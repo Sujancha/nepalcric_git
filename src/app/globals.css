@@ -1,26 +1,248 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Cinematic Core Colors */
+  --color-void-black: #07080F;
+  --color-deep-navy: #0D1B2A;
+  --color-gold: #C9A84C;
+  --color-nepal-crimson: #C41E3A;
+  --color-cool-grey: #B0B8C8;
+  --color-stadium-white: #FFFFFF;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Legacy aliases to prevent breakage during transition */
+  --color-rhino-blue: var(--color-deep-navy);
+  --color-crimson-red: var(--color-nepal-crimson);
+  --color-light-gray: #111;
+  --color-slate-dark: var(--color-void-black);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Fonts (Configured in layout.tsx via next/font/google) */
+  --font-bebas: var(--font-bebas), ui-sans-serif, system-ui, sans-serif;
+  --font-mukta: var(--font-mukta), ui-sans-serif, system-ui, sans-serif;
+  --font-barlow: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-jetbrains-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+
+  /* Tailwind CSS v4 Font Mappings */
+  --font-display: var(--font-bebas);
+  /* Bebas for main english headlines */
+  --font-sans: var(--font-mukta);
+  /* Mukta for body and general */
+  --font-mono: var(--font-jetbrains-mono);
+  --font-stats: var(--font-barlow);
+
+  /* Background / Foreground */
+  --color-background: var(--color-void-black);
+  --color-foreground: var(--color-cool-grey);
+
+  /* Cinematic Animations */
+  --animate-ken-burns: kenBurns 40s ease-in-out infinite alternate;
+
+  @keyframes kenBurns {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.15);
+    }
+  }
+
+  @keyframes floatDust {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    90% {
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(-150px) translateX(50px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeUpIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes traceDraw {
+    from {
+      stroke-dashoffset: 1500;
+      opacity: 1;
+    }
+
+    87.5% {
+      /* 1.4s of 1.6s total */
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    100% {
+      /* 1.6s */
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+
+  @keyframes preloaderOverlayFade {
+    0% {
+      opacity: 1;
+    }
+
+    63.33% {
+      /* 1.9s of 3s total */
+      opacity: 1;
+    }
+
+    76.66% {
+      /* 2.3s */
+      opacity: 0;
+    }
+
+    100% {
+      /* 3.0s */
+      opacity: 0;
+    }
+  }
+
+  @keyframes cinematicFadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    66.66% {
+      /* 2s of 3s total */
+      opacity: 0;
+    }
+
+    86.66% {
+      /* 2.6s */
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes livePulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 8px rgba(196, 30, 58, 0.5);
+    }
+
+    50% {
+      box-shadow: 0 0 20px rgba(196, 30, 58, 0.9);
+    }
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-void-black);
+}
+
+/* Film Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Base Body Styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground);
+  font-family: var(--font-mukta), sans-serif !important;
+  font-weight: 500;
+  line-height: 1.6;
+  font-feature-settings: "kern" 1;
+}
+
+[lang="ne"],
+.nepali,
+*:lang(ne) {
+  letter-spacing: 0 !important;
+}
+
+* {
+  font-family: inherit;
+}
+
+/* Headings Base (Mukta) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display) !important;
+  line-height: 1.1;
+  letter-spacing: normal;
+  color: var(--color-stadium-white);
+  font-feature-settings: "kern" 1;
+}
+
+@layer utilities {
+
+  /* Brand Specific Utility Classes */
+  .bg-rhino-blue {
+    background-color: var(--color-rhino-blue);
+  }
+
+  .text-rhino-blue {
+    color: var(--color-rhino-blue);
+  }
+
+  .border-rhino-blue {
+    border-color: var(--color-rhino-blue);
+  }
+
+  .bg-crimson-red {
+    background-color: var(--color-crimson-red);
+  }
+
+  .text-crimson-red {
+    color: var(--color-crimson-red);
+  }
+
+  .bg-stadium-white {
+    background-color: var(--color-stadium-white);
+  }
+
+  .bg-light-gray {
+    background-color: var(--color-light-gray);
+  }
+
+  .bg-slate-dark {
+    background-color: var(--color-slate-dark);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,905 @@
+[
+    {
+        "id": "rohit-paudel",
+        "name": "Rohit Paudel",
+        "role": "द क्याप्टेन कुल्ल",
+        "position": "Batter · Captain",
+        "signatureMove": "क्याप्टेन्सी र मध्यक्रमको आधार",
+        "quote": "टीयुमा खेल्दा लाग्छ, १२औं खेलाडी मैदानमै छ।",
+        "image": "/images/rohit.webp",
+        "heroImage": "/images/rohit_paudel1.webp",
+        "stats": {
+            "runs": 1800,
+            "strikeRate": 118.5,
+            "average": 28.4
+        },
+        "keyMoment": "२०२३ विश्वकप छनोटमा नेपाललाई ऐतिहासिक जितमा नेतृत्व",
+        "unreasonableWisdom": [
+            "नेतृत्व भनेको आगाडि हिँड्नु होइन — पछाडि उभिएर सबैलाई अगाडि पठाउनु हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "मिडल–अर्डर एंकर",
+                "description": "दबाबमा टीमको ढाल"
+            }
+        ],
+        "originStory": [
+            "२१ वर्षको उमेरमा राष्ट्रिय क्यापटेन्सी — यो गौरवको कथा होइन। यो त्यो कथा हो जब ड्रेसिङ रुममा सिनियर खेलाडीहरूले उनलाई 'बच्चा' भने। र उनले के गरे त्यसको जवाफमा — त्यो सुन्नु जरुरी छ।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "काठमाडौंको एउटा मध्यमवर्गीय परिवार। बुबा सरकारी जागिरे। क्रिकेट खेल्न दिन्थे — तर सपना देख्न होइन। रोहितले दुवै गरे। चुपचाप।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो अन्तर्राष्ट्रिय सिरिजमा ड्रेसिङ रुम चिसो थियो। उनी सबभन्दा कान्छा थिए। कोही बोलेनन्। एउटा सिनियरले भने — 'यो केटो यहाँ के गर्न आएको?' रोहितले सुने। मुस्कुराए। र ब्याट उठाए।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "२०२३ को विश्वकप छनोट। अन्तिम म्याच। नेपाललाई जित्नैपर्ने। रोहित ड्रेसिङ रुममा एक्लै बसे — १५ मिनेट। बाहिर निस्कँदा उनको अनुहारमा कुनै डर थिएन। किन थिएन — त्यो रहस्य उनले आजसम्म भनेका छैनन्।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "नेपाल जित्यो। विश्वकपमा पुग्यो। र त्यो सिनियर खेलाडीले — जसले 'बच्चा' भनेका थिए — रोहितलाई अँगाले। दुवैका आँखा रसाएका थिए। नेतृत्व उमेरले होइन — आँटले बनाउँछ।"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "२०१९",
+                "title": "सबैभन्दा कान्छो",
+                "content": "१७ वर्षमा अन्तर्राष्ट्रिय डेब्यू। ड्रेसिङ रुममा 'बच्चा' — मैदानमा योद्धा।"
+            },
+            {
+                "year": "२०२१",
+                "title": "क्याप्टेन्सी",
+                "content": "२१ वर्षमा नेपालको कप्तान। इतिहासको सबैभन्दा कान्छो।"
+            },
+            {
+                "year": "२०२३",
+                "title": "विश्वकप",
+                "content": "नेपाललाई T20 विश्वकपमा पुर्याउने कप्तान। एउटा पुस्ताको सपना पूरा।"
+            },
+            {
+                "year": "२०२६",
+                "title": "अभियान",
+                "content": "२६ वर्ष। कप्तान। र अझै भोको छ।"
+            }
+        ]
+    },
+    {
+        "id": "dipendra-singh-airee",
+        "name": "Dipendra Singh Airee",
+        "role": "विनाशकारी अलराउन्डर",
+        "position": "All-Rounder · Vice Captain",
+        "signatureMove": "विस्फोटक ब्याटिङ र स्पिन गेंदबाजी",
+        "quote": "I don't play to set records. If you step onto the pitch and play for the team, the records will automatically follow.",
+        "image": "/images/dipendra.webp",
+        "heroImage": "/images/dipendra1.webp",
+        "stats": {
+            "runs": 1650,
+            "strikeRate": 148.9,
+            "wickets": 45
+        },
+        "keyMoment": "एउटै ओभरमा ६ छक्का — नेपाली क्रिकेटको सबैभन्दा विस्फोटक क्षण",
+        "unreasonableWisdom": [
+            "I don't play to set records. If you step onto the pitch and play for the team, the records will automatically follow.",
+            "There was a phase where I seriously thought about quitting cricket completely. But when you know what is right for you, no exam or obstacle in the world can stop you.",
+            "We have to play Test matches and ODI World Cups regularly. Our generation has to lay the foundation for Test cricket in Nepal."
+        ],
+        "signatureArsenal": [
+            {
+                "title": "Power Hitting: The Kinetic Finisher",
+                "description": "Utilizing an exceptionally low center of gravity and devastating bottom-hand dominance, Airee generates terrifying bat speed. He isn't just a slogger; he is a high-IQ finisher who manipulates field settings with unorthodox ramps and square-of-the-wicket strikes to dismantle elite pace at the death."
+            },
+            {
+                "title": "The Golden Arm: Pinpoint Off-Spin",
+                "description": "Transitioning from a medium pacer to a specialist off-spinner, Airee's bowling is defined by suffocating accuracy rather than excessive turn. He operates as the ultimate tactical weapon in the middle overs, expertly choking the run flow and breaking crucial partnerships when the team needs it most."
+            },
+            {
+                "title": "World-Class Fielding: The Rockstar in the Deep",
+                "description": "Airee is a human highlight reel on the turf, holding the national record for catches (40) and run-outs (25) in T20Is. With an infectious energy and the agility of a gymnast, he routinely saves 15-20 runs a match, executing breathtaking diving catches and lethal, pinpoint throws that leave opponents stunned."
+            }
+        ],
+        "originStory": [
+            "Far from the polished academies of Kathmandu, Dipendra Singh Airee's story began with a tennis ball on the rugged village grounds of Gajar and Tilachaur in Mahendranagar. Raised in a humble, middle-class family that envisioned him in a soldier's uniform rather than cricket whites, Airee chose the pitch, famously skipping his 11th-grade exams to chase a dream that few in Nepal dared to dream. He transformed his raw, kinetic energy into an unstoppable force, announcing his arrival by single-handedly dismantling the defending champions, India, in the 2017 U-19 Asia Cup.",
+            "His ascent to the senior national team was rapid, but the journey was not without its scars. In 2021, after standing up for his teammates during a central contract dispute, Airee was unceremoniously stripped of his vice-captaincy by the cricket board. Mentally shattered and on the verge of walking away from the game entirely, the 'Tiger' refused to be caged. He channeled his frustration into a demolition mode, letting his bat silence the critics and cementing his status as the undisputed anchor and leader of the Nepali squad.",
+            "Today, Dipendra Singh Airee is not just Nepal's finest all-rounder; he is a global T20 mercenary. He has shattered records held by legends like Yuvraj Singh, commanded the crease in the world's most elite franchise leagues — from the GT20 in Canada to the ILT20 in the UAE, and the PSL in Pakistan — and climbed to the absolute pinnacle of the ICC T20I All-Rounder rankings. With raw power, razor-sharp off-spin, and gravity-defying fielding, he has evolved from a village dreamer into a world-class phenomenon who carries the weight of a nation on his shoulders."
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "टीकापुरको सानो मैदान। घाँस छैन — माटो छ। त्यही माटोमा दिपेन्द्र दिनभर बल हान्थे। बिजुलीको खम्बामा बल लाग्दा छक्का। गाउँलेहरू हेर्थे — हाँस्थे। 'यो केटो सधैं खेलिरहन्छ।' उनी हाँस्थे। र फेरि हान्थे।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो राष्ट्रिय क्याम्पमा कोचले भने — 'तिम्रो स्विङ राम्रो छैन। ब्याटिङ ठीक छ। तर T20 मा तिमीले के गर्छौ?' दिपेन्द्र बोलेनन्। घर फर्किए। र त्यो रातदेखि — उनले सोचे: मैले के गर्न सक्छु जो अरूले सक्दैनन्?"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "२०२४ को एशिया कप छनोट। नेपाललाई अन्तिम ओभरमा २५ रन चाहिएको। असम्भव। ड्रेसिङ रुमले हार मानिसकेको थियो। दिपेन्द्र क्रिजमा आए। पहिलो बल — छक्का। दोस्रो — छक्का। तेस्रो... त्यो ओभरपछि नेपाली क्रिकेटको परिभाषा फेरियो।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "विश्व रेकर्ड। ६ बलमा ६ छक्का। तर दिपेन्द्रका लागि त्यो रेकर्ड होइन — त्यो टीकापुरको त्यो माटो मैदानको जवाफ थियो। हाँस्नेहरूको जवाफ। र उनले शान्तसँग भने: 'अझै धेरै बाँकी छ।'"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "2017",
+                "title": "The U-19 Upset",
+                "content": "Airee scores an anchoring 88 runs and takes a vicious 4/39 with the ball to orchestrate a historic victory over a star-studded Indian U-19 squad, putting the world on notice."
+            },
+            {
+                "year": "2021",
+                "title": "The Crucible",
+                "content": "Stripped of his national vice-captaincy over a contract dispute, Airee contemplates quitting but instead uses the adversity to fuel his return as an unstoppable, match-winning force."
+            },
+            {
+                "year": "September 27, 2023",
+                "title": "The 9-Ball Miracle",
+                "content": "He shatters Yuvraj Singh's 16-year-old world record by blasting the fastest half-century in T20I history off just 9 deliveries at the Asian Games."
+            },
+            {
+                "year": "April 13, 2024",
+                "title": "The Perfect Over",
+                "content": "Earning his place in cricket immortality, Airee becomes only the third man in T20I history to smash six consecutive sixes in a single over against Qatar."
+            },
+            {
+                "year": "February 17, 2026",
+                "title": "The World Cup Redemption",
+                "content": "Airee blasts a flawless, unbeaten 50 off 23 balls to guide Nepal to a thrilling seven-wicket victory over Scotland, securing the nation's first T20 World Cup win in 12 years."
+            }
+        ]
+    },
+    {
+        "id": "sandeep-lamichhane",
+        "name": "Sandeep Lamichhane",
+        "role": "लेग–स्पिन जादुगर",
+        "position": "Bowler · Leg Spin",
+        "signatureMove": "गुगली र लेग–ब्रेककको वेब",
+        "quote": "I have said from the first day that I am innocent. I am grateful to those who supported me... I will make every effort to take Nepali cricket to a new height.",
+        "image": "/images/sandeep.webp",
+        "heroImage": "/images/sandeep1.webp",
+        "stats": {
+            "wickets": 120,
+            "economy": 6.8,
+            "strikeRate": 14.2
+        },
+        "keyMoment": "IPL ड्राफ्टमा नाम आउँदा नेपाली क्रिकेटको नयाँ युग शुरु",
+        "unreasonableWisdom": [
+            "I have said from the first day that I am innocent. I am grateful to those who supported me... I will make every effort to take Nepali cricket to a new height.",
+            "And the @USEmbassyNepal did it again what they did back in 2019, they denied my Visa for the T-20 World Cup happening in USA and West Indies. Unfortunate. I am sorry to all the well wishers of Nepal Cricket.",
+            "You may choose anyone you like for your show segments, but ridiculing someone's life while sitting on a YouTube chair is shameful."
+        ],
+        "signatureArsenal": [
+            {
+                "title": "The Overspun Leg-Break",
+                "description": "A viciously ripping delivery that bites into the pitch, dipping sharply to deceive the batter in flight before aggressively turning away from the right-hander."
+            },
+            {
+                "title": "The Phantom Wrong'un (Googly)",
+                "description": "Disguised with masterful deception, this delivery mimics his traditional leg-break out of the hand but spins sharply back into the right-hander, shattering stumps and leaving batsmen bewildered."
+            },
+            {
+                "title": "The Middle-Over Chokehold",
+                "description": "Relying on pinpoint control, variations like the flipper, and aggressive stump-to-stump lines to exploit slower surfaces, he suffocates the opposition's run rate and forces fatal errors."
+            }
+        ],
+        "originStory": [
+            "Sandeep Lamichhane's story begins with pure, unadulterated talent spotted in the nets of Chitwan by former national coach Pubudu Dassanayake when Lamichhane was just 14 years old. From a teenager taking a historic hat-trick at the 2016 Under-19 World Cup to becoming Nepal's global cricket ambassador, his leg-spin wizardry quickly caught the eye of heavyweights like Australian captain Michael Clarke. He shattered the glass ceiling in 2018 as the first Nepalese cricketer to secure an Indian Premier League contract, launching a lucrative, globetrotting franchise career that put his nation firmly on the international sporting map.",
+            "The dizzying heights of international stardom were followed by an equally precipitous and very public fall. In September 2022, Lamichhane was accused of rape by a young woman, leading to his arrest, suspension from the national team, and an eventual eight-year prison sentence handed down by the Kathmandu District Court in early 2024. Stripped of his captaincy, he endured a brutal trial by media, saw his international mobility heavily restricted by US visa denials, and faced silent protests from rival teams, leaving his once-glittering career hanging by a thread.",
+            "But the resilient spinner refused to stay down. In May 2024, the Patan High Court fully overturned his conviction, granting him a 'clean chit' due to insufficient evidence and paving the way for a dramatic return to the pitch. Lamichhane bounced back with a vengeance, dominating the 2025 Nepal Premier League as the joint-top wicket-taker, helping lead the Rajshahi Warriors to the BPL championship, and reclaiming his spot as the spin spearhead for the 2026 T20 World Cup."
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "काठमाडौंको धुलो गल्लीमा एउटा केटो थियो जसको जुत्ता फाटेको थियो, तर हातमा टेनिस बल थियो। घरमा पैसा थिएन। क्रिकेट किट किन्ने सपना पनि विलासिता थियो। उनको बुबाले भने — खेलले पेट भर्दैन। तर बल घुमाउन थाल्दा केटोले संसार बिर्सन्थ्यो।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो राष्ट्रिय ट्रायलमा उनलाई भनियो — 'तिम्रो उमेर छैन, अनुभव छैन।' उनी फर्किए। एक्लै प्र्याक्टिस गरे। फेरि गए। फेरि अस्वीकार। तेस्रो पटक पनि। त्यो रात उनले ब्याग बाँधे — सायद बुबा सही थिए।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "तर बिहान भएन। बिहान उनी मैदानमा थिए। एक्लै। भोर ४ बजे। किनभने हार्न जान्ने मान्छेले मात्रै जित्न सिक्छ। र त्यही बिहान — एउटा कोच थिए जसले उनलाई हेरे। रोके। र भने: 'यो केटोलाई म बनाउँछु।'"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "IPL ड्राफ्टमा नाम आउँदा — नेपाल रोयो। साँच्चिकै रोयो। किनभने त्यो केटो जसको जुत्ता फाटेको थियो, आज विश्वका सर्वश्रेष्ठ ब्याट्समानहरूलाई आफ्नो जालमा फसाउँदै थियो। फाटेको जुत्ताबाट IPL सम्म — यो कथा होइन। यो नेपाल हो।"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "January 30, 2016",
+                "title": "The Arrival",
+                "content": "He announced his arrival to the world by claiming a stunning hat-trick against Ireland in the ICC Under-19 World Cup."
+            },
+            {
+                "year": "January 28, 2018",
+                "title": "IPL Glass Ceiling",
+                "content": "Lamichhane shattered the glass ceiling for Nepalese cricket by being bought by the Delhi Daredevils in the IPL auction."
+            },
+            {
+                "year": "April 2023",
+                "title": "World Record",
+                "content": "He broke the global record to become the fastest bowler in history to reach 100 ODI wickets, achieving the staggering feat in just 42 matches."
+            },
+            {
+                "year": "January 10, 2024",
+                "title": "The Darkest Chapter",
+                "content": "A Kathmandu court sentenced him to eight years in jail following a rape conviction, bringing his soaring career to a sudden, dark halt."
+            },
+            {
+                "year": "May 15, 2024",
+                "title": "Full Acquittal",
+                "content": "The Patan High Court officially acquitted him of all rape charges, immediately lifting his suspension and legally clearing his path to return to international cricket."
+            }
+        ]
+    },
+    {
+        "id": "kushal-bhurtel",
+        "name": "Kushal Bhurtel",
+        "role": "आक्रामक ओपनिङ ब्याटर",
+        "position": "Batter · Opener",
+        "signatureMove": "पावरप्लेमा आक्रमण",
+        "quote": "It was a big match and we never got a bigger total to chase before but we had a belief that we can chase it down. We always used to say if we are to become the No.1 Associate team we have to chase down these totals.",
+        "image": "/images/kushal.webp",
+        "heroImage": "/images/kushal1.webp",
+        "stats": {
+            "runs": 1420,
+            "strikeRate": 135.2,
+            "average": 69.5
+        },
+        "keyMoment": "२०२४ विश्वकपमा नेपालको सर्वोच्च स्कोरर",
+        "unreasonableWisdom": [
+            "It was a big match and we never got a bigger total to chase before but we had a belief that we can chase it down. We always used to say if we are to become the No.1 Associate team we have to chase down these totals.",
+            "The crowd has been always like the 12th man for us. When they come out to support in every match. It boosts not only confidence but also the whole team's morale.",
+            "Yes, I know that was the first time that four batters hit 50+ scores in the same match. And that's a very good sign who are thinking to become the number one Associate team."
+        ],
+        "signatureArsenal": [
+            {
+                "title": "The Fearless Pull Shot",
+                "description": "Anchored by a rock-solid base and lightning-fast hand speed, Bhurtel rocks back to brutally punish short-pitched deliveries, sending them rocketing into the stands like a laser."
+            },
+            {
+                "title": "The Creative Lap Sweep",
+                "description": "A masterclass in crease geometry and high-stakes innovation, he perfectly executes the reverse scoop, dropping to his knees to guide the ball past the keeper like a precision billiards shot sliding into the corner pocket."
+            },
+            {
+                "title": "The Electric Boundary Fielding",
+                "description": "Channeling the spatial awareness and rapid reflexes of his childhood days as a football goalkeeper, he launches himself across the inner ring and boundary ropes to maintain an elite catch-per-match ratio."
+            }
+        ],
+        "originStory": [
+            "Born in Butwal, Rupandehi, Kushal Bhurtel originally dreamt of diving across goal lines as a football goalkeeper before his father steered him toward the cricket pitch. That latent agility and rapid reflex coordination laid the foundation for a highly dynamic athlete. Sidelined after a frustrating stint as a medium-pacer in the 2016 U-19 World Cup, he embraced the grueling grind of the domestic circuit, undergoing a rigorous technical overhaul to forge himself into a top-order wrecking ball.",
+            "When his moment finally arrived under coach Dav Whatmore in April 2021, Bhurtel didn't just knock on the international door — he kicked it down. He stunned the globe by smashing three consecutive half-centuries in his first three T20I matches, becoming the first player in the history of the sport to achieve the feat. Racking up 278 runs at a 69.50 average in his debut series, the 'Butwal Boss' cemented his name alongside international titans as an ICC Player of the Month nominee.",
+            "Evolution is the hallmark of a true gladiator, and under head coach Monty Desai, Bhurtel transformed into a fearless, hybrid leader. Whether he is smoking a brilliant 99 in a record-breaking 171-run stand against Zimbabwe, hitting the first six of the match against India's elite pace attack in the Asia Cup, or taking career-best 4/12 bowling figures with his deceptive leg-spin, he has become the aggressive heartbeat of Nepal's modern cricket era."
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "बिराटनगरको क्रिकेट ग्राउन्ड। बुबा स्वयं क्रिकेटर थिए — तर राष्ट्रिय टीमसम्म पुगेनन्। कुशल बुबाको अधुरो सपना थिएनन् — आफ्नो सपना थिए। फरक थियो। र त्यो फरकपन नै उनको शक्ति बन्यो।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "एकेडेमीमा कोचले रिपोर्ट कार्डमा लेखे: 'आक्रामक — तर अनुशासनहीन। ओपनरको रूपमा उपयुक्त छैन।' कुशलले त्यो रिपोर्ट कार्ड राखेका छन् — आजसम्म। ड्रेसिङ रुमको लकरमा।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "२०२३ विश्वकप छनोट। पहिलो म्याचमा शून्य रनमा आउट। दोस्रो म्याचमा पनि। तेस्रो म्याचअघि कप्तानले सोधे — 'के तिमी ठीक छौ?' कुशलले हाँसे: 'हैन। तर खेल्छु।' र त्यो तेस्रो म्याचमा — उनले ७२ रन बनाए।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "विश्वकप २०२४ मा नेपालका सर्वाधिक रन। त्यो कोच — जसले 'उपयुक्त छैन' भनेका थिए — उनले एउटा अन्तर्वार्तामा भने: 'कुशल मेरो सिकाइको सबैभन्दा राम्रो उदाहरण हो।' कुशलले त्यो अन्तर्वार्ता पढे। र लकरको रिपोर्ट कार्डलाई एकपटक हेरे।"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "January 2016",
+                "title": "Global Entry",
+                "content": "Making his global entry at the U-19 World Cup, an early struggle with pace bowling sparked a relentless technical reinvention that defined his future grit."
+            },
+            {
+                "year": "April 17, 2021",
+                "title": "Unleashed",
+                "content": "Unleashed absolute carnage on his T20I debut against the Netherlands, igniting a world-record streak of three consecutive half-centuries to launch his international career."
+            },
+            {
+                "year": "February 19, 2022",
+                "title": "T20I Century",
+                "content": "Asserted his top-order dominance by obliterating the Philippines to secure a majestic, unbeaten 104* — his maiden T20I century."
+            },
+            {
+                "year": "June 18, 2023",
+                "title": "World Record Stand",
+                "content": "Forged a historic 171-run opening partnership by smashing a fearless 99 against hosts Zimbabwe in the Cricket World Cup Qualifiers."
+            },
+            {
+                "year": "September 4, 2023",
+                "title": "Asia Cup Giant-Killer",
+                "content": "Took the fight to the giants of the sport on the Asia Cup stage, blasting a rapid 25-ball 38 and hitting the match's very first six against India's fearsome pace attack."
+            }
+        ]
+    },
+    {
+        "id": "aasif-sheikh",
+        "name": "Aasif Sheikh",
+        "role": "विकेटकीपर योद्धा",
+        "position": "Wicketkeeper · Batter",
+        "signatureMove": "दस्तानापछाडिको तीक्ष्ण नजर",
+        "quote": "विकेटको पछाडि उभिनु — त्यो सम्मान हो।",
+        "image": "/images/aasif.webp",
+        "heroImage": "/images/aasif1.webp",
+        "stats": {
+            "runs": 980,
+            "strikeRate": 112.3,
+            "dismissals": 55
+        },
+        "keyMoment": "अनुभवी विकेटकीपरको रूपमा टीमको मेरुदण्ड",
+        "unreasonableWisdom": [
+            "दस्ताना लगाएपछि सबै कुरा देखिन्छ — मैदानको सत्य।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "विकेटकीपिङ",
+                "description": "नेपालको सबैभन्दा अनुभवी WK"
+            }
+        ],
+        "originStory": [
+            "३५ वर्ष। दुई दशक। र अझै पहिलो नम्बर विकेटकीपर। तर कुनै बेला नेपाली क्रिकेटले उनलाई 'पुरानो' भनेर हटाउन खोजेको थियो। उनले कसरी फर्किए — त्यो कथाले युवा पुस्तालाई आजसम्म प्रेरणा दिँदैछ।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "काठमाडौंको पुरानो परिवार। दस्ताना लगाउनु उनको पहिलो प्रेम थियो — ब्याट होइन। अरूले बल फाल्थे, उनले समाउँथे। र त्यही समाउने कलामा उनले आफ्नो पहिचान खोजे।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "२०२१ मा नयाँ सिलेक्टरहरूले भने — 'नयाँ पुस्ता ल्याउनुपर्छ। आसिफलाई ब्रेक दिऊँ।' उनलाई थाहा भयो। एक महिना घरमा बसे। तर त्यो महिना उनले जिम मात्रै गरे — बिहान ५ बजेदेखि।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "फिर्ता बोलाउने फोन आयो। तर सर्त थियो — युवा विकेटकीपरसँग प्रतिस्पर्धा गर्नुपर्छ। आसिफले भने: 'ठीक छ।' र त्यो ट्रायलमा — उनले युवालाई हराए। कुनै विवाद थिएन। संख्याले बोल्यो।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "विश्वकप २०२६। ३५ वर्षको आसिफ शेख — पहिलो नम्बर विकेटकीपर। ड्रेसिङ रुममा अब उनी सिनियर छन्। युवाहरू उनीसँग सिक्छन्। र उनी भन्छन्: 'दस्ताना लगाउन उमेर हुँदैन।'"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "२००८",
+                "title": "पहिलो दस्ताना",
+                "content": "१७ वर्षमा राष्ट्रिय डेब्यू। नेपालको भरोसेमान दस्ताना।"
+            },
+            {
+                "year": "२०२१",
+                "title": "हटाइने क्षण",
+                "content": "'नयाँ पुस्ता ल्याउँछौं।' उनले सुने। र बिहान ५ बजे जिम गए।"
+            },
+            {
+                "year": "२०२३",
+                "title": "फिर्ता",
+                "content": "ट्रायलमा युवालाई हराए। संख्याले बोल्यो।"
+            },
+            {
+                "year": "२०२६",
+                "title": "अझै पहिलो",
+                "content": "३५ वर्ष। अझै नम्बर एक। अझै भोको।"
+            }
+        ]
+    },
+    {
+        "id": "sompal-kami",
+        "name": "Sompal Kami",
+        "role": "तेज गेंदबाजीको सेनापति",
+        "position": "Bowler · Fast Medium",
+        "signatureMove": "नयाँ बलको स्विङ र सिम मुभमेन्ट",
+        "quote": "पहिलो ओभरमै खेल मोड्न सकिन्छ।",
+        "image": "/images/sompal.webp",
+        "heroImage": "/images/sompal1.webp",
+        "stats": {
+            "wickets": 85,
+            "economy": 7.2,
+            "strikeRate": 16.8
+        },
+        "keyMoment": "नेपालको सर्वाधिक अनुभवी तेज गेंदबाज — दशौं वर्षको सेवा",
+        "unreasonableWisdom": [
+            "गति मात्र हतियार होइन — बुद्धि नै असली हतियार हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "स्विङ बलिङ",
+                "description": "पावरप्लेको खतरनाक हतियार"
+            }
+        ],
+        "originStory": [
+            "गुल्मीको एउटा गाउँमा एउटा केटो थियो जसले कहिल्यै लेदर बल छोएको थिएन — टेनिस बलमा सिकेको थियो। आज उही हात — जसले टेनिस बल समाउँथ्यो — विश्वका सर्वश्रेष्ठ ब्याट्समानहरूलाई कम्पाउँदैछ। तर बीचमा के भयो?"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "गुल्मी। पहाडको छेउमा एउटा गाउँ। मैदान थिएन — ढिस्को थियो। बल थिएन — टेनिस बल थियो। तर सोम्पालले त्यही ढिस्कोमा हावालाई कसरी काट्ने सिके। र त्यो सिकाइ — कुनै कोचले दिन सक्दैनथ्यो।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो राष्ट्रिय ट्रायलमा जाँदा उनको जुत्ता फाटेको थियो। एक जना कोचले हेरे — जुत्ता हेरे — र मुस्कुराए। त्यो मुस्कान देखेर सोम्पाल बुझे: यहाँ जित्न सिर्फ बल गर्न पर्दैन — देखाउन पनि पर्छ।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "२०१९ मा चोट। काँध। डाक्टरले भने — ६ महिना आराम। सोम्पाल रोए — एक्लै। किनभने ६ महिना भनेको सिलेक्टरहरूले बिर्सनु थियो। तर उनी फर्किए। र पहिलो म्याचमा नै — उनले ३ विकेट लिए।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "दशौं वर्षको सेवा। ८५ भन्दा बढी विकेट। र गुल्मीमा अब एउटा क्रिकेट एकेडेमी छ — सोम्पालको नाममा। त्यो फाटेको जुत्ता लगाएको केटो आज इतिहास हो।"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "२०१४",
+                "title": "गुल्मीबाट काठमाडौं",
+                "content": "टेनिस बलबाट लेदर बलसम्म। पहिलो राष्ट्रिय ट्रायल।"
+            },
+            {
+                "year": "२०१७",
+                "title": "नियमित सदस्य",
+                "content": "नेपालको पहिलो पसन्द तेज गेंदबाज।"
+            },
+            {
+                "year": "२०१९",
+                "title": "चोट र फिर्ता",
+                "content": "काँधको चोट। ६ महिना। फिर्ता — पहिलो म्याचमा ३ विकेट।"
+            },
+            {
+                "year": "२०२६",
+                "title": "दशौं वर्ष",
+                "content": "८५+ विकेट। र गुल्मीमा एकेडेमी — भावी सोम्पालहरूको लागि।"
+            }
+        ]
+    },
+    {
+        "id": "karan-kc",
+        "name": "Karan KC",
+        "role": "ऑलराउन्ड खतरा",
+        "position": "All-Rounder · Right Arm Fast",
+        "signatureMove": "डेथ ओभरमा विकेट र फिनिशिङ ब्याट",
+        "quote": "अन्तिम ओभर मेरो लागि — सुरुवात होइन।",
+        "image": "/images/karan.webp",
+        "heroImage": "/images/karan1.webp",
+        "stats": {
+            "wickets": 62,
+            "runs": 520,
+            "economy": 7.8
+        },
+        "keyMoment": "डेथ ओभर विशेषज्ञको रूपमा नेपालको भरोसेमान हतियार",
+        "unreasonableWisdom": [
+            "दबाबमा खेल्नु — त्यही असली परीक्षा हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "डेथ बलर",
+                "description": "अन्तिम ओभरको मास्टर"
+            }
+        ],
+        "originStory": [
+            "डेथ ओभर स्पेशलिस्ट। शब्द सुन्दा सजिलो लाग्छ। तर करनलाई सोध्नुस् — त्यो रात जब उनले अन्तिम ओभरमा ४ रन दिनुपर्थ्यो र दिए २३। र त्यो रातपछि उनले आफूलाई कसरी फेर्यो — त्यो कथाले डेथ ओभरको परिभाषा नै बदल्छ।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "करनको क्रिकेट यात्रा ब्याटरको रूपमा सुरु भयो। गेंदबाजी पछि सिके। तर एकेडेमीमा कोचले भने — 'तिम्रो ब्याटिङ औसत छ। गेंदबाजी राम्रो छ। छान।' करनले छाने — गेंदबाजी। त्यो एउटा चुनावले सबै बदल्यो।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "२०२१ को एउटा सिरिज। अन्तिम ओभर। नेपाललाई जित्नैपर्ने। करनले दिए — २२ रन। हारे। ड्रेसिङ रुम चुप थियो। कोही बोलेन। र त्यो मौनता — एक्लो रातमा — उनले महसुस गरे।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "अर्को सिरिजमा फेरि डेथ ओभर। फेरि दबाब। यसपटक — उनले ४ रन दिए। जित्यो नेपाल। तर करनले भने: 'त्यो जित मेरो थिएन। त्यो त्यो हारेको रातको थियो।'"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "आज करन KC नेपालको डेथ ओभर मास्टर हो। प्रत्येक अन्तिम ओभरमा — उनको दिमागमा त्यो हारेको रात छ। र त्यही रात उनको सबैभन्दा ठूलो हतियार बनेको छ।"
+            }
+        ],
+        "timeline": [
+            {
+                "year": "२०१६",
+                "title": "गेंदबाजी छनोट",
+                "content": "ब्याटर थिए — गेंदबाज बने। एउटा चुनाव। सबै बदल्यो।"
+            },
+            {
+                "year": "२०२१",
+                "title": "काली रात",
+                "content": "अन्तिम ओभरमा २२ रन। हार। र त्यो रात — सबभन्दा ठूलो गुरु।"
+            },
+            {
+                "year": "२०२३",
+                "title": "रूपान्तरण",
+                "content": "डेथ ओभरमा ४ रन। नेपाल जित्यो। करन बदलिए।"
+            },
+            {
+                "year": "२०२६",
+                "title": "मास्टर",
+                "content": "नेपालको भरोसेमान डेथ बलर। हर अन्तिम ओभर — उनको।"
+            }
+        ]
+    },
+    {
+        "id": "aarif-sheikh",
+        "name": "Aarif Sheikh",
+        "role": "बहुमुखी अलराउन्डर",
+        "position": "All-Rounder · Batter",
+        "signatureMove": "मध्यक्रममा स्थिरता र उपयोगी स्पिन",
+        "quote": "टीमको जरुरत जहाँ छ — म त्यहाँ छु।",
+        "image": "/images/aarif.webp",
+        "heroImage": "/images/aarif1.webp",
+        "stats": {
+            "runs": 760,
+            "wickets": 28,
+            "strikeRate": 122.4
+        },
+        "keyMoment": "टीमको लचिलापनको प्रतीक — जहाँ जरुरी त्यहाँ उपस्थित",
+        "unreasonableWisdom": [
+            "बहुमुखी खेलाडी भनेको टीमको सबैभन्दा ठूलो उपहार हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "फ्लेक्सिबिलिटी",
+                "description": "टीमको सबैभन्दा अनुकूलनीय खेलाडी"
+            }
+        ],
+        "originStory": [
+            "नेपाली क्रिकेटको विश्वस्त सिपाही।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "एउटा खेलाडी जो ब्याटर थियो, गेंदबाज थियो, र फिल्डर पनि। 'तिमी के हौ?' भनेर सोध्दा उनले भन्थे — 'जे चाहियो।' टीमले त्यो जवाफ मन पराउँदैनथ्यो। पछि — बुझ्यो।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "सिलेक्टरहरूले भने — 'स्पेशलिस्ट ल्याउँछौं।' आरिफलाई हटाइयो। उनले नेट्समा अभ्यास गरिरहे — टीमभन्दा बढी।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "फेरि बोलाइयो — एउटा खेलाडी चोटिएको थियो। आरिफले आए। र त्यो म्याचमा — ब्याट र बल दुवैमा योगदान। टीम जित्यो।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "बहुमुखी भनेको कमजोरी होइन — सबैभन्दा ठूलो शक्ति हो। आरिफले त्यो प्रमाणित गरे।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "basir-ahamad",
+        "name": "Basir Ahamad",
+        "role": "उदीयमान अलराउन्डर",
+        "position": "All-Rounder · Spin",
+        "signatureMove": "अफ–स्पिन र उपयोगी तल्लोक्रमको ब्याट",
+        "quote": "युवा भएर डराउनु छैन — यही मेरो शक्ति हो।",
+        "image": "/images/basir.webp",
+        "heroImage": "/images/basir1.webp",
+        "stats": {
+            "wickets": 32,
+            "runs": 340,
+            "economy": 7.4
+        },
+        "keyMoment": "विश्वकप २०२६ मा युवा प्रतिभाको प्रतिनिधित्व",
+        "unreasonableWisdom": [
+            "अनुभव नभए पनि आँट हुन्छ — त्यही काफी छ।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "अफ–स्पिन",
+                "description": "नेपालको उदीयमान स्पिन हतियार"
+            }
+        ],
+        "originStory": [
+            "युवा पुस्ताको प्रतिनिधि — नेपाली क्रिकेटको भविष्य।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "सबैभन्दा कान्छा। विश्वकप स्क्वाडमा। ड्रेसिङ रुममा सिनियरहरू — उनले चिन्थे टिभीमा मात्र।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो प्रेस कन्फेरेन्समा पत्रकारले सोधे — 'तिमीलाई थाहा छ यो कति ठूलो मञ्च हो?' बासिरले मुस्कुराए: 'थाहा छ। त्यसैले आएँ।'"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "पहिलो अन्तर्राष्ट्रिय विकेट। हात काँपेको थियो। तर बल काँपेन।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "युवा भएर डराउनु छैन — त्यही आँट नेपाली क्रिकेटको भविष्य हो।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "gulshan-jha",
+        "name": "Gulshan Jha",
+        "role": "बायाँ हात अलराउन्डर",
+        "position": "All-Rounder · Left Hand",
+        "signatureMove": "बायाँ हातको स्पिन र आक्रामक ब्याट",
+        "quote": "बायाँ हात भएको फाइदा — सबै चकित हुन्छन्।",
+        "image": "/images/gulshan.webp",
+        "heroImage": "/images/gulshan1.webp",
+        "stats": {
+            "wickets": 38,
+            "runs": 480,
+            "economy": 7.6
+        },
+        "keyMoment": "मधेसको प्रतिनिधि — नेपाली क्रिकेटको विविधताको प्रतीक",
+        "unreasonableWisdom": [
+            "फरक हुनु कमजोरी होइन — त्यो नै तिम्रो शक्ति हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "लेफ्ट–आर्म स्पिन",
+                "description": "विविधताको हतियार"
+            }
+        ],
+        "originStory": [
+            "तराईबाट उठेको आवाज — नेपाली क्रिकेटको नयाँ अध्याय।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "तराईको छोरो। मधेसको आवाज। नेपाली क्रिकेटमा तराईको प्रतिनिधित्व कम थियो। गुल्शनले त्यो बदल्ने निर्णय गरे।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "'तराईका केटाहरू क्रिकेट खेल्दैनन्' — यो अनौपचारिक मानसिकता थियो। गुल्शनले हर म्याचमा त्यसलाई चुनौती दिए।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "बायाँ हातको स्पिन — फरक कोण। ब्याट्समान अभ्यस्त थिएनन्। पहिलो विकेटमा — ड्रेसिङ रुम उठ्यो।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "तराईको आवाज आज अन्तर्राष्ट्रिय मञ्चमा छ। गुल्शन जहाँ — नेपालको विविधता त्यहाँ।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "nandan-yadav",
+        "name": "Nandan Yadav",
+        "role": "तेज गेंदबाज र ब्याटर",
+        "position": "Bowler · Right Arm Fast",
+        "signatureMove": "गतिमा आक्रमण र तल्लोक्रमको योगदान",
+        "quote": "गति नै मेरो भाषा हो।",
+        "image": "/images/nandan.webp",
+        "heroImage": "/images/nandan1.webp",
+        "stats": {
+            "wickets": 29,
+            "economy": 8.1,
+            "runs": 180
+        },
+        "keyMoment": "नेपाली पेस आक्रमणको नयाँ हतियार",
+        "unreasonableWisdom": [
+            "गतिले सबैलाई डराउँछ — तर दिशाले जित्छ।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "फास्ट बलिङ",
+                "description": "नेपाली गतिको नयाँ आशा"
+            }
+        ],
+        "originStory": [
+            "तराईको छोरो — गतिले विश्व जित्ने सपना।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "गतिको सपना। तराईको फाँटमा दौडँदा लाग्थ्यो — यो गति मैदानमा काम लाग्छ।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "पहिलो ट्रायलमा गति मापियो — ११८ किमी। 'राम्रो छ, तर पुग्दैन।' नन्दनले मुस्कुराए।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "अर्को ट्रायल — १२४ किमी। फेरि — १२८। शरीर बोल्यो जब मन मानेन।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "नेपाली पेसको नयाँ अध्याय। गतिले सबैलाई डराउँदैछ। र नन्दन भर्खरै सुरु भएका छन्।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "lalit-rajbanshi",
+        "name": "Lalit Rajbanshi",
+        "role": "बायाँ हात स्पिनर",
+        "position": "Bowler · Left Arm Spin",
+        "signatureMove": "बायाँ हातको अर्थडक्स स्पिन",
+        "quote": "स्पिनरको धैर्य नै सबैभन्दा ठूलो हतियार।",
+        "image": "/images/lalit.webp",
+        "heroImage": "/images/lalit1.webp",
+        "stats": {
+            "wickets": 35,
+            "economy": 6.9,
+            "strikeRate": 17.2
+        },
+        "keyMoment": "सन्दीपको साथमा नेपालको डबल स्पिन आक्रमणको अंश",
+        "unreasonableWisdom": [
+            "बायाँ हातले फरक कोण दिन्छ — त्यही नै मेरो शक्ति।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "अर्थडक्स स्पिन",
+                "description": "सन्दीपको पूरक हतियार"
+            }
+        ],
+        "originStory": [
+            "नेपाली स्पिनको नयाँ अध्याय लेख्दै।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "बायाँ हात। फरक कोण। स्पिनरहरूको दुनियाँमा बायाँ हात दुर्लभ थियो — नेपालमा।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "'सन्दीप छँदासम्म बायाँ हात स्पिनरको ठाउँ छैन।' लालितले सुने। र सन्दीपसँगै खेल्ने सपना देखे।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "पहिलो पटक सन्दीपसँग एउटै XI मा। दुई स्पिनर। दुई कोण। ब्याट्समान अलमलिए।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "सन्दीपको पूरक। नेपालको डबल स्पिन — विश्व क्रिकेटमा चर्चाको विषय।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "sher-malla",
+        "name": "Sher Malla",
+        "role": "उदीयमान तेज गेंदबाज",
+        "position": "Bowler · Right Arm Fast",
+        "signatureMove": "लाइन र लेन्थको अनुशासन",
+        "quote": "सेरो मल्लाको गेंद — शेरको आक्रमण।",
+        "image": "/images/sher.webp",
+        "heroImage": "/images/sher1.webp",
+        "stats": {
+            "wickets": 18,
+            "economy": 8.3,
+            "strikeRate": 18.5
+        },
+        "keyMoment": "विश्वकप २०२६ मा पहिलो सहभागिता — नयाँ पुस्ताको प्रतिनिधि",
+        "unreasonableWisdom": [
+            "नयाँ छु — तर डराएको छैन।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "पेस बलिङ",
+                "description": "नेपालको भविष्यको तेज हतियार"
+            }
+        ],
+        "originStory": [
+            "नेपाली पेसको नयाँ आशा।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "सबैभन्दा नयाँ। विश्वकपमा पहिलो पटक। नाम सुनेर ब्याट्समान हाँस्थे — चिन्दैनथे।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "अज्ञात हुनु पनि हतियार हो। सेर मल्लाले यो बुझे।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "पहिलो अन्तर्राष्ट्रिय विकेट। ब्याट्समान चौंकिए। 'यो को हो?' — अब जान्छन्।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "अज्ञातबाट खतरनाक। नेपाली क्रिकेटको नयाँ आश्चर्य।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "lokesh-bam",
+        "name": "Lokesh Bam",
+        "role": "विकेटकीपर ब्याटर",
+        "position": "Wicketkeeper · Batter",
+        "signatureMove": "मध्यक्रममा स्थिरता र विकेटकीपिङ",
+        "quote": "दस्ताना र ब्याट — दुवैमा म तयार छु।",
+        "image": "/images/lokesh.webp",
+        "heroImage": "/images/lokesh1.webp",
+        "stats": {
+            "runs": 420,
+            "strikeRate": 115.8,
+            "dismissals": 22
+        },
+        "keyMoment": "दोहोरो भूमिकामा टीमको भरोसेमान सदस्य",
+        "unreasonableWisdom": [
+            "दुई भूमिका निभाउनु — त्यो दोब्बर जिम्मेवारी हो, दोब्बर सम्मान पनि।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "दोहोरो भूमिका",
+                "description": "WK र ब्याटर दुवैमा सक्षम"
+            }
+        ],
+        "originStory": [
+            "नेपाली विकेटकीपिङको नयाँ पुस्ता।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "दुई भूमिका। दोब्बर मेहनत। विकेटकीपर हुनु र ब्याटर हुनु — दुवैमा सर्वश्रेष्ठ हुने सपना।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "'एउटामा राम्रो हौ — दुवैमा हुन गाह्रो छ।' लोकेशले दुवैमा मेहनत दोब्बर गरे।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "आसिफसँग प्रतिस्पर्धा। सिनियरसँग। लोकेशले आसिफबाटै सिके — र आफ्नो ठाउँ बनाए।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "दोब्बर भूमिका — दोब्बर सम्मान। लोकेश बाम नेपाली क्रिकेटको बहुमुखी भविष्य।"
+            }
+        ],
+        "timeline": []
+    },
+    {
+        "id": "sundeep-jora",
+        "name": "Sundeep Jora",
+        "role": "मध्यक्रम ब्याटर",
+        "position": "Batter · Middle Order",
+        "signatureMove": "मध्यक्रममा आँट र स्थिरता",
+        "quote": "मध्यक्रम भनेको टीमको मेरुदण्ड हो।",
+        "image": "/images/sundeep.webp",
+        "heroImage": "/images/sundeep1.webp",
+        "stats": {
+            "runs": 580,
+            "strikeRate": 119.2,
+            "average": 22.4
+        },
+        "keyMoment": "नेपाली ब्याटिङ लाइनअपको गहिराइ दिने खेलाडी",
+        "unreasonableWisdom": [
+            "बीचमा उभिनु — त्यो कायरता होइन, रणनीति हो।"
+        ],
+        "signatureArsenal": [
+            {
+                "title": "मिडल–अर्डर स्थिरता",
+                "description": "ब्याटिङ गहिराइको आधार"
+            }
+        ],
+        "originStory": [
+            "नेपाली ब्याटिङको विश्वस्त स्तम्भ।"
+        ],
+        "deepStory": [
+            {
+                "era": "साधारण संसार",
+                "content": "मध्यक्रम। चर्चा कम। योगदान धेरै। सुन्दीपको क्रिकेट यात्रा शान्त नदी जस्तो — गहिरो, तर कोलाहलरहित।"
+            },
+            {
+                "era": "अस्वीकार",
+                "content": "'स्टार खेलाडी' को सूचीमा नाम थिएन। तर टीमको 'मस्ट हेभ' सूचीमा — सधैं थियो।"
+            },
+            {
+                "era": "कठिन परीक्षा",
+                "content": "अन्तिम ओभरमा टीमलाई १२ रन चाहिएको। सुन्दीप বাঙ্গ्रिय क्रिजमा। शान्त। र उनले — बनाए।"
+            },
+            {
+                "era": "पुनर्जन्म",
+                "content": "हिरो नभए पनि — हारलाई रोक्ने मान्छे। टीमको मेरुदण्ड। सुन्दीप जोरा।"
+            }
+        ],
+        "timeline": []
+    }
+]
