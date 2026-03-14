@@ -28,7 +28,14 @@ export default function Home() {
       }} />
 
       <ScrollReveal direction="up" delay={0}>
-        <LeadStory />
+        <LeadStory
+          image="/images/balen_profile.jpg"
+          quote="काठमाडौंको हिरो बन्नका लागि, उनले पहिले आफैलाई मेटाउनु पर्यो।"
+          name="बालेन्द्र शाह"
+          attribution="र्यापर। इन्जिनियर। मेयर। प्रधानमन्त्री-मनोनीत।"
+          ctaText="पूरा कथा पढ्नुस् →"
+          ctaHref="/balen-shah"
+        />
       </ScrollReveal>
 
       {/* 4. The Magazine Grid */}

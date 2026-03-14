@@ -9,9 +9,44 @@
         "image": "/images/rohit.webp",
         "heroImage": "/images/rohit_paudel1.webp",
         "stats": {
-            "runs": 1800,
-            "strikeRate": 118.5,
-            "average": 28.4
+            "odi": {
+                "matches": 76,
+                "innings": 72,
+                "runs": 2000,
+                "highestScore": 126,
+                "average": 29.85,
+                "strikeRate": 74.99,
+                "centuries": 2,
+                "halfCenturies": 11,
+                "wickets": 10,
+                "bestBowling": "4/22",
+                "economy": 4.32
+            },
+            "t20i": {
+                "matches": 80,
+                "innings": 76,
+                "runs": 1720,
+                "highestScore": 61,
+                "average": 27.30,
+                "strikeRate": 119.44,
+                "centuries": 0,
+                "halfCenturies": 8,
+                "wickets": 14,
+                "bestBowling": "2/7",
+                "economy": 6.55
+            }
+        },
+        "captainRecord": {
+            "odi": {
+                "matches": 50,
+                "wins": 25,
+                "losses": 23
+            },
+            "t20i": {
+                "matches": 59,
+                "wins": 34,
+                "losses": 23
+            }
         },
         "keyMoment": "२०२३ विश्वकप छनोटमा नेपाललाई ऐतिहासिक जितमा नेतृत्व",
         "unreasonableWisdom": [
@@ -20,51 +55,181 @@
         "signatureArsenal": [
             {
                 "title": "मिडल–अर्डर एंकर",
-                "description": "दबाबमा टीमको ढाल"
+                "description": "४ नम्बरदेखि ६ नम्बरसम्म ब्याट गर्ने रोहित टोलीको मेरुदण्ड हुन्। जब विकेटहरू झरिरहेका हुन्छन् — उनी अड्छन्। टोलीलाई ढल्नबाट बचाउने त्यो एक मान्छे।"
+            },
+            {
+                "title": "दबाबको मनोविज्ञान",
+                "description": "दक्षिण अफ्रिकाविरुद्ध अन्तिम ओभरमा उनले भने — 'मलाई केही महसुस भएन। म त्यो क्षणमै थिएँ। ' यही शान्ति उनको सबैभन्दा ठूलो हतियार हो।"
+            },
+            {
+                "title": "कप्तानको चाल",
+                "description": "T20I मा उनी पहिले फिल्डिङ रोज्छन् — किनभने उनलाई थाहा छ आफ्नो टोली खेद्न सक्छ। मध्य ओभरमा स्पिनरहरू उतार्ने उनको रणनीति प्रतिस्पर्धीहरूलाई सधैं अचम्म पार्छ।"
+            },
+            {
+                "title": "Off–Break बलिङ",
+                "description": "ब्याटर मात्र होइन — उनको best bowling 4/22 छ। मध्य ओभरमा off-break गेंदबाजीले रनको प्रवाह रोक्ने उनकै क्षमताले कैयौं खेल जिताएको छ।"
+            },
+            {
+                "title": "हिमालको धैर्य",
+                "description": "उनले भनेका छन् — 'शेर्पाहरू जसरी हिमाल चढ्छन्, त्यसरी नै हामी पनि शान्त र स्थिर रहनुपर्छ। ' यो केवल उद्धरण होइन — यो उनको खेल्ने तरिका हो।"
             }
         ],
         "originStory": [
-            "२१ वर्षको उमेरमा राष्ट्रिय क्यापटेन्सी — यो गौरवको कथा होइन। यो त्यो कथा हो जब ड्रेसिङ रुममा सिनियर खेलाडीहरूले उनलाई 'बच्चा' भने। र उनले के गरे त्यसको जवाफमा — त्यो सुन्नु जरुरी छ।"
+            "नवलपरासीको माटोमा हुर्किएका रोहित कुमार पौडेलले सानैदेखि टेनिस बलले सडकमा क्रिकेट खेल्दै आफ्नो सपना बुनेका थिए। सन् २०१४ मा, बाह्र वर्षको रोहितले टेलिभिजनको पर्दामा बाङ्गलादेशको ICC World T20 मा नेपाल खेलिरहेको देखे — त्यो क्षण उनको जीवन बदलियो। त्यसपछि उनी काठमाडौं आए, कडा परिश्रम गरे, र आफ्नो पुस्ताको सबैभन्दा ठूलो क्रिकेटर बने।",
+            "तर यो गौरवको कथा मात्र होइन। यो त्यो कथा हो जब एउटा बीस वर्षे केटालाई भाँचिएको टोली दिइयो र भनिएको — नेपाली क्रिकेट बचाउ। उनले बचाए। चुपचाप। ब्याटबाटै।"
         ],
         "deepStory": [
             {
-                "era": "साधारण संसार",
-                "content": "काठमाडौंको एउटा मध्यमवर्गीय परिवार। बुबा सरकारी जागिरे। क्रिकेट खेल्न दिन्थे — तर सपना देख्न होइन। रोहितले दुवै गरे। चुपचाप।"
+                "era": "सुरुवात",
+                "title": "साधारण संसार",
+                "content": "नवलपरासीको माटोमा जन्मिएका रोहित कुमार पौडेल सानैदेखि टेनिस बलले सडकमा क्रिकेट खेल्दै हुर्किए। घरको आँगनबाट देखिने हरिया खेतहरू, दाउराको धुँवाको गन्ध, र साँझ परेपछि रेडियोमा आउने क्रिकेट कमेन्ट्री — यही थियो उनको बाल्यकाल। सन् २०१४ मा, बाह्र वर्षको रोहितले टेलिभिजनको सानो पर्दामा हेरे — बाङ्गलादेशको ICC World T20 मा नेपाल खेलिरहेको थियो। त्यो क्षण उनको भित्र केही बदलियो — एउटा आगो सल्कियो जो आजसम्म निभेको छैन। तपाईंलाई पनि याद होला — कुनै एउटा क्षण जब नेपालले केही गर्दा तपाईंको मनमा अचानक 'म पनि सक्छु' भन्ने आवाज आयो। रोहितको त्यो क्षण थियो।",
+                "image": ""
             },
             {
-                "era": "अस्वीकार",
-                "content": "पहिलो अन्तर्राष्ट्रिय सिरिजमा ड्रेसिङ रुम चिसो थियो। उनी सबभन्दा कान्छा थिए। कोही बोलेनन्। एउटा सिनियरले भने — 'यो केटो यहाँ के गर्न आएको?' रोहितले सुने। मुस्कुराए। र ब्याट उठाए।"
+                "era": "बाल्यकाल",
+                "title": "सबैभन्दा कान्छो",
+                "content": "रोहितले अगस्ट ३, २०१८ मा नेदरल्यान्ड्सविरुद्ध मात्र १५ वर्ष ३३५ दिनको उमेरमा आफ्नो ODI डेब्यु गरेका थिए। यति सानो उमेरमै अन्तर्राष्ट्रिय क्रिकेटको ठूलो मञ्चमा पाइला टेक्दा उनी इतिहासकै चौथो सबैभन्दा कान्छो खेलाडी बनेका थिए। उनले सन् २०१६ को U-19 विश्वकपमा भारतीय तिव्र गतिका बलर कमलेश नगरकोटीलाई ५ बलमा २४ रन प्रहार गरेर आफ्नो असाधारण प्रतिभा देखाइसकेका थिए। कम उमेरमै उनले देखाएको परिपक्वता र साहसले उनलाई नेपाली क्रिकेटको 'फायरफाइटर' को उपनाम दिलाएको थियो। उनले दबाबको बेला पनि धैर्य नगुमाई ब्याटबाटै उत्कृष्ट प्रदर्शन गरेर सबै संशयहरूको जवाफ दिए।",
+                "image": ""
             },
             {
-                "era": "कठिन परीक्षा",
-                "content": "२०२३ को विश्वकप छनोट। अन्तिम म्याच। नेपाललाई जित्नैपर्ने। रोहित ड्रेसिङ रुममा एक्लै बसे — १५ मिनेट। बाहिर निस्कँदा उनको अनुहारमा कुनै डर थिएन। किन थिएन — त्यो रहस्य उनले आजसम्म भनेका छैनन्।"
+                "era": "रेकर्ड",
+                "title": "सचिनको रेकर्ड",
+                "content": "जनवरी २६, २०१९ को त्यो सुनौलो दिनमा रोहितले विश्व क्रिकेटलाई चकित पार्दै एउटा ऐतिहासिक कीर्तिमान रचे। युएईविरुद्ध दुबईमा भएको खेलमा उनले ५८ बलमा ५५ रन बनाउँदै नेपाललाई ११३-५ को कमजोर र ढलमलाएको स्थितिबाट २४२ रनको सम्मानजनक योगफलसम्म पुर्याए। यसरी १६ वर्ष १४६ दिनको उमेरमा उनले सचिन तेन्दुलकरको २९ वर्ष पुरानो रेकर्ड र शाहिद अफ्रिदीको कीर्तिमान तोड्दै अन्तर्राष्ट्रिय क्रिकेटमा अर्धशतक प्रहार गर्ने सबैभन्दा कान्छो पुरुष खेलाडी बन्ने गौरव प्राप्त गरे। यो ऐतिहासिक सफलता एउटा तथ्याङ्क मात्र थिएन, यसले नेपालको शिर उच्च बनाउँदै हरेक नेपालीको छाती गर्वले चौडा बनाएको थियो।",
+                "image": ""
             },
             {
-                "era": "पुनर्जन्म",
-                "content": "नेपाल जित्यो। विश्वकपमा पुग्यो। र त्यो सिनियर खेलाडीले — जसले 'बच्चा' भनेका थिए — रोहितलाई अँगाले। दुवैका आँखा रसाएका थिए। नेतृत्व उमेरले होइन — आँटले बनाउँछ।"
+                "era": "संघर्ष",
+                "title": "भाँचिएको टोली",
+                "content": "नोभेम्बर २०२२ मा मात्र २० वर्षको उमेरमा रोहितलाई नेपाली राष्ट्रिय टोलीको कप्तानको ताज पहिराइयो। त्यतिबेला नेपाली टोली ICC CWC League 2 को अङ्कतालिकामा पुछारबाट दोस्रो स्थानमा थियो र एकदिवसीय मान्यता जोगाउन बाँकी १२ मध्ये ११ खेल जित्नैपर्ने पहाडजस्तो चुनौती थियो। यस्तो कठीन परिस्थितिमा फेब्रुअरी २०२३ मा स्कटल्यान्डविरुद्ध १३८-८ को हारको नजिक पुगेको बेला उनले अविजित ९५ रनको सानदार र जादुयी पारी खेले। करण केसीसँग मिलेर नवौं विकेटका लागि ७५ रनको ऐतिहासिक साझेदारी गर्दै उनले टोलीलाई रोमाञ्चक जित दिलाए। उनको यो नेतृत्वले नेपालको एकदिवसीय मान्यता मात्र जोगाएन, विश्वकप छनोटको ढोका खोल्दै सिङ्गो देशको भत्किएको सपनालाई फेरि जोडिदियो।",
+                "image": ""
+            },
+            {
+                "era": "अँध्यारो रात",
+                "title": "एक रनको पीडा",
+                "content": "खेलकुद सधैँ क्रूर हुन्छ, र नेपाली क्रिकेटले यसलाई नजिकबाट भोगेको छ। सन् २०२४ को T20 World Cup मा नेपालले बलियो दक्षिण अफ्रिकालाई ११५ रनमा रोकेर पनि अन्तिम बलमा १ रनले हृदयविदारक हार बेहोर्नुपर्यो। यसैगरी सन् २०२६ को T20 World Cup मा इङ्गल्याण्डविरुद्ध ऐतिहासिक जितको नजिक पुगेर पनि ४ रनको पीडादायी पराजय भोगेको थियो। इटालीसँगको लज्जास्पद १० विकेटको हारपछि प्रशिक्षक स्टुअर्ट लले टोली सामाजिक सञ्जालमा भड्किएको भन्दै कडा सार्वजनिक आलोचना गरे। यस्ता कठीन र अँध्यारा हारहरूले टोलीलाई गहिरो चोट दिए पनि कप्तान रोहितले सारा देशको पीडालाई सम्हाल्दै टोलीलाई अघि बढाउने अठोट छोडेनन्।",
+                "image": ""
+            },
+            {
+                "era": "फिर्ती",
+                "title": "कप्तानको जवाफ",
+                "content": "इटालीसँगको हारपछि नेपालले स्कटल्यान्डविरुद्ध उत्कृष्ट पुनरागमन गर्दै कप्तानको शानदार जवाफ दियो। रोहितले बलिङ गर्दै २ ओभरमा १२ रन खर्चेर महत्त्वपूर्ण विकेट लिए र स्कटल्यान्डको सुरुवाती साझेदारी तोड्न मद्दत गरे। त्यसपछि उनले ब्याटिङमा पनि १४ बलमा १६ रनको अविजित पारी खेल्दै टोलीलाई ७ विकेटको जितसम्म डोहोर्याए। खेलपछि रोहितले दबाबका बेला खेलाडीहरूले आफ्ना स्नायुहरू शान्त राख्न सिकेको र इङ्गल्याण्डसँगको खेलबाट पाठ सिकेको बताए। यो जितले १२ वर्षपछि T20 विश्वकपमा नेपाललाई सफलता दिलाउँदै हरेक नेपालीलाई गौरवान्वित बनायो र रोहितलाई एक परिपक्व कप्तानको रूपमा पूर्ण रूपले स्थापित गर्यो।",
+                "image": ""
             }
         ],
         "timeline": [
             {
-                "year": "२०१९",
-                "title": "सबैभन्दा कान्छो",
-                "content": "१७ वर्षमा अन्तर्राष्ट्रिय डेब्यू। ड्रेसिङ रुममा 'बच्चा' — मैदानमा योद्धा।"
+                "year": "२०१८",
+                "title": "अन्तर्राष्ट्रिय मञ्चमा पाइला",
+                "content": "अगस्ट ३, २०१८ मा नेदरल्यान्ड्सविरुद्ध मैदानमा उत्रिँदा रोहित मात्र १५ वर्ष ३३५ दिनका थिए। यति कलिलो उमेरमै एकदिवसीय क्रिकेटमा डेब्यु गर्दै उनले विश्व क्रिकेटलाई आफ्नो उदयको स्पष्ट सङ्केत दिएका थिए।"
             },
             {
-                "year": "२०२१",
-                "title": "क्याप्टेन्सी",
-                "content": "२१ वर्षमा नेपालको कप्तान। इतिहासको सबैभन्दा कान्छो।"
+                "year": "२०१९",
+                "title": "सचिनको रेकर्ड भङ्ग",
+                "content": "जनवरी २६, २०१९ मा युएईविरुद्ध १६ वर्ष १४६ दिनको उमेरमा रोहितले सानदार अन्तर्राष्ट्रिय अर्धशतक प्रहार गरे। उनले सचिन तेन्दुलकर र शाहिद अफ्रिदीको वर्षौं पुरानो रेकर्ड तोड्दै सिङ्गो विश्वलाई चकित पारे।",
+                "tier": "landmark"
+            },
+            {
+                "year": "२०२२",
+                "title": "नेतृत्वको गहन अभिभारा",
+                "content": "मात्र २० वर्षको कलिलो उमेरमा नेपाली राष्ट्रिय क्रिकेट टोलीको कप्तानको रूपमा उनको काँधमा देशको ठूलो जिम्मेवारी आयो। सङ्कटपूर्ण अवस्थामा रहेको टोलीलाई सम्हाल्दै उनले नेपाली क्रिकेटको नयाँ युगको सुरुवात गरे।",
+                "tier": "landmark"
             },
             {
                 "year": "२०२३",
-                "title": "विश्वकप",
-                "content": "नेपाललाई T20 विश्वकपमा पुर्याउने कप्तान। एउटा पुस्ताको सपना पूरा।"
+                "title": "ऐतिहासिक पुनरागमन",
+                "content": "ODI मान्यता गुम्ने खतरामा रहेको नेपालले रोहितको नेतृत्वमा अन्तिम १२ मध्ये ११ खेल जित्दै असम्भव पुनरागमन गर्यो। स्कटल्यान्डविरुद्ध १३८-८ को नाजुक अवस्थाबाट उनले खेलेको ९५* नेपाली क्रिकेट इतिहासकै सर्वाधिक रोमाञ्चक पारी बन्यो।",
+                "tier": "landmark"
+            },
+            {
+                "year": "२०२३",
+                "title": "एसिया कपको ठूलो मञ्च",
+                "content": "नेपालले इतिहासमै पहिलो पटक एसिया कपमा पाइला टेक्यो। रोहितकै कप्तानीमा नेपाली टोलीले भारत र पाकिस्तानसँग भिड्दै नयाँ उचाइ हासिल गर्यो।"
+            },
+            {
+                "year": "२०२४",
+                "title": "एक रनको हृदयविदारक पीडा",
+                "content": "T20 विश्वकपमा दक्षिण अफ्रिकालाई ११५ रनमै रोकेर पनि नेपाल अन्तिम बलमा १ रनले पराजित भयो। जितको सँघारमा पुगेर पाएको त्यो हारले सिङ्गो देशलाई रुवायो।"
+            },
+            {
+                "year": "२०२५",
+                "title": "एनपिएल च्याम्पियन",
+                "content": "NPL फाइनलमा ह्याट्रिक विकेट लिँदै रोहितले लुम्बिनी लायन्सलाई च्याम्पियन बनाए। उनी प्रतियोगिताकै सर्वोत्कृष्ट खेलाडी घोषित भए।"
             },
             {
                 "year": "२०२६",
-                "title": "अभियान",
-                "content": "२६ वर्ष। कप्तान। र अझै भोको छ।"
+                "title": "१२ वर्षपछिको विश्वकप जित",
+                "content": "वानखेडेमा इङ्गल्याण्डलाई कडा टक्कर दिएको नेपालले स्कटल्यान्डलाई ७ विकेटले हराउँदै १२ वर्षपछि विश्वकपमा ऐतिहासिक जित निकाल्यो। रोहितले नेपाल र नेपालीलाई गर्वको आँसु दिए।",
+                "tier": "landmark"
             }
+        ],
+        "nepaliName": "रोहित कुमार पौडेल",
+        "microStats": [
+            "76 ODIs",
+            "2,000 RUNS",
+            "CAPTAIN"
+        ],
+        "lore": "A 20-year-old handed a broken team and told to save Nepali cricket. He did.",
+        "records": [
+            "१६ वर्ष १४६ दिनको उमेरमा अन्तर्राष्ट्रिय अर्धशतक — सबैभन्दा कान्छो पुरुष खेलाडीको विश्व कीर्तिमान",
+            "ODI मा १,००० र २,००० रन पूरा गर्ने पहिलो नेपाली — नेपालको सर्वाधिक ODI रन",
+            "ODI मा दुईवटा शतक प्रहार गर्ने पहिलो नेपाली",
+            "नेपालको इतिहासमा सबैभन्दा कान्छो ODI कप्तान — मात्र २० वर्षको उमेरमा"
+        ],
+        "iccRanking": null,
+        "quotes": [
+            {
+                "quote": "I feel super proud. I was a small kid when I watched that World Cup. Watching Nepal's team in the World Cup inspired me to pursue a cricketing career. I feel lucky and grateful.",
+                "context": "— सन् २०१४ को विश्वकप हेरेर प्रेरित भएको र आफैँ कप्तानको रूपमा विश्वकप खेल्न पाउँदा",
+                "date": "July 11, 2024",
+                "featured": true
+            },
+            {
+                "quote": "I didn't feel anything. I was just there in the moment. Everyone was excited, two runs were needed in two balls. T20 is a fast game. The game shifts with two good balls or even a boundary. So, I think being present is essential.",
+                "context": "— दक्षिण अफ्रिकाविरुद्ध अन्तिम ओभरको चरम दबाबमा",
+                "date": "June 15, 2024",
+                "featured": false
+            },
+            {
+                "quote": "We were very close and yet so far. I think in crunch moments we did well and the way we fought was very good. If we can play top teams more regularly then next time we will be on the winning side.",
+                "context": "— दक्षिण अफ्रिकासँग १ रनले पराजित भएपछि",
+                "date": "June 15, 2024",
+                "featured": false
+            },
+            {
+                "quote": "I believe failure teaches more than victory. This time we got lessons from the failure. The failure has inspired us to perform even better in the upcoming T20 World Cup qualifiers.",
+                "context": "— विश्वकपको असफलताबाट सिकेको पाठ र आगामी दिनको अठोट",
+                "date": "July 11, 2024",
+                "featured": false
+            },
+            {
+                "quote": "I think we normally say that if you want to be a Nepali cricket fan you have to have a strong heart because we play a lot of tight games.",
+                "context": "— नेपालका रोमाञ्चक खेलहरू र समर्थकहरूको बलियो मुटुबारे",
+                "date": "February 17, 2026",
+                "featured": false
+            },
+            {
+                "quote": "Talking about our last match, despite receiving the highest target, we were ready to face the challenge. Our plan was to stay on the field till the end and win. However, after the fall of early wickets, silence fell over the ground. But, deep down, I believed that we could still do this.",
+                "context": "— स्कटल्यान्डविरुद्ध ९५* को अविजित पारी खेल्दा",
+                "date": "March 27, 2023",
+                "featured": false
+            },
+            {
+                "quote": "I think this means a lot to me, especially this is my second World Cup as captain and winning my first game in the last league stage. So I think this win was very important to us, not only me, but us as a team.",
+                "context": "— १२ वर्षपछि T20 विश्वकपमा स्कटल्यान्डलाई हराएपछि",
+                "date": "February 18, 2026",
+                "featured": false
+            },
+            {
+                "quote": "We did not come to this World Cup just to take part, we came to compete.",
+                "context": "— इङ्ल्याण्डसँग ४ रनको हारपछि",
+                "date": "२०२६ T20 विश्वकप",
+                "featured": false
+            }
+        ],
+        "status": "active",
+        "achievements": [
+            "CWC LEAGUE 2 HERO 🏆",
+            "T20 WC 2026 SQUAD 🏆"
         ]
     },
     {
@@ -77,9 +242,20 @@
         "image": "/images/dipendra.webp",
         "heroImage": "/images/dipendra1.webp",
         "stats": {
-            "runs": 1650,
-            "strikeRate": 148.9,
-            "wickets": 45
+            "odi": {
+                "runs": 1000,
+                "average": 21,
+                "strikeRate": 75,
+                "wickets": 45,
+                "bestBowling": "4/18"
+            },
+            "t20i": {
+                "runs": 1650,
+                "average": 36.5,
+                "strikeRate": 148.9,
+                "wickets": 45,
+                "bestBowling": "4/18"
+            }
         },
         "keyMoment": "एउटै ओभरमा ६ छक्का — नेपाली क्रिकेटको सबैभन्दा विस्फोटक क्षण",
         "unreasonableWisdom": [
@@ -138,18 +314,58 @@
             {
                 "year": "September 27, 2023",
                 "title": "The 9-Ball Miracle",
-                "content": "He shatters Yuvraj Singh's 16-year-old world record by blasting the fastest half-century in T20I history off just 9 deliveries at the Asian Games."
+                "content": "He shatters Yuvraj Singh's 16-year-old world record by blasting the fastest half-century in T20I history off just 9 deliveries at the Asian Games.",
+                "tier": "landmark"
             },
             {
                 "year": "April 13, 2024",
                 "title": "The Perfect Over",
-                "content": "Earning his place in cricket immortality, Airee becomes only the third man in T20I history to smash six consecutive sixes in a single over against Qatar."
+                "content": "Earning his place in cricket immortality, Airee becomes only the third man in T20I history to smash six consecutive sixes in a single over against Qatar.",
+                "tier": "landmark"
             },
             {
                 "year": "February 17, 2026",
                 "title": "The World Cup Redemption",
                 "content": "Airee blasts a flawless, unbeaten 50 off 23 balls to guide Nepal to a thrilling seven-wicket victory over Scotland, securing the nation's first T20 World Cup win in 12 years."
             }
+        ],
+        "nepaliName": "दिपेन्द्र सिंह ऐरी",
+        "microStats": [
+            "64 T20Is",
+            "148.9 SR",
+            "45 WICKETS"
+        ],
+        "lore": "He skipped 11th-grade exams to play cricket. Today, he holds records that mortals only dream of.",
+        "records": [
+            "Highest Strike Rate in a T20I innings (Minimum 10 balls) — 555.55 vs Mongolia",
+            "Fastest T20I half-century in history — 9 balls vs Mongolia",
+            "Third man in T20I history to hit six consecutive sixes in an over"
+        ],
+        "iccRanking": "ICC T20I ALL-ROUNDER #4 (as of May 2024)",
+        "quotes": [
+            {
+                "quote": "I don't play to set records. If you step onto the pitch and play for the team, the records will automatically follow.",
+                "context": "— युवराज सिंहको विश्व रेकर्ड तोडेपछि",
+                "date": "सेप्टेम्बर २०२३, एसियन गेम्स",
+                "featured": true
+            },
+            {
+                "quote": "There was a phase where I seriously thought about quitting cricket completely. But when you know what is right for you, no exam or obstacle in the world can stop you.",
+                "context": "— २०२१ को कठिन समयबारे",
+                "date": "२०२२ पुनरागमन",
+                "featured": false
+            },
+            {
+                "quote": "We have to play Test matches and ODI World Cups regularly. Our generation has to lay the foundation for Test cricket in Nepal.",
+                "context": "— नेपाली क्रिकेटको भविष्यबारे",
+                "date": "२०२५ अन्तर्वार्ता",
+                "featured": false
+            }
+        ],
+        "status": "active",
+        "achievements": [
+            "FASTEST 50 WR 💥",
+            "ASIAN GAMES 2023 🏆"
         ]
     },
     {
@@ -162,9 +378,20 @@
         "image": "/images/sandeep.webp",
         "heroImage": "/images/sandeep1.webp",
         "stats": {
-            "wickets": 120,
-            "economy": 6.8,
-            "strikeRate": 14.2
+            "odi": {
+                "runs": 200,
+                "average": 10,
+                "strikeRate": 50,
+                "wickets": 112,
+                "bestBowling": "6/11"
+            },
+            "t20i": {
+                "runs": 100,
+                "average": 8,
+                "strikeRate": 80,
+                "wickets": 98,
+                "bestBowling": "5/9"
+            }
         },
         "keyMoment": "IPL ड्राफ्टमा नाम आउँदा नेपाली क्रिकेटको नयाँ युग शुरु",
         "unreasonableWisdom": [
@@ -218,7 +445,8 @@
             {
                 "year": "January 28, 2018",
                 "title": "IPL Glass Ceiling",
-                "content": "Lamichhane shattered the glass ceiling for Nepalese cricket by being bought by the Delhi Daredevils in the IPL auction."
+                "content": "Lamichhane shattered the glass ceiling for Nepalese cricket by being bought by the Delhi Daredevils in the IPL auction.",
+                "tier": "landmark"
             },
             {
                 "year": "April 2023",
@@ -235,7 +463,42 @@
                 "title": "Full Acquittal",
                 "content": "The Patan High Court officially acquitted him of all rape charges, immediately lifting his suspension and legally clearing his path to return to international cricket."
             }
-        ]
+        ],
+        "nepaliName": "सन्दीप लामिछाने",
+        "microStats": [
+            "51 T20Is",
+            "98 WICKETS",
+            "14.2 SR"
+        ],
+        "lore": "The teenage prodigy who tore down borders, conquered global leagues, and brought the world's eyes to Nepal.",
+        "records": [
+            "Fastest to 100 ODI wickets in history — 42 matches",
+            "First Nepalese player to play in the IPL (Delhi Capitals)",
+            "Most consecutive ODI matches taking a wicket (33 matches)"
+        ],
+        "iccRanking": null,
+        "quotes": [
+            {
+                "quote": "If someone asks me to play for free for the rest of my life for Nepal cricket, no money, I don't need anything... my goal is to take this team to the World Cup, to play Test matches.",
+                "context": "— राष्ट्रिय कर्तव्य र फ्रेन्चाइज लिगबारे",
+                "date": "२०२३ अन्तर्वार्ता",
+                "featured": true
+            },
+            {
+                "quote": "I have said from the first day that I am innocent. I am grateful to those who supported me. I will make every effort to take Nepali cricket to a new height.",
+                "context": "— अदालतबाट सफाइ पाएपछि पहिलो भनाइ",
+                "date": "मे २०२४",
+                "featured": false
+            },
+            {
+                "quote": "And the @USEmbassyNepal did it again what they did back in 2019, they denied my Visa for the T-20 World Cup... Unfortunate.",
+                "context": "— भिसा अस्वीकृत भएपछि",
+                "date": "मे २०२४, सामाजिक सञ्जाल",
+                "featured": false
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "kushal-bhurtel",
@@ -247,9 +510,20 @@
         "image": "/images/kushal.webp",
         "heroImage": "/images/kushal1.webp",
         "stats": {
-            "runs": 1420,
-            "strikeRate": 135.2,
-            "average": 69.5
+            "odi": {
+                "runs": 1200,
+                "average": 24.5,
+                "strikeRate": 80,
+                "wickets": 15,
+                "bestBowling": "4/20"
+            },
+            "t20i": {
+                "runs": 1100,
+                "average": 30,
+                "strikeRate": 127,
+                "wickets": 12,
+                "bestBowling": "3/18"
+            }
         },
         "keyMoment": "२०२४ विश्वकपमा नेपालको सर्वोच्च स्कोरर",
         "unreasonableWisdom": [
@@ -303,7 +577,8 @@
             {
                 "year": "April 17, 2021",
                 "title": "Unleashed",
-                "content": "Unleashed absolute carnage on his T20I debut against the Netherlands, igniting a world-record streak of three consecutive half-centuries to launch his international career."
+                "content": "Unleashed absolute carnage on his T20I debut against the Netherlands, igniting a world-record streak of three consecutive half-centuries to launch his international career.",
+                "tier": "landmark"
             },
             {
                 "year": "February 19, 2022",
@@ -313,13 +588,50 @@
             {
                 "year": "June 18, 2023",
                 "title": "World Record Stand",
-                "content": "Forged a historic 171-run opening partnership by smashing a fearless 99 against hosts Zimbabwe in the Cricket World Cup Qualifiers."
+                "content": "Forged a historic 171-run opening partnership by smashing a fearless 99 against hosts Zimbabwe in the Cricket World Cup Qualifiers.",
+                "tier": "landmark"
             },
             {
                 "year": "September 4, 2023",
                 "title": "Asia Cup Giant-Killer",
-                "content": "Took the fight to the giants of the sport on the Asia Cup stage, blasting a rapid 25-ball 38 and hitting the match's very first six against India's fearsome pace attack."
+                "content": "Took the fight to the giants of the sport on the Asia Cup stage, blasting a rapid 25-ball 38 and hitting the match's very first six against India's fearsome pace attack.",
+                "tier": "landmark"
             }
+        ],
+        "nepaliName": "कुशल भुर्तेल",
+        "microStats": [
+            "44 T20Is",
+            "127.0 SR",
+            "OPENER"
+        ],
+        "lore": "He doesn't build innings; he detonates them. The fearless spearhead of the Rhino onslaught.",
+        "records": [
+            "First player in T20I history to score three consecutive half-centuries on debut"
+        ],
+        "iccRanking": null,
+        "quotes": [
+            {
+                "quote": "It was a big match and we never got a bigger total to chase before but we had a belief that we can chase it down. We always used to say if we are to become the No.1 Associate team we have to chase down these totals.",
+                "context": "— यूएईविरुद्ध ३११ रन चेस गरेपछि",
+                "date": "मार्च २०२३, कीर्तिपुर",
+                "featured": true
+            },
+            {
+                "quote": "The crowd has been always like the 12th man for us. When they come out to support in every match. It boosts not only confidence but also the whole team's morale.",
+                "context": "— नेपाली समर्थकहरूबारे",
+                "date": "२०२३ पोस्ट-म्याच",
+                "featured": false
+            },
+            {
+                "quote": "Yes, I know that was the first time that four batters hit 50+ scores in the same match. And that's a very good sign who are thinking to become the number one Associate team.",
+                "context": "— टिमको ब्याटिङ प्रदर्शनबारे",
+                "date": "२०२३ प्रेस कन्फरेन्स",
+                "featured": false
+            }
+        ],
+        "status": "active",
+        "achievements": [
+            "DEBUT RECORD SETTER 🏆"
         ]
     },
     {
@@ -332,9 +644,16 @@
         "image": "/images/aasif.webp",
         "heroImage": "/images/aasif1.webp",
         "stats": {
-            "runs": 980,
-            "strikeRate": 112.3,
-            "dismissals": 55
+            "odi": {
+                "runs": 980,
+                "average": 0,
+                "strikeRate": 112.3
+            },
+            "t20i": {
+                "runs": 980,
+                "average": 0,
+                "strikeRate": 112.3
+            }
         },
         "keyMoment": "अनुभवी विकेटकीपरको रूपमा टीमको मेरुदण्ड",
         "unreasonableWisdom": [
@@ -388,7 +707,24 @@
                 "title": "अझै पहिलो",
                 "content": "३५ वर्ष। अझै नम्बर एक। अझै भोको।"
             }
-        ]
+        ],
+        "nepaliName": "आशिफ शेख",
+        "microStats": [
+            "41 ODIs",
+            "1,200 RUNS",
+            "WICKETKEEPER"
+        ],
+        "lore": "Ice in his veins. The calm, elegant anchor amidst the T20 carnage.",
+        "quotes": [
+            {
+                "quote": "दस्ताना लगाएपछि सबै कुरा देखिन्छ — मैदानको सत्य।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "sompal-kami",
@@ -400,9 +736,18 @@
         "image": "/images/sompal.webp",
         "heroImage": "/images/sompal1.webp",
         "stats": {
-            "wickets": 85,
-            "economy": 7.2,
-            "strikeRate": 16.8
+            "odi": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 16.8,
+                "wickets": 85
+            },
+            "t20i": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 16.8,
+                "wickets": 85
+            }
         },
         "keyMoment": "नेपालको सर्वाधिक अनुभवी तेज गेंदबाज — दशौं वर्षको सेवा",
         "unreasonableWisdom": [
@@ -456,6 +801,25 @@
                 "title": "दशौं वर्ष",
                 "content": "८५+ विकेट। र गुल्मीमा एकेडेमी — भावी सोम्पालहरूको लागि।"
             }
+        ],
+        "nepaliName": "सोमपाल कामी",
+        "microStats": [
+            "47 ODIs",
+            "63 WICKETS",
+            "FAST BOWLER"
+        ],
+        "lore": "The Gulmi Express. A fast-bowling pioneer who laid the tracks for a generation of pace.",
+        "quotes": [
+            {
+                "quote": "गति मात्र हतियार होइन — बुद्धि नै असली हतियार हो।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "injured",
+        "achievements": [
+            "ASIAN GAMES RECORD 🏆"
         ]
     },
     {
@@ -468,9 +832,18 @@
         "image": "/images/karan.webp",
         "heroImage": "/images/karan1.webp",
         "stats": {
-            "wickets": 62,
-            "runs": 520,
-            "economy": 7.8
+            "odi": {
+                "runs": 520,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 62
+            },
+            "t20i": {
+                "runs": 520,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 62
+            }
         },
         "keyMoment": "डेथ ओभर विशेषज्ञको रूपमा नेपालको भरोसेमान हतियार",
         "unreasonableWisdom": [
@@ -524,7 +897,28 @@
                 "title": "मास्टर",
                 "content": "नेपालको भरोसेमान डेथ बलर। हर अन्तिम ओभर — उनको।"
             }
-        ]
+        ],
+        "nepaliName": "करण केसी",
+        "microStats": [
+            "46 ODIs",
+            "73 WICKETS",
+            "MATCH WINNER"
+        ],
+        "lore": "The architect of the Miracle in Namibia. When hope dies, Karan KC swings the bat.",
+        "quotes": [
+            {
+                "quote": "दबाबमा खेल्नु — त्यही असली परीक्षा हो।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "retired",
+        "achievements": [
+            "WCL DIV 2 HERO 🏆",
+            "T20 WC 2024 SQUAD 🏆"
+        ],
+        "retirementYear": 2025
     },
     {
         "id": "aarif-sheikh",
@@ -536,9 +930,18 @@
         "image": "/images/aarif.webp",
         "heroImage": "/images/aarif1.webp",
         "stats": {
-            "runs": 760,
-            "wickets": 28,
-            "strikeRate": 122.4
+            "odi": {
+                "runs": 760,
+                "average": 0,
+                "strikeRate": 122.4,
+                "wickets": 28
+            },
+            "t20i": {
+                "runs": 760,
+                "average": 0,
+                "strikeRate": 122.4,
+                "wickets": 28
+            }
         },
         "keyMoment": "टीमको लचिलापनको प्रतीक — जहाँ जरुरी त्यहाँ उपस्थित",
         "unreasonableWisdom": [
@@ -571,7 +974,24 @@
                 "content": "बहुमुखी भनेको कमजोरी होइन — सबैभन्दा ठूलो शक्ति हो। आरिफले त्यो प्रमाणित गरे।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "nepaliName": "आरिफ शेख",
+        "microStats": [
+            "48 ODIs",
+            "800 RUNS",
+            "FINISHER"
+        ],
+        "lore": "The seasoned anchor. A master of navigating the middle overs and rescuing broken innings.",
+        "quotes": [
+            {
+                "quote": "बहुमुखी खेलाडी भनेको टीमको सबैभन्दा ठूलो उपहार हो।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "basir-ahamad",
@@ -583,9 +1003,18 @@
         "image": "/images/basir.webp",
         "heroImage": "/images/basir1.webp",
         "stats": {
-            "wickets": 32,
-            "runs": 340,
-            "economy": 7.4
+            "odi": {
+                "runs": 340,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 32
+            },
+            "t20i": {
+                "runs": 340,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 32
+            }
         },
         "keyMoment": "विश्वकप २०२६ मा युवा प्रतिभाको प्रतिनिधित्व",
         "unreasonableWisdom": [
@@ -618,7 +1047,17 @@
                 "content": "युवा भएर डराउनु छैन — त्यही आँट नेपाली क्रिकेटको भविष्य हो।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "quotes": [
+            {
+                "quote": "अनुभव नभए पनि आँट हुन्छ — त्यही काफी छ।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "gulshan-jha",
@@ -630,9 +1069,18 @@
         "image": "/images/gulshan.webp",
         "heroImage": "/images/gulshan1.webp",
         "stats": {
-            "wickets": 38,
-            "runs": 480,
-            "economy": 7.6
+            "odi": {
+                "runs": 480,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 38
+            },
+            "t20i": {
+                "runs": 480,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 38
+            }
         },
         "keyMoment": "मधेसको प्रतिनिधि — नेपाली क्रिकेटको विविधताको प्रतीक",
         "unreasonableWisdom": [
@@ -665,7 +1113,24 @@
                 "content": "तराईको आवाज आज अन्तर्राष्ट्रिय मञ्चमा छ। गुल्शन जहाँ — नेपालको विविधता त्यहाँ।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "nepaliName": "गुलसन झा",
+        "microStats": [
+            "24 ODIs",
+            "21 WICKETS",
+            "PACE ALLROUNDER"
+        ],
+        "lore": "Plucked from domestic obscurity at 15. Now, the terrifying future of Nepalese pace.",
+        "quotes": [
+            {
+                "quote": "फरक हुनु कमजोरी होइन — त्यो नै तिम्रो शक्ति हो।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "nandan-yadav",
@@ -677,9 +1142,18 @@
         "image": "/images/nandan.webp",
         "heroImage": "/images/nandan1.webp",
         "stats": {
-            "wickets": 29,
-            "economy": 8.1,
-            "runs": 180
+            "odi": {
+                "runs": 180,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 29
+            },
+            "t20i": {
+                "runs": 180,
+                "average": 0,
+                "strikeRate": 0,
+                "wickets": 29
+            }
         },
         "keyMoment": "नेपाली पेस आक्रमणको नयाँ हतियार",
         "unreasonableWisdom": [
@@ -712,7 +1186,17 @@
                 "content": "नेपाली पेसको नयाँ अध्याय। गतिले सबैलाई डराउँदैछ। र नन्दन भर्खरै सुरु भएका छन्।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "quotes": [
+            {
+                "quote": "गतिले सबैलाई डराउँछ — तर दिशाले जित्छ।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "lalit-rajbanshi",
@@ -724,9 +1208,18 @@
         "image": "/images/lalit.webp",
         "heroImage": "/images/lalit1.webp",
         "stats": {
-            "wickets": 35,
-            "economy": 6.9,
-            "strikeRate": 17.2
+            "odi": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 17.2,
+                "wickets": 35
+            },
+            "t20i": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 17.2,
+                "wickets": 35
+            }
         },
         "keyMoment": "सन्दीपको साथमा नेपालको डबल स्पिन आक्रमणको अंश",
         "unreasonableWisdom": [
@@ -759,7 +1252,24 @@
                 "content": "सन्दीपको पूरक। नेपालको डबल स्पिन — विश्व क्रिकेटमा चर्चाको विषय।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "nepaliName": "ललित राजवंशी",
+        "microStats": [
+            "21 ODIs",
+            "28 WICKETS",
+            "LEFT-ARM ORTHODOX"
+        ],
+        "lore": "The silent assassin. His flight is a seduction; his turn is a death sentence.",
+        "quotes": [
+            {
+                "quote": "बायाँ हातले फरक कोण दिन्छ — त्यही नै मेरो शक्ति।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "sher-malla",
@@ -771,9 +1281,18 @@
         "image": "/images/sher.webp",
         "heroImage": "/images/sher1.webp",
         "stats": {
-            "wickets": 18,
-            "economy": 8.3,
-            "strikeRate": 18.5
+            "odi": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 18.5,
+                "wickets": 18
+            },
+            "t20i": {
+                "runs": 0,
+                "average": 0,
+                "strikeRate": 18.5,
+                "wickets": 18
+            }
         },
         "keyMoment": "विश्वकप २०२६ मा पहिलो सहभागिता — नयाँ पुस्ताको प्रतिनिधि",
         "unreasonableWisdom": [
@@ -806,7 +1325,17 @@
                 "content": "अज्ञातबाट खतरनाक। नेपाली क्रिकेटको नयाँ आश्चर्य।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "quotes": [
+            {
+                "quote": "नयाँ छु — तर डराएको छैन।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "lokesh-bam",
@@ -818,9 +1347,16 @@
         "image": "/images/lokesh.webp",
         "heroImage": "/images/lokesh1.webp",
         "stats": {
-            "runs": 420,
-            "strikeRate": 115.8,
-            "dismissals": 22
+            "odi": {
+                "runs": 420,
+                "average": 0,
+                "strikeRate": 115.8
+            },
+            "t20i": {
+                "runs": 420,
+                "average": 0,
+                "strikeRate": 115.8
+            }
         },
         "keyMoment": "दोहोरो भूमिकामा टीमको भरोसेमान सदस्य",
         "unreasonableWisdom": [
@@ -853,7 +1389,17 @@
                 "content": "दोब्बर भूमिका — दोब्बर सम्मान। लोकेश बाम नेपाली क्रिकेटको बहुमुखी भविष्य।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "quotes": [
+            {
+                "quote": "दुई भूमिका निभाउनु — त्यो दोब्बर जिम्मेवारी हो, दोब्बर सम्मान पनि।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "active",
+        "achievements": []
     },
     {
         "id": "sundeep-jora",
@@ -865,9 +1411,16 @@
         "image": "/images/sundeep.webp",
         "heroImage": "/images/sundeep1.webp",
         "stats": {
-            "runs": 580,
-            "strikeRate": 119.2,
-            "average": 22.4
+            "odi": {
+                "runs": 580,
+                "average": 22.4,
+                "strikeRate": 119.2
+            },
+            "t20i": {
+                "runs": 580,
+                "average": 22.4,
+                "strikeRate": 119.2
+            }
         },
         "keyMoment": "नेपाली ब्याटिङ लाइनअपको गहिराइ दिने खेलाडी",
         "unreasonableWisdom": [
@@ -900,6 +1453,25 @@
                 "content": "हिरो नभए पनि — हारलाई रोक्ने मान्छे। टीमको मेरुदण्ड। सुन्दीप जोरा।"
             }
         ],
-        "timeline": []
+        "timeline": [],
+        "nepaliName": "सन्दीप जोरा",
+        "microStats": [
+            "14 T20Is",
+            "131 SR",
+            "MIDDLE ORDER"
+        ],
+        "lore": "The youngest male to score a T20I half-century. A sleeping giant in the middle order.",
+        "quotes": [
+            {
+                "quote": "बीचमा उभिनु — त्यो कायरता होइन, रणनीति हो।",
+                "context": "— अनरिज़नेबल विजडम",
+                "date": "क्यारियर डायरी",
+                "featured": true
+            }
+        ],
+        "status": "suspended",
+        "achievements": [
+            "YOUNGEST T20I 50 (PREV) 🏆"
+        ]
     }
 ]
