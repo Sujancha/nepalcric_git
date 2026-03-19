@@ -13,6 +13,7 @@ export default function Navbar() {
 
     const navLinks = [
         { name: "पेभिलियन", href: "/" },
+        { name: "कथाहरू", href: "/kathaharu" },
         { name: "म्याच डे", href: "/match-day" },
         { name: "द स्क्वाड", href: "/squad" },
         { name: "स्कोरबोर्ड", href: "/scoreboard" },
@@ -92,12 +93,6 @@ export default function Navbar() {
                 {/* Right Side Actions */}
                 <div className="flex items-center gap-3">
                     {/* Removed Dark Mode Toggle since the site is fully dark/cinematic now */}
-
-                    <button className="hidden sm:flex items-center justify-center px-5 py-2 bg-transparent border border-[#C41E3A]/70 text-white font-sans font-semibold text-sm rounded hover:bg-[#C41E3A] transition-all duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] relative">
-                        <span className="relative z-10">
-                            टिकट बुक गर्नुस्
-                        </span>
-                    </button>
                 </div>
 
             </nav>

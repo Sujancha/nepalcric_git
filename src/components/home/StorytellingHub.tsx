@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function StorytellingHub() {
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
@@ -28,45 +29,47 @@ export default function StorytellingHub() {
         // Wait for 400ms exit animation to complete before destroying instance
         setTimeout(() => setActiveVideo(null), 400);
     };
+
     const stories = [
         {
-            type: "म्याच हाइलाइट्स",
-            title: "युएईविरुद्धको त्यो सास रोक्ने अन्तिम ओभर",
-            date: "२ दिन अघि",
+            type: "विश्वकप",
+            title: "एक रन: त्यो रात जब नेपालले विश्वलाई रुवायो",
+            date: "जुन १५, २०२४",
             span: "md:col-span-2 md:row-span-2",
-            image: "bg-slate-dark", // Placeholder for actual image
-            isPlayable: true,
-            videoId: "video-1"
+            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+            slug: "nepal-vs-south-africa-one-run",
+            isPlayable: false
         },
         {
-            type: "पर्दा पछाडि",
-            title: "लकर रुमभित्र: म्याच अघिको माहोल",
-            date: "५ दिन अघि",
+            type: "म्याच कथा",
+            title: "मायाको दिन, करणको जादु",
+            date: "फेब्रुअरी १४, २०२३",
             span: "md:col-span-1 md:row-span-1",
-            image: "bg-[#0D1B2A]",
+            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            slug: "karan-kc-valentines-day-miracle",
             isPlayable: false,
         },
         {
             type: "न्युज",
-            title: "विश्वकप छनोटका लागि स्क्वाड घोषणा",
+            title: "नेपाली फ्यानको सागर: सेन्ट भिन्सेन्टमा 'होम अवे फ्रम होम'",
             date: "१ हप्ता अघि",
             span: "md:col-span-1 md:row-span-1",
-            image: "bg-slate-dark/80",
+            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
             isPlayable: false,
         },
         {
             type: "ट्रेनिङ",
-            title: "सन्दीपको स्पिन मास्टरक्लास",
+            title: "सोमपाल र करण: १० वर्षको ओल्डेस्ट ड्युओको जुगलबन्दी",
             date: "२ हप्ता अघि",
             span: "md:col-span-2 md:row-span-1",
-            image: "bg-rhino-blue",
+            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
             isPlayable: true,
             videoId: "video-2"
         }
     ];
 
     return (
-        <section className="py-24 bg-[#07080F] border-b border-t border-white/5 mt-1">
+        <section id="stories" className="py-24 bg-[#07080F] border-b border-t border-white/5 mt-1 scroll-mt-20">
             <div className="max-w-7xl mx-auto px-6">
 
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-14 gap-6">
@@ -76,62 +79,85 @@ export default function StorytellingHub() {
                         </h2>
                         <p className="font-sans text-[#B0B8C8] mt-4 text-lg animate-[fadeUpIn_1s_ease-out_0.2s_both]">ताजा खबर, हाइलाइट्स, र पर्दा पछाडिका विशेष झलकहरू।</p>
                     </div>
-                    <button className="hidden md:flex items-center gap-2 font-sans font-bold text-sm tracking-widest uppercase text-[#B0B8C8] hover:text-[#C9A84C] transition-colors pb-1 border-b-[1px] border-white/20 hover:border-[#C9A84C] animate-[fadeUpIn_1s_ease-out_0.4s_both]">
-                        सबै भिडियोहरू हेर्नुस्
-                    </button>
                 </div>
 
                 {/* CSS Grid Masonry-style layout */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[250px] animate-[fadeUpIn_1s_ease-out_0.6s_both]">
-                    {stories.map((story, i) => (
-                        <div
-                            key={i}
-                            className={`group relative rounded-sm overflow-hidden border border-white/5 bg-[#0D1B2A] flex flex-col transition-all duration-500 hover:-translate-y-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${story.span} ${story.isPlayable ? 'cursor-pointer' : 'cursor-default'}`}
-                            onClick={() => story.isPlayable && story.videoId && openVideo(story.videoId)}
-                        >
-                            {/* Image/Thumbnail Placeholder */}
-                            <div className={`relative w-full ${story.span.includes("row-span-2") ? "h-2/3" : "h-48"} ${story.image} border-b border-white/5 group-hover:border-[#C41E3A] transition-colors overflow-hidden`}>
+                    {stories.map((story, i) => {
+                        const CardContent = (
+                            <>
+                                {/* Image/Thumbnail Placeholder */}
+                                <div className={`relative w-full ${story.span.includes("row-span-2") ? "h-2/3" : "h-48"} border-b border-white/5 group-hover:border-[#C41E3A] transition-colors overflow-hidden`}>
 
-                                {/* Background Zoom Effect */}
-                                <div className="absolute inset-0 bg-black/20 group-hover:scale-105 transition-transform duration-700" />
+                                    {/* Real Image */}
+                                    <div
+                                        className="absolute inset-0 bg-cover bg-center grayscale-[0.6] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                        style={{ backgroundImage: `url(${story.image})` }}
+                                    />
 
-                                {story.isPlayable && (
-                                    <>
-                                        {/* Cinematic Red Gradient on Hover */}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#C41E3A]/80 via-[#C41E3A]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                                    {/* Overlay */}
+                                    <div className="absolute inset-0 bg-black/40 group-hover:bg-[#C41E3A]/20 transition-colors z-10" />
 
-                                        <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-transparent transition-colors z-20">
-                                            {/* Minimal Outline Play Button */}
+                                    {story.isPlayable && (
+                                        <div className="absolute inset-0 flex items-center justify-center z-20">
                                             <div className="w-14 h-14 border-2 border-white/70 text-stadium-white rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(0,0,0,0.5)] group-hover:scale-110 group-hover:bg-[#C41E3A] group-hover:border-[#C41E3A] group-hover:shadow-[0_0_25px_#C41E3A] transition-all duration-500 backdrop-blur-sm">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1"><polygon points="6 3 20 12 6 21 6 3" /></svg>
                                             </div>
                                         </div>
-                                    </>
-                                )}
+                                    )}
 
-                                {/* Tag */}
-                                <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-[#C9A84C] font-sans font-bold text-[10px] uppercase tracking-[0.1em] px-3 py-1.5 rounded-sm border border-white/10 z-30">
-                                    {story.type}
+                                    {/* Tag */}
+                                    <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-[#C9A84C] font-sans font-bold text-[10px] uppercase tracking-[0.1em] px-3 py-1.5 rounded-sm border border-white/10 z-30">
+                                        {story.type}
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Content */}
-                            <div className="p-6 flex flex-col justify-between flex-grow bg-gradient-to-b from-[#0D1B2A] to-black/40">
-                                <h3 className="font-display uppercase text-xl md:text-2xl text-stadium-white leading-tight group-hover:text-[#C9A84C] transition-colors drop-shadow-md">
-                                    {story.title}
-                                </h3>
-                                <span className="font-sans text-[#B0B8C8]/60 text-xs font-bold uppercase tracking-widest mt-4">
-                                    {story.date}
-                                </span>
+                                {/* Content */}
+                                <div className="p-6 flex flex-col justify-between flex-grow bg-gradient-to-b from-[#0D1B2A] to-black/40">
+                                    <h3 className="font-display uppercase text-xl md:text-2xl text-stadium-white leading-tight group-hover:text-[#C9A84C] transition-colors drop-shadow-md">
+                                        {story.title}
+                                    </h3>
+                                    <span className="font-sans text-[#B0B8C8]/60 text-xs font-bold uppercase tracking-widest mt-4">
+                                        {story.date}
+                                    </span>
+                                </div>
+                            </>
+                        );
+
+                        if (story.isPlayable) {
+                            return (
+                                <div
+                                    key={i}
+                                    className={`group relative rounded-sm overflow-hidden border border-white/5 bg-[#0D1B2A] flex flex-col transition-all duration-500 hover:-translate-y-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer ${story.span}`}
+                                    onClick={() => story.videoId && openVideo(story.videoId)}
+                                >
+                                    {CardContent}
+                                </div>
+                            );
+                        }
+
+                        if (story.slug) {
+                            return (
+                                <Link
+                                    key={i}
+                                    href={`/story/${story.slug}`}
+                                    className={`group relative rounded-sm overflow-hidden border border-white/5 bg-[#0D1B2A] flex flex-col transition-all duration-500 hover:-translate-y-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer ${story.span}`}
+                                >
+                                    {CardContent}
+                                </Link>
+                            );
+                        }
+
+                        return (
+                            <div
+                                key={i}
+                                className={`group relative rounded-sm overflow-hidden border border-white/5 bg-[#0D1B2A] flex flex-col transition-all duration-500 hover:-translate-y-2 shadow-[0_10px_30px_rgba(0,0,0,0.5)] ${story.span}`}
+                            >
+                                {CardContent}
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
-
-                {/* Mobile View All Button */}
-                <button className="w-full mt-8 md:hidden py-4 border border-[#C9A84C]/50 text-stadium-white rounded bg-transparent font-sans font-bold uppercase tracking-widest text-sm hover:bg-[#C9A84C] hover:text-[#07080F] transition-all duration-300">
-                    सबै भिडियोहरू हेर्नुस्
-                </button>
             </div>
 
             {/* Cinematic Lightbox Modal */}

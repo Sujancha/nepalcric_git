@@ -56,16 +56,16 @@ export default function MatchDayClient() {
     }, [mounted]);
 
     const initialFixtures = [
-        { id: "02", date: "MAR 18", time: "14:00 NPT", nepaliName: "ओमानविरुद्ध", venue: "Oman Cricket Academy", format: "T20I", threat: 65, threatLevel: "MODERATE", threatColor: "#C9A84C", weapon: "Kushal Bhurtel", danger: "Aqib Ilyas", h2h: "Nepal 4-2 Oman" },
-        { id: "03", date: "MAR 21", time: "18:00 NPT", nepaliName: "मलेसियाविरुद्ध", venue: "Zayed Stadium", format: "T20I", threat: 45, threatLevel: "MODERATE", threatColor: "#C9A84C", weapon: "Dipendra Airee", danger: "Virandeep Singh", h2h: "Nepal 5-1 Malaysia" },
-        { id: "04", date: "MAR 25", time: "10:00 NPT", nepaliName: "सिङ्गापुरविरुद्ध", venue: "TU Ground", format: "ODI", threat: 40, threatLevel: "MODERATE", threatColor: "#C9A84C", weapon: "Rohit Paudel", danger: "Tim David", h2h: "Nepal 6-2 Singapore" },
-        { id: "05", date: "APR 02", time: "09:30 NPT", nepaliName: "हङकङविरुद्ध", venue: "Mission Road Ground", format: "T20I", threat: 35, threatLevel: "LOW", threatColor: "rgba(255,255,255,0.3)", weapon: "Aasif Sheikh", danger: "Nizakat Khan", h2h: "Nepal 5-1 HK" }, /* ङ used, not ड */
-        { id: "06", date: "APR 15", time: "13:00 NPT", nepaliName: "क्यानडाविरुद्ध", venue: "King City", format: "ODI", threat: 30, threatLevel: "LOW", threatColor: "rgba(255,255,255,0.3)", weapon: "Gulshan Jha", danger: "Navneet Dhaliwal", h2h: "Nepal 3-1 Canada" },
-        { id: "00", date: "MAR 10", time: "10:00 NPT", nepaliName: "युएईविरुद्ध", venue: "TU Ground", format: "T20I", threat: 80, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Sandeep Lamichhane", danger: "Rohan Mustafa", h2h: "Nepal 3-2 UAE" }, // Past match
+        { id: "01", date: "SEP 16", time: "19:45 NPT", nepaliName: "क्यानडाविरुद्ध", venue: "King City, Canada", format: "ODI", threat: 75, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Rohit Paudel", danger: "Saad Bin Zafar", h2h: "Nepal 3-1 Canada" },
+        { id: "02", date: "SEP 18", time: "19:45 NPT", nepaliName: "ओमानविरुद्ध", venue: "King City, Canada", format: "ODI", threat: 85, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Sandeep Lamichhane", danger: "Aqib Ilyas", h2h: "Nepal 4-3 Oman" },
+        { id: "03", date: "SEP 22", time: "19:45 NPT", nepaliName: "क्यानडाविरुद्ध", venue: "King City, Canada", format: "ODI", threat: 75, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Dipendra Singh Airee", danger: "Nicholas Kirton", h2h: "Nepal 3-1 Canada" },
+        { id: "04", date: "SEP 24", time: "19:45 NPT", nepaliName: "ओमानविरुद्ध", venue: "King City, Canada", format: "ODI", threat: 85, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Kushal Malla", danger: "Zeeshan Maqsood", h2h: "Nepal 4-3 Oman" },
+        { id: "05", date: "OCT 25", time: "21:15 NPT", nepaliName: "अमेरकाविरुद्ध", venue: "Dallas, USA", format: "ODI", threat: 90, threatLevel: "CRITICAL", threatColor: "#C41E3A", weapon: "Kushal Bhurtel", danger: "Saurabh Netravalkar", h2h: "Nepal 3-2 USA" },
+        { id: "06", date: "OCT 27", time: "21:15 NPT", nepaliName: "स्कटल्यान्डविरुद्ध", venue: "Dallas, USA", format: "ODI", threat: 80, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "Gulshan Jha", danger: "Richie Berrington", h2h: "Nepal 3-3 Scotland" }
     ];
 
-    // Determine past status based on date (Mocking "Today" for the scenario)
-    const today = new Date('2026-03-14T00:00:00');
+    // Determine past status based on real current date
+    const today = new Date();
 
     // Sort chronologically and determine past status
     const fixtures = initialFixtures.map(f => {
@@ -150,9 +150,9 @@ export default function MatchDayClient() {
             </section>
 
             {/* 3. THE 'NEXT BATTLE' FEATURE CARD */}
-            <section className="w-full relative z-10 animate-[dynamicFadeUp_0.8s_cubic-bezier(0.76,0,0.24,1)_0.9s_both]">
+            <section className="w-full relative z-10 animate-[dynamicFadeUp_0.8s_cubic-bezier(0.76,0,0.24,1)_0.9s_both] px-6">
                 <div
-                    className="w-full margin-0 px-6 py-8 md:py-[48px] md:px-[80px] bg-[linear-gradient(135deg,rgba(13,27,42,0.98)_0%,rgba(7,8,15,0.99)_60%,rgba(196,30,58,0.07)_100%)] border border-[rgba(196,30,58,0.25)] backdrop-blur-[16px] transition-shadow duration-500 hover:shadow-[0_0_60px_rgba(196,30,58,0.08)]"
+                    className="max-w-5xl mx-auto w-full py-8 md:py-[48px] px-8 md:px-[80px] bg-[linear-gradient(135deg,rgba(13,27,42,0.98)_0%,rgba(7,8,15,0.99)_60%,rgba(196,30,58,0.07)_100%)] border border-[rgba(196,30,58,0.25)] backdrop-blur-[16px] transition-shadow duration-500 hover:shadow-[0_0_60px_rgba(196,30,58,0.08)]"
                     style={{ borderLeft: '3px solid #C41E3A' }}
                 >
                     {/* Top Strip */}
@@ -182,19 +182,19 @@ export default function MatchDayClient() {
                         {/* Column 1: NEPAL */}
                         <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
                             <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase block mb-1">NPL</span>
-                            <h2 className="font-display font-black text-white text-[clamp(64px,9vw,110px)] leading-[0.9] mb-1 relative z-20" style={{ letterSpacing: '0' }}>नेपाल</h2>
+                            <h2 className="font-display font-black text-white text-[clamp(40px,5vw,72px)] leading-[0.9] mb-1 relative z-20" style={{ letterSpacing: '0' }}>नेपाल</h2>
                             <span className="font-barlow font-medium text-[rgba(255,255,255,0.35)] text-[10px] tracking-wider uppercase mb-8">घरेलु टोली</span>
 
                             {/* Weapon Box */}
                             <div className="bg-[rgba(196,30,58,0.08)] border border-[rgba(196,30,58,0.2)] px-4 py-3 w-full max-w-[280px]">
                                 <span className="font-barlow font-bold text-[#C41E3A] text-[10px] uppercase block mb-2" style={{ letterSpacing: '0' }}>⚔ हाम्रो हतियार</span>
-                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">Sandeep Lamichhane</span>
-                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">Leg Spin &middot; #1 T20I Bowler</span>
+                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">Rohit Paudel</span>
+                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">Captain · Middle Order</span>
                             </div>
                         </div>
 
-                        {/* Column 2: CENTER */}
-                        <div className="shrink-0 flex flex-col items-center relative z-20 mt-8 md:mt-0">
+                        {/* Column 2: CENTER (Glassmorphic Anchor) */}
+                        <div className="shrink-0 flex flex-col items-center relative z-20 mt-8 md:mt-0 bg-white/5 backdrop-blur-md rounded-md border border-white/10 p-6 md:p-8">
                             <span className="font-barlow font-black text-[#C9A84C] text-[clamp(60px,8vw,100px)] leading-none tracking-[-0.02em] block mb-1" style={{ animation: 'vsPulse 3s ease-in-out infinite' }}>VS</span>
                             <span className="font-barlow font-medium text-white/40 text-[12px] uppercase block mb-6">ICC T20I &middot; 2026</span>
 
@@ -251,15 +251,15 @@ export default function MatchDayClient() {
 
                         {/* Column 3: OPPONENT */}
                         <div className="flex-1 flex flex-col items-center md:items-end text-center md:text-right relative z-20 mt-8 md:mt-0">
-                            <span className="font-barlow font-bold text-[rgba(255,255,255,0.35)] text-[12px] tracking-[0.3em] uppercase block mb-1">UAE</span>
-                            <h2 className="font-display font-black text-[rgba(255,255,255,0.85)] text-[clamp(48px,6vw,80px)] leading-[0.9] mb-1" style={{ letterSpacing: '0' }}>यूएई</h2>
+                            <span className="font-barlow font-bold text-[rgba(255,255,255,0.35)] text-[12px] tracking-[0.3em] uppercase block mb-1">CAN</span>
+                            <h2 className="font-display font-black text-[rgba(255,255,255,0.85)] text-[clamp(40px,5vw,72px)] leading-[0.9] mb-1" style={{ letterSpacing: '0' }}>क्यानडा</h2>
                             <span className="font-barlow font-medium text-[rgba(255,255,255,0.35)] text-[10px] tracking-wider uppercase mb-8">प्रतिद्वन्द्वी</span>
 
                             {/* Danger Box */}
                             <div className="bg-[rgba(201,168,76,0.06)] border border-[rgba(201,168,76,0.15)] px-4 py-3 w-full max-w-[280px] text-center md:text-right">
                                 <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase block mb-2" style={{ letterSpacing: '0' }}>⚠ खतरनाक खेलाडी</span>
-                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">Rohan Mustafa</span>
-                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">All-rounder &middot; Captain</span>
+                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">Saad Bin Zafar</span>
+                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">Captain · Spinner</span>
                             </div>
                         </div>
 

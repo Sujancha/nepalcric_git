@@ -10,7 +10,7 @@ export default function HeroSection() {
     const [showPreloader, setShowPreloader] = useState(true);
 
     // Simulate live match state for Phase 1 requirements
-    const isLiveMatch = true;
+    const isLiveMatch = false;
 
     useEffect(() => {
         if (sessionStorage.getItem('hasVisited')) {
@@ -119,17 +119,23 @@ export default function HeroSection() {
                             आज <span style={{ color: '#C41E3A' }}>नेपालको</span> दिन हो।
                         </h1>
                     ) : (
-                        <h1 className="font-display tracking-[0.05em] text-7xl md:text-8xl lg:text-9xl text-stadium-white leading-tight uppercase drop-shadow-2xl flex flex-col items-center">
-                            <div className="flex gap-4">
-                                <span className="animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_2.2s_both] inline-block">अब</span>
-                                <span className="animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_2.6s_both] inline-block">हाम्रो</span>
-                            </div>
-                            <span className="text-[#C41E3A] block mt-2 animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_3.2s_both]">पालो</span>
+                        <h1 style={{
+                            fontFamily: 'Mukta, sans-serif',
+                            fontWeight: 800,
+                            fontSize: 'clamp(52px, 10vw, 120px)',
+                            lineHeight: 1.05,
+                            color: '#FFFFFF',
+                            letterSpacing: '0',
+                            margin: 0,
+                            textAlign: 'center'
+                        }}>
+                            <span className="block animate-[fadeUpIn_1s_ease-out_2.2s_both] text-white/40 text-[clamp(18px,2.5vw,28px)] uppercase tracking-[0.3em] font-barlow mb-4">T20 World Cup 2024</span>
+                            नेपाल VS <span style={{ color: '#C41E3A' }}>दक्षिण अफ्रिका</span>
                         </h1>
                     )}
 
-                    <p className="max-w-xl mx-auto text-lg md:text-xl text-[#B0B8C8] font-sans drop-shadow-md animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_3.8s_both]">
-                        टीयू ग्राउन्डको हुटिङदेखि विश्वकपको मञ्चसम्म। यो नेपाली क्रिकेटको असली धड्कन हो।
+                    <p className="max-w-2xl mx-auto text-lg md:text-xl text-[#B0B8C8] font-sans drop-shadow-md animate-[fadeUpIn_1s_ease-out_3s_both] text-center">
+                        सेन्ट भिन्सेन्टको त्यो ऐतिहासिक रात र १ रनको त्यो साहसिक हार, जसले विश्व क्रिकेटको मन जित्यो।
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_4.4s_both]">
@@ -192,7 +198,7 @@ export default function HeroSection() {
                                 gap: '32px',
                                 marginTop: '8px'
                             }}>
-                                <a href="/pavilion" style={{
+                                <a href="/#stories" style={{
                                     fontFamily: 'Barlow Condensed, sans-serif',
                                     fontSize: '16px',
                                     fontWeight: 500,

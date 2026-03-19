@@ -11,50 +11,10 @@ export default function ScoreboardArchive() {
     }, []);
 
     const archives = [
-        {
-            id: "t20-wc-qualifier-2026",
-            seriesName: "T20 WC ASIA QUALIFIER",
-            year: "2026",
-            outcome: "नेपाल अपराजित (च्याम्पियन)",
-            matches: [
-                { opponent: "युएई", date: "NOV 05", result: "नेपाल ८ विकेटले विजयी" },
-                { opponent: "ओमान", date: "NOV 03", result: "नेपाल सुपर ओभरमा विजयी" },
-                { opponent: "मलेसिया", date: "NOV 01", result: "नेपाल ६५ रनले विजयी" }
-            ]
-        },
-        {
-            id: "cwc-league-2-2026",
-            seriesName: "CWC LEAGUE 2",
-            year: "2026",
-            outcome: "नेपाल २-१ ले विजयी",
-            matches: [
-                { opponent: "ओमान", date: "MAR 14", result: "नेपाल ५ विकेटले विजयी" },
-                { opponent: "क्यानडा", date: "MAR 12", result: "क्यानडा २१ रनले विजयी" },
-                { opponent: "ओमान", date: "MAR 10", result: "नेपाल ४ विकेटले विजयी" }
-            ]
-        },
-        {
-            id: "acc-premier-cup-2026",
-            seriesName: "ACC PREMIER CUP",
-            year: "2026",
-            outcome: "नेपाल सेमिफाइनलमा रोकियो",
-            matches: [
-                { opponent: "युएई", date: "MAY 15", result: "युएई १० विकेटले विजयी (सेमिफाइनल)" },
-                { opponent: 'हङकङ', date: "MAY 12", result: "नेपाल ८ विकेटले विजयी" },
-                { opponent: "मलेसिया", date: "MAY 10", result: "नेपाल ६ विकेटले विजयी" }
-            ]
-        },
-        {
-            id: "tri-series-2026",
-            seriesName: "NEPAL T20I TRI-SERIES",
-            year: "2026",
-            outcome: "नेपाल फाइनलमा पराजित",
-            matches: [
-                { opponent: "नेदरल्यान्ड्स", date: "APR 20", result: "नेदरल्यान्ड्स ४ विकेटले विजयी (फाइनल)" },
-                { opponent: "नेदरल्यान्ड्स", date: "APR 18", result: "नेपाल २ विकेटले विजयी" },
-                { opponent: "नामिबिया", date: "APR 15", result: "नेपाल ११ रनले विजयी" }
-            ]
-        }
+        { id: "t20wc-2024", seriesName: "ICC T20 WORLD CUP", year: "2024", outcome: "विश्वकपमा उत्कृष्ट संघर्ष (ऐतिहासिक प्रदर्शन)", matches: [{ opponent: "दक्षिण अफ्रिका", date: "JUN 15", result: "१ रनको हृदयविदारक हार" }, { opponent: "बङ्गलादेश", date: "JUN 17", result: "२१ रनले पराजित" }, { opponent: "नेदरल्यान्ड्स", date: "JUN 04", result: "६ विकेटले पराजित" }] },
+        { id: "acc-premier-2023", seriesName: "ACC PREMIER CUP", year: "2023", outcome: "नेपाल च्याम्पियन (एशिया कपमा छनोट)", matches: [{ opponent: "यूएई", date: "MAY 02", result: "नेपाल ७ विकेटले विजयी (फाइनल)" }, { opponent: "कुवेत", date: "APR 29", result: "नेपाल फाइनलमा प्रवेश (सेमिफाइनल)" }, { opponent: "ओमान", date: "APR 21", result: "नेपाल ८४ रनले विजयी" }] },
+        { id: "cwc-qualifier-2023", seriesName: "T20 WC ASIA QUALIFIER", year: "2023", outcome: "विश्वकपमा ऐतिहासिक छनोट", matches: [{ opponent: "ओमान", date: "NOV 05", result: "सुपर ओभरमा पराजित (फाइनल)" }, { opponent: "यूएई", date: "NOV 03", result: "नेपाल ८ विकेटले विजयी (सेमिफाइनल)" }, { opponent: "मलेसिया", date: "OCT 31", result: "नेपाल ६ विकेटले विजयी" }] },
+        { id: "cwc-league2-2023", seriesName: "CWC LEAGUE 2", year: "2023", outcome: "१२ मध्ये ११ खेलमा ऐतिहासिक जित", matches: [{ opponent: "यूएई", date: "MAR 16", result: "नेपाल ९ रनले विजयी (DLS)" }, { opponent: "पपुवा न्युगिनी", date: "MAR 13", result: "नेपाल ९ विकेटले विजयी" }, { opponent: "यूएई", date: "MAR 12", result: "नेपाल १७७ रनले विजयी" }] }
     ];
 
     if (!mounted) return null;

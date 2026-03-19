@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bebas_Neue, Mukta, Barlow_Condensed, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 import AudioFAB from "@/components/layout/AudioFAB";
 import CricketScrollJourney from "@/components/layout/CricketScrollJourney";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
           <Navbar />
           <CricketScrollJourney />
           <main className="flex-grow">{children}</main>
+          <Footer />
         </div>
       </body>
     </html>

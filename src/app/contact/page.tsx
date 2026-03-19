@@ -1,0 +1,88 @@
+"use client";
+
+import Head from "next/head";
+
+export default function ContactPage() {
+    return (
+        <div className="bg-[#07080F] min-h-screen relative overflow-hidden">
+            <Head>
+                <title>सम्पर्क | NepalCric</title>
+                <meta name="description" content="नेपालक्रिकसँग सम्पर्कमा रहनुहोस्" />
+            </Head>
+
+            {/* Ghost Flag Watermark */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[120px] opacity-[0.04] select-none">
+                    <svg width="600" height="900" viewBox="0 0 200 250" fill="#C41E3A" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40 20 L160 110 L80 110 L180 230 L40 230 Z" />
+                    </svg>
+                </div>
+            </div>
+
+            <main className="relative z-10 max-w-4xl mx-auto px-6 py-32 md:py-48">
+                <h1 className="font-sans font-extrabold text-white text-[clamp(64px,10vw,120px)] leading-[0.85] tracking-tight mb-20 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_both]">
+                    सम्पर्क
+                </h1>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
+                    {/* Left: Contact Info */}
+                    <div className="flex flex-col gap-12 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_0.2s_both]">
+                        <div className="flex flex-col gap-2">
+                            <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase">EMAIL</span>
+                            <a href="mailto:info@nepalcric.com" className="font-mukta text-white/80 text-2xl hover:text-white transition-colors">
+                                info@nepalcric.com
+                            </a>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase">LOCATION</span>
+                            <p className="font-mukta text-white/80 text-2xl">
+                                काठमाडौं, नेपाल
+                            </p>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase">SOCIAL</span>
+                            <div className="flex gap-6 mt-2">
+                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">Twitter</span>
+                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">Instagram</span>
+                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">Facebook</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right: Glassmorphic Form */}
+                    <div className="bg-white/5 backdrop-blur-md rounded-md border border-white/10 p-8 md:p-10 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_0.4s_both]">
+                        <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+                            <div className="flex flex-col gap-2">
+                                <label className="font-barlow font-bold text-white/40 text-[10px] tracking-wider uppercase ml-1">Name</label>
+                                <input
+                                    type="text"
+                                    className="bg-transparent border-b border-white/10 py-2 px-1 focus:border-[#C41E3A] outline-none text-white font-mukta transition-colors"
+                                    placeholder="तपाईंको नाम"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="font-barlow font-bold text-white/40 text-[10px] tracking-wider uppercase ml-1">Email</label>
+                                <input
+                                    type="email"
+                                    className="bg-transparent border-b border-white/10 py-2 px-1 focus:border-[#C41E3A] outline-none text-white font-mukta transition-colors"
+                                    placeholder="इमेल ठेगाना"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <label className="font-barlow font-bold text-white/40 text-[10px] tracking-wider uppercase ml-1">Message</label>
+                                <textarea
+                                    rows={4}
+                                    className="bg-transparent border-b border-white/10 py-2 px-1 focus:border-[#C41E3A] outline-none text-white font-mukta transition-colors resize-none"
+                                    placeholder="तपाईंको सन्देश..."
+                                />
+                            </div>
+                            <button className="mt-6 bg-[#C41E3A] text-white py-4 rounded-sm font-mukta font-bold uppercase tracking-widest hover:bg-[#A31830] transition-all transform hover:scale-[1.02] active:scale-[0.98]">
+                                पठाउनुस्
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    );
+}
