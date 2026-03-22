@@ -1,97 +1,75 @@
-# Sandeep Lamichhane — NepalCric Knowledge Base
+---
+# TIER 1 — IDENTITY
+id: sandeep-lamichhane
+name_en: Sandeep Lamichhane
+name_ne: सन्दीप लामिछाने
+role: लेग-स्पिन गेंदबाज
+status: ACTIVE
+cricinfo_id: 1070926
+excerpt_ne: "सियाङ्जाको त्यो अँध्यारो उपत्यकाबाट उठेर लर्ड्सको मैदानसम्म पुगेको मान्छे, जसले खाडल खन्दा पनि गाना गायो — र फर्किएर अझ खतरनाक भयो।"
 
-## Basic Info
-- Full Name: Sandeep Lamichhane (सन्दीप लामिछाने)
-- Role: Specialist Bowler (Right-arm leg break googly)
-- Date of Birth: August 2, 2000
-- Hometown: Aruchaur, Syangja, Nepal (spent childhood years in India)
-- Other: Musician — writes, sings, and produces his own songs; debut track "Udash thiyo" (2018)
+# TIER 2 — DEBUT
+debut_date: 2018-08-01
+debut_age_years: 17
+debut_age_days: 364
+debut_match: नेपाल बनाम नेदरल्यान्ड्स — नेपालको पहिलो आधिकारिक ओडीआई
+debut_note_ne: "आफ्नो अठाह्रौं जन्मदिनभन्दा एक दिन अघि नेपालको पहिलो आधिकारिक ओडीआईमा उत्रिए — यसअघि नै लर्ड्सको मैदानमा आईसीसी रेस्ट अफ द वर्ल्ड एकादशका लागि टी-ट्वेन्टी डेब्यु गरी इतिहासको पन्नामा आफ्नो नाम लेखिसकेका थिए; आईपीएलमा खेल्ने पहिलो नेपाली खेलाडी।"
 
-## ODI Stats
-- Matches: 66 | Wickets: 135 | Average: 19.93 | Economy: 4.48 | Strike Rate: 26.68 | Best: 6/11
+# TIER 3 — STORY
+hero_quote: "पहिलो दिनदेखि नै मैले भनेको थिएँ — म निर्दोष छु।"
+lore_ne: |
+  यो कुनै सीधो रेखाको कथा होइन। यो त्यो कथा हो जुन हुन नहुनु थियो — जो सुरु भयो एउटा साँघुरो गल्लीमा, उचाइएको एउटा उत्कर्षमा पुग्यो, र त्यसपछि यस्तो अँध्यारोमा डुब्यो जुन अँध्यारोको नाम बोल्नु नै गाह्रो छ; तर यो कथाको अन्त त्यही अँध्यारोमा भएन, किनभने कसै-कसैका जरा यति गहिरा हुन्छन् कि तूफानले टुप्पा तोडेपनि जरो खुइलाउन सक्दैन।
 
-## T20I Stats
-- Matches: 72 | Wickets: 130 | Average: 13.00 | Economy: 6.20 | Strike Rate: 12.58 | Best: 5/9
+  कुरा सन् २०१५ को हो। क्याम्पाचौरको नेट्समा एउटा चौध वर्षे केटो बलिङ गर्दैछ — न त उसको जुत्ता ठीकसँग भिड्छ, न हात नाप्दा ग्लब मिल्छ, तर हरेक बलमा उसको कलाईले त्यस्तो जादू पैदा गर्छ जुन पुबुडु दासनायके पहिलोपटक देख्नासाथ थाहा भयो — यो साधारण केटो होइन। लेग-स्पिन सिक्नको लागि उसले टेनिस बलबाट सुरु गरेको थियो, सियाङ्जाको त्यो माटोमा, जहाँ क्रिकेटको कुनै पूर्वाधार थिएन, मात्र थियो एउटा अदम्य भोक। दासनायकेले त्यो दिन नेट्सबाट सिधै उसलाई राष्ट्रिय अन्डर-उन्नाइस प्रशिक्षण शिविरमा बोलाए। एक वर्षपछि, सन् २०१६ को आईसीसी यू-१९ वर्ल्ड कपमा आयरल्यान्डविरुद्ध उसले ह्याट-ट्रिक लियो — टूर्नामेन्टको दोस्रो सर्वाधिक विकेट लिने खेलाडी बन्यो, चौधवटा विकेटसहित।
 
-## Career T20 Stats (all competitions)
-- Matches: 167 | Wickets: 243 | Average: 17.02
+  त्यसपछिका वर्षहरू जुन गतिमा आए, त्यो देख्दा मान्छेलाई लाग्थ्यो — कतै यो सपना त होइन? सन् २०१८ मा लर्ड्सको त्यो हरियो मैदानमा उभिँदा, जहाँ इतिहासका सबैभन्दा ठूला नामहरूले खेलेका छन्, सन्दीपको उमेर सत्रह वर्ष थियो। दिल्ली डेयरडेभिल्सले उसलाई आईपीएलमा किने — नेपालको इतिहासमा पहिलोपटक। भारतका प्रधानमन्त्री नरेन्द्र मोदीले त्यो क्षणलाई भारत-नेपाल मित्रताको प्रतीकका रूपमा उद्धृत गरे। माइकल क्लार्कले उसलाई सिड्नीमा गुरुका रूपमा पखालिए। तपाईंलाई थाहा छ त्यो क्षण — जब एउटा साना देशको केटोले संसारको सबभन्दा ठूलो मञ्चमा कदम राख्छ, र सिंगो देशको छाती गर्वले फुल्छ, तर शब्दहरू आउँदैनन्। त्यो मौनतामा सबैभन्दा धेरै कुरा बोलिएको हुन्छ।
 
-## ICC Rankings (February 2026)
-- ODI Bowling: #47 | T20I Bowling: #86
+  अप्रिल २०२३। अस्ट्रेलियाविरुद्ध ४२औं ओडीआईमा उसले सयौं विकेट लियो — विश्वको सबभन्दा छिटो यो उचाइमा पुग्ने गेंदबाज बन्यो।
 
-## Origin Story
-Sandeep Lamichhane was born in Aruchaur, Syangja, but spent two to three childhood years in India where his father worked for Indian Railways. Growing up in a cricket-obsessed country, he was deeply influenced by Sachin Tendulkar and Shane Warne. After moving to Chitwan, Nepal, he trained at the Chitwan Cricket Academy under former captain Raju Khadka. He initially bowled fast with a tennis ball before discovering leg-spin.
+  तर त्यसपछि — अँध्यारो आयो।
 
-His defining moment came in 2015 when former national coach Pubudu Dassanayake spotted the 14-year-old bowling in the nets at Kyampachaur and immediately drafted him into the national U-19 training camp. A year later, he took a stunning hat-trick against Ireland at the 2016 U-19 World Cup.
+  सेप्टेम्बर २०२२ मा पक्राउ, निलम्बन, अदालतका कोठाहरू। जनवरी २०२४ मा जिल्ला अदालतले आठ वर्षको कैद सुनायो। उसले पछि लेख्यो — ती दिनहरूमा उसको हात यति काँप्थे कि कलम समाउन गाह्रो हुन्थ्यो, र कहिलेकाहीँ राति जब जेलको ती सिमेन्टे भित्तामा परछाईं पर्थे, उसलाई लाग्थ्यो — सायद अब फर्किने बाटो छैन। उसले कविता लेख्यो। परिवारको आवाज सम्झ्यो। बाँच्ने कारण खोज्यो — र पायो। मे २०२४ मा पाटन उच्च अदालतले फैसला उल्ट्यायो — प्रमाण अपर्याप्त, सम्पूर्ण मुक्ति। त्यो दिन अदालतको बाहिर मादल र सहनाईका धुन बजिरहेका थिए। काठमाडौंका चोकहरूमा मान्छेहरू जम्मा भए — न कुनै राजनीतिक दल, न कुनै आयोजना, केवल थियो एउटा भोक — आफ्नो मान्छे फर्केको देख्ने भोक।
 
-His trajectory from teenage prodigy to Nepal's global cricket ambassador was meteoric. He became the first Nepalese player in IPL history (Delhi Daredevils, 2018). Former Australian captain Michael Clarke championed him and mentored him in Sydney. Indian Prime Minister Narendra Modi cited his IPL signing as a symbol of India-Nepal relations.
+  त्यसपछि आयो त्यो झड्का जसलाई सहन गाह्रो छ। अमेरिकी दूतावासले भिसा अस्वीकार गर्यो। दोस्रोपटक। अदालतले निर्दोष भनिसकेपछि पनि। सन् २०२४ को टी-ट्वेन्टी वर्ल्ड कप अमेरिका र वेस्ट इन्डिजमा थियो — नेपालको सबभन्दा ठूलो मञ्च, र उसलाई छिर्न दिइएन। उसले लेख्यो: "म नेपालका सबै शुभचिन्तकसँग माफी चाहन्छु।" यो एउटा अपराधी मान्छेको माफी थिएन — यो एउटा योद्धाको त्यो पीडाको स्वर थियो जो लड्न त तयार छ, तर लड्ने मैदानमा जान दिइँदैन।
 
-Then came the fall. In September 2022, Lamichhane was accused of rape and arrested. In January 2024, a District Court sentenced him to eight years. In May 2024, the Patan High Court overturned the conviction entirely — insufficient evidence — and granted him a clean chit. CAN reinstated him. He returned to dominate the 2025 NPL as joint-top wicket-taker, and was named Nepal's lead spinner for the 2026 T20 World Cup.
+  तर उ रोकिएन।
 
-During his imprisonment, his mental state deteriorated so severely he contemplated quitting cricket and ending his life. He survived through poetry, faith, and the steadfast support of family and lawyers.
+  सन् २०२५ को एनपीएलमा बिराटनगर किंग्सका लागि संयुक्त सर्वाधिक विकेट-लिने खेलाडी बन्यो — सत्रह विकेट। बंगलादेश प्रिमियर लिगमा राजशाही वारियर्सलाई च्याम्पियन बनायो। र सन् २०२६ को टी-ट्वेन्टी वर्ल्ड कपका लागि नेपालको मुख्य स्पिनरका रूपमा चुनिएको छ।
 
-## Career Timeline
-- April 16, 2016: List A debut vs Namibia (ICC WCL Championship)
-- January 30, 2016: Historic hat-trick vs Ireland at ICC U-19 World Cup — tournament's second-highest wicket-taker (14 wickets)
-- May 31, 2018: T20I debut for ICC Rest of the World XI vs West Indies at Lord's — first cricketer to debut in T20I representing a combined team
-- August 1, 2018: ODI debut for Nepal vs Netherlands
-- 2018: First Nepalese player in IPL history — bought by Delhi Daredevils for ₹20 lakh
-- 2018: WCL Division Two — 17 wickets in 6 matches, Player of the Tournament
-- September 2021: ICC Men's Player of the Month
-- April 2023: Fastest bowler to 100 ODI wickets — in just 42 matches (world record)
-- December 2021: Appointed Nepal captain (replacing Gyanendra Malla)
-- September 2022: Accused of rape, arrested, suspended from national team
-- January 2024: Sentenced to 8 years by District Court
-- May 2024: Patan High Court acquits him — clean chit, reinstated by CAN
-- 2025 NPL: Captained Biratnagar Kings — joint-top wicket-taker (17 wickets)
-- 2025-26 BPL: Helped Rajshahi Warriors win BPL championship
-- 2026 T20 World Cup: Named Nepal's frontline spinner
+  उनी सन्त होइनन्। उनी पीडित मात्र पनि होइनन्। उनी त्यो मान्छे हुन् जसले आफ्नो सबभन्दा अँध्यारो रातमा पनि गाना गाए — र बिहान हुँदा मैदानमा फर्किए। तपाईंलाई थाहा छ त्यो भोक, जब देश तपाईंलाई माया गर्छ तर संसारले आँखा चिम्लन्छ — त्यो बेला आफूलाई थाम्नु, र फर्किनु, र अझ राम्रो भएर फर्किनु — यही सन्दीप लामिछानेको कथाको असली अर्थ हो।
 
-## Global Franchise History
-- IPL: Delhi Daredevils/Capitals (2018 onwards)
-- CPL: St Kitts and Nevis Patriots, Barbados Tridents, Jamaica Tallawahs
-- BBL: Melbourne Stars (2018-2020), Hobart Hurricanes (2020-2022)
-- PSL: Lahore Qalandars
-- BPL: Sylhet Sixers (2019), Rajshahi Warriors (2025-26, champions)
-- GT20 Canada: Montreal Tigers, Vancouver Knights, Toronto Nationals
+# TIER 4 — RECORDS
+records:
+  - label_ne: "विश्वको सबभन्दा छिटो १०० ओडीआई विकेट"
+    value: "४२ खेल"
+  - label_ne: "दोस्रो सबभन्दा छिटो ५० ओडीआई विकेट"
+    value: "२२ खेल"
+  - label_ne: "दोस्रो सबभन्दा छिटो १०० टी-ट्वेन्टी विकेट (विश्व)"
+    value: "५४ खेल"
+  - label_ne: "नेपालको सर्वकालीन सर्वाधिक ओडीआई विकेट"
+    value: "१३५+"
+  - label_ne: "नेपालको सर्वकालीन सर्वाधिक टी-ट्वेन्टी विकेट"
+    value: "१३०+"
+  - label_ne: "नेपालको सर्वश्रेष्ठ ओडीआई बलिङ आँकडा"
+    value: "६/११ (पिएनजी विरुद्ध)"
 
-## Key World Records
-- Fastest to 100 ODI wickets in history: 42 matches
-- Second-fastest to 50 ODI wickets: 22 matches
-- Third-fastest to 50 T20I wickets: 29 matches
-- Second-fastest to 100 T20I wickets globally: 54 matches
-- Nepal all-time leading wicket-taker in both ODIs and T20Is
-- Best bowling figures by a Nepali in ODIs: 6/11 (vs PNG); in T20Is: 5/9 (vs Kenya)
-- Career-best ODI figures: 6/16 vs USA (2020) — helped bowl USA out for ODI record-low 35 runs
+# TIER 5 — DATA
+# Note: Stats injected via cricinfo_id (1070926) — do not hardcode
 
-## Signature Arsenal
-- The Overspun Leg-Break: Viciously ripping delivery that bites into the pitch, dipping sharply before turning away from right-handers
-- The Phantom Wrong'un (Googly): Masterfully disguised — mimics leg-break but spins back into right-handers, regularly shatters stumps
-- The Flipper: Developed with technical guidance from global veterans including Imran Tahir
-- Middle-Over Chokehold: Pinpoint control suffocates run rates and forces fatal errors
+# TIER 6 — DOMESTIC / FRANCHISE
+domestic_teams:
+  - नेपाल अन्डर-१९
+  - चितवन क्रिकेट एकेडेमी
+  - बिराटनगर किंग्स (एनपीएल कप्तान, २०२५)
+franchise_leagues:
+  - दिल्ली डेयरडेभिल्स / दिल्ली क्यापिटल्स (आईपीएल)
+  - सेन्ट किट्स एन्ड नेभिस पेट्रियट्स, बार्बाडोस ट्राइडेन्ट्स, जमाइका टालावाह्स (सीपीएल)
+  - मेलबर्न स्टार्स, होबार्ट हरिकेन्स (बिबिएल)
+  - लाहोर कलान्दर्स (पिएसएल)
+  - सिलेट सिक्सर्स, राजशाही वारियर्स — च्याम्पियन (बिपिएल)
+  - मन्ट्रियल टाइगर्स, भ्यान्कुभर नाइट्स, टोरोन्टो न्यासनल्स (जीटी२० क्यानडा)
 
-## Personality & Wisdom
-- "I have said from the first day that I am innocent. I am grateful to those who supported me. I will make every effort to take Nepali cricket to a new height." (First statement after acquittal)
-- "And the @USEmbassyNepal did it again what they did back in 2019, they denied my Visa for the T-20 World Cup happening in USA and West Indies. Unfortunate. I am sorry to all the well wishers of Nepal Cricket." (On 2024 visa denial)
-- "You may choose anyone you like for your show segments, but ridiculing someone's life while sitting on a YouTube chair is shameful." (Criticizing Paradygm TV)
-- "If someone asks me to play for free for the rest of my life for Nepal cricket, no money, I don't need anything... my goal is to take this team to the World Cup, to play Test matches." (On national duty over franchise wealth)
-- Highly aggressive philosophy: "Aggression is the best way of defense"
-- Patriotic above all — explicitly prioritizes national duty over financial gain
-
-## Diplomatic & Legal Fallout
-- 2023: Scotland and Namibia players refused to shake his hand post-match (silent protest during legal case)
-- 2024: US Embassy denied visa twice — prevented from playing US leg of T20 World Cup despite Nepal government intervention
-- July 2024: CAN awarded Grade 'A' central contract post-acquittal
-
-## Media & Public Profile
-- Nepal's international "poster boy" — single-handedly put Nepal on global cricket map
-- Mentored by former Australian captain Michael Clarke in Sydney early career
-- IPL signing cited by Indian PM Narendra Modi as India-Nepal bridge
-- When US visa was denied, fans protested in streets of Kathmandu
-- When acquitted, fans celebrated outside courthouse with traditional musical pipes and drums
-
-## Recent Form
-- 2025: 21 T20I wickets in 10 matches at 10.23 average
-- 2025 NPL: Joint-top wicket-taker (17 wickets) — Biratnagar Kings
-- 2025-26 BPL: Helped Rajshahi Warriors win championship
-- 2026 T20 World Cup: Named Nepal's lead spinner
+# TIER 7 — META
+last_updated: 2026-03-22
+research_status: FINAL
+---
