@@ -4,7 +4,6 @@ import MatchPulse from "@/components/home/MatchPulse";
 import StoriesGrid from "@/components/home/StoriesGrid";
 import Voices from "@/components/home/Voices";
 import StorytellingHub from "@/components/home/StorytellingHub";
-import JourneyArchives from "@/components/home/JourneyArchives";
 import FanSpotlight from "@/components/home/FanSpotlight";
 import ScrollReveal from '@/components/ui/ScrollReveal';
 

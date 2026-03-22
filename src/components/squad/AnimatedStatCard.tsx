@@ -49,7 +49,6 @@ export default function AnimatedStatCard({ label, value }: AnimatedStatCardProps
 
         // Custom cubic bezier easing function (0.76, 0, 0.24, 1)
         const easeCubicBezier = (t: number) => {
-            const y1 = 0; const y2 = 1;
             // A precise approximation for our counts, primarily ease-in-out
             return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
         };

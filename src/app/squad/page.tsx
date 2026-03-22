@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import SquadRoster from "@/components/squad/SquadRoster";
 
 export default function SquadPage() {
@@ -27,10 +28,11 @@ export default function SquadPage() {
                     }}
                 >
                     <div className="absolute inset-0 bg-gradient-to-t from-[#07080F] via-[#07080F]/50 to-transparent z-10" />
-                    <img
+                    <Image
                         src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
                         alt="Squad Atmosphere"
-                        className="w-full h-full object-cover saturate-50 opacity-60"
+                        fill
+                        className="object-cover saturate-50 opacity-60"
                     />
                 </div>
 

@@ -30,7 +30,8 @@ export default function SquadRoster() {
 
             {/* Player roster */}
             <div className="flex flex-col gap-[2px] relative z-10">
-                {playersData.map((player: any, index: number) => {
+                {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                {(playersData as any[]).map((player, index: number) => {
                     const isHovered = hoveredId === player.id;
                     const isExpanded = expandedId === player.id;
                     const isDesktopHovered = isHovered; // Hover logic for desktop

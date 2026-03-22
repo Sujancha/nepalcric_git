@@ -3,8 +3,29 @@
 import { useState } from "react";
 import AnimatedStatCard from "./AnimatedStatCard";
 
+interface StatSet {
+    runs?: number;
+    average?: number;
+    strikeRate?: number;
+    wickets?: number;
+    bestBowling?: string;
+}
+
+interface PlayerProp {
+    stats?: {
+        odi?: StatSet;
+        t20i?: StatSet;
+        runs?: number;
+        average?: number;
+        strikeRate?: number;
+        wickets?: number;
+    };
+    records?: string[];
+    iccRanking?: string;
+}
+
 interface PlayerStatsClientProps {
-    player: any;
+    player: PlayerProp;
 }
 
 export default function PlayerStatsClient({ player }: PlayerStatsClientProps) {

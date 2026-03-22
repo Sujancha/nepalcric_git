@@ -19,7 +19,7 @@ const SUGGESTED_QUESTIONS = [
     'What are the key stats?'
 ]
 
-export default function PlayerChatbot({ playerId, playerName, playerRole }: PlayerChatbotProps) {
+export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotProps) {
     const [messages, setMessages] = useState<Message[]>([])
     const [input, setInput] = useState('')
     const [isLoading, setIsLoading] = useState(false)

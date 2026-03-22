@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import StoryArticleClient from "./StoryArticleClient";
 import { stories } from "@/lib/storiesData";
 import { notFound } from "next/navigation";
@@ -8,8 +8,7 @@ type Props = {
 };
 
 export async function generateMetadata(
-    { params }: Props,
-    parent: ResolvingMetadata
+    { params }: Props
 ): Promise<Metadata> {
     const { slug } = await params;
     const story = stories.find(s => s.slug === slug);
@@ -42,5 +41,5 @@ export default async function StoryArticlePage({ params }: Props) {
         notFound();
     }
 
-    return <StoryArticleClient story={story as any} />;
+    return <StoryArticleClient story={story} />;
 }

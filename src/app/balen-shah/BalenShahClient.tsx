@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 
 /* ── Full-bleed image break (parallax desktop / fade mobile) ── */
 function ImageBreak({ src, caption }: { src: string; caption: string }) {
@@ -395,18 +397,19 @@ export default function BalenShahClient() {
             {/* ── FLOATING NAV ── */}
             <div className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-4 md:px-10 py-4 border-b border-[#C9A84C]/10"
                 style={{ opacity: navVisible ? 1 : 0, transition: 'opacity 0.8s ease', pointerEvents: navVisible ? 'auto' : 'none', background: 'rgba(10,10,10,0.85)', backdropFilter: 'blur(12px)' }}>
-                <a href="/" className="font-stats text-[13px] text-[#C9A84C] no-underline tracking-[0.2em] uppercase">← nepalCRIC</a>
+                <Link href="/" className="font-stats text-[13px] text-[#C9A84C] no-underline tracking-[0.2em] uppercase">← nepalCRIC</Link>
                 <span className="font-stats text-[11px] text-white/30 tracking-[0.15em] uppercase">आजको कथा</span>
             </div>
 
             {/* ══ HERO ══ */}
             <section className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                    <img
+                    <Image
                         src="/images/balen_profile.jpg"
                         alt="बालेन्द्र शाह"
-                        loading="eager"
-                        className="w-full h-full object-cover object-top"
+                        fill
+                        priority
+                        className="object-cover object-top"
                         style={{ filter: 'brightness(0.35) contrast(1.1) grayscale(0.4)' }}
                     />
                 </div>

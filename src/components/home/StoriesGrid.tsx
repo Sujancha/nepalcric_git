@@ -16,16 +16,17 @@ export default function StoriesGrid() {
                 <div className="flex flex-col md:grid md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
                     {/* Card 1: Lead Story */}
                     <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden rounded-sm min-h-[400px] md:min-h-0">
-                        <img
+                        <Image
                             src="/images/monty.jpg"
                             alt="Lead Story"
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 saturate-50 group-hover:saturate-100"
+                            fill
+                            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 saturate-50 group-hover:saturate-100"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#07080F] via-[#07080F]/40 to-transparent opacity-90 transition-opacity duration-500 z-10 mix-blend-multiply group-hover:opacity-80" />
 
                         <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 z-20 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                             <h3 className="font-display font-black text-4xl md:text-5xl text-stadium-white leading-[1.1] mb-4 drop-shadow-lg group-hover:text-[#C41E3A] transition-colors">
-                                "हाम्रो लक्ष्य विश्वकप मात्र होइन, पुस्ता निर्माण हो।"
+                                &ldquo;हाम्रो लक्ष्य विश्वकप मात्र होइन, पुस्ता निर्माण हो।&rdquo;
                             </h3>
                             <p className="font-sans font-medium text-[#B0B8C8] line-clamp-2 max-w-xl">
                                 मुख्य प्रशिक्षक मोन्टी देसाईले नेपाली क्रिकेटको भविष्य र नयाँ खेलाडीहरूको सम्भावनाबारे खुलेर कुरा गरे।

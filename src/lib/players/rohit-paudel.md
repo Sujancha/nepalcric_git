@@ -1,82 +1,54 @@
-# Rohit Kumar Paudel — NepalCric Knowledge Base
-
-## Basic Info
-- Full Name: Rohit Kumar Paudel (रोहित कुमार पौडेल)
-- Role: Right-handed middle-order batter, right-arm off-break bowler, Captain
-- Date of Birth: September 2, 2002
-- Hometown: Nawalparasi, Nepal
-- Nickname: The Cardiac Kid Captain / Architect of Modern Nepali Cricket
-
-## ODI Stats
-- Matches: 76 | Innings: 72 | Runs: 2,000 | Highest Score: 126 | Average: 29.85 | Strike Rate: 74.99
-- Half-Centuries: 11 | Centuries: 2 | Bowling: 10 wickets | Best: 4/22 | Economy: 4.32
-- Fielding: 41 T20I catches
-
-## T20I Stats
-- Matches: 80 | Innings: 76 | Runs: 1,720 | Highest Score: 61 | Average: 27.30 | Strike Rate: 119.44
-- Half-Centuries: 8 | Bowling: 14 wickets | Best: 2/7 | Economy: 6.55
-
-## ICC Rankings
-- T20I: Batting #81 | All-Rounder #40 | Bowling #237
-- ODI: Batting #90 | All-Rounder #153 | Bowling #238
-
-## Captain's Record
-- ODI: 50 matches, 25 wins, 23 losses
-- T20I: 59 matches, 34 wins, 23 losses
-
-## Origin Story
-Rohit Kumar Paudel was born in Nawalparasi, Nepal. His entry into cricket was sparked by pure national pride — he watched Nepal's historic 2014 ICC World Twenty20 in Bangladesh on television and was instantly ignited.
-
-He became Nepal's youngest-ever ODI cricketer at just 15 years and 335 days old (August 3, 2018, vs Netherlands — Nepal's first official ODI). A year later, at just 16 years and 146 days old, he shattered a 29-year-old record held by Sachin Tendulkar to become the youngest male cricketer in history to score an international half-century.
-
-In November 2022, amid extreme leadership turmoil in Nepali cricket, a 20-year-old Paudel was thrust into the captaincy of the senior national team — Nepal's youngest-ever captain. He inherited a squad sitting second-from-bottom in the CWC League 2. He led them to 11 wins from 12 matches to save ODI status and punch their World Cup Qualifier ticket — one of the greatest runs in Associate cricket history. His unbeaten 95 vs Scotland was the turning point.
-
-He leads what fans affectionately call the "Cardiac Kids" — a team that consistently pushes elite Test-playing nations to the final ball, winning hearts in near-upsets against South Africa (1-run loss, 2024 T20 World Cup) and England (4-run loss, 2026 T20 World Cup). His vision: qualify Nepal for the 2027 ODI World Cup.
-
-## Career Timeline
-- February 8, 2018: List A debut (ICC WCL Division Two)
-- July 29, 2018: T20 debut (MCC Tri-Nation Series)
-- August 3, 2018: ODI debut vs Netherlands — 4th youngest ODI debutant in history (15 years, 335 days)
-- January 26, 2019: Youngest male cricketer in history to score an international half-century (16 years, 146 days) — broke Sachin Tendulkar's 29-year record
-- March 2022: Career-best ODI score — 126 vs Papua New Guinea
-- November 2022: Appointed Nepal captain at 20 — youngest in Nepal's history
-- 2023: Led miraculous CWC League 2 comeback — 11 wins from 12 matches; 95* vs Scotland
-- 2023: Asia Cup debut — Nepal's first appearance, vs India and Pakistan
-- 2024 T20 World Cup: Near-upset of South Africa — lost by just 1 run chasing 115
-- Late 2025: Scored 109 vs UAE
-- 2025 NPL: Led Lumbini Lions to championship — top Nepali run-scorer (276 runs); took hat-trick in final
-- 2026 T20 World Cup: 39 (34) vs England in 4-run loss; then unbeaten 16 to guide 7-wicket win vs Scotland
-- 2024 NSJF Sports Award: Male Player of the Year
-
-## Playing Style
-- Bats at No. 4 to No. 6 — structural bridge between explosive openers and late finishers
-- Situational awareness and pacing are his core batting tools
-- Right-arm off-break bowling — tactical middle-over weapon; 4/22 career best
-- Prefers fielding first in T20Is — backs his team to chase under pressure
-- Heavily deploys spin in middle overs to choke opponents
-
-## Key Records
-- First Nepalese player to pass 1,000 and 2,000 ODI runs — Nepal's all-time leading ODI run-scorer
-- First Nepali to score two ODI centuries
-- Youngest male cricketer in history to score an international half-century (16 years, 146 days)
-- Youngest ODI cricketer in Nepal's history (debuted at 15 years, 335 days — 4th youngest globally)
-- Youngest captain in Nepal cricket history
-
-## Personality & Wisdom
-- "We did not come to this World Cup just to take part, we came to compete." (After 4-run loss to England, 2026 T20 World Cup)
-- "Sherpas and others like them are part of our history, and we play with that in mind. Just like in climbing, in cricket also we have to stay calm and composed."
-- "Both the bowler and batter are under pressure. So if the batters can make mistakes by playing a false shot, the bowler can miss his length too." (On handling death-over pressure)
-- Draws inspiration from Himalayan Sherpas — views underdog cricket battles through the lens of a mountaineer
-- Calm, soft-spoken, but fiercely competitive — Nepal's version of cool-headed leadership
-
-## Challenges & Recent Form
-- 2026 T20 World Cup: Near-upset of England (4-run loss) followed by catastrophic 10-wicket defeat to Italy
-- Head coach Stuart Law publicly criticised the team as "distracted" and lacking "mental toughness" after Italy loss
-- Paudel shouldered criticism while secretly battling severe stomach illness and fever during the tournament
-- Responded with tactical brilliance vs Scotland: broke 80-run opening stand, used pace-off deliveries, scored unbeaten 16 in 7-wicket win
-- 2025-26 form: Scored 109 vs UAE, led Lumbini Lions to NPL title (276 runs, hat-trick in final), 2026 T20 WC
-
-## Domestic Cricket
-- Teams: Nepal U-19, Tribhuwan Army Club, APF Club, Lumbini Lions (NPL captain)
-- International franchise: Toronto Nationals (GT20 Canada, 2024)
-- NPL Season 2: Top Nepali run-scorer (276 runs), championship-winning hat-trick in final
+---
+# TIER 1 — IDENTITY
+id: rohit-paudel
+name_en: Rohit Kumar Paudel
+name_ne: रोहित कुमार पौडेल
+role: ब्याट्सम्यान · कप्तान
+status: ACTIVE
+cricinfo_id: 1078690
+excerpt_ne: "नवलपरासीको रातो माटोबाट उदय भएको त्यो 'फायरफाइटर' कप्तान, जसले सचिनको कीर्तिमान धुलोमा मिलायो र भाँचिएको देशको सपनालाई पुनः जोड्यो।"
+# TIER 2 — DEBUT
+debut_date: 2018-08-03
+debut_age_years: 15
+debut_age_days: 335
+debut_match: नेपाल बनाम नेदरल्यान्ड्स — नेपालको पहिलो आधिकारिक ओडीआई
+debut_note_ne: "इतिहासकै चौथो कान्छो ओडीआई खेलाडी"
+# TIER 3 — STORY
+hero_quote: "हामी यहाँ भाग लिन मात्र आएका होइनौं — हामी प्रतिस्पर्धा गर्न आएका हौं।"
+lore_ne: |
+  यो कथा कुनै चम्किलो ट्रफी वा भव्य रंगशालाबाट सुरु हुँदैन, र न त कुनै सफा रेखामा हिँड्ने सफलताको गाथा नै हो; यो कथा सुरु हुन्छ एउटा त्यस्तो निसास्सिने ड्रेसिङ रुमबाट जहाँ देशको भत्किनै लागेको क्रिकेटको सम्पूर्ण भार, २०१४ को टी-ट्वेन्टी वर्ल्ड कप हेरेर क्रिकेटको सपना सजाएको, भर्खरै बीस वर्ष पुगेको एउटा ठिटोको काँधमा थमाइएको थियो।
+  कुरा सन् २०१४ को हो। नवलपरासीको त्यो रातो माटो जहाँ उडेको धुलोले सास फेर्दा पनि मुखमा टर्रो स्वाद छोड्छ, त्यही धुलोमा टेप बेरिएको टेनिस बल र भाँचिएको ब्याट बोकेर हिँड्ने एउटा बाह्र वर्षे केटोले २०१४ को वर्ल्ड कपको ठूलो मञ्चमा आफ्नो देशलाई खेल्दै गरेको देख्यो। तपाईंलाई थाहा छ त्यो भोक— जब कुनै कुरा यति साँचो लाग्छ कि त्यसलाई नखोजी बाँच्नु नै असम्भव हुन्छ। त्यो दिनदेखि उसको भित्र यस्तो आगो बल्यो जसलाई कसैले निभाउन सकेन। सपना पूरा गर्न उनी काठमाडौं आएर कडा प्रशिक्षण लिए।
+  पन्ध्र वर्षकै उमेरमा नेदरल्यान्ड्सविरुद्ध मैदानमा उत्रिँदा उनी इतिहासकै चौथो कान्छो खेलाडी बने। विश्व क्रिकेट त्यतिबेला चकित पर्यो जब उनले यू-१९ वर्ल्ड कपमा भारतीय तिव्र गतिका बलर कमलेश नगरकोटीलाई ५ बलमा २४ रन प्रहार गरेपछि उनलाई 'फायरफाइटर' को उपनाम दिइयो। त्यसको केही महिनापछि नै, १६ वर्ष १४६ दिनको उमेरमा युएईविरुद्ध दुबईमा ढलमलाएको स्थितिबाट टोलीलाई सम्हाल्दै उनले साचिन तेन्दुलकरको झन्डै तीन दशक पुरानो कीर्तिमान धुलोमा मिलाए र विश्वकै कान्छो अन्तर्राष्ट्रिय अर्धशतक प्रहार गर्ने पुरुष खेलाडीको ताज पहिरिए। यो केवल एउटा तथ्याङ्क थिएन, यो विश्व क्रिकेटलाई नेपालको आगमनको स्पष्ट संकेत थियो।
+  साँचो परीक्षा त त्यतिबेला सुरु भयो जब टोली सिडब्ल्यूसी लिग २ को पुछारमा लडखडाइरहेको थियो। नोभेम्बर २०२२ को त्यो समय नेपाली क्रिकेटको भित्रैबाट टुक्रिएको विश्वासको अँध्यारो थियो, र बोर्डले बीस वर्षको रोहित पौडेललाई नेतृत्वको अभिभारा सुम्पियो। कठीन परिस्थितिमा फेब्रुअरी २०२३ मा स्कटल्यान्डविरुद्ध १३८-८ को हारको नजिक पुगेको बेला उनले अविजित ९५ रनको जादुयी पारी खेले। करण केसीसँग मिलेर नवौं विकेटका लागि ७५ रनको ऐतिहासिक साझेदारी गर्दै उनले टोलीलाई रोमाञ्चक जित दिलाए। ओडीआई हैसियत मात्र जोगाएनन्, विश्वकप छनोटको ढोका खोल्दै सिङ्गो देशको भत्किएको सपनालाई फेरि जोडिदियो।
+  इतिहास सधैं सफा रेखामा चल्दैन, र नायकको असली परीक्षा जितमा होइन, हार्दा पनि नझुक्ने अठोटमा हुन्छ। सन् २०२४ र २०२६ को टी-ट्वेन्टी वर्ल्ड कपमा इङ्ल्यान्ड र दक्षिण अफ्रिकासँगको हृदयविदारक पराजय र त्यसपछि इटालीविरुद्धको नतिजाले उनलाई नराम्ररी घेरेको थियो। बाहिर प्रशिक्षक स्टुअर्ट लले सार्वजनिक आलोचना गरिरहँदा, उनी भित्रभित्रै पेटको गम्भीर संक्रमण र उच्च ज्वरोले जलिरहेका थिए; तर मैदानमा उत्रिएपछि उनले कसैलाई सुइँको दिएनन्।
+  शरीरले साथ छोड्दै थियो।
+  तर देशले जित्नु थियो।
+  एक्लै।
+  त्यसपछिको खेलमा, जब सबैले उनीबाट स्पष्टीकरण पर्खिरहेका थिए, उनले शब्दले होइन ब्याटले जवाफ दिए। मुम्बईको वानखेडे स्टेडियममा साबिक विजेता इङ्गल्याण्डलाई कडा टक्कर दिँदै स्कटल्यान्डविरुद्ध रोहितले बलिङ गर्दै महत्त्वपूर्ण विकेट लिए र स्कटल्यान्डको सुरुवाती साझेदारी तोडे। त्यसपछि उनले ब्याटिङमा पनि १४ बलमा १६ रनको अविजित पारी खेल्दै टोलीलाई ७ विकेटको जितसम्म डोहोर्‍याए। यो जितले १२ वर्षपछि टी-ट्वेन्टी वर्ल्ड कपमा नेपाललाई सफलता दिलायो।
+  उनी सन्त होइनन्। उनी मसीहा होइनन्। उनी केवल एउटा यस्तो मान्छे हुन् जसले असम्भव ठाउँबाट सुरु गरे। तपाईंले त्यो रात जब नेपाल एक रनले हार्दैछ भनेर फोनको स्क्रिनमा स्कोर ताजा गरिरहनुभएको थियो— चाहे त्यो काठमाडौंको कुनै साँघुरो गल्लीमा होस् वा सुदूरपश्चिमको कुनै चियापसलमा— त्यो क्षणमा मैदानको बीचमा उभिएर रोहित पौडेलले जुन बोझ बोकेका थिए, त्यो केवल एउटा म्याचको बोझ थिएन; त्यो छातीमा देश बोकेर हिँड्ने हरेक नेपालीको साझा ढुकढुकी थियो।
+# TIER 4 — RECORDS
+records:
+  - label_ne: "इतिहासकै सबैभन्दा कान्छो अन्तर्राष्ट्रिय अर्धशतक"
+    value: "१६ वर्ष, १४६ दिन"
+  - label_ne: "नेपालको सर्वकालीन सर्वाधिक ओडीआई रन"
+    value: "२,०००+"
+  - label_ne: "सचिन तेन्दुलकरको रेकर्ड तोडे"
+    value: "२९ वर्ष पुरानो"
+  - label_ne: "एकदिवसीय (ODI) क्रिकेटमा दुईवटा शतक प्रहार गर्ने पहिलो नेपाली खेलाडी"
+    value: "२ शतक"
+  - label_ne: "सिडब्ल्यूसी लिग २ — असाधारण कमब्याक"
+    value: "१२ मध्ये ११ जित"
+# TIER 5 — DATA
+# Note: Stats injected via cricinfo_id (1078690)
+# TIER 6 — DOMESTIC / FRANCHISE
+domestic_teams:
+  - नेपाल अन्डर-१९
+  - त्रिभुवन आर्मी क्लब
+  - एपीएफ क्लब
+  - लुम्बिनी लायन्स (एनपीएल कप्तान)
+franchise_leagues:
+  - टोरोन्टो न्यासनल्स (जीटी२० क्यानडा, २०२४)
+# TIER 7 — META
+last_updated: 2026-03-21
+research_status: FINAL
+---

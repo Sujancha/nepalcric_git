@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef } from "react";
-
 export default function Voices() {
     const voices = [
         {
@@ -92,7 +90,7 @@ export default function Voices() {
                                 userSelect: 'none',
                                 zIndex: 0
                             }}>
-                                "
+                                &ldquo;
                             </div>
 
                             {/* QUOTE TEXT */}

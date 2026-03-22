@@ -181,6 +181,7 @@ name_ne: रोहित पौडेल
 role: ब्याट्सम्यान
 status: ACTIVE   # ACTIVE | INJURED | RETIRED — RETIRED triggers legacy mode automatically
 cricinfo_id: 1234567   # Powers live stat injection. Never remove this field.
+excerpt_ne: ""   # 1-sentence punchline for the squad grid card. MUST be punchy and cinematic.
 
 # TIER 2 — DEBUT
 debut_date: 2017-03-15

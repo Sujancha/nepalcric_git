@@ -2,11 +2,16 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HeroSection() {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [mounted, setMounted] = useState(false);
-    const [particles, setParticles] = useState<any[]>([]);
+    interface Particle {
+        width: string; height: string; left: string; top: string;
+        animation: string; animationDelay: string;
+    }
+    const [particles, setParticles] = useState<Particle[]>([]);
     const [showPreloader, setShowPreloader] = useState(true);
 
     // Simulate live match state for Phase 1 requirements
@@ -14,6 +19,7 @@ export default function HeroSection() {
 
     useEffect(() => {
         if (sessionStorage.getItem('hasVisited')) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setShowPreloader(false);
         } else {
             const timer = setTimeout(() => {
@@ -25,6 +31,7 @@ export default function HeroSection() {
     }, []);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
         setParticles([...Array(40)].map(() => ({
             width: Math.random() * 3 + 1 + 'px',
@@ -81,9 +88,10 @@ export default function HeroSection() {
                 </svg>
             </div>
             {/* Background Image with Ken Burns */}
-            <img
+            <Image
                 onLoad={() => setIsVideoLoaded(true)}
-                className={`absolute top-0 left-0 w-full h-full object-cover object-top z-0 transition-opacity duration-1000 animate-ken-burns ${isVideoLoaded ? 'opacity-50 saturate-50' : 'opacity-0'}`}
+                fill
+                className={`object-cover object-top z-0 transition-opacity duration-1000 animate-ken-burns ${isVideoLoaded ? 'opacity-50 saturate-50' : 'opacity-0'}`}
                 src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
                 alt="Night Cricket Stadium Atmosphere"
             />
@@ -198,7 +206,7 @@ export default function HeroSection() {
                                 gap: '32px',
                                 marginTop: '8px'
                             }}>
-                                <a href="/#stories" style={{
+                                <Link href="/#stories" style={{
                                     fontFamily: 'Barlow Condensed, sans-serif',
                                     fontSize: '16px',
                                     fontWeight: 500,
@@ -219,7 +227,7 @@ export default function HeroSection() {
                                             ; (e.target as HTMLElement).style.borderColor = 'rgba(255,255,255,0.25)'
                                     }}>
                                     <span style={{ letterSpacing: '0' }}>कथाहरू पढ्नुस् →</span>
-                                </a>
+                                </Link>
                                 <a href="/match-day" style={{
                                     fontFamily: 'Barlow Condensed, sans-serif',
                                     fontSize: '16px',

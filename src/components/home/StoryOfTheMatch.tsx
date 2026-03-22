@@ -59,7 +59,7 @@ export default function StoryOfTheMatch() {
                     </div>
 
                     <h2 className="font-display uppercase tracking-[0em] text-4xl md:text-5xl lg:text-6xl text-stadium-white leading-[1.1] mb-8 animate-[fadeUpIn_1s_ease-out_both] drop-shadow-lg">
-                        "जब ग्राउण्डमा हुटिङ सुरु भयो, हामीलाई थाहा थियो, अब हामी हार्दैनौँ।"
+                        &ldquo;जब ग्राउण्डमा हुटिङ सुरु भयो, हामीलाई थाहा थियो, अब हामी हार्दैनौँ।&rdquo;
                     </h2>
 
                     <p className="font-sans text-[#B0B8C8] text-lg md:text-xl leading-relaxed mb-10 max-w-xl pr-6 border-l-[1px] border-[#C9A84C] pl-6 animate-[fadeUpIn_1s_ease-out_0.2s_both]">

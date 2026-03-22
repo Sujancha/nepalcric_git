@@ -1,11 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 export default function StorytellingHub() {
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
+
+    const openVideo = (videoId: string) => {
+        setActiveVideo(videoId);
+        // Small delay to ensure display: block is applied before animation toggles
+        requestAnimationFrame(() => setIsAnimating(true));
+    };
+
+    const closeVideo = useCallback(() => {
+        setIsAnimating(false);
+        // Wait for 400ms exit animation to complete before destroying instance
+        setTimeout(() => setActiveVideo(null), 400);
+    }, []);
 
     // Handle Escape key to close modal
     useEffect(() => {
@@ -16,19 +28,7 @@ export default function StorytellingHub() {
             window.addEventListener("keydown", handleKeyDown);
         }
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [activeVideo]);
-
-    const openVideo = (videoId: string) => {
-        setActiveVideo(videoId);
-        // Small delay to ensure display: block is applied before animation toggles
-        requestAnimationFrame(() => setIsAnimating(true));
-    };
-
-    const closeVideo = () => {
-        setIsAnimating(false);
-        // Wait for 400ms exit animation to complete before destroying instance
-        setTimeout(() => setActiveVideo(null), 400);
-    };
+    }, [activeVideo, closeVideo]);
 
     const stories = [
         {

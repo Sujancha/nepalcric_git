@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface LeadStoryProps {
     image: string;
@@ -18,10 +19,11 @@ export default function LeadStory({ image, quote, name, attribution, ctaText, ct
                 <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#07080F] to-transparent z-10 lg:bg-gradient-to-r lg:from-transparent lg:to-[#07080F]" />
 
                 {image ? (
-                    <img
+                    <Image
                         src={image}
                         alt={name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] ease-out group-hover:scale-110 saturate-50 group-hover:saturate-100"
+                        fill
+                        className="object-cover transition-transform duration-[10s] ease-out group-hover:scale-110 saturate-50 group-hover:saturate-100"
                     />
                 ) : (
                     /* Intentional placeholder — shows when no image URL is supplied */

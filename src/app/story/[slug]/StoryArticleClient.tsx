@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Section, stories } from "@/lib/storiesData";
+import { Section, stories, Story } from "@/lib/storiesData";
 
-export default function StoryArticleClient({ story }: { story: any }) {
+export default function StoryArticleClient({ story }: { story: Story }) {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
@@ -32,10 +33,11 @@ export default function StoryArticleClient({ story }: { story: any }) {
                     }}
                 >
                     <div className="absolute inset-x-0 bottom-0 h-[80%] bg-gradient-to-t from-[#07080F] via-[#07080F]/60 to-transparent z-10" />
-                    <img
+                    <Image
                         src={story.heroImage}
                         alt={story.title}
-                        className="w-full h-full object-cover saturate-50"
+                        fill
+                        className="object-cover saturate-50"
                     />
                 </div>
 
@@ -91,7 +93,7 @@ export default function StoryArticleClient({ story }: { story: any }) {
                                     return (
                                         <blockquote key={idx} className="relative my-20 -mx-6 md:-mx-16 lg:-mx-24 pl-8 md:pl-12 py-8 border-l-4 border-[#C9A84C] bg-gradient-to-r from-white/[0.03] to-transparent">
                                             <span className="absolute top-0 left-6 font-display font-black text-[6rem] leading-none text-[#C9A84C]/20 select-none pointer-events-none -mt-8">
-                                                "
+                                                &ldquo;
                                             </span>
                                             <p className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-stadium-white leading-[1.2] tracking-[-0.02em] drop-shadow-lg relative z-10">
                                                 {section.text}
@@ -114,10 +116,11 @@ export default function StoryArticleClient({ story }: { story: any }) {
                                 case 'imagebreak':
                                     return (
                                         <div key={idx} className="relative my-24 -mx-6 md:-mx-16 lg:-mx-24 aspect-[21/9] overflow-hidden rounded-sm border border-white/5">
-                                            <img
-                                                src={section.image}
+                                            <Image
+                                                src={section.image || ''}
                                                 alt={section.caption || "Story Image"}
-                                                className="w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
+                                                fill
+                                                className="object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
                                             />
                                             {section.caption && (
                                                 <div className="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md px-4 py-2 border border-white/10">

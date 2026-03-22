@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({ answer: text });
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Gemini API error:', error);
         return NextResponse.json({ error: 'failed' }, { status: 500 });
     }

@@ -9,6 +9,7 @@ export default function MatchDayClient() {
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener("scroll", handleScroll, { passive: true });
@@ -286,7 +287,7 @@ export default function MatchDayClient() {
                                 </span>
                             </div>
                             <div style={{ fontFamily: 'Mukta, sans-serif', fontStyle: 'italic', fontSize: '13px', color: 'rgba(255,255,255,0.35)', marginTop: '10px', letterSpacing: '0', textAlign: 'center' }}>
-                                "इतिहास हाम्रो पक्षमा छ।"
+                                &ldquo;इतिहास हाम्रो पक्षमा छ।&rdquo;
                             </div>
                         </div>
                     </div>

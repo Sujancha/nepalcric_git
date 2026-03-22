@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import playersData from '@/lib/playerData.json'
 
+interface ChatMessage {
+    role: 'user' | 'model';
+    content: string;
+}
+
 export async function POST(req: NextRequest) {
     try {
         const { playerId, message, history } = await req.json()
@@ -10,7 +15,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Missing message or playerId' }, { status: 400 })
         }
 
-        const player = (playersData as any[]).find(p => p.id === playerId)
+        const player = playersData.find(p => p.id === playerId)
         if (!player) {
             return NextResponse.json({ error: 'Player not found' }, { status: 404 })
         }
@@ -48,7 +53,7 @@ RULES:
                     role: 'model',
                     parts: [{ text: `Understood. I'm ready to speak about ${player.name} — Nepal's ${player.role}. Ask me anything.` }]
                 },
-                ...(history || []).map((msg: any) => ({
+                ...(history || []).map((msg: ChatMessage) => ({
                     role: msg.role,
                     parts: [{ text: msg.content }]
                 }))
@@ -61,7 +66,7 @@ RULES:
 
         return NextResponse.json({ response: text })
 
-    } catch (error: any) {
+    } catch (error) {
         console.error('Gemini API error:', error)
         return NextResponse.json({ error: 'AI service unavailable' }, { status: 500 })
     }

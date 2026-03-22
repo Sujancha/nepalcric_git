@@ -15,6 +15,7 @@ export default function MatchPulse() {
         const diffMinutes = (now.getTime() - lastUpdated.getTime()) / 60000;
 
         if (diffMinutes > 45) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsStale(true);
         }
     }, []);

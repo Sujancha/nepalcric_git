@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { stories } from "@/lib/storiesData";
 
 export default function StoriesArchivePage() {
@@ -66,10 +67,11 @@ export default function StoriesArchivePage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                         {featuredStories.map((story) => (
                             <Link key={story.slug} href={`/story/${story.slug}`} className="group relative block aspect-[16/10] overflow-hidden bg-[#0A0A0A] border border-white/5 hover:border-[#C9A84C] transition-all duration-500">
-                                <img
+                                <Image
                                     src={story.heroImage}
                                     alt={story.title}
-                                    className="absolute inset-0 w-full h-full object-cover grayscale-[50%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                                    fill
+                                    className="object-cover grayscale-[50%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
@@ -94,11 +96,12 @@ export default function StoriesArchivePage() {
                     <div className="space-y-12">
                         {allStories.map((story) => (
                             <Link key={story.slug} href={`/story/${story.slug}`} className="group flex flex-col md:flex-row gap-8 items-start hover:translate-x-2 transition-transform duration-300">
-                                <div className="w-full md:w-64 aspect-video overflow-hidden border border-white/5">
-                                    <img
+                                <div className="relative w-full md:w-64 aspect-video overflow-hidden border border-white/5">
+                                    <Image
                                         src={story.heroImage}
                                         alt={story.title}
-                                        className="w-full h-full object-cover grayscale-[80%] group-hover:grayscale-0 transition-all duration-500"
+                                        fill
+                                        className="object-cover grayscale-[80%] group-hover:grayscale-0 transition-all duration-500"
                                     />
                                 </div>
                                 <div className="flex-grow pt-2 border-b border-white/5 pb-10 w-full">
