@@ -21,7 +21,7 @@ interface PlayerProp {
         wickets?: number;
     };
     records?: string[];
-    iccRanking?: string;
+    iccRanking?: string | null;
 }
 
 interface PlayerStatsClientProps {
