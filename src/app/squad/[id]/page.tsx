@@ -42,9 +42,17 @@ export default async function PlayerProfile({
                         . Check the terminal for the resolved path logged by{" "}
                         <code className="text-[#C9A84C] font-mono text-xs">getPlayerMarkdown</code>.
                     </p>
-                    <p className="font-mono text-[#B0B8C8]/40 text-xs uppercase tracking-widest">
-                        Player ID: {id}
-                    </p>
+                    <div className="font-mono text-[#B0B8C8]/40 text-xs text-left w-full border border-red-500/20 p-4 mt-4">
+                        <p>Player ID: {id}</p>
+                        <p>CWD: {process.cwd()}</p>
+                        <p>Target Path: {require('path').join(process.cwd(), 'content', 'players', `${id}.md`)}</p>
+                        <p>File Exists?: {require('fs').existsSync(require('path').join(process.cwd(), 'content', 'players', `${id}.md`)) ? 'YES' : 'NO'}</p>
+                        {
+                            require('fs').existsSync(require('path').join(process.cwd(), 'content', 'players', `${id}.md`)) 
+                            && 
+                            <p>Gray-Matter Parsed Keys: {Object.keys(require('gray-matter')(require('fs').readFileSync(require('path').join(process.cwd(), 'content', 'players', `${id}.md`), 'utf8')).data).join(', ')}</p>
+                        }
+                    </div>
                 </div>
             </div>
         );
