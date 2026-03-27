@@ -37,7 +37,7 @@ export default async function PlayerProfile({
                     <p className="font-sans text-[#B0B8C8] text-sm leading-relaxed mb-6">
                         No markdown file found at{" "}
                         <code className="text-[#C9A84C] font-mono text-xs">
-                            src/lib/players/{id}.md
+                            content/players/{id}.md
                         </code>
                         . Check the terminal for the resolved path logged by{" "}
                         <code className="text-[#C9A84C] font-mono text-xs">getPlayerMarkdown</code>.
