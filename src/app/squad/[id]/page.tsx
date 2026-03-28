@@ -138,7 +138,7 @@ export default async function PlayerProfile({
                                     if (!trimmed.endsWith('।')) {
                                         return (
                                             <div key={i} className="mt-16 pt-8 border-t border-white/5">
-                                                <h3 className="font-sans font-black text-[#E8E8E8] text-2xl md:text-3xl leading-snug tracking-tight" lang="ne">
+                                                <h3 className="font-sans font-black text-[#C41E3A] text-2xl md:text-3xl leading-snug tracking-tight" lang="ne">
                                                     {trimmed}
                                                 </h3>
                                             </div>
@@ -148,7 +148,7 @@ export default async function PlayerProfile({
                                     // 4. Gut-punch isolated lines — short lines that land like blunt trauma
                                     if (trimmed.length < 30) {
                                         return (
-                                            <p key={i} className="font-sans font-bold text-2xl md:text-3xl text-white/90 tracking-wide mt-6 mb-2" lang="ne">
+                                            <p key={i} className="font-sans font-black text-white text-2xl md:text-3xl tracking-tight mt-8 mb-4" lang="ne">
                                                 {trimmed}
                                             </p>
                                         );
