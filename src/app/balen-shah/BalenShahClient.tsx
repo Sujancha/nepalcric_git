@@ -417,11 +417,11 @@ export default function BalenShahClient() {
                 <div className="absolute inset-0 z-[1] pointer-events-none" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 40%, rgba(0,0,0,0.85) 100%)' }} />
                 <div className="relative z-[2] text-center max-w-[780px]">
                     <h1 className="font-display tracking-[0.02em] uppercase text-[#F0EDE8] leading-[1.0] mb-12" style={{ fontSize: 'clamp(2.8rem, 10vw, 8rem)' }}>
-                        उनले आफैलाई<br />मेटाए —<br />तिनीहरूलाई बचाउनका लागि।
+                        तहखानाको<br />र्‍यापर।<br /><span className="text-[#C9A84C]">देशको प्रधानमन्त्री।</span>
                     </h1>
                     <div className="w-[120px] h-[1px] bg-[#C9A84C] mx-auto mb-8" />
                     <p className="font-sans italic text-white/60 leading-[1.7] mb-5" style={{ fontSize: 'clamp(0.9rem, 2vw, 1.05rem)' }}>
-                        बालेन्द्र शाह — र्यापर। इन्जिनियर। मेयर। प्रधानमन्त्री।
+                        बालेन्द्र शाह — नेपालको ४० औं प्रधानमन्त्री। पहिलो मधेशी। सबैभन्दा कान्छो।
                     </p>
                     <p className="font-stats text-[11px] text-[#C9A84C] tracking-[0.25em] uppercase mb-16">२० मिनेटको पढाइ</p>
                     <div className="flex justify-center">

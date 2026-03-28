@@ -2,11 +2,11 @@ import BalenShahClient from './BalenShahClient';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'उनले आफैलाई मेटाए — बालेन्द्र शाहको कथा | NepalCric',
+    title: 'तहखानाको र्‍यापर। देशको प्रधानमन्त्री। — बालेन्द्र शाहको कथा | NepalCric',
     description:
         'तहखानाको र्‍यापरबाट नेपालको ४० औं प्रधानमन्त्रीसम्म — बालेन्द्र शाहको कथा। नेपालको पहिलो मधेशी प्रधानमन्त्री। सबैभन्दा कान्छो प्रधानमन्त्री। यो नेपालको सबैभन्दा अप्रत्याशित कथा हो।',
     openGraph: {
-        title: 'उनले आफैलाई मेटाए — बालेन्द्र शाहको कथा',
+        title: 'तहखानाको र्‍यापर। देशको प्रधानमन्त्री।',
         description: 'तहखानाको र्‍यापरबाट नेपालको ४० औं प्रधानमन्त्रीसम्म — नेपालको पहिलो मधेशी प्रधानमन्त्री।',
         url: 'https://nepalcric.com/balen-shah',
         siteName: 'NepalCric',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'उनले आफैलाई मेटाए — बालेन्द्र शाहको कथा',
+        title: 'तहखानाको र्‍यापर। देशको प्रधानमन्त्री।',
         description: 'तहखानाको र्‍यापरबाट नेपालको ४० औं प्रधानमन्त्रीसम्म — नेपालको पहिलो मधेशी प्रधानमन्त्री।',
         images: ['/images/balen_profile.jpg'],
     },
