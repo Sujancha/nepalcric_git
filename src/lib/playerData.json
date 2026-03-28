@@ -533,16 +533,16 @@
         ],
         "signatureArsenal": [
             {
-                "title": "The Fearless Pull Shot",
-                "description": "Anchored by a rock-solid base and lightning-fast hand speed, Bhurtel rocks back to brutally punish short-pitched deliveries, sending them rocketing into the stands like a laser."
+                "title": "रिभर्स-स्कुप",
+                "description": "१४० किलोमिटर प्रतिघण्टाको बललाई घुँडा टेकेर विकेटकिपरको टाउको माथिबाट बाउन्ड्री कटाउने हतियार। मेलबर्नका एक्ला नेटहरूमा हजारौं पटक दोहोर्याउँदा औंलाहरूमा ठेला उठाएर बनाइएको 'मसल मेमोरी'।"
             },
             {
-                "title": "The Creative Lap Sweep",
-                "description": "A masterclass in crease geometry and high-stakes innovation, he perfectly executes the reverse scoop, dropping to his knees to guide the ball past the keeper like a precision billiards shot sliding into the corner pocket."
+                "title": "गोल्डेन आर्म लेग-स्पिन",
+                "description": "असफल मिडियम पेसरबाट रूपान्तरित लेग-स्पिनर— म्याच फसेको बेला कप्तानले बल थमाउँछन् र गुगलीले विकेट झार्छ। अन्तर्राष्ट्रिय क्रिकेटमा ३० भन्दा बढी विकेट, टोलीको संकटमोचक।"
             },
             {
-                "title": "The Electric Boundary Fielding",
-                "description": "Channeling the spatial awareness and rapid reflexes of his childhood days as a football goalkeeper, he launches himself across the inner ring and boundary ropes to maintain an elite catch-per-match ratio."
+                "title": "बिजुली क्षेत्ररक्षण",
+                "description": "बाल्यकालको गोलकिपर प्रशिक्षणले दिएको रिफ्लेक्स— हावामा उड्ने, एक हातले क्याच लिने, भुइँमा घस्रिँदै पनि बल नछोड्ने। ओडीआई र टी-ट्वेन्टीमा ८४ भन्दा बढी क्याच, नेपालको सर्वाधिक।"
             }
         ],
         "originStory": [
@@ -570,32 +570,43 @@
         ],
         "timeline": [
             {
-                "year": "January 2016",
-                "title": "Global Entry",
-                "content": "Making his global entry at the U-19 World Cup, an early struggle with pace bowling sparked a relentless technical reinvention that defined his future grit."
+                "year": "जनवरी २०१६",
+                "title": "पहिलो विश्वमञ्च",
+                "content": "अन्डर-१९ विश्वकपमा मिडियम-पेस बलरको रूपमा उत्रिए— पूरै प्रतियोगिताभर एउटा पनि विकेट आएन। त्यो शून्य नतिजानै पूर्ण रूपान्तरणको बीउ बन्यो।"
             },
             {
-                "year": "April 17, 2021",
-                "title": "Unleashed",
-                "content": "Unleashed absolute carnage on his T20I debut against the Netherlands, igniting a world-record streak of three consecutive half-centuries to launch his international career.",
+                "year": "१७ अप्रिल २०२१",
+                "title": "बिस्फोट",
+                "content": "नेदरल्यान्ड्सविरुद्ध टी-ट्वेन्टी डेब्युमा ६२ रन, त्यसपछि ६१* र ६२— लगातार तीन पारीमा अर्धशतक प्रहार गर्ने विश्वकै पहिलो डेब्युटेन्ट।",
                 "tier": "landmark"
             },
             {
-                "year": "February 19, 2022",
-                "title": "T20I Century",
-                "content": "Asserted his top-order dominance by obliterating the Philippines to secure a majestic, unbeaten 104* — his maiden T20I century."
+                "year": "फेब्रुअरी २०२२",
+                "title": "पहिलो शतक",
+                "content": "फिलिपिन्सविरुद्ध १०४* रनको अपराजित शतक— नेपाली ओपनरको पहिलो अन्तर्राष्ट्रिय टी-ट्वेन्टी शतक।"
             },
             {
-                "year": "June 18, 2023",
-                "title": "World Record Stand",
-                "content": "Forged a historic 171-run opening partnership by smashing a fearless 99 against hosts Zimbabwe in the Cricket World Cup Qualifiers.",
+                "year": "१८ जुन २०२३",
+                "title": "९९ को घाउ",
+                "content": "जिम्बाब्वेविरुद्ध आसिफ शेखसँग १७१ रनको नेपालकै ठूलो ओपनिङ साझेदारी, तर ९९ मा आउट— एक रन अझै छाती भित्रै गाडिएको छ।",
                 "tier": "landmark"
             },
             {
-                "year": "September 4, 2023",
-                "title": "Asia Cup Giant-Killer",
-                "content": "Took the fight to the giants of the sport on the Asia Cup stage, blasting a rapid 25-ball 38 and hitting the match's very first six against India's fearsome pace attack.",
+                "year": "४ सेप्टेम्बर २०२३",
+                "title": "सिराजविरुद्ध गर्जन",
+                "content": "एसिया कपमा मोहम्मद सिराजको पहिलो ओभरमै क्रिज बाहिर निस्केर पुल सट— त्यो छक्का वर्षौंदेखि हेपिएको एसोसिएट क्रिकेटको गर्जन थियो।",
                 "tier": "landmark"
+            },
+            {
+                "year": "जुन २०२४",
+                "title": "एक रनको क्रुरता",
+                "content": "टी-ट्वेन्टी विश्वकपमा दक्षिण अफ्रिकाविरुद्ध एक रनको हार— सिङ्गो देश एकैचोटि भाँचियो।",
+                "tier": "landmark"
+            },
+            {
+                "year": "२०२५",
+                "title": "तीन करोड सन्ताउन्न लाख",
+                "content": "एनपीएलमा पोखरा एभेन्जर्सले ३.५७ करोड रुपैयाँमा मार्की खेलाडी बनाए— नेपाली क्रिकेटको सबैभन्दा महँगो खेलाडी।"
             }
         ],
         "nepaliName": "कुशल भुर्तेल",
