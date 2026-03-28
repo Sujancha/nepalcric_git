@@ -122,7 +122,7 @@ function Isolated({ children, gold = false, large = false }: { children: React.R
     }
     return (
         <FadeIn>
-            <p className={`font-sans italic my-[3em] ${gold ? 'text-[#C9A84C]' : 'text-white/75'}`}>
+            <p className={`font-sans font-black my-[2em] text-xl md:text-2xl tracking-tight leading-snug ${gold ? 'text-[#C9A84C]' : 'text-white'}`}>
                 {children}
             </p>
         </FadeIn>
