@@ -10,31 +10,22 @@ import ScrollReveal from '@/components/ui/ScrollReveal';
 export default function Home() {
   return (
     <div className="w-full bg-[#07080F]">
-      {/* 1. Cinematic Hero with live strip */}
+      {/* 1. Balen Shah Takeover — Full-screen hero */}
+      <LeadStory
+        image="/images/balen_profile.jpg"
+        quote="तहखानाको र्‍यापर। देशको प्रधानमन्त्री।"
+        name="बालेन्द्र शाह"
+        attribution="नेपालको ४० औं प्रधानमन्त्री। पहिलो मधेशी। सबैभन्दा कान्छो।"
+        ctaText="पूरा कथा पढ्नुस् →"
+        ctaHref="/balen-shah"
+      />
+
+      {/* 2. Cinematic Cricket Hero */}
       <HeroSection />
 
-      {/* 2. Mandatory Editorial Guard */}
+      {/* 3. Editorial Guard */}
       <ScrollReveal direction="down" delay={0}>
         <MatchPulse />
-      </ScrollReveal>
-
-      {/* 3. The Lead Story */}
-      <div style={{
-        width: '100%',
-        height: '1px',
-        backgroundColor: 'rgba(255,255,255,0.06)',
-        margin: '80px 0 0 0'
-      }} />
-
-      <ScrollReveal direction="up" delay={0}>
-        <LeadStory
-          image="/images/balen_profile.jpg"
-          quote="काठमाडौंको हिरो बन्नका लागि, उनले पहिले आफैलाई मेटाउनु पर्यो।"
-          name="बालेन्द्र शाह"
-          attribution="र्यापर। इन्जिनियर। मेयर। प्रधानमन्त्री-मनोनीत।"
-          ctaText="पूरा कथा पढ्नुस् →"
-          ctaHref="/balen-shah"
-        />
       </ScrollReveal>
 
       {/* 4. The Magazine Grid */}
