@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
+const matter = require('gray-matter');
 
 export interface PlayerMdRecord {
   label_ne: string;
@@ -30,11 +30,11 @@ export interface PlayerMdData {
 }
 
 /**
- * Parses a player's .md file from src/lib/players/{id}.md
+ * Parses a player's .md file from content/players/{id}.md
  * Returns typed frontmatter data, or null if no file exists.
  */
 export function getPlayerMarkdown(id: string): PlayerMdData | null {
-  const filePath = path.join(process.cwd(), 'src', 'lib', 'players', `${id}.md`);
+  const filePath = path.join(process.cwd(), 'content', 'players', `${id}.md`);
   const exists = fs.existsSync(filePath);
   console.log(`[getPlayerMarkdown] cwd        : ${process.cwd()}`);
   console.log(`[getPlayerMarkdown] resolved   : ${filePath}`);
