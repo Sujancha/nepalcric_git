@@ -1,5 +1,13 @@
+// SECURITY: This route is rate-limited and origin-checked.
+// Additionally set a hard monthly cap on the Gemini API key
+// in Google Cloud Console to prevent runaway costs.
+
 import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+const RATE_LIMIT_MAX = 20
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000 // 1 hour
 
 const SYSTEM_PROMPT = `तपाईं NepalCric को AI सहायक हुनुहुन्छ। तपाईं केवल बालेन्द्र शाहको कथाबारे प्रश्नहरूको जवाफ दिनुहुन्छ।
 
@@ -21,6 +29,29 @@ const SYSTEM_PROMPT = `तपाईं NepalCric को AI सहायक ह�
 — यदि प्रश्न बालेनसँग सम्बन्धित छैन भने विनम्रतापूर्वक फर्काउनुस्`;
 
 export async function POST(req: NextRequest) {
+    // Origin check
+    const referer = req.headers.get('referer') || ''
+    if (!referer.includes('nepalcric') && !referer.includes('localhost')) {
+        return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    }
+
+    // Rate limiting
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+        || req.headers.get('x-real-ip')
+        || 'unknown'
+    const now = Date.now()
+    const entry = rateLimitMap.get(ip)
+    if (!entry || entry.resetAt < now) {
+        rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
+    } else if (entry.count >= RATE_LIMIT_MAX) {
+        return NextResponse.json(
+            { error: 'धेरै अनुरोधहरू। केही समयपछि पुन: प्रयास गर्नुहोस्।' },
+            { status: 429 }
+        )
+    } else {
+        entry.count++
+    }
+
     try {
         const { question } = await req.json();
 

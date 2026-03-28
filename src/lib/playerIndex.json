@@ -1,0 +1,46 @@
+[
+  {
+    "id": "dipendra-singh-airee",
+    "name_en": "Dipendra Singh Airee",
+    "name_ne": "दिपेन्द्र सिंह ऐरी",
+    "role": "ब्याटिङ अल-राउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1151682,
+    "debut_date": "2018-07-29",
+    "hero_quote": "म रेकर्ड बनाउन खेल्दिनँ। टोलीका लागि खेल्यो भने रेकर्ड आफैं आउँछ।",
+    "image_path": "/images/players/dipendra-singh-airee/portrait.webp"
+  },
+  {
+    "id": "kushal-bhurtel",
+    "name_en": "Kushal Bhurtel",
+    "name_ne": "कुशल भुर्तेल",
+    "role": "आक्रामक ओपनिङ ब्याटर · लेग-स्पिन अलराउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1197535,
+    "debut_date": "2021-04-17",
+    "hero_quote": "सपनाको म्याद हुँदैन — मात्र अठोट हुनुपर्छ।",
+    "image_path": "/images/players/kushal-bhurtel/portrait.webp"
+  },
+  {
+    "id": "rohit-paudel",
+    "name_en": "Rohit Kumar Paudel",
+    "name_ne": "रोहित कुमार पौडेल",
+    "role": "ब्याट्सम्यान · कप्तान",
+    "status": "ACTIVE",
+    "cricinfo_id": 1078690,
+    "debut_date": "2018-08-03",
+    "hero_quote": "हामी यहाँ भाग लिन मात्र आएका होइनौं — हामी प्रतिस्पर्धा गर्न आएका हौं।",
+    "image_path": "/images/players/rohit-paudel/portrait.webp"
+  },
+  {
+    "id": "sandeep-lamichhane",
+    "name_en": "Sandeep Lamichhane",
+    "name_ne": "सन्दीप लामिछाने",
+    "role": "लेग-स्पिन गेंदबाज",
+    "status": "ACTIVE",
+    "cricinfo_id": 1070926,
+    "debut_date": "2018-08-01",
+    "hero_quote": "पहिलो दिनदेखि नै मैले भनेको थिएँ — म निर्दोष छु।",
+    "image_path": "/images/players/sandeep-lamichhane/portrait.webp"
+  }
+]
