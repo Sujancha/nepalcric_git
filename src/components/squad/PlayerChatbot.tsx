@@ -13,10 +13,10 @@ interface PlayerChatbotProps {
 }
 
 const SUGGESTED_QUESTIONS = [
-    'What is the signature delivery?',
-    'What was the defining career moment?',
-    'What drives this player?',
-    'What are the key stats?'
+    'हस्ताक्षर डेलिभरी कुन हो?',
+    'करियरको सबैभन्दा निर्णायक क्षण कुन थियो?',
+    'यो खेलाडीलाई के प्रेरित गर्छ?',
+    'मुख्य तथ्याङ्कहरू के के हुन्?'
 ]
 
 export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotProps) {
@@ -53,7 +53,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                 setMessages([...newMessages, { role: 'model', content: data.response }])
             }
         } catch {
-            setMessages([...newMessages, { role: 'model', content: 'Connection lost. Try again.' }])
+            setMessages([...newMessages, { role: 'model', content: 'जडान टुट्यो। फेरि प्रयास गर्नुस्।' }])
         } finally {
             setIsLoading(false)
         }
@@ -89,7 +89,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                     letterSpacing: '0.25em',
                     textTransform: 'uppercase'
                 }}>
-                    AI ANALYST · NEPALCRIC INTEL
+                    एआई विश्लेषक · नेपालक्रिक इन्टेल
                 </span>
             </div>
 
@@ -113,7 +113,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                             marginBottom: '16px',
                             lineHeight: 1.6
                         }}>
-                            Ask anything about {playerName} — career, technique, key moments, stats.
+                            {playerName} बारे जे जान्न मन छ सोध्नुस् — करियर, प्रविधि, महत्त्वपूर्ण क्षणहरू, तथ्याङ्क।
                         </p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                             {SUGGESTED_QUESTIONS.map((q, i) => (
@@ -163,7 +163,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                             letterSpacing: '0.2em',
                             textTransform: 'uppercase'
                         }}>
-                            {msg.role === 'user' ? 'YOU' : 'ANALYST'}
+                            {msg.role === 'user' ? 'तपाईं' : 'विश्लेषक'}
                         </span>
                         <div style={{
                             maxWidth: '90%',
@@ -191,7 +191,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                             fontSize: '10px',
                             color: 'rgba(201,168,76,0.7)',
                             letterSpacing: '0.2em'
-                        }}>ANALYST</span>
+                        }}>विश्लेषक</span>
                         <div style={{ display: 'flex', gap: '4px' }}>
                             {[0, 1, 2].map(i => (
                                 <div key={i} style={{
@@ -217,7 +217,7 @@ export default function PlayerChatbot({ playerId, playerName }: PlayerChatbotPro
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     onKeyDown={e => e.key === 'Enter' && sendMessage(input)}
-                    placeholder="Ask about this player..."
+                    placeholder="खेलाडीबारे सोध्नुस्..."
                     disabled={isLoading}
                     style={{
                         flex: 1,

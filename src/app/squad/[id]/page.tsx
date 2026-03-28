@@ -109,21 +109,60 @@ export default async function PlayerProfile({
                         </div>
 
                         {loreParagraphs.length > 0 ? (
-                            <div className="flex flex-col gap-8">
+                            <div className="flex flex-col gap-6">
                                 {loreParagraphs.map((line, i) => {
-                                    // Short lines (gut-punch beats) get bold white treatment
-                                    const isIsolated = line.trim().length < 30;
+                                    const trimmed = line.trim();
+
+                                    // 1. Section header — lines starting with Devanagari numeral + period
+                                    const sectionMatch = trimmed.match(/^([१२३४५६७८९][०]?\.)(.+)$/);
+                                    if (sectionMatch) {
+                                        const num = sectionMatch[1];
+                                        const title = sectionMatch[2].trim();
+                                        return (
+                                            <div key={i} className="mt-16 pt-8 border-t border-white/5 flex items-baseline gap-3">
+                                                <span className="font-mono font-black text-[#C41E3A] text-xs tracking-[0.3em] uppercase shrink-0">
+                                                    {num}
+                                                </span>
+                                                <h3 className="font-sans font-bold text-[#E8E8E8] text-xl md:text-2xl leading-snug" lang="ne">
+                                                    {title}
+                                                </h3>
+                                            </div>
+                                        );
+                                    }
+
+                                    // 2. Direct player quote — lines opening with a quote mark
+                                    if (trimmed.startsWith('"') || trimmed.startsWith('\u201C')) {
+                                        return (
+                                            <blockquote key={i} className="border-l-4 border-[#C41E3A] pl-6 py-3 bg-[#07080F]/60 mt-2">
+                                                <p className="font-sans italic text-[#E8E8E8] text-base md:text-lg leading-[1.8]" lang="ne">
+                                                    {trimmed}
+                                                </p>
+                                            </blockquote>
+                                        );
+                                    }
+
+                                    // 3. Attribution — lines starting with em-dash
+                                    if (trimmed.startsWith('—')) {
+                                        return (
+                                            <p key={i} className="font-sans italic text-[#C9A84C] text-sm pl-6 -mt-2" lang="ne">
+                                                {trimmed}
+                                            </p>
+                                        );
+                                    }
+
+                                    // 4. Gut-punch isolated lines — short lines that land like blunt trauma
+                                    if (trimmed.length < 30) {
+                                        return (
+                                            <p key={i} className="font-sans font-bold text-2xl md:text-3xl text-white/90 tracking-wide mt-6 mb-2" lang="ne">
+                                                {trimmed}
+                                            </p>
+                                        );
+                                    }
+
+                                    // 5. Body prose — default
                                     return (
-                                        <p
-                                            key={i}
-                                            className={
-                                                isIsolated
-                                                    ? "font-sans font-bold text-lg md:text-xl text-white/90 tracking-wide my-2"
-                                                    : "font-sans text-[#B0B8C8] text-sm md:text-[15px] leading-[1.85]"
-                                            }
-                                            lang="ne"
-                                        >
-                                            {line.trim()}
+                                        <p key={i} className="font-sans text-[#B0B8C8] text-sm md:text-[15px] leading-[1.85]" lang="ne">
+                                            {trimmed}
                                         </p>
                                     );
                                 })}
