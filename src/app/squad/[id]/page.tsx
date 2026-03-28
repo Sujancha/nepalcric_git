@@ -113,40 +113,35 @@ export default async function PlayerProfile({
                                 {loreParagraphs.map((line, i) => {
                                     const trimmed = line.trim();
 
-                                    // 1. Section header — lines starting with Devanagari numeral + period
-                                    const sectionMatch = trimmed.match(/^([१२३४५६७८९][०]?\.)(.+)$/);
-                                    if (sectionMatch) {
-                                        const num = sectionMatch[1];
-                                        const title = sectionMatch[2].trim();
-                                        return (
-                                            <div key={i} className="mt-16 pt-8 border-t border-white/5 flex items-baseline gap-3">
-                                                <span className="font-mono font-black text-[#C41E3A] text-xs tracking-[0.3em] uppercase shrink-0">
-                                                    {num}
-                                                </span>
-                                                <h3 className="font-sans font-bold text-[#E8E8E8] text-xl md:text-2xl leading-snug" lang="ne">
-                                                    {title}
-                                                </h3>
-                                            </div>
-                                        );
-                                    }
-
-                                    // 2. Direct player quote — lines opening with a quote mark
+                                    // 1. Direct player quote — check first, before header detection
                                     if (trimmed.startsWith('"') || trimmed.startsWith('\u201C')) {
                                         return (
-                                            <blockquote key={i} className="border-l-4 border-[#C41E3A] pl-6 py-3 bg-[#07080F]/60 mt-2">
-                                                <p className="font-sans italic text-[#E8E8E8] text-base md:text-lg leading-[1.8]" lang="ne">
+                                            <blockquote key={i} className="relative border-l-4 border-[#C9A84C] pl-8 py-5 my-2 bg-gradient-to-r from-[#C9A84C]/8 to-transparent">
+                                                <span className="absolute top-2 left-2 text-5xl text-[#C9A84C]/20 font-serif leading-none select-none" aria-hidden="true">&ldquo;</span>
+                                                <p className="font-sans italic text-[#E8E8E8] text-base md:text-[17px] leading-[1.9] tracking-wide" lang="ne">
                                                     {trimmed}
                                                 </p>
                                             </blockquote>
                                         );
                                     }
 
-                                    // 3. Attribution — lines starting with em-dash
+                                    // 2. Attribution — lines starting with em-dash
                                     if (trimmed.startsWith('—')) {
                                         return (
-                                            <p key={i} className="font-sans italic text-[#C9A84C] text-sm pl-6 -mt-2" lang="ne">
+                                            <p key={i} className="font-sans italic text-[#C9A84C] text-sm pl-8 -mt-3" lang="ne">
                                                 {trimmed}
                                             </p>
+                                        );
+                                    }
+
+                                    // 3. Section header — lines not ending with । (Devanagari danda) are titles
+                                    if (!trimmed.endsWith('।')) {
+                                        return (
+                                            <div key={i} className="mt-16 pt-8 border-t border-white/5">
+                                                <h3 className="font-sans font-black text-[#E8E8E8] text-2xl md:text-3xl leading-snug tracking-tight" lang="ne">
+                                                    {trimmed}
+                                                </h3>
+                                            </div>
                                         );
                                     }
 
