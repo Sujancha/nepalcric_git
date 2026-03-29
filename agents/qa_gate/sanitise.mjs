@@ -99,9 +99,12 @@ async function loadApprovedDomains() {
 function extractDraftEntry(draftsContent, draftId) {
   const escaped = draftId.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
-  // Match from "---\ndraft_id: <id>" until the next "---\ndraft_id:" or end of string
+  // Match from "---\ndraft_id: <id>" until the next entry block, a top-level
+  // DRAFTS.md section boundary (`\n---\n\n##`), or EOF.
+  // The section-boundary stop prevents template sections like "## Published Archive"
+  // from being captured as part of the entry body.
   const pattern = new RegExp(
-    `(---\\r?\\ndraft_id:\\s*${escaped}[\\s\\S]*?)(?=\\n---\\r?\\ndraft_id:|$)`,
+    `(---\\r?\\ndraft_id:\\s*${escaped}[\\s\\S]*?)(?=\\n---\\r?\\ndraft_id:|\\n+---\\n+##|$)`,
   )
   const match = pattern.exec(draftsContent)
   if (!match) return null
