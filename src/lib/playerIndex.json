@@ -1,5 +1,38 @@
 [
   {
+    "id": "aarif-sheikh",
+    "name_en": "Aarif Sheikh",
+    "name_ne": "आरिफ शेख",
+    "role": "बहुमुखी अलराउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1321059,
+    "debut_date": "2019-09-23",
+    "hero_quote": "टीमको जरुरत जहाँ छ — म त्यहाँ छु।",
+    "image_path": "/images/players/aarif-sheikh/portrait.webp"
+  },
+  {
+    "id": "aasif-sheikh",
+    "name_en": "Aasif Sheikh",
+    "name_ne": "आसिफ शेख",
+    "role": "विकेटकीपर ब्याट्सम्यान",
+    "status": "ACTIVE",
+    "cricinfo_id": 1151684,
+    "debut_date": "2014-03-24",
+    "hero_quote": "दस्ताना लगाएपछि संसारको सबभन्दा सानो पनि — विकेटकिपरको आँखाले देखिन्छ।",
+    "image_path": "/images/players/aasif-sheikh/portrait.webp"
+  },
+  {
+    "id": "basir-ahamad",
+    "name_en": "Basir Ahamad",
+    "name_ne": "बासिर अहमद",
+    "role": "अफ-स्पिन अलराउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1407764,
+    "debut_date": "2023-02-01",
+    "hero_quote": "युवा भएर डराउनु छैन — यही मेरो सबैभन्दा ठूलो शक्ति हो।",
+    "image_path": "/images/players/basir-ahamad/portrait.webp"
+  },
+  {
     "id": "dipendra-singh-airee",
     "name_en": "Dipendra Singh Airee",
     "name_ne": "दिपेन्द्र सिंह ऐरी",
@@ -11,15 +44,70 @@
     "image_path": "/images/players/dipendra-singh-airee/portrait.webp"
   },
   {
+    "id": "gulshan-jha",
+    "name_en": "Gulshan Jha",
+    "name_ne": "गुलशन झा",
+    "role": "बायाँ हात अलराउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1321076,
+    "debut_date": "2020-11-25",
+    "hero_quote": "फरक हुनु कमजोरी होइन — त्यो नै तिम्रो सबैभन्दा ठूलो शक्ति हो।",
+    "image_path": "/images/players/gulshan-jha/portrait.webp"
+  },
+  {
+    "id": "karan-kc",
+    "name_en": "Karan KC",
+    "name_ne": "करण केसी",
+    "role": "तेज-मध्यम गेंदबाज · अलराउन्डर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1151683,
+    "debut_date": "2019-04-19",
+    "hero_quote": "अन्तिम ओभर मेरो लागि — सुरुवात होइन, समाप्ति हो।",
+    "image_path": "/images/players/karan-kc/portrait.webp"
+  },
+  {
     "id": "kushal-bhurtel",
     "name_en": "Kushal Bhurtel",
     "name_ne": "कुशल भुर्तेल",
-    "role": "आक्रामक ओपनिङ ब्याटर · लेग-स्पिन अलराउन्डर",
+    "role": "ओपनिङ ब्याट्सम्यान · लेग-स्पिनर",
     "status": "ACTIVE",
-    "cricinfo_id": 1197535,
+    "cricinfo_id": 1107535,
     "debut_date": "2021-04-17",
-    "hero_quote": "सपनाको म्याद हुँदैन — मात्र अठोट हुनुपर्छ।",
+    "hero_quote": "हामी यहाँ भाग लिन मात्र आएका होइनौं — हामी ट्रफी लिन आएका हौं।",
     "image_path": "/images/players/kushal-bhurtel/portrait.webp"
+  },
+  {
+    "id": "lalit-rajbanshi",
+    "name_en": "Lalit Rajbanshi",
+    "name_ne": "ललित राजवंशी",
+    "role": "बायाँ हात अर्थडक्स स्पिनर",
+    "status": "ACTIVE",
+    "cricinfo_id": 1321074,
+    "debut_date": "2020-11-25",
+    "hero_quote": "बायाँ हातले फरक कोण दिन्छ — त्यही नै मेरो शक्ति।",
+    "image_path": "/images/players/lalit-rajbanshi/portrait.webp"
+  },
+  {
+    "id": "lokesh-bam",
+    "name_en": "Lokesh Bam",
+    "name_ne": "लोकेश बम",
+    "role": "विकेटकीपर ब्याट्सम्यान",
+    "status": "ACTIVE",
+    "cricinfo_id": 1335534,
+    "debut_date": "2023-02-01",
+    "hero_quote": "दुई भूमिका निभाउनु — त्यो दोब्बर जिम्मेवारी हो, दोब्बर सम्मान पनि।",
+    "image_path": "/images/players/lokesh-bam/portrait.webp"
+  },
+  {
+    "id": "nandan-yadav",
+    "name_en": "Nandan Yadav",
+    "name_ne": "नन्दन यादव",
+    "role": "दायाँ हात तेज गेंदबाज",
+    "status": "ACTIVE",
+    "cricinfo_id": 1321077,
+    "debut_date": "2020-11-27",
+    "hero_quote": "गतिले सबैलाई डराउँछ — तर दिशाले जित्छ।",
+    "image_path": "/images/players/nandan-yadav/portrait.webp"
   },
   {
     "id": "rohit-paudel",
@@ -42,5 +130,38 @@
     "debut_date": "2018-08-01",
     "hero_quote": "पहिलो दिनदेखि नै मैले भनेको थिएँ — म निर्दोष छु।",
     "image_path": "/images/players/sandeep-lamichhane/portrait.webp"
+  },
+  {
+    "id": "sher-malla",
+    "name_en": "Sher Malla",
+    "name_ne": "शेर मल्ल",
+    "role": "दायाँ हात तेज गेंदबाज",
+    "status": "ACTIVE",
+    "cricinfo_id": 1407770,
+    "debut_date": "2023-08-17",
+    "hero_quote": "नयाँ छु — तर डराएको छैन।",
+    "image_path": "/images/players/sher-malla/portrait.webp"
+  },
+  {
+    "id": "sompal-kami",
+    "name_en": "Sompal Kami",
+    "name_ne": "सोमपाल कामी",
+    "role": "तेज-मध्यम गेंदबाज",
+    "status": "ACTIVE",
+    "cricinfo_id": 1151681,
+    "debut_date": "2014-03-24",
+    "hero_quote": "भारतको धुलोले नेपालको बेग बनायो।",
+    "image_path": "/images/players/sompal-kami/portrait.webp"
+  },
+  {
+    "id": "sundeep-jora",
+    "name_en": "Sundeep Jora",
+    "name_ne": "सुन्दीप जोरा",
+    "role": "मध्यक्रम ब्याट्सम्यान",
+    "status": "ACTIVE",
+    "cricinfo_id": 1335535,
+    "debut_date": "2022-10-09",
+    "hero_quote": "मध्यक्रम भनेको टीमको मेरुदण्ड हो।",
+    "image_path": "/images/players/sundeep-jora/portrait.webp"
   }
 ]
