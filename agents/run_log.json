@@ -1,0 +1,5 @@
+{
+  "schema_version": "1.0",
+  "description": "NepalCric agent pipeline run log. Append-only. Never edit existing entries.",
+  "runs": []
+}
