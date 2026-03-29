@@ -40,5 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# claude
+# claude — track slash commands, ignore local settings and worktrees
 .claude/
+!.claude/commands/
+!.claude/commands/**
