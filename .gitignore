@@ -44,3 +44,6 @@ next-env.d.ts
 .claude/
 !.claude/commands/
 !.claude/commands/**
+
+# qa gate — generated report artefact, not source
+agents/qa_gate/qa_report.md

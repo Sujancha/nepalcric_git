@@ -6,6 +6,33 @@ If no argument is given, list all `PENDING_QA` and `REVISION_REQUIRED` drafts fr
 
 ---
 
+## STEP 0 — Programmatic Sanitisation Gate (MUST RUN FIRST)
+
+**This is a hard security gate. It must complete with exit code 0 before any literary checks run.**
+
+Run:
+```bash
+npm run qa:sanitise -- $ARGUMENTS
+```
+
+This executes `agents/qa_gate/sanitise.mjs` which performs four checks:
+1. **remark parse** — if the draft markdown fails to parse → BLOCKED, stop here
+2. **HTML/script injection** — strips dangerous content and flags it → BLOCKED if found
+3. **MDX/JSX syntax** — checks for capitalised component tags that break the Next.js build → BLOCKED if found
+4. **URL approval** — checks all URLs against the approved domains in `agents/research_scout/sources.md` → BLOCKED if any unapproved URL found
+
+**If exit code is 1 (BLOCKED):**
+- Read `agents/qa_gate/qa_report.md` and report the BLOCKED findings to Sujan verbatim
+- DO NOT proceed to the literary checklist (Steps 1–10)
+- Status in DRAFTS.md has already been updated to `BLOCKED` by the script
+- End the /review run here
+
+**If exit code is 0 (CLEAN):**
+- Confirm: "Sanitisation gate: CLEAN. Proceeding to literary QA."
+- Continue to STEP 1 below
+
+---
+
 ## STEP 1 — Locate the draft
 
 Read `DRAFTS.md`. Find the entry with `draft_id: $ARGUMENTS`.

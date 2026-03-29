@@ -12,6 +12,7 @@
 | `REVISION_REQUIRED` | QA Gate returned the draft with specific notes. Lore Drafter must revise. |
 | `REDRAFT` | QA Gate rejected the draft entirely. Full rewrite required. |
 | `APPROVED` | QA Gate passed all 10 checklist questions. Ready for Sujan's final review before publishing. |
+| `BLOCKED` | Sanitisation gate failed. Literary QA suspended. See `agents/qa_gate/qa_report.md`. |
 | `PUBLISHED` | Sujan has published the draft to the live site. |
 
 ---

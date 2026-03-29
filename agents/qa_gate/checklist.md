@@ -4,6 +4,30 @@
 
 ---
 
+## Step 0 — Programmatic Sanitisation Gate
+
+**This runs before the literary checklist. It is automated. It is not optional.**
+
+```bash
+npm run qa:sanitise -- <draft_id>
+```
+
+Script: `agents/qa_gate/sanitise.mjs`
+Report output: `agents/qa_gate/qa_report.md`
+
+| Check | What it does | Fail outcome |
+|-------|-------------|--------------|
+| remark parse | Parses draft with `remark` + `remark-lint` | BLOCKED — stop, do not run literary checks |
+| HTML/script injection | Detects `html` AST nodes, `<script>`, `javascript:`, `onX=`, `eval()`, `process.env`, etc. Strips them from a sanitised copy | BLOCKED |
+| MDX/JSX syntax | Regex scan for capitalised component tags (`<MyComponent>`) that break Next.js build | BLOCKED |
+| URL approval | Extracts all URLs from AST, checks hostnames against `agents/research_scout/sources.md` | BLOCKED |
+
+**Status outcomes:**
+- `CLEAN` (exit 0) → proceed to The Ten Questions below
+- `BLOCKED` (exit 1) → update DRAFTS.md status to `BLOCKED`, report findings, stop here
+
+---
+
 ## The Ten Questions
 
 Answer each question for the draft under review. Mark ✅ PASS or ❌ FAIL. If any answer is FAIL — the draft is returned to Lore Drafter with specific notes. It does not advance.

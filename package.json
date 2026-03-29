@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "generate:players": "node scripts/generatePlayerIndex.js"
+    "generate:players": "node scripts/generatePlayerIndex.js",
+    "qa:sanitise": "node agents/qa_gate/sanitise.mjs"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -24,7 +25,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "remark": "^15.0.1",
+    "remark-lint": "^10.0.1",
+    "remark-lint-no-html": "^4.0.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unist-util-visit": "^5.1.0"
   }
 }

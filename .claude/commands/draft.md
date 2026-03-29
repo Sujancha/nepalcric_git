@@ -102,6 +102,17 @@ Answer the 10 questions from `agents/qa_gate/checklist.md` privately. Revise unt
 
 **Goal:** Formally grade the draft against the 10-point checklist.
 
+**Step 3.0 — Sanitisation gate (MUST run first)**
+
+Before any literary checks, run:
+```bash
+npm run qa:sanitise -- $ARGUMENTS-[YYYY-MM-DD]
+```
+
+If exit code is 1 (BLOCKED): append to DRAFTS.md with status `BLOCKED`, report the findings from `agents/qa_gate/qa_report.md` to the user, and stop here. Do NOT proceed to literary checks.
+
+If exit code is 0 (CLEAN): continue.
+
 **Step 3.1 — Read checklist.md**
 Read `agents/qa_gate/checklist.md` in full.
 
