@@ -6,7 +6,9 @@
       "run_id": "2026-03-29T10:10:56.008Z-sanitise-sompal-kami-2026-03-29",
       "trigger": "sanitise sompal-kami-2026-03-29",
       "date": "2026-03-29T10:10:56.008Z",
-      "phases": ["qa_gate_step0_sanitise"],
+      "phases": [
+        "qa_gate_step0_sanitise"
+      ],
       "draft_id": "sompal-kami-2026-03-29",
       "result": "BLOCKED",
       "blocked_count": 1,
@@ -16,7 +18,9 @@
       "run_id": "2026-03-29T10:12:56.599Z-sanitise-sompal-kami-2026-03-29",
       "trigger": "sanitise sompal-kami-2026-03-29",
       "date": "2026-03-29T10:12:56.599Z",
-      "phases": ["qa_gate_step0_sanitise"],
+      "phases": [
+        "qa_gate_step0_sanitise"
+      ],
       "draft_id": "sompal-kami-2026-03-29",
       "result": "CLEAN",
       "blocked_count": 0
@@ -25,7 +29,11 @@
       "run_id": "2026-03-29T10:15:00.000Z-draft-sompal-kami",
       "trigger": "/draft sompal-kami",
       "date": "2026-03-29T10:15:00.000Z",
-      "phases": ["research_scout", "lore_drafter", "qa_gate"],
+      "phases": [
+        "research_scout",
+        "lore_drafter",
+        "qa_gate"
+      ],
       "output_files": [
         "agents/research_scout/output/sompal-kami-facts.json",
         "DRAFTS.md"
@@ -35,6 +43,38 @@
       "flagged_gaps_count": 2,
       "lore_word_count_approx": 870,
       "sanitisation": "CLEAN"
+    },
+    {
+      "run_id": "2026-03-29T11:13:00.581Z-sanitise-dipendra-singh-airee-2026-03-29",
+      "trigger": "sanitise dipendra-singh-airee-2026-03-29",
+      "date": "2026-03-29T11:13:00.581Z",
+      "phases": [
+        "qa_gate_step0_sanitise"
+      ],
+      "draft_id": "dipendra-singh-airee-2026-03-29",
+      "result": "CLEAN",
+      "blocked_count": 0,
+      "checks": []
+    },
+    {
+      "run_id": "2026-03-30T00:00:00.000Z-draft-dipendra-singh-airee",
+      "trigger": "/draft dipendra-singh-airee",
+      "date": "2026-03-30T00:00:00.000Z",
+      "phases": [
+        "research_scout",
+        "lore_drafter",
+        "qa_gate"
+      ],
+      "output_files": [
+        "agents/research_scout/output/dipendra-singh-airee-facts.json",
+        "DRAFTS.md"
+      ],
+      "qa_result": "APPROVED",
+      "unverified_facts_count": 4,
+      "flagged_gaps_count": 5,
+      "lore_word_count_approx": 810,
+      "sanitisation": "CLEAN",
+      "note": "Existing player file had research_status: FINAL but lore predated pipeline. New lore adds: father Surendra Singh Airee (former Nepal cricketer, 1990s) as generational thread; microbus horn sensory anchor in Act 4 (NCA rock bottom); mother Naru Devi at TU Ground (Act 6). cricinfo_id discrepancy flagged: file has 1151682, ESPNCricinfo search returns 794707 — Sujan to verify."
     }
   ]
 }
