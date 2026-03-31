@@ -22,7 +22,7 @@
 ---
 draft_id: dipendra-singh-airee-2026-03-29
 type: player_lore
-status: APPROVED
+status: PUBLISHED
 run_date: 2026-03-29T00:00:00Z
 source_file: agents/research_scout/output/dipendra-singh-airee-facts.json
 ---
