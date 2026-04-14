@@ -1,13 +1,13 @@
-"use client";
+import type { Metadata } from "next";
 
-import Head from "next/head";
+export const metadata: Metadata = {
+    title: "नियम र सर्त",
+    description: "नेपालक्रिकका नियम र सर्तहरू",
+};
 
 export default function TermsPage() {
     return (
         <div className="bg-[#07080F] min-h-screen relative overflow-hidden">
-            <Head>
-                <title>नियम र सर्त | NepalCric</title>
-            </Head>
 
             {/* Ghost Flag Watermark */}
             <div className="fixed inset-0 pointer-events-none z-0">

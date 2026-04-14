@@ -34,9 +34,9 @@ export default function MatchCenter() {
                             </span>
                             <span className="font-display font-black text-3xl md:text-5xl text-stadium-white tracking-widest uppercase">नेपाल</span>
                         </div>
-                        <span className="font-sans font-bold text-[#B0B8C8]/50 text-xl tracking-[0.2em] uppercase mx-4">VS</span>
+                        <span className="font-sans font-bold text-[#B0B8C8]/50 text-xl tracking-[0.2em] mx-4">विरुद्ध</span>
                         <div className="flex items-center">
-                            <span className="font-display font-black text-2xl md:text-4xl text-[#B0B8C8]/60 tracking-widest uppercase line-through decoration-white/20">UAE</span>
+                            <span className="font-display font-black text-2xl md:text-4xl text-[#B0B8C8]/60 tracking-widest uppercase line-through decoration-white/20">युएई</span>
                         </div>
                     </div>
 
@@ -116,7 +116,7 @@ export default function MatchCenter() {
             <section className="max-w-4xl mx-auto px-6 py-32 relative">
                 <div className="flex items-center justify-center gap-4 mb-20">
                     <span className="h-[2px] w-12 bg-[#B0B8C8]/20" />
-                    <h2 className="font-ui font-black text-[#B0B8C8]/50 uppercase tracking-[0.2em] text-sm">
+                    <h2 className="font-stats font-black text-[#B0B8C8]/50 uppercase tracking-[0.2em] text-sm">
                         म्याच मोमेन्टम
                     </h2>
                     <span className="h-[2px] w-12 bg-[#B0B8C8]/20" />
@@ -132,7 +132,7 @@ export default function MatchCenter() {
 
                                 {/* Timeline Stamp */}
                                 <div className="w-24 shrink-0 text-left md:text-right pt-1 hidden md:block">
-                                    <span className="font-mono text-[#B0B8C8]/60 font-bold tracking-widest text-sm">{event.time}</span>
+                                    <span className="text-[#B0B8C8]/60 font-bold tracking-widest text-sm">{event.time}</span>
                                 </div>
 
                                 {/* Pulse Node */}
@@ -144,7 +144,7 @@ export default function MatchCenter() {
                                         <div className={`absolute inset-0 rounded-full animate-ping opacity-60 ${event.highlight ? 'bg-[#C9A84C]' : 'bg-[#C41E3A]'}`}></div>
                                     </div>
                                     {/* Mobile Timestamp */}
-                                    <span className="md:hidden font-mono text-[#B0B8C8]/60 font-bold tracking-widest text-sm ml-6">{event.time}</span>
+                                    <span className="md:hidden text-[#B0B8C8]/60 font-bold tracking-widest text-sm ml-6">{event.time}</span>
                                 </div>
 
                                 {/* Narrative Card */}

@@ -1,6 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { stories } from "@/lib/storiesData";
+
+export const metadata: Metadata = {
+    title: "कथाहरू",
+    description: "नेपाली क्रिकेटका ती क्षणहरू जो इतिहास बने",
+};
 
 export default function StoriesArchivePage() {
     const featuredStories = stories.filter(s => s.featured);

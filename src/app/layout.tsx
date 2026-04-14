@@ -55,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ne">
       <body className={`${bebasNeue.variable} ${mukta.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable} antialiased`}>
         <div className="min-h-screen flex flex-col pt-16">
           <Navbar />

@@ -1,13 +1,13 @@
-"use client";
+import type { Metadata } from "next";
 
-import Head from "next/head";
+export const metadata: Metadata = {
+    title: "गोपनीयता नीति",
+    description: "नेपालक्रिकको गोपनीयता नीति",
+};
 
 export default function PrivacyPage() {
     return (
         <div className="bg-[#07080F] min-h-screen relative overflow-hidden">
-            <Head>
-                <title>गोपनीयता नीति | NepalCric</title>
-            </Head>
 
             {/* Ghost Flag Watermark */}
             <div className="fixed inset-0 pointer-events-none z-0">
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
                     </section>
 
                     <section className="flex flex-col gap-4">
-                        <h2 className="font-mukta font-bold text-white text-2xl tracking-tight">२. कुकीज (Cookies) को प्रयोग</h2>
+                        <h2 className="font-mukta font-bold text-white text-2xl tracking-tight">२. कुकीजको प्रयोग</h2>
                         <p className="font-mukta text-white/70 text-lg leading-relaxed">
                             हामी राम्रो युजर इन्टरफेस र सुविधाहरू प्रदान गर्नका लागि कुकीजहरू प्रयोग गर्दछौं। तपाइँले आफ्नो ब्राउजरको सेटिङबाट कुकीजहरू बन्द गर्न सक्नुहुन्छ, यद्यपि यसले वेबसाइटका केही सुविधाहरूमा असर पार्न सक्छ।
                         </p>
