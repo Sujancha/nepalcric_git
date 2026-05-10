@@ -33,7 +33,7 @@ export default function StorytellingHub() {
     const stories = [
         {
             type: "विश्वकप",
-            title: "एक रन: त्यो रात जब नेपालले विश्वलाई रुवायो",
+            title: "एक रन: डलासको त्यो रात जब नेपालले विश्वलाई रुवायो",
             date: "जुन १५, २०२४",
             span: "md:col-span-2 md:row-span-2",
             image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
@@ -59,7 +59,7 @@ export default function StorytellingHub() {
         },
         {
             type: "ट्रेनिङ",
-            title: "सोमपाल र करण: १० वर्षको ओल्डेस्ट ड्युओको जुगलबन्दी",
+            title: "सोमपाल र करण: एक दशकको अटूट युद्ध",
             date: "२ हप्ता अघि",
             span: "md:col-span-2 md:row-span-1",
             image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
@@ -77,7 +77,7 @@ export default function StorytellingHub() {
                         <h2 className="font-display uppercase text-5xl md:text-6xl text-stadium-white animate-[fadeUpIn_1s_ease-out_both]">
                             लकर रुमका <span className="text-[#C41E3A] drop-shadow-[0_0_15px_rgba(196,30,58,0.5)]">कथाहरू</span>
                         </h2>
-                        <p className="font-sans text-[#B0B8C8] mt-4 text-lg animate-[fadeUpIn_1s_ease-out_0.2s_both]">ताजा खबर, हाइलाइट्स, र पर्दा पछाडिका विशेष झलकहरू।</p>
+                        <p className="font-sans text-[#B0B8C8] mt-4 text-lg animate-[fadeUpIn_1s_ease-out_0.2s_both]">मैदानमा भएका ती क्षणहरू — जुन स्कोरबोर्डमा देखिँदैनन्, तर सधैं बस्छन्।</p>
                     </div>
                 </div>
 

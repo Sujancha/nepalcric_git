@@ -137,13 +137,13 @@ export default function HeroSection() {
                             margin: 0,
                             textAlign: 'center'
                         }}>
-                            <span className="block animate-[fadeUpIn_1s_ease-out_2.2s_both] text-white/40 text-[clamp(18px,2.5vw,28px)] uppercase tracking-[0.3em] font-barlow mb-4">T20 World Cup 2024</span>
+                            <span className="block animate-[fadeUpIn_1s_ease-out_2.2s_both] text-white/40 text-[clamp(18px,2.5vw,28px)] uppercase tracking-[0.3em] font-barlow mb-4">टी-ट्वेन्टी विश्वकप २०२४</span>
                             नेपाल VS <span style={{ color: '#C41E3A' }}>दक्षिण अफ्रिका</span>
                         </h1>
                     )}
 
                     <p className="max-w-2xl mx-auto text-lg md:text-xl text-[#B0B8C8] font-sans drop-shadow-md animate-[fadeUpIn_1s_ease-out_3s_both] text-center">
-                        सेन्ट भिन्सेन्टको त्यो ऐतिहासिक रात र १ रनको त्यो साहसिक हार, जसले विश्व क्रिकेटको मन जित्यो।
+                        डलासको त्यो रात — एक रन, र सिङ्गो देशको सास रोकिएको। त्यो हारले विश्व क्रिकेटलाई भन्यो: नेपाल आइसक्यो।
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 animate-[fadeUpIn_1s_cubic-bezier(0.76,0,0.24,1)_4.4s_both]">

@@ -31,7 +31,7 @@ export default function StoriesArchivePage() {
                         कथाहरू
                     </h1>
                     <p className="font-sans italic text-white/50 text-xl md:text-2xl tracking-wide">
-                        नेपाली क्रिकेटका ती क्षणहरू जो इतिहास बने
+                        तथ्याङ्क सकिन्छ — कथाहरू सकिँदैनन्
                     </p>
                 </div>
             </section>
@@ -53,7 +53,7 @@ export default function StoriesArchivePage() {
                             </h2>
 
                             <p className="font-sans text-[#B0B8C8]/80 text-xl md:text-2xl mb-10 max-w-2xl leading-relaxed">
-                                बालेन्द्र शाह — र्यापर। इन्जिनियर। मेयर। प्रधानमन्त्री-मनोनीत।
+                                बालेन्द्र शाह — र्यापर। इन्जिनियर। मेयर। नेपालको ४०औं प्रधानमन्त्री।
                             </p>
 
                             <span className="font-sans font-bold text-[#C41E3A] text-sm uppercase tracking-widest border-b border-[#C41E3A] pb-1 group-hover:text-white group-hover:border-white transition-all">
