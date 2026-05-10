@@ -43,6 +43,10 @@ export default function AdminPlayersPage() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#07080F', padding: '2.5rem 1.5rem' }}>
+      <style>{`
+        .admin-player-card { transition: border-color 0.2s, background 0.2s; }
+        .admin-player-card:hover { border-color: #C41E3A !important; background: rgba(196,30,58,0.05) !important; }
+      `}</style>
       <div style={{ maxWidth: '700px', margin: '0 auto' }}>
         {/* Header */}
         <div
@@ -107,6 +111,7 @@ export default function AdminPlayersPage() {
               style={{ textDecoration: 'none' }}
             >
               <div
+                className="admin-player-card"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -114,20 +119,8 @@ export default function AdminPlayersPage() {
                   padding: '1rem 1.25rem',
                   background: 'rgba(255,255,255,0.03)',
                   border: '1px solid rgba(255,255,255,0.06)',
-                  transition: 'border-color 0.2s, background 0.2s',
                   flexWrap: 'wrap',
                   gap: '0.5rem',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = '#C41E3A';
-                  (e.currentTarget as HTMLDivElement).style.background =
-                    'rgba(196,30,58,0.05)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor =
-                    'rgba(255,255,255,0.06)';
-                  (e.currentTarget as HTMLDivElement).style.background =
-                    'rgba(255,255,255,0.03)';
                 }}
               >
                 <div>

@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const sections = [
@@ -116,17 +118,6 @@ export default function AdminDashboardPage() {
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                   backdropFilter: 'blur(8px)',
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor = section.accent;
-                  (e.currentTarget as HTMLDivElement).style.background =
-                    'rgba(255,255,255,0.05)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.borderColor =
-                    'rgba(255,255,255,0.07)';
-                  (e.currentTarget as HTMLDivElement).style.background =
-                    'rgba(255,255,255,0.03)';
                 }}
               >
                 <p
