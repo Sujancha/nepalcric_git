@@ -123,6 +123,12 @@ domestic_teams:
 
 franchise_leagues: []
 
+images:
+  - /images/players/basir-ahamad/1.webp
+  - /images/players/basir-ahamad/2.webp
+  - /images/players/basir-ahamad/3.webp
+  - /images/players/basir-ahamad/4.webp
+  - /images/players/basir-ahamad/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

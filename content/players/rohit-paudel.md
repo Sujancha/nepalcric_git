@@ -172,6 +172,12 @@ domestic_teams:
   - लुम्बिनी लायन्स (एनपीएल कप्तान)
 franchise_leagues:
   - टोरोन्टो न्यासनल्स (जीटी२० क्यानडा, २०२४)
+images:
+  - /images/players/rohit-paudel/1.webp
+  - /images/players/rohit-paudel/2.webp
+  - /images/players/rohit-paudel/3.webp
+  - /images/players/rohit-paudel/4.webp
+  - /images/players/rohit-paudel/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

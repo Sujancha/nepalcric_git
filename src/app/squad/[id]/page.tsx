@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import CinematicHeroClient from "@/components/squad/CinematicHeroClient";
 import playersData from "@/lib/playerData.json";
 import PlayerChatbot from '@/components/squad/PlayerChatbot';
@@ -265,6 +266,38 @@ export default async function PlayerProfile({
 
             {/* 6. Stats Center */}
             <PlayerStatsClient player={player} />
+
+            {/* 7. Photo Gallery */}
+            {mdData.images && mdData.images.length > 0 && (
+                <section className="bg-[#07080F] py-24 border-t border-white/5">
+                    <div className="max-w-7xl mx-auto px-6">
+                        <div className="flex items-center gap-4 mb-16 opacity-70">
+                            <span className="h-px flex-1 bg-[#B0B8C8]/20" />
+                            <h2 className="font-mono font-bold text-[#C9A84C] uppercase tracking-[0.3em] text-sm md:text-base">
+                                तस्बिरहरू
+                            </h2>
+                            <span className="h-px flex-1 bg-[#B0B8C8]/20" />
+                        </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
+                            {mdData.images.map((src, i) => (
+                                <div
+                                    key={i}
+                                    className="relative overflow-hidden bg-black/40 border border-white/5 group"
+                                    style={{ aspectRatio: '3/4' }}
+                                >
+                                    <Image
+                                        src={src}
+                                        alt={`${mdData.name_ne ?? ''} — तस्बिर ${i + 1}`}
+                                        fill
+                                        className="object-cover grayscale-[80%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
         </div>
     );

@@ -112,6 +112,12 @@ arsenal_ne: |
   सुधारको मानसिकता — यही नेपाली पेसको भोलि
   "पुग्दैन" सुनेर मैदान छोड्ने मान्छेहरू धेरै हुन्छन्। र जुन एक्लोले फर्केर काम गर्छ — उसको हात फरक हुन्छ। नन्दन यादवको सबैभन्दा खतरनाक हतियार उनको गति होइन, उनको स्पीड गन होइन — उनको मानसिकता हो। हर ट्रायलमा सुधार खोज्नु, हर सिरिजबाट पाठ लिनु, र हार्दा पनि भोलिपल्ट मैदानमा फर्किनु — यही मानसिकता नेपाली पेसको अर्को अध्यायको जग हो।
 
+images:
+  - /images/players/nandan-yadav/1.webp
+  - /images/players/nandan-yadav/2.webp
+  - /images/players/nandan-yadav/3.webp
+  - /images/players/nandan-yadav/4.webp
+  - /images/players/nandan-yadav/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

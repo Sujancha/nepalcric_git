@@ -268,6 +268,12 @@ domestic_teams:
 franchise_leagues:
   - भिक्टोरिया फर्स्ट ग्रेड (फ्रेन्कस्टन पेनिनसुला क्रिकेट क्लब, अष्ट्रेलिया)
 
+images:
+  - /images/players/kushal-bhurtel/1.webp
+  - /images/players/kushal-bhurtel/2.webp
+  - /images/players/kushal-bhurtel/3.webp
+  - /images/players/kushal-bhurtel/4.webp
+  - /images/players/kushal-bhurtel/5.webp
 # TIER 7 — META
 last_updated: 2026-03-28
 research_status: FINAL

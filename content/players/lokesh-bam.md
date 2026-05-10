@@ -112,6 +112,12 @@ domestic_teams:
 
 franchise_leagues: []
 
+images:
+  - /images/players/lokesh-bam/1.webp
+  - /images/players/lokesh-bam/2.webp
+  - /images/players/lokesh-bam/3.webp
+  - /images/players/lokesh-bam/4.webp
+  - /images/players/lokesh-bam/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

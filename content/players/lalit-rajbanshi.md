@@ -138,6 +138,12 @@ arsenal_ne: |
   त्यो श्रृंखला, त्यो कारण-र-परिणाम,
   ललितको सबभन्दा परिपक्व हतियार हो।
 
+images:
+  - /images/players/lalit-rajbanshi/1.webp
+  - /images/players/lalit-rajbanshi/2.webp
+  - /images/players/lalit-rajbanshi/3.webp
+  - /images/players/lalit-rajbanshi/4.webp
+  - /images/players/lalit-rajbanshi/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

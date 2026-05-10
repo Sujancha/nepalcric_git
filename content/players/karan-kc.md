@@ -157,6 +157,12 @@ arsenal_ne: |
   दबाबको मनोविज्ञान — काली रातको शिक्षा
   हार्नको नजिक पुग्दा पनि नहार्ने — यो करण केसीको सबैभन्दा दुर्लभ गुण हो। जुन रात अन्तिम ओभरमा रन गएका थिए, ड्रेसिङ रुम चुप थियो, कसैले हेरेको थिएन — त्यो पीडाले मात्र सिकाउने पाठ, जुन कुनै कोचले दिन सक्दैनथ्यो। अर्को सिरिजमा फर्कनु — त्यो निर्णय मात्र हैन, त्यो चरित्र हो।
 
+images:
+  - /images/players/karan-kc/1.webp
+  - /images/players/karan-kc/2.webp
+  - /images/players/karan-kc/3.webp
+  - /images/players/karan-kc/4.webp
+  - /images/players/karan-kc/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL
