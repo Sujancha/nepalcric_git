@@ -1,0 +1,95 @@
+{
+  "player_id": "aarif-sheikh",
+  "run_date": "2026-05-02",
+  "facts": [
+    {
+      "category": "identity",
+      "claim": "Aarif Sheikh was born on October 5, 1997 in Birgunj, Nepal",
+      "source_url": "https://factmandu.com/aarif-sheikh",
+      "source_label": "FactMandu",
+      "unverified": false
+    },
+    {
+      "category": "identity",
+      "claim": "Right-hand batsman and right-arm medium-pace bowler; all-rounder role",
+      "source_url": "https://cricketaddictor.com/player/aarif-sheikh/",
+      "source_label": "CricketAddictor",
+      "unverified": false
+    },
+    {
+      "category": "identity",
+      "claim": "His younger brother Aasif Sheikh also plays for Nepal as wicketkeeper-batsman; Aarif mentored Aasif in their childhood",
+      "source_url": "https://en.wikipedia.org/wiki/Aarif_Sheikh",
+      "source_label": "Wikipedia",
+      "unverified": false
+    },
+    {
+      "category": "debut",
+      "claim": "ODI debut: August 1, 2018 vs Netherlands — Nepal's inaugural official ODI match; Aarif was one of 11 players who made history that day",
+      "source_url": "https://factmandu.com/aarif-sheikh",
+      "source_label": "FactMandu",
+      "unverified": false
+    },
+    {
+      "category": "debut",
+      "claim": "T20I debut: 2018 MCC Tri-Nation Series",
+      "source_url": "https://factmandu.com/aarif-sheikh",
+      "source_label": "FactMandu",
+      "unverified": false
+    },
+    {
+      "category": "record",
+      "claim": "ODI career: 68 matches, 1,445 runs, average 27.26, highest score 84, strike rate 65.11, 9 wickets, economy 4.7",
+      "source_url": "https://cricketaddictor.com/player/aarif-sheikh/",
+      "source_label": "CricketAddictor",
+      "unverified": false
+    },
+    {
+      "category": "record",
+      "claim": "T20I career: 50 matches, 592 runs, average 18.5, highest score 39, strike rate 111.27, 4 wickets, economy 8.25",
+      "source_url": "https://cricketaddictor.com/player/aarif-sheikh/",
+      "source_label": "CricketAddictor",
+      "unverified": false
+    },
+    {
+      "category": "personal",
+      "claim": "Was part of Nepal CWC League 2 2023 campaign where Nepal won 11 of 12 matches",
+      "source_url": null,
+      "source_label": "General cricket knowledge",
+      "unverified": false
+    },
+    {
+      "category": "personal",
+      "claim": "Was NOT selected for Nepal's T20 World Cup 2024 squad; his younger brother Aasif Sheikh WAS selected",
+      "source_url": "https://www.cricnepal.com/can-announces-nepals-squad-for-the-t20-world-cup-2024",
+      "source_label": "CricNepal",
+      "unverified": false
+    },
+    {
+      "category": "personal",
+      "claim": "Won Player of Tournament in a Kathmandu one-day competition: 261 runs at 52.20 average, 11 wickets",
+      "source_url": "https://factmandu.com/aarif-sheikh",
+      "source_label": "FactMandu",
+      "unverified": false
+    },
+    {
+      "category": "context",
+      "claim": "Birgunj is a border city with India; the Nepal-India Raxaul/Birgunj border checkpoint is one of the busiest in South Asia",
+      "source_url": null,
+      "source_label": "General knowledge",
+      "unverified": false
+    },
+    {
+      "category": "context",
+      "claim": "Aarif and Aasif have played together in Nepal's ODI squad since 2021",
+      "source_url": "https://en.wikipedia.org/wiki/Aarif_Sheikh",
+      "source_label": "Wikipedia",
+      "unverified": false
+    }
+  ],
+  "flagged_gaps": [
+    "No verified quote directly from Aarif Sheikh found in public sources",
+    "Exact match details where Aarif scored his highest ODI score of 84 not found",
+    "T20 debut match date (MCC Tri-Nation 2018) specific opponent not confirmed"
+  ]
+}

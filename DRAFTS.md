@@ -212,3 +212,28 @@ source_file: agents/research_scout/output/sompal-kami-facts.json
 ## Published Archive
 
 _Entries moved here after PUBLISHED status._
+
+---
+draft_id: aarif-sheikh-2026-04-30
+type: player_lore
+status: PUBLISHED
+run_date: 2026-04-30T00:00:00Z
+source_file: agents/research_scout/output/aarif-sheikh-facts.json
+---
+
+### QA Gate Results
+
+| # | Question | Result | Notes |
+|---|----------|--------|-------|
+| 1 | Knowledge deficit hook | ✅ | Opens June 2024, Aasif on T20 WC field — Aarif's identity withheld until "उनी त्यहाँ थिएनन्।" |
+| 2 | In Medias Res | ✅ | Drops into T20 WC moment first; Birgunj origin comes second |
+| 3 | No emotion-naming | ✅ | Body only: "दुई भाइको छायाँ एउटै जमीनमा पर्थ्यो"; "घरमा थिए" |
+| 4 | Nepali sensory grounding | ✅ | Birgunj diesel+incense, Raxaul border, taped ball, dusty pitch |
+| 5 | Open Loop | ✅ | "हात कस्तो छ" planted Act 2 → detonates Act 5 with Aasif on field |
+| 6 | Flawed Protagonist | ✅ | Not selected for T20 WC 2024 despite 68 ODIs; Von Restorff isolation applied |
+| 7 | Breadcrumb | ✅ | Teaching Aasif to grip a bat (Act 2) → Aasif in T20 WC with gloves (Act 5) |
+| 8 | Visual breathing | ✅ | Three isolated lines including "भाइको नाम थियो। आफ्नो थिएन।" |
+| 9 | Two emotional threads | ✅ | External: 68 ODIs, 1445 runs, all-round record. Internal: invisible foundation, teaching the brother who surpassed him |
+| 10 | Sobering ending | ✅ | "जग बनाउनेहरूको कथा कम लेखिन्छ। तर जग बिना — छत उभिँदैन।" + "तपाईं" transfer |
+
+**QA STATUS: APPROVED → PUBLISHED**

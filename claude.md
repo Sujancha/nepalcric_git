@@ -23,7 +23,7 @@ This is **not** a content management system. Not a Wikipedia clone. Not a fantas
 | Styling | Tailwind CSS |
 | Player Data | Markdown `.md` files (custom YAML schema) |
 | AI Companion | Google Gemini API (via local proxy route) |
-| Fonts | Barlow Condensed + Mukta / Mukta ExtraBold (Google Fonts) |
+| Fonts | Bebas Neue (display) + Barlow Condensed (stats/labels) + Mukta / Mukta ExtraBold (Devanagari body) + JetBrains Mono (technical) |
 | Language | TypeScript |
 
 ---
@@ -42,8 +42,10 @@ This is **not** a content management system. Not a Wikipedia clone. Not a fantas
 
 ### Typography
 
+- **Bebas Neue** — Hero headlines, cinematic display scale. The voice of the stadium.
 - **Barlow Condensed** — UI labels, numbers, tactical readouts, nav items, stat values. Aggressive. Military. Uppercase preferred.
-- **Mukta / Mukta ExtraBold** — Devanagari headlines. Cinematic scale. Never small. If a Devanagari headline could not appear on a movie poster, make it bigger.
+- **Mukta / Mukta ExtraBold** — Devanagari body copy and headlines. Cinematic scale. Never small. If a Devanagari headline could not appear on a movie poster, make it bigger.
+- **JetBrains Mono** — Technical mono (pipeline artifacts, code, timestamps only).
 - **Never use**: Inter, Roboto, Arial, system-ui, or any font that ships with a MacBook by default.
 
 ### Visual Rules
@@ -100,6 +102,9 @@ When a term is universally understood, do not write it in Latin script. Translit
 | ODI | ओडीआई |
 | World Cup | वर्ल्ड कप |
 | Threat Meter | थ्रेट मिटर |
+| NPL | एनपीएल |
+| ICC | आईसीसी |
+| CWC | सिडब्ल्यूसी |
 
 If in doubt, transliterate. Never switch to Latin script on a live page.
 
@@ -162,8 +167,206 @@ Usage limit: Maximum four times per long-form piece.
 **Type 5 — The Second Person Bridge ("तपाईं")**
 Purpose: Collapse the distance between the reader and the narrative.
 Structure: "तपाईं" + one specific, universal Nepali detail the reader will recognise from their own life.
-
 Exactly right: तपाईंलाई थाहा छ — जब देशलाई दुख्छ, हामी सबैलाई एकैपटक दुख्छ, तर जब देशले जित्छ, त्यो खुशीमा आँसु लुकाउन कति गाह्रो हुन्छ।
+
+---
+
+## Advanced Narrative Techniques
+
+### 🔴 The In Medias Res Rule
+
+**Never start a piece at the beginning of the story.**
+
+Drop the reader into the moment of maximum tension — a threat, a defeat, a decision already made. Withhold the backstory. Let the reader live inside the chaos for at least one full paragraph before any context is given. Then, and only then, cut back to the origin.
+
+**Wrong:** रोहित पौडेल नवलपरासीमा जन्मिए। उनले सानैदेखि क्रिकेट खेल्न थाले।
+
+**Right:** स्कोरबोर्डमा लेखिएको थियो — ११४/९। नेपाललाई एक बलमा एक रन चाहिएको थियो। उनी बीस वर्षका थिए। यो विश्वकप थियो। — अनि मात्र उनी कहाँ जन्मिए भन्ने कुरा महत्त्वपूर्ण हुन्छ।
+
+This technique is mandatory for all long-form pieces over 400 words. The reader must ask "how did we get here?" before they know who the subject is.
+
+---
+
+### 🔴 The Flawed Protagonist Rule
+
+**Never write a saint. Write a human.**
+
+Every subject must have at least one moment of genuine failure, contradiction, or moral complexity — shown as a scene, not summarised. The lathi charges on street vendors. The NPL golden duck. The form collapse. The dropped catch. The 99 that wasn't 100. The Italy loss that exposed the cracks.
+
+If the piece contains no failure, it is propaganda. Propaganda is not cinema.
+
+**The test:** Can you screenshot the protagonist's worst moment and show it to a stranger without context? If that moment does not exist in the piece — go find it and write it as a scene.
+
+Showing failure makes the triumph cost something. Without cost, there is no story.
+
+---
+
+### 🔴 The Breadcrumb Rule
+
+**Plant one seed early. Detonate it late.**
+
+Every long-form piece must contain at least one specific detail — a quote, a date, a name, a line from a song — that is introduced early and paid off in the final third. The reader must feel the click of recognition: "I knew that was going to matter."
+
+Examples of breadcrumbs that work:
+- A 2017 Facebook post that predicts the 2026 election result
+- A rap lyric from 2013 that becomes a headline in 2026: "हिस्ट्री भनेको फेरिने चिज हो भाइ, बालेन अहिलेसम्म आएको थिएन"
+- A college friend's first comment on a post that turns into a cabinet appointment a decade later
+- A childhood habit that becomes a governing philosophy
+
+**Rule:** Breadcrumbs cannot be invented. They must come from verified research. If no breadcrumb exists in the initial research — dig deeper. It is always there.
+
+---
+
+### 🔴 The Open Loop Rule
+
+**Introduce a mystery before the midpoint. Do not close it until the final third.**
+
+The Zeigarnik effect — the brain's compulsion to complete unresolved tasks — is the most powerful retention mechanism available. Name the question explicitly. Then withhold the answer.
+
+**How to construct an open loop:**
+1. Introduce a specific, tantalising mystery in the first third: "त्यो सम्झौतामा एउटा शब्द थिएन। एउटा मात्र शब्द — जसले सबै कुरा बदल्थ्यो।"
+2. Do not answer it immediately.
+3. Continue through at least two other sections.
+4. Close the loop in the final third with the answer that recontextualises everything before it.
+
+**Rule:** One loop per piece. Maximum. Two open loops creates anxiety, not tension.
+
+---
+
+### 🔴 The Sobering Reality Check Rule
+
+**Never end on pure triumph.**
+
+The final emotional transfer to the reader — the "तपाईं" moment — must contain weight, not just pride. The reader should feel the goosebumps of belonging AND the specific discomfort of responsibility.
+
+The question the ending must leave unresolved: not "wasn't that amazing?" but "now what are you going to do?"
+
+**Wrong ending:** उनले प्रमाण दिए कि सबै कुरा सम्भव छ। तपाईं पनि यो कथाको हिस्सा हुनुहुन्छ।
+
+**Right ending:** उनले प्रमाण दिए कि सबै कुरा सम्भव छ — र अब त्यो प्रमाणको भार तपाईंको हातमा छ, र तपाईंले त्यो फर्काउन सक्नुहुन्न।
+
+The Balen Shah page does this correctly: "बाँकी — तपाईंको हातमा छ।"
+Every long-form piece must find its own version of that line.
+
+---
+
+### The David vs. Goliath Structural Requirement
+
+**Every piece must have a named antagonist force.**
+
+The antagonist is not always a person. It can be:
+- A system (the qualification structure that dismisses associate nations)
+- A condition (poverty, injury, form collapse)
+- A number (the 1 run, the 99, the 4-run loss)
+- A historical weight (29 years of Sachin's record, six-time parliamentary dominance)
+
+Without a named antagonist, the protagonist has nothing to push against. Without resistance, there is no story — only biography.
+
+**Rule:** Name the antagonist in Act 1. Make the reader feel its weight before the protagonist enters the frame.
+
+---
+
+### The Show Don't Tell Evidence Rule
+
+**Every major claim must be evidenced by a specific scene, not a summary.**
+
+Wrong: उनी शक्तिशाली बलरहरूविरुद्ध निडर थिए।
+
+Right: सिराजको पहिलो ओभर। नयाँ बल। एसिया कप। बालेन क्रिज बाहिर निस्किएर विश्वका नम्बर एक ओडीआई बलरलाई स्क्वेर लेगमा छक्का हाने। पच्चीस बल। अठ्तीस रन। एउटा बयान।
+
+The scene is the evidence. The summary is the verdict. Always show the scene before the verdict — or better still, let the scene speak and skip the verdict entirely.
+
+---
+
+### Episodic Pacing Rule
+
+**Pieces over 600 words must use named visual chapter breaks.**
+
+Long-form pieces are not read in one sitting. Each named section must stand alone as a unit of meaning while also serving the larger arc.
+
+**Requirements for chapter breaks:**
+- Maximum six chapters per piece
+- Each chapter title must be in Devanagari
+- Each chapter title must function as a hook — not a label ("बाल्यकाल") but a tension ("जुन रात इतिहास लेखियो")
+- Each chapter must end either on a gut-punch isolation OR a connective sentence that pulls into the next
+
+**Chapter length:** 100–250 words. If a chapter runs longer, split it.
+
+The chapter system exists to reset the reader's attention without breaking emotional momentum.
+
+---
+
+## Master Story Architecture — The Six-Act Structure
+
+Every piece of long-form content follows this arc. The structure is invisible to the reader. They only feel the emotion.
+
+### Act 1 — The Arrival: In Medias Res Hook (80–120 words)
+
+**Emotional purpose:** Psychological discomfort. The reader must feel tension before they understand why.
+
+**Technique:** Drop into the middle of the fire. Withhold the subject's identity until the end of the paragraph. The reader must ask "how did we get here?" before they know who this is.
+
+**Right:**
+> यो कथा कुनै भव्य रंगशालाबाट सुरु हुँदैन, र न त कुनै चम्किलो ट्रफीबाट नै; यो कथा सुरु हुन्छ एउटा त्यस्तो सुनसान ड्रेसिङ रुमबाट जहाँ हारको पिडाले निसास्सिएको एउटा केटोले पहिलोपटक हार नमान्ने कसम खाएको थियो।
+
+---
+
+### Act 2 — The Ordinary World: The Grounding (150–200 words)
+
+**Emotional purpose:** Empathy. The reader must know where this person came from before they can feel what it cost.
+
+**The Proustian Anchor rule:** Every paragraph must contain at least one sensory detail that is universally Nepali. Not "a dusty road" — but "the specific two-tone horn of a microbus," or "the chaotic roar of the crowd clinging to the branches at TU Ground."
+
+**Rule:** This is where the Breadcrumb is planted. One specific detail — a name, a date, a habit — that will pay off in Act 5 or 6.
+
+---
+
+### Act 3 — The Inciting Incident: The Pivot (100–150 words)
+
+**Emotional purpose:** The moment everything changes.
+
+**The "But/Therefore" rule:** Every paragraph must follow the logic of *but* and *therefore* — never *and then*. Causation drives story. The earthquake. The dropped selection. The friend's torn ligament. The Facebook post. One specific moment that makes the rest of the story inevitable.
+
+**Rule:** The antagonist becomes visible here. Name it.
+
+---
+
+### Act 4 — The Ordeal: Rock Bottom (100–150 words)
+
+**Emotional purpose:** The protagonist genuinely fails. This is where the Flawed Protagonist Rule is applied.
+
+**The Von Restorff Isolation rule:** The darkest fact must sit alone on its own line with white space above and below. Nothing decorating it. Nothing explaining it.
+
+> डाक्टरले उनको अनुहार हेरेनन्।
+> बुबा छैनन्।
+> पाँच जना।
+
+**Rule:** The antagonist wins here. The protagonist fails as a scene, not a summary.
+
+---
+
+### Act 5 — The Resurrection: The Climax (150–200 words)
+
+**Emotional purpose:** The payoff. This is where the Breadcrumb planted in Act 2 detonates.
+
+**The cinematic moment rule:** Every climax must have one specific image that, if frozen on a screen, would make a stranger feel something without context. Do not rush the climax. Build to it.
+
+**Right:**
+> पूरै रंगशालाले सास रोकेको त्यो अन्तिम सेकेन्डमा, जब स्कोरबोर्डको त्यो चहकिलो रातो बत्ती उनको चश्माको धारमा परावर्तन भइरहेको थियो, उनले कुनै खुशी मनाएनन् — मात्र एकपटक, एकदमै बिस्तारै, आफ्नो टाउको हल्लाए।
+
+**Rule:** The Open Loop closes here. The mystery is answered. The reader feels the click.
+
+---
+
+### Act 6 — The Return: The Sobering Transfer (80–120 words)
+
+**Emotional purpose:** The weight transfers from the protagonist to the reader. Not just pride. Responsibility.
+
+**The final "तपाईं" rule:** The last sentence of the piece must contain "तपाईं." It must connect the subject's journey to the reader's own life — with weight, not just warmth.
+
+After the final sentence — **silence**. Nothing. No related content. No CTA. No share prompt.
+
+**Rule:** Read the last paragraph aloud. Does it make you pause? If no — it is not the last paragraph yet.
 
 ---
 
@@ -192,7 +395,33 @@ debut_note_ne: ""
 
 # TIER 3 — STORY (Editorial, not encyclopaedic)
 hero_quote: ""   # Single defining line. Not a full sentence if possible.
-lore_ne: ""      # 2–4 paragraph origin story. Drop the reader into a scene. Apply The Delayed Reveal Rule.
+lore_ne: |
+  # MINIMUM: 8–10 substantial paragraphs. This is a cinematic biography.
+  # Each paragraph is a scene, not a report.
+  #
+  # Required sections in order:
+  # 1. The Hook — In Medias Res. Drop into maximum tension.
+  #    Withhold identity until the end of the first paragraph.
+  # 2. The Origin — specific place, specific childhood, specific Nepal.
+  #    Plant the Breadcrumb here.
+  # 3. The Wrong Path — what they tried before their true form was found.
+  # 4. The Crucible — the specific failure or conversation that redirected them.
+  # 5. The Weapon — what makes them dangerous, shown through one specific match moment.
+  # 6. The Record — the achievement told through what it cost, not what it proved.
+  # 7. The Almost — their heartbreak moment (the 99, the 1-run loss, the near-miss).
+  # 8. The Giant — the moment they faced an elite nation and did not blink.
+  # 9. The Wound — what they are still carrying. The Flawed Protagonist scene.
+  # 10. The Transfer — final paragraph hands emotional weight to the reader (तपाईं).
+  #     The Breadcrumb detonates here or in section 8.
+
+struggle_timeline_ne: |
+  # Chronological timeline of setbacks, failures, and pivots.
+  # Each entry: year + scene, never summary.
+  # Von Restorff isolation for the darkest entry.
+
+arsenal_ne: |
+  # 4–6 specific weapons. Each shown through match evidence, not claims.
+  # Not "he is good at pull shots" — show the specific ball, the specific match.
 
 # TIER 4 — RECORDS
 records:
@@ -215,25 +444,29 @@ research_status: DRAFT   # DRAFT | REVIEWED | FINAL
 
 ## Reference Implementation: Balen Shah Page
 
-The Balen Shah page is the **gold standard** for all cinematic player and character pages. When building any new profile page, benchmark against this.
+The Balen Shah page is the **gold standard** for all cinematic player and character pages.
 
 ### Architecture — Six Sections Following the Hero's Journey
 
-1. Cinematic opening — drop the reader into a scene (apply The Delayed Reveal Rule)
-2. The Crucible — conflict and pressure
-3. The Weapon — what makes them different
-4. The Proof — records, moments, data
-5. The Reckoning — cost and consequence
-6. The Legend — legacy statement
+1. **In Medias Res opening** — Raw Barz battle 2013. Withholds his name until the final line.
+2. **The Ordinary World** — Naradevi, the father's poetry, the government office waiting room. **Breadcrumb planted:** the father writes poems; Sunil Lamsal makes the first comment on the 2017 post.
+3. **The Crucible** — The earthquake. Bangalore. The Facebook post. The decision to infiltrate the system.
+4. **The Ordeal** — The lathi charges on street vendors. The contradiction of the man who wrote "सडक बालक" ordering force against the poor. **Flawed Protagonist moment shown as scene.**
+5. **The Resurrection** — Jhapa-5 result. **Breadcrumb detonates:** Sunil Lamsal, first commenter on the 2017 post → Infrastructure Minister.
+6. **The Return** — "बाँकी — तपाईंको हातमा छ।" **Sobering Reality Check, not pure triumph.**
 
 ### Key Techniques Already Implemented
 
-- Anti-skimming formatting: gut-punch isolated lines with generous white space above and below
-- Zeigarnik loop discipline: major reveals withheld from early sections to sustain narrative tension
-- "तपाईं" weapon moments: single, precise sentences addressed directly to the reader
+- In Medias Res opening — Raw Barz battle before any biography
+- Breadcrumb planted (2013 rap lyric + Sunil Lamsal) detonated at 2026 result
+- Flawed Protagonist — lathi charges shown as a scene, not reported
+- Open Loop — "त्यो सम्झौतामा एउटा शब्द थिएन" opened early, closed late
+- Von Restorff isolation: "बुबा छैनन्।"
+- "तपाईं" weapon deployed five times, each targeting a different wound
 - Parallax image breaks between sections
 - YouTube embed via expandable pill component (lazy loaded)
 - AI Story Companion at page bottom
+- Sobering Reality Check ending, not pure triumph
 
 ---
 
@@ -243,7 +476,7 @@ The Balen Shah page is the **gold standard** for all cinematic player and charac
 
 - Powered by **Google Gemini API** via a local Next.js proxy route
 - Environment variable: `GEMINI_API_KEY` in `.env.local`
-- Proxy route: `/api/gemini`
+- Proxy route: `/api/balen-companion`
 
 ### UI Rules — "Question Written in Darkness"
 
@@ -268,82 +501,25 @@ The Match Day page scouts opponents — it does not simply list them.
 
 ---
 
-## Master Story Architecture — The Six-Act Structure
-
-Every piece of long-form content on NepalCric follows this structure. Not as a rigid formula — as a skeleton you build flesh onto. The structure is invisible to the reader. They only feel the emotion.
-
-### Act 1: The Arrival — The Aversive Hook
-
-**Emotional purpose:** Psychological discomfort. The reader must feel tension before they understand why.
-
-**Technique:** Drop the reader into a moment of high tension, withhold the subject's identity until the end of the paragraph.
-
-**Right:**
-> यो कथा कुनै भव्य रंगशालाबाट सुरु हुँदैन, र न त कुनै चम्किलो ट्रफीबाट नै; यो कथा सुरु हुन्छ एउटा त्यस्तो सुनसान ड्रेसिङ रुमबाट जहाँ हारको पिडाले निसास्सिएको एउटा केटोले पहिलोपटक हार नमान्ने कसम खाएको थियो।
-
----
-
-### Act 2: The Ordinary World — The Empathy Baseline
-
-**The Proustian Anchor rule:** Every paragraph must contain at least one sensory detail that is universally Nepali. Not "a dusty road" — but "the specific two-tone horn of a microbus," or "the chaotic, beautiful roar of the crowd clinging to the branches at TU Ground."
-
----
-
-### Act 3: The Inciting Incident and Try/Fail Cycles
-
-**The "But/Therefore" rule:** Every paragraph must follow the logic of *but* and *therefore* — never *and then*. Causation drives story.
-
----
-
-### Act 4: The Ordeal — Rock Bottom
-
-**The Von Restorff Isolation rule:** The darkest fact must sit alone on its own line with white space above and below. Nothing decorating it. Nothing explaining it.
-
-> डाक्टरले उनको अनुहार हेरेनन्।
-> बुबा छैनन्।
-> पाँच जना।
-
----
-
-### Act 5: The Resurrection — The Climax
-
-**The cinematic moment rule:** Every climax must have one specific image that, if frozen on a screen, would make a stranger feel something without context. Do not rush the climax. Build to it.
-
-**Right:**
-> पूरै रंगशालाले सास रोकेको त्यो अन्तिम सेकेन्डमा, जब स्कोरबोर्डको त्यो चहकिलो रातो बत्ती उनको चश्माको धारमा परावर्तन भइरहेको थियो, उनले कुनै खुशी मनाएनन् — मात्र एकपटक, एकदमै बिस्तारै, आफ्नो टाउको हल्लाए।
-
----
-
-### Act 6: The Return — The Identity Loop
-
-**The final "तपाईं" rule:** The last sentence of the page must contain "तपाईं." It must connect the subject's journey to the reader's own life.
-
----
-
 ## The Universal Nepali Emotional Frequency
 
 ### The Five Core Frequencies of the 12th Rhino
 
-Every piece of content should consciously touch at least two of these five universal Nepali experiences. This is what connects a fan in Kirtipur to a fan in Sydney.
+Every piece of content should consciously touch at least two of these five universal Nepali experiences.
 
 **Frequency 1 — The Battle for Respect (The Underdog Wound)**
-The experience of being dismissed by the cricketing elite. Playing with taped tennis balls and broken bats, yet standing face-to-face with giants and refusing to blink.
 > ६१,७६७। अजेय देवताहरू पनि रगत बगाउँछन्।
 
 **Frequency 2 — The Unifying Force**
-The reality that cricket is the only thing that brings a fractured nation together. When the team plays, the politics stop, the struggles fade, and the whole country holds its breath as one.
 > तपाईंलाई थाहा छ — जब यो टिम मैदानमा उत्रिन्छ, हामीले आफ्नो दुःख बिर्सिन्छौं। एकछिनको लागि मात्रै भए पनि, हामी सबै एउटै हुन्छौं।
 
 **Frequency 3 — The Heartbreak of 'Almost'**
-The tragic beauty of the 1-run loss to South Africa. The heavy, suffocating feeling of fighting perfectly and still falling agonizingly short.
 > त्यो एक रन मात्र अंक थिएन। त्यो हाम्रो वर्षौंको भोक थियो, जो ओठसम्मै आएर पनि खोसियो।
 
 **Frequency 4 — The TU Ground Magic**
-The specific, chaotic, terrifyingly beautiful energy of Kirtipur. Trees filled with people, the roar of 30,000 fans acting as a literal 12th player on the field.
 > काठमाडौंको चिसो बिहान, टियू ग्राउन्डको त्यो पहेंलो घाम, र रुखका हाँगा-हाँगामा झुन्डिएर देशको नाम चिच्याइरहेका हजारौं आवाज — यो हाम्रो लागि खेल होइन, मन्दिर हो।
 
 **Frequency 5 — The Unconditional Loyalty**
-Loving a team not because they are guaranteed to win, but because they are ours. Because their struggle mirrors the everyday struggle of being a Nepali.
 > उनी सन्त होइनन्। उनी मसीहा होइनन्। उनी एउटा मान्छे हुन् — जसले असम्भव ठाउँबाट सुरु गरे।
 
 ---
@@ -379,41 +555,64 @@ These are the specific sensory anchors that unlock involuntary memory in Nepali 
 ## The Fatal Mistakes — Detailed Diagnosis
 
 **Mistake 1 — The Exposition Dump**
-Three paragraphs of background before anything has happened. Tournament history, career statistics — all before the reader has a reason to care.
-Fix: Drop the reader into the most dramatic moment first. Then weave in context to explain why the moment matters.
+Three paragraphs of background before anything has happened.
+Fix: Drop into the most dramatic moment first (In Medias Res). Then weave in context.
 
 **Mistake 2 — Emotional Monotony**
-Every sentence trying to be devastating. Every paragraph at maximum intensity. The nervous system acclimatises — without quiet there is no loud.
-Fix: Map your emotional arc before writing. You need valleys between peaks. After every moment of high intensity, give the reader one moment of stillness.
+Every paragraph at maximum intensity. The nervous system acclimatises — without quiet there is no loud.
+Fix: Map your emotional arc. You need valleys between peaks.
 
 **Mistake 3 — The "And Then" Plot**
-Events listed chronologically without causation. Each sentence is technically true and completely emotionally inert.
+Events listed chronologically without causation. Technically true. Completely emotionally inert.
 Fix: Every narrative paragraph must contain at least one *but* or *therefore*.
 
 **Mistake 4 — The Invisible Interior**
 Writing describes what happened externally but never takes the reader inside the character's experience.
-Fix: Ground every external action in a physical internal experience. Not the emotion — the body experiencing the emotion.
+Fix: Ground every external action in a physical internal experience.
 
 **Mistake 5 — The Statistics Crutch**
 Using numbers to prove greatness. Statistics answer "how much" — the reader is asking "what did it cost."
-Fix: Every statistic must be translated into a human experience before it appears on the page.
+Fix: Every statistic must be translated into a human experience before it appears.
+
+**Mistake 6 — The Hagiography Trap**
+Every paragraph is admiring. The subject never fails, never contradicts themselves.
+Fix: Apply the Flawed Protagonist Rule. Find the lathi charges. Find the 99. Show it as a scene.
+
+**Mistake 7 — The Isolated Piece**
+No planted seeds, no callbacks, no breadcrumbs. Could have been written by anyone who read Wikipedia.
+Fix: Apply the Breadcrumb Rule. Find the specific detail that, when it pays off late, makes the reader feel the click.
+
+**Mistake 8 — The Biography Opening**
+The piece starts at birth or at the beginning. The reader is not yet invested.
+Fix: Apply In Medias Res. Start in the middle of the fire. The origin comes after the reader is hooked.
+
+**Mistake 9 — The Hollow Triumph Ending**
+The piece ends with pure pride and no weight. The reader feels good but not responsible.
+Fix: Apply the Sobering Reality Check Rule. "बाँकी — तपाईंको हातमा छ।" is the template.
+
+**Mistake 10 — The Missing Antagonist**
+The protagonist succeeds against a vague, unnamed opposition. The stakes feel low.
+Fix: Name the antagonist in Act 1. Make the reader feel its weight before the protagonist appears.
 
 ---
 
 ## Pre-Publication Quality Checklist
 
-Answer these ten questions before any content is published. If the answer to any of them is no — the piece is not ready.
+Answer all thirteen questions before any content is published. If any answer is no — the piece is not ready.
 
 1. Does the first sentence open a knowledge deficit so uncomfortable the reader cannot close the tab?
-2. Have I described every emotion through the body rather than naming it? Replace words like "sad" or "happy" with a physical sensation.
-3. Can the reader smell Nepal? Can they hear TU Ground? If the setting could exist anywhere in the world — the job is not done.
-4. Is there a Zeigarnik loop that opens before the midpoint and does not close until the final third?
-5. Does the visual layout breathe? Isolated lines with white space? Flowing paragraphs?
-6. Am I writing about the institution or the human being who survived it?
-7. Are there at least two emotional threads running simultaneously — the external story (match, record) and the internal story (identity, wound)?
-8. If someone screenshots the climax section and sends it with no context — does it still hit?
-9. Does sharing this content make the reader feel like a more resilient, more proud Nepali?
-10. When they read the last word — do they feel something they cannot immediately name?
+2. Does the piece open In Medias Res — in the middle of the action, not at the beginning of the biography?
+3. Have I described every emotion through the body rather than naming it?
+4. Can the reader smell Nepal? Can they hear TU Ground? If the setting could exist anywhere — the job is not done.
+5. Is there a named Open Loop that opens before the midpoint and closes in the final third?
+6. Does the piece contain at least one moment of genuine failure shown as a scene — not summarised?
+7. Is there at least one Breadcrumb planted early that pays off in the final third? Does the reader feel the click?
+8. Does the visual layout breathe? Isolated lines with white space? Flowing paragraphs?
+9. Are there at least two emotional threads running simultaneously — the external story and the internal wound?
+10. If someone screenshots the climax section and sends it with no context — does it still hit?
+11. Does the ending contain weight, not just pride? Does it leave the reader with responsibility?
+12. Does sharing this content make the reader feel like a more resilient, more proud Nepali?
+13. When they read the last word — do they feel something they cannot immediately name?
 
 ---
 
@@ -427,17 +626,21 @@ Answer these ten questions before any content is published. If the answer to any
 
 **Law 4:** Every sensory detail must be irreplaceable. If it could exist in Sydney — it does not belong here.
 
-**Law 5:** The "तपाईं" weapon is deployed maximum five times per piece.
+**Law 5:** The "तपाईं" weapon is deployed maximum five times per piece. Each deployment targets a different emotional wound.
 
 **Law 6:** Isolated gut-punch lines maximum four times per piece. Surrounded by silence.
 
-**Law 7:** Every direct quote is sacred. Word for word. No cleaning.
+**Law 7:** Every direct quote is sacred. Word for word. No cleaning. No paraphrasing.
 
 **Law 8:** The final line contains "तपाईं." It leaves something unresolved in the reader, not the story.
 
 **Law 9:** After the final line — silence. Nothing. No related content. No CTA.
 
 **Law 10:** Before publishing — read the last paragraph aloud. Does it make you pause? If no — it is not the last paragraph yet.
+
+**Law 11:** Every piece must contain at least one moment where the protagonist genuinely fails. No saints allowed.
+
+**Law 12:** Every piece must contain at least one Breadcrumb planted early that detonates late. Research until you find it.
 
 ---
 
@@ -448,7 +651,7 @@ Answer these ten questions before any content is published. If the answer to any
 - ❌ No Inter, Roboto, Arial, or system fonts.
 - ❌ No hardcoded stat values — always dynamic via `cricinfo_id`.
 - ❌ No commercial CTAs in navigation.
-- ❌ No Wikipedia-style biography openings.
+- ❌ No biography-style openings — start In Medias Res, not at birth.
 - ❌ No symmetric, template-feeling layouts.
 - ❌ No white or light backgrounds. The Void is the default. Always.
 - ❌ No emoji in any UI copy or editorial content.
@@ -456,6 +659,9 @@ Answer these ten questions before any content is published. If the answer to any
 - ❌ No Latin script on any live page — everything in Devanagari.
 - ❌ No code-mixed Nepali in editorial content.
 - ❌ No Google-Translate logic. Apply The Connective Tissue Rule and The Delayed Reveal Rule relentlessly.
+- ❌ No hagiography. Every subject must have a scene of genuine failure.
+- ❌ No invented breadcrumbs — all callbacks must come from verified research.
+- ❌ No hollow triumph endings — every closing paragraph must leave the reader with weight, not just warmth.
 
 ---
 
@@ -463,7 +669,11 @@ Answer these ten questions before any content is published. If the answer to any
 
 - [ ] Have you read the existing component for this area? Don't rebuild what exists.
 - [ ] Is there a player `.md` file for this profile? Check `/content/players/` first.
-- [ ] Does the copy open in scene, not summary?
+- [ ] Does the copy open In Medias Res — in the middle of the fire, not at birth?
+- [ ] Is the Open Loop identified before writing begins? Where does it open? Where does it close?
+- [ ] Is the Breadcrumb identified before writing begins? What is the seed? What is the payoff?
+- [ ] Is the Flawed Protagonist moment identified? What specific failure will be shown as a scene?
+- [ ] Is the Antagonist named? What force does the protagonist push against?
 - [ ] Are Devanagari headlines at cinematic scale?
 - [ ] Are all stat values dynamic (from `cricinfo_id`), not hardcoded?
 - [ ] Is the color palette respected? No off-brand colors.
@@ -497,4 +707,4 @@ They do not close the tab. They send it to someone. Not because the content told
 
 ---
 
-*Last updated: March 2026. If anything in this file contradicts the actual codebase — the codebase wins, then update this file.*
+*Last updated: April 2026. If anything in this file contradicts the actual codebase — the codebase wins, then update this file.*
