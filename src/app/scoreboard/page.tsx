@@ -7,14 +7,24 @@ export const metadata: Metadata = {
 
 const archives = [
     {
+        id: "t20wc-2026",
+        seriesName: "आईसीसी टी-ट्वेन्टी विश्वकप",
+        year: "२०२६",
+        outcome: "१२ वर्षपछि पहिलो विश्वकप जित — वानखेडेमा इतिहास",
+        matches: [
+            { opponent: "स्कटल्यान्ड", date: "जनवरी", result: "नेपाल ७ विकेटले विजयी — वानखेडे, मुम्बई" },
+            { opponent: "इङ्गल्यान्ड", date: "जनवरी", result: "ऐतिहासिक सामना" },
+        ],
+    },
+    {
         id: "t20wc-2024",
         seriesName: "आईसीसी टी-ट्वेन्टी विश्वकप",
         year: "२०२४",
-        outcome: "विश्वकपमा उत्कृष्ट संघर्ष (ऐतिहासिक प्रदर्शन)",
+        outcome: "एक रनको त्यो पीडा — नेपालले विश्वको मन जित्यो",
         matches: [
-            { opponent: "दक्षिण अफ्रिका", date: "जुन १५", result: "१ रनको हृदयविदारक हार" },
-            { opponent: "बङ्गलादेश", date: "जुन १७", result: "२१ रनले पराजित" },
-            { opponent: "नेदरल्यान्ड्स", date: "जुन ०४", result: "६ विकेटले पराजित" },
+            { opponent: "दक्षिण अफ्रिका", date: "जुन", result: "१ रनको हृदयविदारक हार — डलास, टेक्सास" },
+            { opponent: "बङ्गलादेश", date: "जुन", result: "२१ रनले पराजित — सेन्ट भिन्सेन्ट" },
+            { opponent: "नेदरल्यान्ड्स", date: "जुन", result: "६ विकेटले पराजित" },
         ],
     },
     {
@@ -105,7 +115,7 @@ export default function ScoreboardArchive() {
                                 backgroundColor: "rgba(255,255,255,0.05)",
                                 backdropFilter: "blur(12px)",
                                 border: "1px solid rgba(255,255,255,0.1)",
-                                borderTop: series.outcome.includes("अपराजित") || series.outcome.includes("विजयी")
+                                borderTop: series.outcome.includes("जित") || series.outcome.includes("विजयी") || series.outcome.includes("च्याम्पियन")
                                     ? "3px solid rgba(201,168,76,0.7)"
                                     : "3px solid rgba(196,30,58,0.6)",
                                 animationDelay: `${idx * 0.15}s`,

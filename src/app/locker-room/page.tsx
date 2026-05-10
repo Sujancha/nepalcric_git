@@ -15,7 +15,7 @@ const vaultVideos = [
     },
     {
         id: "vid-02",
-        title: "सन्दीपको जादु: ५ विकेटको हाइलाइट्स",
+        title: "सन्दीपको जादु: पाँच विकेट, एउटा ओभर, एउटा देश",
         duration: "३:४०",
         date: "१० मार्च २०२६",
         thumb: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
@@ -36,14 +36,14 @@ const vaultVideos = [
     },
     {
         id: "vid-05",
-        title: "रोहित पौडेल: कप्तानको मनोबल",
+        title: "रोहित पौडेल: कप्तानको अडान, देशको भार",
         duration: "६:१०",
         date: "०१ मार्च २०२६",
         thumb: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
     },
     {
         id: "vid-06",
-        title: "अभ्यास सत्र: पसिना र समर्पण",
+        title: "बिहानको नेट: पसिना, प्रतिज्ञा, र एउटा बल",
         duration: "३:०५",
         date: "२८ फेब्रुअरी २०२६",
         thumb: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",

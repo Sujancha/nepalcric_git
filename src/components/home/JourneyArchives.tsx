@@ -3,10 +3,10 @@ import Image from 'next/image';
 
 export default function JourneyArchives() {
     const journeys = [
-        { id: "sandeep-lamichhane", name: "सन्दीप लामिछाने", subtitle: "गोल्डेन आर्म भएको केटो", image: "/images/sandeep.webp" },
-        { id: "dipendra-singh-airee", name: "दीपेन्द्र सिंह ऐरी", subtitle: "टीकापुरमा सपनाको मैदान", image: "/images/dipendra_airee.jpg" },
-        { id: "kushal-bhurtel", name: "कुशल भुर्तेल", subtitle: "न्यु बलको बोस", image: "/images/kushal_bhurtel.webp" },
-        { id: "rohit-paudel", name: "रोहित पौडेल", subtitle: "द क्याप्टेन कूल", image: "/images/rohit_paudel.jpg" },
+        { id: "sandeep-lamichhane", name: "सन्दीप लामिछाने", subtitle: "सियाङ्जाको आगो, विश्वको भय", image: "/images/sandeep.webp" },
+        { id: "dipendra-singh-airee", name: "दीपेन्द्र सिंह ऐरी", subtitle: "नौ बलमा इतिहास बदल्नेवाला", image: "/images/dipendra_airee.jpg" },
+        { id: "kushal-bhurtel", name: "कुशल भुर्तेल", subtitle: "पावरप्लेको बाघ, बुटवलको गौरव", image: "/images/kushal_bhurtel.webp" },
+        { id: "rohit-paudel", name: "रोहित पौडेल", subtitle: "बीस वर्षमा काँधमा देश", image: "/images/rohit_paudel.jpg" },
     ];
 
     return (
@@ -21,7 +21,7 @@ export default function JourneyArchives() {
                         अविस्मरणीय <span className="text-[#B0B8C8]">यात्राहरू</span>
                     </h2>
                     <p className="font-sans text-[#B0B8C8] text-lg mt-6 max-w-2xl mx-auto animate-[fadeUpIn_1s_ease-out_0.4s_both]">
-                        बाउन्ड्री र तथ्याङ्कभन्दा धेरै पर। टोलीको पर्दा पछाडिका असली कथाहरू पढ्नुस्।
+                        तथ्याङ्क रेकर्डमा छन् — तर कथाहरू यहाँ छन्। ती मान्छेहरूका, जसले देशको नाम बोकेर मैदानमा उत्रिए।
                     </p>
                 </div>
 
