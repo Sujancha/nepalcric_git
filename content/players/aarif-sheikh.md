@@ -153,6 +153,12 @@ domestic_teams:
 
 franchise_leagues: []
 
+images:
+  - /images/players/aarif-sheikh/1.webp
+  - /images/players/aarif-sheikh/2.webp
+  - /images/players/aarif-sheikh/3.webp
+  - /images/players/aarif-sheikh/4.webp
+  - /images/players/aarif-sheikh/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

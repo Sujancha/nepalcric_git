@@ -98,6 +98,12 @@ arsenal_ne: |
   युवा ऊर्जा र निरन्तर दबाब
   बीस ओभरमा प्रत्येक बल उही तीव्रताले दगुर्नु — यो युवाको एकाधिकार हो, र शेर मल्लसँग यो पूर्णतः छ। स्पेल समाप्त भइसकेपछि पनि त्यो दबाब मैदानमा महसुस हुन्छ — फिल्डिङमा, जोश भर्ने तरिकामा, र अर्को ओभरको प्रतीक्षामा। यो ऊर्जा केवल व्यक्तिगत होइन — यसले टिमको वातावरण बदल्छ।
 
+images:
+  - /images/players/sher-malla/1.webp
+  - /images/players/sher-malla/2.webp
+  - /images/players/sher-malla/3.webp
+  - /images/players/sher-malla/4.webp
+  - /images/players/sher-malla/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

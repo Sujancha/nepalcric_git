@@ -116,6 +116,12 @@ domestic_teams:
 
 franchise_leagues: []
 
+images:
+  - /images/players/sundeep-jora/1.webp
+  - /images/players/sundeep-jora/2.webp
+  - /images/players/sundeep-jora/3.webp
+  - /images/players/sundeep-jora/4.webp
+  - /images/players/sundeep-jora/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

@@ -163,6 +163,12 @@ arsenal_ne: |
   यो ज्ञान मैदानमा हजारौं ओभर फालेपछि मात्र आउँछ।
   गतिले नभई बुद्धिले लिएको विकेट — त्यो बेग्लै हो।
 
+images:
+  - /images/players/sompal-kami/1.webp
+  - /images/players/sompal-kami/2.webp
+  - /images/players/sompal-kami/3.webp
+  - /images/players/sompal-kami/4.webp
+  - /images/players/sompal-kami/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

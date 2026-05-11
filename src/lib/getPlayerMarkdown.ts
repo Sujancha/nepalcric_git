@@ -22,6 +22,9 @@ export interface PlayerMdData {
   debut_note_ne?: string;
   hero_quote?: string;
   lore_ne?: string;
+  struggle_timeline_ne?: string;
+  arsenal_ne?: string;
+  images?: string[];
   records?: PlayerMdRecord[];
   domestic_teams?: string[];
   franchise_leagues?: string[];

@@ -117,6 +117,12 @@ franchise_leagues:
   - गल्फ जायन्ट्स — आईएलटी२० युएई
   - इस्लामाबाद युनाइटेड — पीएसएल (२०२६)
 
+images:
+  - /images/players/dipendra-singh-airee/1.webp
+  - /images/players/dipendra-singh-airee/2.webp
+  - /images/players/dipendra-singh-airee/3.webp
+  - /images/players/dipendra-singh-airee/4.webp
+  - /images/players/dipendra-singh-airee/5.webp
 # TIER 7 — META
 last_updated: 2026-03-31
 research_status: FINAL

@@ -1,66 +1,28 @@
 import type { Metadata } from "next";
+import fs from 'fs';
+import path from 'path';
 
 export const metadata: Metadata = {
     title: "स्कोरबोर्ड",
     description: "विगतका युद्धहरू — नेपाली क्रिकेटको ऐतिहासिक अभिलेख",
 };
 
-const archives = [
-    {
-        id: "t20wc-2026",
-        seriesName: "आईसीसी टी-ट्वेन्टी विश्वकप",
-        year: "२०२६",
-        outcome: "१२ वर्षपछि पहिलो विश्वकप जित — वानखेडेमा इतिहास",
-        matches: [
-            { opponent: "स्कटल्यान्ड", date: "जनवरी", result: "नेपाल ७ विकेटले विजयी — वानखेडे, मुम्बई" },
-            { opponent: "इङ्गल्यान्ड", date: "जनवरी", result: "ऐतिहासिक सामना" },
-        ],
-    },
-    {
-        id: "t20wc-2024",
-        seriesName: "आईसीसी टी-ट्वेन्टी विश्वकप",
-        year: "२०२४",
-        outcome: "एक रनको त्यो पीडा — नेपालले विश्वको मन जित्यो",
-        matches: [
-            { opponent: "दक्षिण अफ्रिका", date: "जुन", result: "१ रनको हृदयविदारक हार — डलास, टेक्सास" },
-            { opponent: "बङ्गलादेश", date: "जुन", result: "२१ रनले पराजित — सेन्ट भिन्सेन्ट" },
-            { opponent: "नेदरल्यान्ड्स", date: "जुन", result: "६ विकेटले पराजित" },
-        ],
-    },
-    {
-        id: "acc-premier-2023",
-        seriesName: "एसीसी प्रिमियर कप",
-        year: "२०२३",
-        outcome: "नेपाल च्याम्पियन (एशिया कपमा छनोट)",
-        matches: [
-            { opponent: "युएई", date: "मे ०२", result: "नेपाल ७ विकेटले विजयी (फाइनल)" },
-            { opponent: "कुवेत", date: "अप्रिल २९", result: "नेपाल फाइनलमा प्रवेश (सेमिफाइनल)" },
-            { opponent: "ओमान", date: "अप्रिल २१", result: "नेपाल ८४ रनले विजयी" },
-        ],
-    },
-    {
-        id: "cwc-qualifier-2023",
-        seriesName: "टी-ट्वेन्टी विश्वकप एसिया छनोट",
-        year: "२०२३",
-        outcome: "विश्वकपमा ऐतिहासिक छनोट",
-        matches: [
-            { opponent: "ओमान", date: "नोभेम्बर ०५", result: "सुपर ओभरमा पराजित (फाइनल)" },
-            { opponent: "युएई", date: "नोभेम्बर ०३", result: "नेपाल ८ विकेटले विजयी (सेमिफाइनल)" },
-            { opponent: "मलेसिया", date: "अक्टोबर ३१", result: "नेपाल ६ विकेटले विजयी" },
-        ],
-    },
-    {
-        id: "cwc-league2-2023",
-        seriesName: "सीडब्ल्यूसी लिग २",
-        year: "२०२३",
-        outcome: "१२ मध्ये ११ खेलमा ऐतिहासिक जित",
-        matches: [
-            { opponent: "युएई", date: "मार्च १६", result: "नेपाल ९ रनले विजयी (DLS)" },
-            { opponent: "पपुवा न्युगिनी", date: "मार्च १३", result: "नेपाल ९ विकेटले विजयी" },
-            { opponent: "युएई", date: "मार्च १२", result: "नेपाल १७७ रनले विजयी" },
-        ],
-    },
-];
+interface Match {
+    opponent: string;
+    date: string;
+    result: string;
+}
+
+interface Archive {
+    id: string;
+    seriesName: string;
+    year: string;
+    outcome: string;
+    matches: Match[];
+}
+
+const archivesRaw = fs.readFileSync(path.join(process.cwd(), 'content', 'scoreboard.json'), 'utf8');
+const { archives } = JSON.parse(archivesRaw) as { archives: Archive[] };
 
 export default function ScoreboardArchive() {
     return (

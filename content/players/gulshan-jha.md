@@ -148,6 +148,12 @@ arsenal_ne: |
   त्यो नियन्त्रण — मधेसको माटोमा,
   घामको तातोमा, एक्लो घण्टाहरूमा बनेको हो।
 
+images:
+  - /images/players/gulshan-jha/1.webp
+  - /images/players/gulshan-jha/2.webp
+  - /images/players/gulshan-jha/3.webp
+  - /images/players/gulshan-jha/4.webp
+  - /images/players/gulshan-jha/5.webp
 # TIER 7 — META
 last_updated: 2026-05-10
 research_status: FINAL

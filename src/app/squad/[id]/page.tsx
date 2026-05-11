@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import CinematicHeroClient from "@/components/squad/CinematicHeroClient";
 import playersData from "@/lib/playerData.json";
 import PlayerChatbot from '@/components/squad/PlayerChatbot';
@@ -50,10 +51,36 @@ export default async function PlayerProfile({
         );
     }
 
-    // Split lore_ne into display paragraphs, respecting isolated short lines
+    // Split lore_ne into display paragraphs
     const loreParagraphs: string[] = mdData.lore_ne
         ? mdData.lore_ne.split('\n').filter(line => line.trim() !== '')
         : [];
+
+    // Build inline content — weave images between paragraphs like a magazine.
+    // Only real (non-placeholder) images are shown; placeholder paths are skipped
+    // until the admin uploads actual photos through the CMS.
+    const placeholderPattern = /\/images\/players\/[^/]+\/[1-5]\.webp$/;
+    const inlineImages: string[] = (mdData.images ?? []).filter(
+        (src) => src && !placeholderPattern.test(src)
+    );
+
+    const imageCount = inlineImages.length;
+    // Distribute images evenly: insert one every ~4 paragraphs
+    const interval = imageCount > 0 ? Math.max(4, Math.floor(loreParagraphs.length / (imageCount + 1))) : 0;
+
+    type LoreItem =
+        | { kind: 'paragraph'; text: string; index: number }
+        | { kind: 'image'; src: string; imageIndex: number };
+
+    const loreContent: LoreItem[] = [];
+    let imgIdx = 0;
+    loreParagraphs.forEach((line, i) => {
+        loreContent.push({ kind: 'paragraph', text: line, index: i });
+        if (interval > 0 && (i + 1) % interval === 0 && imgIdx < imageCount) {
+            loreContent.push({ kind: 'image', src: inlineImages[imgIdx], imageIndex: imgIdx });
+            imgIdx++;
+        }
+    });
 
     return (
         <div className="w-full bg-[#07080F] min-h-screen">
@@ -97,7 +124,7 @@ export default async function PlayerProfile({
             <section className="bg-[#0D1B2A] py-24 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
 
-                    {/* Left Column: lore_ne — flowing Devanagari prose, ONLY from mdData */}
+                    {/* Left Column: lore_ne with inline story images */}
                     <div className="lg:col-span-8 flex flex-col">
 
                         <div className="flex items-center gap-4 mb-16 opacity-70">
@@ -108,13 +135,38 @@ export default async function PlayerProfile({
                             <span className="h-px flex-1 bg-[#B0B8C8]/20" />
                         </div>
 
-                        {loreParagraphs.length > 0 ? (
+                        {loreContent.length > 0 ? (
                             <div className="flex flex-col gap-6">
-                                {loreParagraphs.map((line, i) => {
-                                    const trimmed = line.trim();
+                                {loreContent.map((item, i) => {
 
-                                    // 1. Direct player quote — check first, before header detection
-                                    if (trimmed.startsWith('"') || trimmed.startsWith('\u201C')) {
+                                    /* ── Inline story image ──────────────────────────── */
+                                    if (item.kind === 'image') {
+                                        return (
+                                            <div
+                                                key={`img-${item.imageIndex}`}
+                                                className="relative w-full my-10 overflow-hidden group"
+                                                style={{ aspectRatio: '16/9' }}
+                                            >
+                                                <Image
+                                                    src={item.src}
+                                                    alt={`${mdData.name_ne ?? ''} — ${item.imageIndex + 1}`}
+                                                    fill
+                                                    className="object-cover grayscale-[70%] group-hover:grayscale-0 transition-all duration-700 ease-out"
+                                                    sizes="(max-width: 1024px) 100vw, 66vw"
+                                                />
+                                                {/* Cinematic gradient overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent pointer-events-none" />
+                                                {/* Subtle crimson ground line */}
+                                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C41E3A]/40 group-hover:bg-[#C41E3A]/80 transition-colors duration-500" />
+                                            </div>
+                                        );
+                                    }
+
+                                    /* ── Paragraph rendering ───────────────────────────── */
+                                    const trimmed = item.text.trim();
+
+                                    // 1. Direct player quote
+                                    if (trimmed.startsWith('"') || trimmed.startsWith('“')) {
                                         return (
                                             <blockquote key={i} className="relative border-l-4 border-[#C9A84C] pl-8 py-5 my-2 bg-gradient-to-r from-[#C9A84C]/8 to-transparent">
                                                 <span className="absolute top-2 left-2 text-5xl text-[#C9A84C]/20 font-serif leading-none select-none" aria-hidden="true">&ldquo;</span>
@@ -125,7 +177,7 @@ export default async function PlayerProfile({
                                         );
                                     }
 
-                                    // 2. Attribution — lines starting with em-dash
+                                    // 2. Attribution — em-dash lines
                                     if (trimmed.startsWith('—')) {
                                         return (
                                             <p key={i} className="font-sans italic text-[#C9A84C] text-sm pl-8 -mt-3" lang="ne">
@@ -134,7 +186,7 @@ export default async function PlayerProfile({
                                         );
                                     }
 
-                                    // 3. Section header — lines not ending with । (Devanagari danda) are titles
+                                    // 3. Section header — lines not ending with । are chapter titles
                                     if (!trimmed.endsWith('।')) {
                                         return (
                                             <div key={i} className="mt-16 pt-8 border-t border-white/5">
@@ -145,7 +197,7 @@ export default async function PlayerProfile({
                                         );
                                     }
 
-                                    // 4. Gut-punch isolated lines — short lines that land like blunt trauma
+                                    // 4. Gut-punch isolated lines — short lines, blunt trauma
                                     if (trimmed.length < 30) {
                                         return (
                                             <p key={i} className="font-sans font-black text-white text-2xl md:text-3xl tracking-tight mt-8 mb-4" lang="ne">
