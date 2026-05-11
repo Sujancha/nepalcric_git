@@ -2,8 +2,18 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { inputStyle, labelStyle, sectionStyle, saveBtnStyle } from '../adminStyles';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
+
+interface Story {
+  id: string;
+  title: string;
+  date: string;
+  era: string;
+  description: string;
+  thumb: string;
+}
 
 interface GithubFileResponse {
   content: string;
@@ -13,22 +23,40 @@ interface GithubFileResponse {
 
 interface GithubPutResponse {
   success?: boolean;
-  commit?: string;
   error?: string;
 }
 
-const FILE_PATH = 'src/app/locker-room/page.tsx';
+const FILE_PATH = 'content/locker-room.json';
+
+function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  e.currentTarget.style.borderBottomColor = '#C9A84C';
+}
+function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)';
+}
+
+function newStory(): Story {
+  return {
+    id: `story-${Date.now()}`,
+    title: '',
+    date: '',
+    era: '',
+    description: '',
+    thumb: '',
+  };
+}
 
 export default function LockerRoomEditorPage() {
-  const [content, setContent] = useState('');
+  const [stories, setStories] = useState<Story[]>([]);
   const [sha, setSha] = useState('');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
-  const [loadingFile, setLoadingFile] = useState(true);
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
   const [saveError, setSaveError] = useState('');
 
-  const fetchFile = useCallback(async () => {
-    setLoadingFile(true);
+  const fetchData = useCallback(async () => {
+    setLoading(true);
     setLoadError('');
     try {
       const res = await fetch(`/api/admin/github?path=${encodeURIComponent(FILE_PATH)}`);
@@ -37,39 +65,41 @@ export default function LockerRoomEditorPage() {
         setLoadError(data.error ?? `फाइल लोड गर्न सकिएन (${res.status})`);
         return;
       }
-      setContent(data.content);
+      const parsed = JSON.parse(data.content) as { stories: Story[] };
+      setStories(parsed.stories ?? []);
       setSha(data.sha);
-    } catch {
-      setLoadError('नेटवर्क त्रुटि: फाइल लोड हुन सकेन।');
+    } catch (err) {
+      setLoadError(`लोड त्रुटि: ${err instanceof Error ? err.message : 'अज्ञात'}`);
     } finally {
-      setLoadingFile(false);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchFile();
-  }, [fetchFile]);
+    fetchData();
+  }, [fetchData]);
 
   async function handleSave() {
     if (!sha) return;
     setSaveStatus('saving');
     setSaveError('');
     try {
+      const jsonContent = JSON.stringify({ stories }, null, 2);
       const res = await fetch('/api/admin/github', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           path: FILE_PATH,
-          content,
+          content: jsonContent,
           sha,
-          message: 'admin: update locker-room page',
+          message: 'admin: update locker room stories',
         }),
       });
       const data = (await res.json()) as GithubPutResponse;
       if (res.ok && data.success) {
         setSaveStatus('saved');
-        await fetchFile();
-        setTimeout(() => setSaveStatus('idle'), 4000);
+        await fetchData();
+        setTimeout(() => setSaveStatus('idle'), 5000);
       } else {
         setSaveStatus('error');
         setSaveError(data.error ?? `सेभ हुन सकेन (${res.status})`);
@@ -80,33 +110,34 @@ export default function LockerRoomEditorPage() {
     }
   }
 
+  function addStory() {
+    const entry = newStory();
+    setStories([entry, ...stories]);
+    setExpandedId(entry.id);
+  }
+
+  function removeStory(id: string) {
+    setStories(stories.filter((s) => s.id !== id));
+    if (expandedId === id) setExpandedId(null);
+  }
+
+  function updateStory(id: string, field: keyof Omit<Story, 'id'>, value: string) {
+    setStories(stories.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
+  }
+
+  const canSave = !loading && !!sha && saveStatus !== 'saving';
+
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: '#07080F',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '2rem 1.5rem',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1000px',
-          margin: '0 auto',
-          width: '100%',
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
+    <div style={{ minHeight: '100vh', background: '#07080F', padding: '2rem 1.5rem' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+
         {/* Header */}
         <div
           style={{
             display: 'flex',
-            alignItems: 'flex-start',
+            alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '1.75rem',
+            marginBottom: '2rem',
             paddingBottom: '1.25rem',
             borderBottom: '1px solid rgba(255,255,255,0.08)',
             flexWrap: 'wrap',
@@ -116,135 +147,196 @@ export default function LockerRoomEditorPage() {
           <div>
             <Link
               href="/admin/dashboard"
-              style={{
-                fontFamily: 'var(--font-barlow), sans-serif',
-                fontSize: '0.65rem',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                color: '#6B7280',
-                textDecoration: 'none',
-                display: 'block',
-                marginBottom: '0.5rem',
-              }}
+              style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6B7280', textDecoration: 'none', display: 'block', marginBottom: '0.5rem' }}
             >
               ← ड्यासबोर्ड
             </Link>
-            <h1
-              style={{
-                fontFamily: 'var(--font-bebas), sans-serif',
-                fontSize: '1.5rem',
-                letterSpacing: '0.08em',
-                color: '#C41E3A',
-                margin: 0,
-                lineHeight: 1,
-              }}
-            >
-              लकर रुम
+            <h1 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: '1.75rem', letterSpacing: '0.08em', color: '#C41E3A', margin: 0, lineHeight: 1 }}>
+              इतिहासको अभिलेख
             </h1>
-            <p
-              style={{
-                fontFamily: 'var(--font-jetbrains-mono), monospace',
-                fontSize: '0.65rem',
-                color: '#6B7280',
-                marginTop: '0.35rem',
-              }}
-            >
-              {FILE_PATH}
-            </p>
           </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            {saveStatus === 'saving' && (
-              <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C9A84C' }}>
-                सेभ हुँदैछ...
-              </span>
-            )}
-            {saveStatus === 'saved' && (
-              <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4ade80' }}>
-                सेभ भयो ✓
-              </span>
-            )}
-            {saveStatus === 'error' && (
-              <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C41E3A' }}>
-                त्रुटि ✗
-              </span>
-            )}
-
-            <button
-              onClick={handleSave}
-              disabled={loadingFile || saveStatus === 'saving' || !sha}
-              style={{
-                background: loadingFile || saveStatus === 'saving' || !sha ? '#6B7280' : '#C41E3A',
-                color: '#E8E8E8',
-                border: 'none',
-                padding: '0.6rem 1.25rem',
-                fontFamily: 'var(--font-barlow), sans-serif',
-                fontSize: '0.75rem',
-                letterSpacing: '0.15em',
-                textTransform: 'uppercase',
-                cursor: loadingFile || saveStatus === 'saving' || !sha ? 'not-allowed' : 'pointer',
-                transition: 'background 0.2s',
-              }}
-            >
-              सेभ गर्नुस्
-            </button>
-          </div>
+          <button
+            onClick={addStory}
+            style={{
+              background: 'transparent',
+              border: '1px solid rgba(196,30,58,0.4)',
+              color: '#C41E3A',
+              padding: '0.5rem 1rem',
+              fontFamily: 'var(--font-barlow), sans-serif',
+              fontSize: '0.65rem',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              borderRadius: 2,
+            }}
+          >
+            + नयाँ कथा थप्नुस्
+          </button>
         </div>
 
+        {/* Status banners */}
         {saveStatus === 'saved' && (
-          <div style={{ background: 'rgba(74,222,128,0.08)', border: '1px solid rgba(74,222,128,0.2)', padding: '0.75rem 1rem', marginBottom: '1rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#4ade80' }}>
-            Vercel मा प्रकाशित हुँदैछ — १–२ मिनेट लाग्छ
+          <div style={{ background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.2)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#4ade80' }}>
+            ✓ सेभ भयो — Vercel मा प्रकाशित हुँदैछ (~१ मिनेट)
           </div>
         )}
-
         {loadError && (
-          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
-            {loadError}
+          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
+            ⚠ {loadError}
           </div>
         )}
         {saveStatus === 'error' && saveError && (
-          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
-            {saveError}
+          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
+            ⚠ {saveError}
           </div>
         )}
 
-        {loadingFile ? (
-          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6B7280', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+        {loading ? (
+          <div style={{ padding: '4rem 0', textAlign: 'center', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6B7280' }}>
             लोड हुँदैछ...
           </div>
         ) : (
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            spellCheck={false}
-            style={{
-              flex: 1,
-              minHeight: '65vh',
-              width: '100%',
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.08)',
-              color: '#E8E8E8',
-              fontFamily: 'var(--font-jetbrains-mono), "JetBrains Mono", monospace',
-              fontSize: '0.8rem',
-              lineHeight: 1.6,
-              padding: '1.25rem',
-              resize: 'vertical',
-              outline: 'none',
-              wordWrap: 'break-word',
-              whiteSpace: 'pre-wrap',
-              boxSizing: 'border-box',
-              transition: 'border-color 0.2s',
-            }}
-            onFocus={(e) => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)')}
-            onBlur={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
-          />
-        )}
+          <>
+            {stories.map((story) => {
+              const isOpen = expandedId === story.id;
+              return (
+                <div
+                  key={story.id}
+                  style={{
+                    marginBottom: '0.75rem',
+                    border: '1px solid rgba(255,255,255,0.07)',
+                    background: 'rgba(255,255,255,0.03)',
+                    borderRadius: 2,
+                  }}
+                >
+                  {/* Accordion header */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.85rem 1.25rem',
+                      cursor: 'pointer',
+                      userSelect: 'none',
+                    }}
+                    onClick={() => setExpandedId(isOpen ? null : story.id)}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.75rem', color: '#6B7280', width: '12px', flexShrink: 0 }}>
+                        {isOpen ? '▼' : '▶'}
+                      </span>
+                      <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.95rem', fontWeight: 600, color: '#E8E8E8' }}>
+                        {story.title || '(शीर्षक छैन)'}
+                      </span>
+                    </div>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); removeStory(story.id); }}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6B7280',
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-barlow), sans-serif',
+                        fontSize: '0.65rem',
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        padding: '0.25rem 0.5rem',
+                      }}
+                      title="हटाउनुस्"
+                    >
+                      🗑 हटाउनुस्
+                    </button>
+                  </div>
 
-        <p style={{ marginTop: '1.5rem', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6B7280', textAlign: 'center' }}>
-          <Link href="/" style={{ color: '#6B7280', textDecoration: 'none' }}>
-            ← साइटमा फर्किनुस्
-          </Link>
-        </p>
+                  {/* Expanded content */}
+                  {isOpen && (
+                    <div style={{ padding: '0 1.25rem 1.5rem 1.25rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+
+                      <div style={{ ...sectionStyle, marginTop: '1.25rem' }}>
+                        <label style={labelStyle}>शीर्षक</label>
+                        <input
+                          type="text"
+                          value={story.title}
+                          onChange={(e) => updateStory(story.id, 'title', e.target.value)}
+                          placeholder="ढाकाको त्यो बिहान — नेपालको पहिलो विश्वकप"
+                          style={inputStyle}
+                          onFocus={focusGold}
+                          onBlur={blurDim}
+                        />
+                      </div>
+
+                      <div style={sectionStyle}>
+                        <label style={labelStyle}>मिति</label>
+                        <input
+                          type="text"
+                          value={story.date}
+                          onChange={(e) => updateStory(story.id, 'date', e.target.value)}
+                          placeholder="मार्च २०१४"
+                          style={{ ...inputStyle, maxWidth: '260px' }}
+                          onFocus={focusGold}
+                          onBlur={blurDim}
+                        />
+                      </div>
+
+                      <div style={sectionStyle}>
+                        <label style={labelStyle}>युग</label>
+                        <input
+                          type="text"
+                          value={story.era}
+                          onChange={(e) => updateStory(story.id, 'era', e.target.value)}
+                          placeholder="पारस खड्का युग"
+                          style={{ ...inputStyle, maxWidth: '320px' }}
+                          onFocus={focusGold}
+                          onBlur={blurDim}
+                        />
+                      </div>
+
+                      <div style={sectionStyle}>
+                        <label style={labelStyle}>विवरण</label>
+                        <textarea
+                          value={story.description}
+                          onChange={(e) => updateStory(story.id, 'description', e.target.value)}
+                          rows={4}
+                          style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }}
+                          onFocus={focusGold}
+                          onBlur={blurDim}
+                        />
+                      </div>
+
+                      <div style={sectionStyle}>
+                        <label style={labelStyle}>Thumbnail URL</label>
+                        <input
+                          type="text"
+                          value={story.thumb}
+                          onChange={(e) => updateStory(story.id, 'thumb', e.target.value)}
+                          placeholder="https://images.unsplash.com/..."
+                          style={inputStyle}
+                          onFocus={focusGold}
+                          onBlur={blurDim}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Save button */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)', marginTop: '0.5rem' }}>
+              <button
+                onClick={handleSave}
+                disabled={!canSave}
+                style={{
+                  ...saveBtnStyle,
+                  background: canSave ? '#C41E3A' : '#6B7280',
+                  cursor: canSave ? 'pointer' : 'not-allowed',
+                }}
+              >
+                {saveStatus === 'saving' ? 'सेभ हुँदैछ...' : 'सबै परिवर्तन सेभ गर्नुस् →'}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
