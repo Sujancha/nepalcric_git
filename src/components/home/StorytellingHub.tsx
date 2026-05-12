@@ -55,6 +55,7 @@ export default function StorytellingHub() {
             date: "१ हप्ता अघि",
             span: "md:col-span-1 md:row-span-1",
             image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            slug: "nepal-fans-dallas",
             isPlayable: false,
         },
         {

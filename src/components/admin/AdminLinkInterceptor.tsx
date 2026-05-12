@@ -13,6 +13,7 @@ const MIRRORED = [
     '/kathaharu',
     '/fanzone',
     '/balen-shah',
+    '/story',  // covers /story/[slug]
 ];
 
 function hasMirror(href: string): boolean {

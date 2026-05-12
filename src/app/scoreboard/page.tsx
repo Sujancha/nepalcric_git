@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from 'next/link';
 import fs from 'fs';
 import path from 'path';
 
@@ -70,9 +71,10 @@ export default function ScoreboardArchive() {
             <section className="relative z-20 px-6 lg:px-12 w-full max-w-[1400px] mx-auto mt-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     {archives.map((series, idx) => (
-                        <div
+                        <Link
                             key={series.id}
-                            className="group relative flex flex-col p-8 md:p-10 overflow-hidden cursor-default transition-all duration-500 ease-out animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both] hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(196,30,58,0.1)]"
+                            href={`/scoreboard/${series.id}`}
+                            className="group relative flex flex-col p-8 md:p-10 overflow-hidden transition-all duration-500 ease-out animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both] hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(196,30,58,0.1)]"
                             style={{
                                 backgroundColor: "rgba(255,255,255,0.05)",
                                 backdropFilter: "blur(12px)",
@@ -81,6 +83,8 @@ export default function ScoreboardArchive() {
                                     ? "3px solid rgba(201,168,76,0.7)"
                                     : "3px solid rgba(196,30,58,0.6)",
                                 animationDelay: `${idx * 0.15}s`,
+                                textDecoration: "none",
+                                cursor: "pointer",
                             }}
                         >
                             {/* Left accent bar — CSS-only hover */}
@@ -134,7 +138,7 @@ export default function ScoreboardArchive() {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
