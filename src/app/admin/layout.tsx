@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AdminBar from '@/components/admin/AdminBar';
 
 export const metadata: Metadata = {
   title: 'एडमिन | NepalCric',
@@ -7,15 +8,11 @@ export const metadata: Metadata = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: '#07080F',
-        color: '#E8E8E8',
-        fontFamily: 'var(--font-mukta), sans-serif',
-      }}
-    >
-      {children}
-    </div>
+    <>
+      <AdminBar />
+      <div style={{ color: '#E8E8E8' }}>
+        {children}
+      </div>
+    </>
   );
 }
