@@ -32,6 +32,21 @@ const navLinks = [
 
 export default function Navbar() {
     const pathname = usePathname();
+
+    // When logged in as admin (URL starts with /admin), all links stay under /admin/*
+    const isAdmin = pathname?.startsWith("/admin") ?? false;
+    const prefix = isAdmin ? "/admin" : "";
+
+    // Resolve href and active state for each link
+    const resolvedLinks = navLinks.map((l) => {
+        const target = l.href === "/" ? prefix || "/" : prefix + l.href;
+        const active = isAdmin
+            ? pathname === (l.href === "/" ? "/admin" : "/admin" + l.href)
+            : pathname === l.href;
+        return { ...l, href: target, isActive: active };
+    });
+
+    const logoHref = isAdmin ? "/admin" : "/";
     const scrollProgress = useScrollProgress();
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -64,7 +79,7 @@ export default function Navbar() {
                 <div className="h-full flex items-center justify-between px-6 lg:px-12">
 
                     {/* LEFT — Logo */}
-                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                    <Link href={logoHref} className="flex items-center gap-2 shrink-0">
                         {/* Diamond SVG */}
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 0L16 8L8 16L0 8Z" fill="#C41E3A" />
@@ -86,35 +101,29 @@ export default function Navbar() {
 
                     {/* CENTER — Nav links (desktop only) */}
                     <div className="hidden md:flex items-center gap-8">
-                        {navLinks.map((link) => {
-                            const isActive = pathname === link.href;
-                            return (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    className="nav-link group relative py-1"
-                                    style={{
-                                        fontFamily: "'Barlow Condensed', sans-serif",
-                                        fontWeight: 500,
-                                        fontSize: "13px",
-                                        letterSpacing: "0.08em",
-                                        textTransform: "uppercase",
-                                        color: isActive ? "#E8E8E8" : "rgba(232,232,232,0.60)",
-                                        transition: "color 200ms",
-                                    }}
-                                >
-                                    {link.name}
-                                    {/* Underline — permanent if active, slides in on hover */}
-                                    <span
-                                        className="absolute bottom-0 left-0 h-[1px] bg-[#C41E3A] transition-all duration-200"
-                                        style={{
-                                            width: isActive ? "100%" : "0%",
-                                        }}
-                                        aria-hidden="true"
-                                    />
-                                </Link>
-                            );
-                        })}
+                        {resolvedLinks.map((link) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className="nav-link group relative py-1"
+                                style={{
+                                    fontFamily: "'Barlow Condensed', sans-serif",
+                                    fontWeight: 500,
+                                    fontSize: "13px",
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    color: link.isActive ? "#E8E8E8" : "rgba(232,232,232,0.60)",
+                                    transition: "color 200ms",
+                                }}
+                            >
+                                {link.name}
+                                <span
+                                    className="absolute bottom-0 left-0 h-[1px] bg-[#C41E3A] transition-all duration-200"
+                                    style={{ width: link.isActive ? "100%" : "0%" }}
+                                    aria-hidden="true"
+                                />
+                            </Link>
+                        ))}
                     </div>
 
                     {/* RIGHT — Live indicator + hamburger */}
@@ -180,7 +189,7 @@ export default function Navbar() {
                     {/* Top bar */}
                     <div className="flex items-center justify-between px-6 h-[60px] shrink-0">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
+                        <Link href={logoHref} className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8 0L16 8L8 16L0 8Z" fill="#C41E3A" />
                             </svg>
@@ -213,26 +222,23 @@ export default function Navbar() {
 
                     {/* Staggered nav links */}
                     <div className="flex-1 flex flex-col items-center justify-center gap-8">
-                        {navLinks.map((link, i) => {
-                            const isActive = pathname === link.href;
-                            return (
-                                <Link
-                                    key={link.href}
-                                    href={link.href}
-                                    onClick={() => setMobileOpen(false)}
-                                    className="mobile-nav-link"
-                                    style={{
-                                        fontFamily: "'Mukta', sans-serif",
-                                        fontWeight: 800,
-                                        fontSize: "28px",
-                                        color: isActive ? "#E8E8E8" : "rgba(232,232,232,0.55)",
-                                        animationDelay: `${i * 50}ms`,
-                                    }}
-                                >
-                                    {link.name}
-                                </Link>
-                            );
-                        })}
+                        {resolvedLinks.map((link, i) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                onClick={() => setMobileOpen(false)}
+                                className="mobile-nav-link"
+                                style={{
+                                    fontFamily: "'Mukta', sans-serif",
+                                    fontWeight: 800,
+                                    fontSize: "28px",
+                                    color: link.isActive ? "#E8E8E8" : "rgba(232,232,232,0.55)",
+                                    animationDelay: `${i * 50}ms`,
+                                }}
+                            >
+                                {link.name}
+                            </Link>
+                        ))}
                     </div>
                 </div>
             )}
