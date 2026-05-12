@@ -22,28 +22,29 @@ function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) 
   e.currentTarget.style.borderBottomColor = '#C9A84C';
 }
 function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)';
+  e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.12)';
 }
 
 const inputBase: React.CSSProperties = {
   width: '100%',
   background: 'transparent',
   border: 'none',
-  borderBottom: '1px solid rgba(255,255,255,0.15)',
+  borderBottom: '1px solid rgba(255,255,255,0.12)',
   color: '#E8E8E8',
   fontFamily: "'Mukta', sans-serif",
   fontSize: '14px',
   padding: '6px 0',
   outline: 'none',
-  resize: 'none',
+  resize: 'vertical',
   transition: 'border-bottom-color 150ms ease',
+  boxSizing: 'border-box',
 };
 
 const labelBase: React.CSSProperties = {
   display: 'block',
   fontFamily: "'Barlow Condensed', sans-serif",
   fontSize: '9px',
-  letterSpacing: '0.2em',
+  letterSpacing: '0.22em',
   textTransform: 'uppercase',
   color: '#6B7280',
   marginBottom: '6px',
@@ -58,20 +59,24 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
   const [images, setImages] = useState<string[]>([]);
   const [sha, setSha] = useState('');
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
-  const [saveError, setSaveError] = useState('');
-  const backdropRef = useRef<HTMLDivElement>(null);
+  const [saveMsg, setSaveMsg] = useState('');
+  const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const uploadTargetIdx = useRef<number>(-1);
 
+  // Load player data whenever the panel opens
   useEffect(() => {
     if (!showPanel) return;
     setLoading(true);
     setSaveStatus('idle');
-    setSaveError('');
+    setSaveMsg('');
 
     fetch(`/api/admin/parse-player?id=${encodeURIComponent(id)}`)
       .then((r) => r.json())
       .then((data: ParsePlayerResponse) => {
         if (data.error) {
-          setSaveError(data.error);
+          setSaveMsg(data.error);
+          setSaveStatus('error');
         } else {
           setHeroQuote(data.heroQuote ?? '');
           setExcerptNe(data.excerptNe ?? '');
@@ -80,14 +85,17 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
           setSha(data.sha ?? '');
         }
       })
-      .catch((err) => setSaveError(err instanceof Error ? err.message : 'लोड गर्न सकिएन'))
+      .catch((err) => {
+        setSaveStatus('error');
+        setSaveMsg(err instanceof Error ? err.message : 'लोड गर्न सकिएन');
+      })
       .finally(() => setLoading(false));
   }, [showPanel, id]);
 
   async function handleSave() {
     if (!sha) return;
     setSaveStatus('saving');
-    setSaveError('');
+    setSaveMsg('');
     try {
       const res = await fetch('/api/admin/parse-player', {
         method: 'POST',
@@ -97,41 +105,99 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
       const data = await res.json() as { success?: boolean; error?: string };
       if (res.ok && data.success) {
         setSaveStatus('saved');
-        setTimeout(() => {
-          setShowPanel(false);
-          setSaveStatus('idle');
-        }, 2000);
+        setSaveMsg('✓ सेभ भयो — Vercel मा प्रकाशित हुँदैछ (~१ मिनेट)');
+        setTimeout(() => { setShowPanel(false); setSaveStatus('idle'); }, 3000);
       } else {
         setSaveStatus('error');
-        setSaveError(data.error ?? `सेभ हुन सकेन (${res.status})`);
+        setSaveMsg(data.error ?? `सेभ हुन सकेन (${res.status})`);
       }
     } catch (err) {
       setSaveStatus('error');
-      setSaveError(err instanceof Error ? err.message : 'नेटवर्क त्रुटि');
+      setSaveMsg(err instanceof Error ? err.message : 'नेटवर्क त्रुटि');
     }
   }
 
+  // ── Image list helpers ───────────────────────────────────────────────────
   function addImage() {
     if (images.length >= 5) return;
     setImages([...images, '']);
   }
-
   function removeImage(idx: number) {
     setImages(images.filter((_, i) => i !== idx));
   }
-
   function updateImage(idx: number, val: string) {
     setImages(images.map((img, i) => (i === idx ? val : img)));
+  }
+
+  // ── Photo upload ─────────────────────────────────────────────────────────
+  function triggerUpload(targetIdx: number) {
+    uploadTargetIdx.current = targetIdx;
+    fileInputRef.current?.click();
+  }
+
+  async function handleFileSelected(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    e.target.value = ''; // reset so same file can be re-selected
+
+    const idx = uploadTargetIdx.current;
+    setUploadingIdx(idx);
+
+    // Read file as base64
+    const contentBase64 = await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        // Strip the data-URL prefix ("data:image/webp;base64,")
+        resolve(result.split(',')[1] ?? result);
+      };
+      reader.onerror = () => reject(new Error('File read failed'));
+      reader.readAsDataURL(file);
+    });
+
+    try {
+      const res = await fetch('/api/admin/upload-image', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ playerId: id, filename: file.name, contentBase64 }),
+      });
+      const data = await res.json() as { success?: boolean; path?: string; error?: string };
+      if (res.ok && data.path) {
+        // Insert or update the image path at the target index
+        if (idx === -1 || idx >= images.length) {
+          setImages((prev) => [...prev, data.path!].slice(0, 5));
+        } else {
+          setImages((prev) => prev.map((img, i) => (i === idx ? data.path! : img)));
+        }
+      } else {
+        setSaveStatus('error');
+        setSaveMsg(data.error ?? 'Photo upload failed');
+      }
+    } catch (err) {
+      setSaveStatus('error');
+      setSaveMsg(err instanceof Error ? err.message : 'Upload error');
+    } finally {
+      setUploadingIdx(null);
+    }
   }
 
   const canSave = !loading && !!sha && saveStatus !== 'saving';
 
   return (
     <>
-      {/* FAB Button */}
+      {/* Hidden file input for photo upload */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: 'none' }}
+        onChange={handleFileSelected}
+      />
+
+      {/* FAB — fixed crimson circle, bottom-right */}
       <button
         onClick={() => setShowPanel(true)}
-        title="Edit Player"
+        title="खेलाडी सम्पादन गर्नुस्"
         style={{
           position: 'fixed',
           bottom: '24px',
@@ -144,40 +210,32 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
           border: 'none',
           cursor: 'pointer',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(196,30,58,0.4)',
-          transition: 'transform 150ms ease, box-shadow 150ms ease',
-          color: '#fff',
+          boxShadow: '0 4px 20px rgba(196,30,58,0.45)',
           fontSize: '22px',
-          lineHeight: 1,
+          color: '#fff',
+          transition: 'transform 150ms ease, box-shadow 150ms ease',
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.transform = 'scale(1.08)';
-          e.currentTarget.style.boxShadow = '0 6px 28px rgba(196,30,58,0.6)';
+          e.currentTarget.style.boxShadow = '0 6px 28px rgba(196,30,58,0.65)';
         }}
         onMouseLeave={(e) => {
           e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 20px rgba(196,30,58,0.4)';
+          e.currentTarget.style.boxShadow = '0 4px 20px rgba(196,30,58,0.45)';
         }}
       >
         ✏
       </button>
 
-      {/* Backdrop + Panel */}
+      {/* ── Panel ──────────────────────────────────────────────────────────── */}
       {showPanel && (
         <>
           {/* Backdrop */}
           <div
-            ref={backdropRef}
             onClick={() => setShowPanel(false)}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              background: 'rgba(0,0,0,0.6)',
-              zIndex: 999,
-            }}
+            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.65)', zIndex: 999 }}
           />
 
           {/* Slide-in panel */}
@@ -187,21 +245,26 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
               right: 0,
               top: 0,
               bottom: 0,
-              width: '420px',
-              maxWidth: '100vw',
+              width: 'min(440px, 100vw)',
               background: '#0D1B2A',
-              borderLeft: '1px solid rgba(196,30,58,0.3)',
+              borderLeft: '2px solid rgba(196,30,58,0.35)',
               zIndex: 1000,
               display: 'flex',
               flexDirection: 'column',
-              transform: 'translateX(0)',
-              transition: 'transform 300ms cubic-bezier(0.76,0,0.24,1)',
+              animation: 'slideInPanel 280ms cubic-bezier(0.76,0,0.24,1) forwards',
             }}
           >
-            {/* Panel header */}
+            <style>{`
+              @keyframes slideInPanel {
+                from { transform: translateX(100%); }
+                to   { transform: translateX(0); }
+              }
+            `}</style>
+
+            {/* ── Header ── */}
             <div
               style={{
-                padding: '20px 20px 16px 20px',
+                padding: '18px 20px 14px',
                 borderBottom: '1px solid rgba(255,255,255,0.07)',
                 display: 'flex',
                 alignItems: 'flex-start',
@@ -210,98 +273,34 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
               }}
             >
               <div>
-                <h2
-                  style={{
-                    fontFamily: "'Mukta', sans-serif",
-                    fontWeight: 700,
-                    fontSize: '16px',
-                    color: '#C41E3A',
-                    margin: '0 0 4px 0',
-                  }}
-                >
+                <h2 style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800, fontSize: '15px', color: '#C41E3A', margin: '0 0 3px' }}>
                   ✏ खेलाडी सम्पादन
                 </h2>
                 {nameEn && (
-                  <p
-                    style={{
-                      fontFamily: "'Barlow Condensed', sans-serif",
-                      fontSize: '11px',
-                      color: '#6B7280',
-                      letterSpacing: '0.1em',
-                      margin: 0,
-                      textTransform: 'uppercase',
-                    }}
-                  >
+                  <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: '10px', color: '#6B7280', letterSpacing: '0.15em', textTransform: 'uppercase', margin: 0 }}>
                     {nameEn}
                   </p>
                 )}
               </div>
-              <button
-                onClick={() => setShowPanel(false)}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: '#6B7280',
-                  fontSize: '20px',
-                  cursor: 'pointer',
-                  lineHeight: 1,
-                  padding: '0 0 0 8px',
-                  flexShrink: 0,
-                }}
-              >
-                ×
-              </button>
+              <button onClick={() => setShowPanel(false)} style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: '22px', cursor: 'pointer', padding: '0 0 0 12px', lineHeight: 1 }}>×</button>
             </div>
 
-            {/* Panel body */}
-            <div
-              style={{
-                flex: 1,
-                overflowY: 'auto',
-                padding: '20px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '20px',
-              }}
-            >
+            {/* ── Body ── */}
+            <div style={{ flex: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '22px' }}>
               {loading ? (
-                <div
-                  style={{
-                    padding: '3rem 0',
-                    textAlign: 'center',
-                    fontFamily: "'Mukta', sans-serif",
-                    fontSize: '14px',
-                    color: '#6B7280',
-                  }}
-                >
-                  लोड हुँदैछ...
-                </div>
+                <p style={{ fontFamily: "'Mukta', sans-serif", fontSize: '14px', color: '#6B7280', textAlign: 'center', padding: '3rem 0' }}>लोड हुँदैछ...</p>
               ) : (
                 <>
                   {/* Hero Quote */}
                   <div>
-                    <label style={labelBase}>HERO QUOTE</label>
-                    <input
-                      type="text"
-                      value={heroQuote}
-                      onChange={(e) => setHeroQuote(e.target.value)}
-                      style={inputBase}
-                      onFocus={focusGold}
-                      onBlur={blurDim}
-                    />
+                    <label style={labelBase}>Hero Quote</label>
+                    <input type="text" value={heroQuote} onChange={(e) => setHeroQuote(e.target.value)} style={inputBase} onFocus={focusGold} onBlur={blurDim} />
                   </div>
 
                   {/* Excerpt */}
                   <div>
-                    <label style={labelBase}>संक्षिप्त</label>
-                    <textarea
-                      value={excerptNe}
-                      onChange={(e) => setExcerptNe(e.target.value)}
-                      rows={3}
-                      style={inputBase}
-                      onFocus={focusGold}
-                      onBlur={blurDim}
-                    />
+                    <label style={labelBase}>संक्षिप्त परिचय</label>
+                    <textarea value={excerptNe} onChange={(e) => setExcerptNe(e.target.value)} rows={3} style={inputBase} onFocus={focusGold} onBlur={blurDim} />
                   </div>
 
                   {/* Full lore */}
@@ -310,8 +309,8 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
                     <textarea
                       value={loreNe}
                       onChange={(e) => setLoreNe(e.target.value)}
-                      rows={18}
-                      style={{ ...inputBase, fontFamily: "'JetBrains Mono', monospace", fontSize: '13px' }}
+                      rows={20}
+                      style={{ ...inputBase, fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', lineHeight: 1.6 }}
                       onFocus={focusGold}
                       onBlur={blurDim}
                     />
@@ -319,56 +318,70 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
 
                   {/* Images */}
                   <div>
-                    <label style={labelBase}>तस्बिरहरू</label>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                      <label style={{ ...labelBase, marginBottom: 0 }}>तस्बिरहरू ({images.length}/5)</label>
+                      {images.length < 5 && (
+                        <div style={{ display: 'flex', gap: '6px' }}>
+                          {/* Upload photo button */}
+                          <button
+                            onClick={() => triggerUpload(images.length)}
+                            style={{ background: 'rgba(201,168,76,0.12)', border: '1px solid rgba(201,168,76,0.3)', color: '#C9A84C', padding: '4px 10px', fontFamily: "'Barlow Condensed', sans-serif", fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
+                          >
+                            📷 Upload
+                          </button>
+                          {/* Add URL manually */}
+                          <button
+                            onClick={addImage}
+                            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.08)', color: '#6B7280', padding: '4px 10px', fontFamily: "'Barlow Condensed', sans-serif", fontSize: '9px', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
+                          >
+                            + URL
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                       {images.map((img, idx) => (
-                        <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.03)', padding: '6px 8px', borderRadius: 2 }}>
+                          {/* Thumbnail preview if path looks real */}
+                          {img && !img.endsWith('/1.webp') && !img.endsWith('/2.webp') && !img.endsWith('/3.webp') && !img.endsWith('/4.webp') && !img.endsWith('/5.webp') ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={img} alt="" style={{ width: 36, height: 36, objectFit: 'cover', borderRadius: 2, flexShrink: 0, border: '1px solid rgba(255,255,255,0.1)' }} />
+                          ) : (
+                            <div style={{ width: 36, height: 36, background: 'rgba(255,255,255,0.05)', borderRadius: 2, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>
+                              {uploadingIdx === idx ? '⏳' : '🖼'}
+                            </div>
+                          )}
                           <input
                             type="text"
                             value={img}
                             onChange={(e) => updateImage(idx, e.target.value)}
                             placeholder="/images/players/..."
-                            style={{ ...inputBase, flex: 1 }}
+                            style={{ ...inputBase, flex: 1, fontSize: '11px' }}
                             onFocus={focusGold}
                             onBlur={blurDim}
                           />
+                          {/* Replace with upload */}
+                          <button
+                            onClick={() => triggerUpload(idx)}
+                            title="Replace with upload"
+                            style={{ background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: '14px', padding: '0 2px', flexShrink: 0 }}
+                          >
+                            📷
+                          </button>
                           <button
                             onClick={() => removeImage(idx)}
-                            style={{
-                              background: 'transparent',
-                              border: 'none',
-                              color: '#6B7280',
-                              cursor: 'pointer',
-                              fontSize: '16px',
-                              lineHeight: 1,
-                              padding: '0 4px',
-                              flexShrink: 0,
-                            }}
+                            style={{ background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: '16px', padding: '0 2px', flexShrink: 0 }}
                           >
                             ×
                           </button>
                         </div>
                       ))}
-                      {images.length < 5 && (
-                        <button
-                          onClick={addImage}
-                          style={{
-                            background: 'transparent',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                            color: '#6B7280',
-                            padding: '6px 12px',
-                            fontFamily: "'Barlow Condensed', sans-serif",
-                            fontSize: '10px',
-                            letterSpacing: '0.15em',
-                            textTransform: 'uppercase',
-                            cursor: 'pointer',
-                            borderRadius: 2,
-                            alignSelf: 'flex-start',
-                            marginTop: '4px',
-                          }}
-                        >
-                          + तस्बिर थप्नुस्
-                        </button>
+
+                      {images.length === 0 && (
+                        <p style={{ fontFamily: "'Mukta', sans-serif", fontSize: '12px', color: '#6B7280', textAlign: 'center', padding: '12px 0' }}>
+                          कुनै तस्बिर छैन — 📷 Upload वा + URL थिच्नुस्
+                        </p>
                       )}
                     </div>
                   </div>
@@ -376,29 +389,21 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
               )}
             </div>
 
-            {/* Panel footer */}
-            <div
-              style={{
-                padding: '16px 20px',
-                borderTop: '1px solid rgba(255,255,255,0.07)',
-                flexShrink: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-              }}
-            >
+            {/* ── Footer ── */}
+            <div style={{ padding: '14px 20px', borderTop: '1px solid rgba(255,255,255,0.07)', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <button
                 onClick={handleSave}
                 disabled={!canSave}
                 style={{
                   width: '100%',
                   padding: '12px',
-                  background: canSave ? '#C41E3A' : '#6B7280',
+                  background: canSave ? '#C41E3A' : 'rgba(107,114,128,0.5)',
                   border: 'none',
                   color: '#fff',
                   fontFamily: "'Mukta', sans-serif",
                   fontWeight: 700,
                   fontSize: '14px',
+                  letterSpacing: '0.05em',
                   cursor: canSave ? 'pointer' : 'not-allowed',
                   borderRadius: 2,
                   transition: 'background 150ms ease',
@@ -407,31 +412,9 @@ export default function PlayerEditFAB({ id, nameEn }: PlayerEditFABProps) {
                 {saveStatus === 'saving' ? 'सेभ हुँदैछ...' : 'सेभ गर्नुस्'}
               </button>
 
-              {/* Status text */}
-              {saveStatus === 'saved' && (
-                <p
-                  style={{
-                    fontFamily: "'Mukta', sans-serif",
-                    fontSize: '12px',
-                    color: '#4ade80',
-                    margin: 0,
-                    textAlign: 'center',
-                  }}
-                >
-                  ✓ सेभ भयो — Vercel मा प्रकाशित हुँदैछ
-                </p>
-              )}
-              {saveStatus === 'error' && saveError && (
-                <p
-                  style={{
-                    fontFamily: "'Mukta', sans-serif",
-                    fontSize: '12px',
-                    color: '#C41E3A',
-                    margin: 0,
-                    textAlign: 'center',
-                  }}
-                >
-                  ⚠ {saveError}
+              {saveMsg && (
+                <p style={{ fontFamily: "'Mukta', sans-serif", fontSize: '12px', color: saveStatus === 'error' ? '#f87171' : '#4ade80', margin: 0, textAlign: 'center', lineHeight: 1.4 }}>
+                  {saveMsg}
                 </p>
               )}
             </div>
