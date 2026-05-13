@@ -42,9 +42,9 @@ export default function ContactClient() {
                                 सामाजिक सञ्जाल
                             </span>
                             <div className="flex gap-6 mt-2">
-                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">ट्विटर</span>
-                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">इन्स्टाग्राम</span>
-                                <span className="font-mukta text-white/40 text-lg hover:text-white transition-colors cursor-pointer">फेसबुक</span>
+                                <a href="https://twitter.com/nepalcric" target="_blank" rel="noopener noreferrer" className="font-mukta text-white/40 text-lg hover:text-white transition-colors" style={{ textDecoration: 'none' }}>ट्विटर</a>
+                                <a href="https://instagram.com/nepalcric" target="_blank" rel="noopener noreferrer" className="font-mukta text-white/40 text-lg hover:text-white transition-colors" style={{ textDecoration: 'none' }}>इन्स्टाग्राम</a>
+                                <a href="https://facebook.com/nepalcric" target="_blank" rel="noopener noreferrer" className="font-mukta text-white/40 text-lg hover:text-white transition-colors" style={{ textDecoration: 'none' }}>फेसबुक</a>
                             </div>
                         </div>
                     </div>
