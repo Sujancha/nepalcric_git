@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { inputStyle, labelStyle, sectionStyle, saveBtnStyle } from '../adminStyles';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
@@ -179,7 +180,7 @@ export default function AdminLockerRoomPage() {
               else if (idx === 5) overlayBg = "linear-gradient(135deg, rgba(196,30,58,0.2), rgba(0,56,147,0.2))";
 
               return (
-                <div key={story.id} className="flex flex-col group cursor-pointer animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both]" style={{ animationDelay: `${idx * 0.1}s` }}>
+                <Link key={story.id} href={`/admin/locker-room/${story.id}`} className="flex flex-col group cursor-pointer animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both]" style={{ animationDelay: `${idx * 0.1}s`, textDecoration: 'none' }}>
                   <div className="relative aspect-video rounded-sm overflow-hidden bg-[#0a0f16] border border-white/5 mb-4 shadow-lg">
                     <div
                       className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-400 ease-[cubic-bezier(0.76,0,0.24,1)] grayscale-[80%] brightness-[0.6] group-hover:grayscale-0 group-hover:brightness-[0.9] group-hover:scale-105"
@@ -216,7 +217,7 @@ export default function AdminLockerRoomPage() {
                   >
                     {story.description}
                   </p>
-                </div>
+                </Link>
               );
             })}
           </div>
