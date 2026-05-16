@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 export default function StoriesGrid() {
     return (
@@ -14,8 +15,13 @@ export default function StoriesGrid() {
                 </div>
 
                 <div className="flex flex-col md:grid md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
-                    {/* Card 1: Lead Story */}
-                    <div className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden rounded-sm min-h-[400px] md:min-h-0">
+
+                    {/* Card 1: Lead Story — Monty Desai interview */}
+                    <Link
+                        href="/story/monty-desai-interview"
+                        className="md:col-span-2 md:row-span-2 relative group cursor-pointer overflow-hidden rounded-sm min-h-[400px] md:min-h-0 block"
+                        style={{ textDecoration: 'none' }}
+                    >
                         <Image
                             src="/images/monty.jpg"
                             alt="Lead Story"
@@ -32,10 +38,14 @@ export default function StoriesGrid() {
                                 मुख्य प्रशिक्षक मोन्टी देसाईले नेपाली क्रिकेटको भविष्य र नयाँ खेलाडीहरूको सम्भावनाबारे खुलेर कुरा गरे।
                             </p>
                         </div>
-                    </div>
+                    </Link>
 
-                    {/* Card 2 */}
-                    <div className="md:col-span-1 md:row-span-1 bg-white/5 border border-white/10 backdrop-blur-md rounded-sm p-6 flex flex-col justify-between relative overflow-hidden group hover:bg-white/10 transition-colors cursor-pointer min-h-[200px]">
+                    {/* Card 2: Sandeep's Googly analysis */}
+                    <Link
+                        href="/story/sandeep-googly"
+                        className="md:col-span-1 md:row-span-1 bg-white/5 border border-white/10 backdrop-blur-md rounded-sm p-6 flex flex-col justify-between relative overflow-hidden group hover:bg-white/10 transition-colors min-h-[200px] block"
+                        style={{ textDecoration: 'none' }}
+                    >
                         <div className="absolute top-0 right-0 w-32 h-32 bg-[#C9A84C] blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none" />
                         <div className="relative z-10">
                             <span className="font-ui font-bold text-[#C9A84C] text-[10px] uppercase tracking-[0.15em] mb-4 block">
@@ -48,23 +58,27 @@ export default function StoriesGrid() {
                         <span className="font-sans text-[#B0B8C8]/60 text-xs font-semibold uppercase tracking-widest relative z-10">
                             ५ मिनेटको पढाइ
                         </span>
-                    </div>
+                    </Link>
 
-                    {/* Card 3 */}
-                    <div className="md:col-span-1 md:row-span-1 bg-[#0D1B2A] border border-white/10 rounded-sm p-6 flex flex-col justify-between relative overflow-hidden group hover:border-[#1E3A8A]/50 transition-colors cursor-pointer min-h-[200px]">
-                        <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#1E3A8A] blur-[80px] opacity-10 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none" />
+                    {/* Card 3: Kushal's mindset interview */}
+                    <Link
+                        href="/story/kushal-mindset"
+                        className="md:col-span-1 md:row-span-1 bg-[#0D1B2A] border border-white/10 rounded-sm p-6 flex flex-col justify-between relative overflow-hidden group hover:border-[#C41E3A]/40 transition-colors min-h-[200px] block"
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#C41E3A] blur-[80px] opacity-5 group-hover:opacity-15 transition-opacity duration-700 pointer-events-none" />
                         <div className="relative z-10">
-                            <span className="font-ui font-bold text-[#1E3A8A] text-[10px] uppercase tracking-[0.15em] mb-4 block">
+                            <span className="font-ui font-bold text-[#C41E3A] text-[10px] uppercase tracking-[0.15em] mb-4 block">
                                 अन्तर्वार्ता
                             </span>
-                            <h4 className="font-display font-black text-2xl text-stadium-white leading-tight group-hover:text-[#1E3A8A] transition-colors">
+                            <h4 className="font-display font-black text-2xl text-stadium-white leading-tight group-hover:text-[#C9A84C] transition-colors">
                                 कुशल भुर्तेलको आक्रामक शैली पछाडिको मानसिकता
                             </h4>
                         </div>
                         <span className="font-sans text-[#B0B8C8]/60 text-xs font-semibold uppercase tracking-widest relative z-10">
                             ३ मिनेटको पढाइ
                         </span>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </section>

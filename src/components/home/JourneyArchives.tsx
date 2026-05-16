@@ -75,9 +75,9 @@ export default function JourneyArchives() {
                 </div>
 
                 <div className="mt-16 text-center">
-                    <button className="relative px-8 py-4 bg-transparent border border-[#C9A84C]/50 rounded font-sans font-medium text-stadium-white hover:text-[#07080F] hover:bg-[#C9A84C] hover:border-[#C9A84C] shadow-[0_0_15px_rgba(201,168,76,0)] hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] transition-all overflow-hidden group">
+                    <Link href="/kathaharu" className="relative inline-block px-8 py-4 bg-transparent border border-[#C9A84C]/50 font-sans font-medium text-stadium-white hover:text-[#07080F] hover:bg-[#C9A84C] hover:border-[#C9A84C] shadow-[0_0_15px_rgba(201,168,76,0)] hover:shadow-[0_0_20px_rgba(201,168,76,0.3)] transition-all overflow-hidden group">
                         <span className="relative z-10 uppercase tracking-widest text-sm text-[13px]">सबै कथाहरू हेर्नुस्</span>
-                    </button>
+                    </Link>
                 </div>
 
             </div>

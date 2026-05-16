@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { inputStyle, labelStyle, sectionStyle, saveBtnStyle } from '../adminStyles';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
@@ -216,9 +217,10 @@ export default function AdminScoreboardPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {archives.map((series, idx) => (
-              <div
+              <Link
                 key={series.id}
-                className="group relative flex flex-col p-8 md:p-10 overflow-hidden cursor-default transition-all duration-500 ease-out animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both] hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(196,30,58,0.1)]"
+                href={`/admin/scoreboard/${series.id}`}
+                className="group relative flex flex-col p-8 md:p-10 overflow-hidden cursor-pointer transition-all duration-500 ease-out animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both] hover:bg-white/[0.07] hover:shadow-[0_0_30px_rgba(196,30,58,0.1)]"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.05)",
                   backdropFilter: "blur(12px)",
@@ -227,6 +229,7 @@ export default function AdminScoreboardPage() {
                     ? "3px solid rgba(201,168,76,0.7)"
                     : "3px solid rgba(196,30,58,0.6)",
                   animationDelay: `${idx * 0.15}s`,
+                  textDecoration: 'none',
                 }}
               >
                 <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-transparent transition-colors duration-500 group-hover:bg-[#C41E3A]" />
@@ -277,7 +280,7 @@ export default function AdminScoreboardPage() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}
