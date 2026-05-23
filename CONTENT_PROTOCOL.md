@@ -74,7 +74,7 @@ Ask: *"How detailed should this content be? Surface / Standard / Cinematic."*
 
 ### STEP 4 — FIRST DRAFT
 
-Generate the content. Apply the depth level confirmed in Step 3.
+Generate the content. Apply the depth level confirmed in Step 3. If Cinematic, the draft MUST adhere to the "Aarif Sheikh Standard" of heavy drama, profound emotional depth, and visceral storytelling.
 
 **Mandatory before writing:**
 1. Identify the In Medias Res hook — maximum tension, name withheld
@@ -85,7 +85,10 @@ Generate the content. Apply the depth level confirmed in Step 3.
 6. Identify the Bridge Transitions — one per section end
 7. Count planned Von Restorff isolations — must be 4 or fewer
 
-**Writing rules:**
+**Writing rules (The Aarif Sheikh Cinematic Standard):**
+- **Netflix Documentary Depth:** Every emotional beat must breathe. Atmosphere must be heavy. Contrast profound struggles against visceral sensory details.
+- **Section Length:** Minimum 3 to 5 full, rich paragraphs per section. Do NOT rush the narrative.
+- **Sensory Reality:** Exploit smell, sound, weather, and physical weight (e.g., the smell of a border town, the biting cold, the deafening silence of a room).
 - Open every section with a moment, never a fact
 - Proper paragraphs throughout — no cheap fragmented lines
 - Statistics shown as human cost, not as scorecard
