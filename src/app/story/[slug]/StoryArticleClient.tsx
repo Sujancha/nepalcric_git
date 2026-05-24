@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { getAllStories, StoryFrontmatter } from "@/lib/getStories";
+import type { StoryFrontmatter } from "@/lib/getStories";
 
-export default function StoryArticleClient({ story, htmlContent }: { story: StoryFrontmatter, htmlContent: string }) {
+export default function StoryArticleClient({ story, htmlContent, recoStory }: { story: StoryFrontmatter, htmlContent: string, recoStory: StoryFrontmatter | null }) {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
@@ -17,9 +17,6 @@ export default function StoryArticleClient({ story, htmlContent }: { story: Stor
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const stories = getAllStories();
-    const currentIndex = stories.findIndex(s => s.slug === story.slug);
-    const recoStory = stories[(currentIndex + 1) % stories.length];
 
     return (
         <div className="bg-[#07080F] min-h-screen text-[#B0B8C8] selection:bg-[#C41E3A] selection:text-white">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import StoryArticleClient from "./StoryArticleClient";
-import { getStoryBySlug } from "@/lib/getStories";
+import { getStoryBySlug, getAllStories } from "@/lib/getStories";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -41,5 +41,12 @@ export default async function StoryArticlePage({ params }: Props) {
         notFound();
     }
 
-    return <StoryArticleClient story={storyData.data} htmlContent={storyData.content} />;
+    // Compute recommendation on the server so the Client Component never imports `fs`
+    const allStories = getAllStories();
+    const currentIndex = allStories.findIndex(s => s.slug === slug);
+    const recoStory = allStories.length > 1
+        ? allStories[(currentIndex + 1) % allStories.length]
+        : null;
+
+    return <StoryArticleClient story={storyData.data} htmlContent={storyData.content} recoStory={recoStory} />;
 }
