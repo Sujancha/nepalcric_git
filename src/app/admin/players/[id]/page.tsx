@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { inputStyle, labelStyle, sectionStyle, saveBtnStyle, cancelBtnStyle } from '../../adminStyles';
+import AdminEditor from '@/components/admin/AdminEditor';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
@@ -250,25 +251,12 @@ export default function PlayerEditorPage() {
               />
             </div>
 
-            {/* LORE */}
-            <div style={sectionStyle}>
-              <label style={labelStyle}>पूर्ण कथा (Player Story — Nepali)</label>
-              <textarea
-                value={loreNe}
-                onChange={(e) => setLoreNe(e.target.value)}
-                rows={24}
-                spellCheck={false}
-                style={{
-                  ...inputStyle,
-                  fontFamily: 'var(--font-jetbrains-mono), "JetBrains Mono", monospace',
-                  fontSize: '0.82rem',
-                  lineHeight: 1.7,
-                  resize: 'vertical',
-                  borderBottom: '1px solid rgba(255,255,255,0.15)',
-                  padding: '0.75rem 0',
-                }}
-                onFocus={focusGold}
-                onBlur={blurDim}
+            {/* LORE (Rich Text Editor) */}
+            <div style={{...sectionStyle, maxWidth: '100%'}}>
+              <label style={labelStyle}>पूर्ण कथा (Player Story — Rich Text)</label>
+              <AdminEditor 
+                content={loreNe} 
+                onChange={(html) => setLoreNe(html)} 
               />
             </div>
 
