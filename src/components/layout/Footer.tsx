@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+    const pathname = usePathname();
+    if (pathname?.startsWith("/admin")) return null;
+
     return (
         <footer className="w-full bg-[#07080F] border-t border-white/5 py-24 px-6 md:px-12 flex flex-col items-center">
             {/* Faded Ghost Logo */}

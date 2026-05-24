@@ -33,8 +33,10 @@ const navLinks = [
 export default function Navbar() {
     const pathname = usePathname();
 
-    // When logged in as admin (URL starts with /admin), all links stay under /admin/*
-    const isAdmin = pathname?.startsWith("/admin") ?? false;
+    // The admin dashboard has its own WPLayout sidebar. Do not render this site-wide Navbar.
+    if (pathname?.startsWith("/admin")) return null;
+
+    const isAdmin = false;
     const prefix = isAdmin ? "/admin" : "";
 
     // Resolve href and active state for each link

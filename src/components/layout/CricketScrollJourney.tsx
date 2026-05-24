@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function CricketScrollJourney() {
+    const pathname = usePathname();
     const [scrollPercentage, setScrollPercentage] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
     const [svgHeight, setSvgHeight] = useState(1000); // Default placeholder
@@ -53,6 +55,7 @@ export default function CricketScrollJourney() {
 
     // SSR Guard to prevent hydration mismatches
     if (!isMounted) return null;
+    if (pathname?.startsWith("/admin")) return null;
 
     const ch = Math.max(svgHeight, 100); // Container Height
     const startY = 20;
