@@ -86,8 +86,10 @@ Generate the content. Apply the depth level confirmed in Step 3. If Cinematic, t
 7. Count planned Von Restorff isolations — must be 4 or fewer
 
 **Writing rules (The Aarif Sheikh Cinematic Standard):**
-- **Netflix Documentary Depth (Extreme Level):** Every emotional beat must breathe. Atmosphere must be thick. Do not rush. Stretch moments of tension. Write long, deeply resonant paragraphs. Never summarize what you can show. Generic one-liners are grounds for failure.
-- **Section Length:** Minimum 3 to 5 full, rich paragraphs per section. Do NOT rush the narrative.
+- **Netflix Documentary Depth (Extreme Level):**
+- **Dynamic Paragraphing & Pacing (CRITICAL):** Do NOT make every section exactly 3 paragraphs long. This looks robotic and boring. You MUST vary the paragraph length and count based on the emotional weight of the information. Some punchy acts might be 2 paragraphs. A massive climax might be 5 or 6 paragraphs. Create a dynamic, unpredictable rhythm that surprises and engages the reader.
+- **Sensory Details:** Every emotional beat must breathe. Atmosphere must be thick. Do not rush. Stretch moments of tension. Write long, deeply resonant paragraphs where needed, but balance them with sharp, impactful short paragraphs.
+- **Show, Don't Tell:** Never summarize what you can show. Generic one-liners are grounds for failure.
 - **Sensory Reality:** Exploit smell, sound, weather, and physical weight (e.g., the smell of a border town, the biting cold, the deafening silence of a room).
 - Open every section with a moment, never a fact
 - Proper paragraphs throughout — no cheap fragmented lines
@@ -97,18 +99,27 @@ Generate the content. Apply the depth level confirmed in Step 3. If Cinematic, t
 - The "तपाईं" weapon used max 5 times, each targeting a different wound
 - The final line contains "तपाईं" and leaves something unresolved
 
-### THE GULSHAN JHA DEEP-DIVE EXPANSION (The Baseline Multi-Act Structure)
-*Established during the Gulshan Jha profile rewrite. This is the new minimum standard for comprehensiveness.*
+### THE LOKESH BAM 9-ACT MAXIMALIST EXPANSION (The Baseline Multi-Act Structure)
+*Upgraded during the Sher Malla & Lokesh Bam sessions. This is the new minimum standard for comprehensiveness.*
 
-A player's profile cannot just be a summary of their recent stats. It MUST be an "All-in-One" documentary hub capturing everything fans remember. Before finalizing Step 4, force the narrative into a **baseline 6 to 8+ Act Epic Structure**. This is just the starting point for research. Expand as the player's history demands:
-1. **The Origins:** The obscure beginnings, the geographical roots, the early unnoticed grind.
-2. **The Phenomenon/Arrival:** The sudden breakthrough moment (e.g., Mayor's Cup, U-19 heroics) that shocked the domestic circuit.
-3. **The Turning Point:** The specific match or over that proved they belonged at the highest level (e.g., Gulshan's 20 runs off Waseem).
-4. **The Hero:** The definitive match-winning performance that achieved a historic milestone for the country (e.g., qualifying for the Asia Cup/World Cup).
-5. **The Tragedy/Heartbreak:** The darkest, most painful moment on the world stage (e.g., the 1-run loss in St. Vincent). A 'clutch player' isn't defined by always winning, but by surviving heartbreak.
-6. **The Resurrection:** The ultimate evolution. How they bounced back from the tragedy to set new records.
+A player's profile cannot just be a summary of their recent stats. It MUST be an "All-in-One" documentary hub capturing everything fans remember, told through a 9-Act Netflix-style cinematic structure:
+1. **Act 1: The Cold Open / In Medias Res:** Start in the middle of a high-stakes climax (e.g., facing Jofra Archer at Wankhede). Create an "Open Loop" that makes the reader ask, "How did we get here?"
+2. **Act 2: The Origins:** The obscure beginnings, geographic roots, and early unnoticed grind.
+3. **Act 3: The Rebellion / Shift:** A massive turning point in their early life (e.g., defying a politician father, switching from fast bowling to batting).
+4. **Act 4: The Phenomenon / Arrival:** The sudden domestic breakthrough that shocked the circuit (e.g., a 14-ball fifty, a PPL debut at 17).
+5. **Act 5: The Genuine Struggle (STRICTLY VERIFIED):** The darkest, most painful moment. **CRITICAL:** Do NOT hallucinate depression, visa applications, or quitting unless strictly verified by web search. If unverified, use their *real* professional struggle (e.g., media criticism, being dropped, the burden of expectations).
+6. **Act 6: The Turning Point:** The specific match or over that proved they belonged at the highest level.
+7. **Act 7: The Resurrection:** How they bounced back to set new records (e.g., destroying Ireland Wolves).
+8. **Act 8: The Climax Resolution:** The payoff to the Act 1 Cold Open. This MUST be the longest, most sensory, and most emotional paragraph of the profile. Describe the sound of the bat, the stadium atmosphere, and the human tears.
+9. **Act 9: The Legacy:** Summarize their archetype (e.g., The X-Factor, The Silent General).
 
-If the draft does not contain these 6 Acts, you have not researched deep enough. Use web search to dig until you find the tragedy and the turning points.
+If the draft does not contain these 9 Acts, you have not researched deep enough. Use web search to dig until you find the turning points.
+
+### JSON DATABASE HANDLING
+*When updating `playerData.json` or `playerIndex.json`:*
+- NEVER use raw `sed` or manual text injection which can corrupt the JSON array.
+- ALWAYS write a robust Python script to `json.load()` and `json.dump()`.
+- ALWAYS run a validation check (`python -m json.tool`) before executing `git push`.
 
 ---
 
@@ -258,3 +269,7 @@ Has the atmosphere been achieved — yes or no? If no, what specifically needs t
 | 7 | Missing bridge transitions between sections | Rohit Paudel | Bridge transition mandatory at every section end |
 | 8 | "Inferred kitchen-table dialogue" for father | Dipendra Airee | No inferred personal memories without verified source |
 | 9 | Stopping at a generic summary instead of an "All-in-One" hub | Gulshan Jha | Mandated the "6-Act Deep-Dive Expansion" for all future profiles to ensure no fan-favorite moment or heartbreaking tragedy is missed |
+| 10 | Hallucinated Player Type (Sher Malla as off-spinner instead of fast bowler) | Sher Malla | Do not assume playing roles. Perform web search to confirm specific skills (e.g. pace vs spin). |
+| 11 | Hallucinated Trauma (Invented visa applications and depression for Lokesh Bam to add Netflix drama) | Lokesh Bam | STRICTLY NO FAKE LORE. Do not invent struggles. If a dramatic low is needed, use their verified professional struggle (media criticism, being dropped). |
+| 12 | Corrupting playerData.json with raw text injection | Lokesh Bam / Sher Malla | ALWAYS use Python json module to read/write JSON files securely. Verify JSON integrity before Git Push. |
+| 13 | Weak Climax Resolution (Resolving a massive 7-Act buildup with 3 sentences) | Lokesh Bam | Act 8 (Climax) must be the longest, most sensory and emotional paragraph, paying off the Act 1 Open Loop perfectly. |
