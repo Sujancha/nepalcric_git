@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import fs from "fs";
+import path from "path";
 import FanZoneClient from "@/components/fanzone/FanZoneClient";
 
 export const metadata: Metadata = {
@@ -7,5 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function FanZonePage() {
-    return <FanZoneClient />;
+    const filePath = path.join(process.cwd(), "content", "pages", "fanzone.json");
+    const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    return <FanZoneClient fans={data.fans} chants={data.chants} />;
 }

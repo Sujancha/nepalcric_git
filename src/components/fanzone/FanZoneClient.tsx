@@ -2,30 +2,27 @@
 
 import { useEffect, useState } from "react";
 
-export default function FanZoneClient() {
+interface Fan {
+    name: string;
+    city: string;
+    memory: string;
+    chant: string;
+}
+
+interface Chant {
+    nepali: string;
+    tivrata: string;
+}
+
+export default function FanZoneClient({ fans, chants }: { fans: Fan[]; chants: Chant[] }) {
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
-    const fans = [
-        { name: "प्रकाश श्रेष्ठ", city: "काठमाडौं", memory: "२०१६ मा नेपालले वेस्ट इन्डिजलाई हराएको दिन म रोएँ। त्यो आँशु खुशीको थियो।", chant: "नेपाल! नेपाल!" },
-        { name: "सुनिता तामाङ", city: "पोखरा", memory: "सन्दीपले पहिलो आईपीएल खेलेको दिन हाम्रो पूरा मोहल्ला टिभीको अगाडि बस्यो।", chant: "जित्छौं हामी!" },
-        { name: "रमेश थापा", city: "बुटवल", memory: "विश्वकप छनोटमा ओमानलाई हराएपछि सडकमा नाचेको याद अझै छ।", chant: "हाम्रो नेपाल!" },
-        { name: "अञ्जली गुरुङ", city: "धरान", memory: "रोहितले कप्तानी लिएको दिनदेखि टिम फरक लाग्छ — परिपक्व, आत्मविश्वासी।", chant: "रोहित! रोहित!" },
-        { name: "विकास यादव", city: "जनकपुर", memory: "दिपेन्द्रको ६ छक्का — त्यो ओभर हेर्दा शरीरमा झनझनी आयो।", chant: "छक्का! छक्का!" },
-        { name: "मीना राई", city: "इलाम", memory: "पहिलो पटक त्रिभुवन मैदानमा नेपालको खेल हेर्न गएँ — त्यो अनुभव शब्दमा भन्न सकिँदैन।", chant: "नेपाल जिन्दाबाद!" },
-    ];
-
-    const chants = [
-        { nepali: "नेपाल! नेपाल!", tivrata: "उच्चतम" },
-        { nepali: "जित्छौं हामी, जित्छौं हामी!", tivrata: "उच्च" },
-        { nepali: "हाम्रो रगत रातो छ!", tivrata: "उच्च" },
-        { nepali: "१२औं गैंडा — मैदान हल्लाउँछौं!", tivrata: "उच्चतम" },
-    ];
-
     if (!mounted) return null;
+
 
     return (
         <div className="bg-[#07080F] min-h-screen selection:bg-[#C41E3A] selection:text-white pb-32 relative font-sans">
