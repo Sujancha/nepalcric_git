@@ -1,18 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import type { StoryFrontmatter } from './storyTypes';
 
-export interface StoryFrontmatter {
-  slug: string;
-  title: string;
-  subtitle: string;
-  category: string;
-  date: string;
-  readTime: string;
-  heroImage: string;
-  featured: boolean;
-  lede: string;
-}
+// Re-export so callers can still `import { StoryFrontmatter } from '@/lib/getStories'`
+export type { StoryFrontmatter } from './storyTypes';
 
 export function getAllStories(): StoryFrontmatter[] {
   const directory = path.join(process.cwd(), 'content', 'stories');

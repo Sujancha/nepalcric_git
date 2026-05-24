@@ -6,8 +6,17 @@ import Voices from "@/components/home/Voices";
 import StorytellingHub from "@/components/home/StorytellingHub";
 import FanSpotlight from "@/components/home/FanSpotlight";
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import fs from "fs";
+import path from "path";
 
 export default function AdminHomePage() {
+  const scoreboardData = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), "content", "pages", "scoreboard.json"), "utf8")
+  );
+  const lockerRoomData = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), "content", "pages", "locker-room.json"), "utf8")
+  );
+
   return (
     <div className="w-full bg-[#07080F]">
       <LeadStory
@@ -18,9 +27,9 @@ export default function AdminHomePage() {
         ctaText="पूरा कथा पढ्नुस् →"
         ctaHref="/balen-shah"
       />
-      <HeroSection />
+      <HeroSection scoreboardData={scoreboardData} />
       <ScrollReveal direction="down" delay={0}>
-        <MatchPulse />
+        <MatchPulse scoreboardData={scoreboardData} />
       </ScrollReveal>
       <ScrollReveal direction="up" delay={0.05}>
         <StoriesGrid />
@@ -29,7 +38,7 @@ export default function AdminHomePage() {
         <Voices />
       </ScrollReveal>
       <ScrollReveal direction="up" delay={0}>
-        <StorytellingHub />
+        <StorytellingHub stories={lockerRoomData.stories} />
       </ScrollReveal>
       <ScrollReveal direction="up" delay={0.05}>
         <FanSpotlight />

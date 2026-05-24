@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import StoryArticleClient from "./StoryArticleClient";
 import { getStoryBySlug, getAllStories } from "@/lib/getStories";
+import type { StoryFrontmatter } from "@/lib/storyTypes";
 import { notFound } from "next/navigation";
 
 type Props = {

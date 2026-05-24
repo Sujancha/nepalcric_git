@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import type { StoryFrontmatter } from "@/lib/getStories";
+import type { StoryFrontmatter } from "@/lib/storyTypes";
 
 export default function StoryArticleClient({ story, htmlContent, recoStory }: { story: StoryFrontmatter, htmlContent: string, recoStory: StoryFrontmatter | null }) {
     const [scrollY, setScrollY] = useState(0);
