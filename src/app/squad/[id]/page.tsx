@@ -51,36 +51,12 @@ export default async function PlayerProfile({
         );
     }
 
-    // Split lore_ne into display paragraphs
-    const loreParagraphs: string[] = mdData.lore_ne
-        ? mdData.lore_ne.split('\n').filter(line => line.trim() !== '')
-        : [];
-
-    // Build inline content — weave images between paragraphs like a magazine.
-    // Only real (non-placeholder) images are shown; placeholder paths are skipped
-    // until the admin uploads actual photos through the CMS.
-    const placeholderPattern = /\/images\/players\/[^/]+\/[1-5]\.webp$/;
-    const inlineImages: string[] = (mdData.images ?? []).filter(
-        (src) => src && !placeholderPattern.test(src)
-    );
-
-    const imageCount = inlineImages.length;
-    // Distribute images evenly: insert one every ~4 paragraphs
-    const interval = imageCount > 0 ? Math.max(4, Math.floor(loreParagraphs.length / (imageCount + 1))) : 0;
-
-    type LoreItem =
-        | { kind: 'paragraph'; text: string; index: number }
-        | { kind: 'image'; src: string; imageIndex: number };
-
-    const loreContent: LoreItem[] = [];
-    let imgIdx = 0;
-    loreParagraphs.forEach((line, i) => {
-        loreContent.push({ kind: 'paragraph', text: line, index: i });
-        if (interval > 0 && (i + 1) % interval === 0 && imgIdx < imageCount) {
-            loreContent.push({ kind: 'image', src: inlineImages[imgIdx], imageIndex: imgIdx });
-            imgIdx++;
-        }
-    });
+    // True WYSIWYG HTML is now stored in lore_ne.
+    // If it lacks <p> tags (legacy data), wrap split paragraphs, otherwise use raw.
+    let displayHtml = mdData.lore_ne || '';
+    if (displayHtml && !displayHtml.includes('<p>') && !displayHtml.includes('<h')) {
+        displayHtml = displayHtml.split('\n').filter(l => l.trim()).map(l => `<p>${l}</p>`).join('');
+    }
 
     return (
         <div className="w-full bg-[#07080F] min-h-screen">
@@ -135,90 +111,74 @@ export default async function PlayerProfile({
                             <span className="h-px flex-1 bg-[#B0B8C8]/20" />
                         </div>
 
-                        {loreContent.length > 0 ? (
-                            <div className="flex flex-col gap-6">
-                                {loreContent.map((item, i) => {
-
-                                    /* ── Inline story image ──────────────────────────── */
-                                    if (item.kind === 'image') {
-                                        return (
-                                            <div
-                                                key={`img-${item.imageIndex}`}
-                                                className="relative w-full my-10 overflow-hidden group"
-                                                style={{ aspectRatio: '16/9' }}
-                                            >
-                                                <Image
-                                                    src={item.src}
-                                                    alt={`${mdData.name_ne ?? ''} — ${item.imageIndex + 1}`}
-                                                    fill
-                                                    className="object-cover grayscale-[70%] group-hover:grayscale-0 transition-all duration-700 ease-out"
-                                                    sizes="(max-width: 1024px) 100vw, 66vw"
-                                                />
-                                                {/* Cinematic gradient overlay */}
-                                                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent pointer-events-none" />
-                                                {/* Subtle crimson ground line */}
-                                                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C41E3A]/40 group-hover:bg-[#C41E3A]/80 transition-colors duration-500" />
-                                            </div>
-                                        );
-                                    }
-
-                                    /* ── Paragraph rendering ───────────────────────────── */
-                                    const trimmed = item.text.trim();
-
-                                    // 1. Direct player quote
-                                    if (trimmed.startsWith('"') || trimmed.startsWith('“')) {
-                                        return (
-                                            <blockquote key={i} className="relative border-l-4 border-[#C9A84C] pl-8 py-5 my-2 bg-gradient-to-r from-[#C9A84C]/8 to-transparent">
-                                                <span className="absolute top-2 left-2 text-5xl text-[#C9A84C]/20 font-serif leading-none select-none" aria-hidden="true">&ldquo;</span>
-                                                <p className="font-sans italic text-[#E8E8E8] text-base md:text-[17px] leading-[1.9] tracking-wide" lang="ne">
-                                                    {trimmed}
-                                                </p>
-                                            </blockquote>
-                                        );
-                                    }
-
-                                    // 2. Attribution — em-dash lines
-                                    if (trimmed.startsWith('—')) {
-                                        return (
-                                            <p key={i} className="font-sans italic text-[#C9A84C] text-sm pl-8 -mt-3" lang="ne">
-                                                {trimmed}
-                                            </p>
-                                        );
-                                    }
-
-                                    // 3. Section header — lines not ending with । are chapter titles
-                                    if (!trimmed.endsWith('।')) {
-                                        return (
-                                            <div key={i} className="mt-16 pt-8 border-t border-white/5">
-                                                <h3 className="font-sans font-black text-[#C41E3A] text-2xl md:text-3xl leading-snug tracking-tight" lang="ne">
-                                                    {trimmed}
-                                                </h3>
-                                            </div>
-                                        );
-                                    }
-
-                                    // 4. Gut-punch isolated lines — short lines, blunt trauma
-                                    if (trimmed.length < 30) {
-                                        return (
-                                            <p key={i} className="font-sans font-black text-white text-2xl md:text-3xl tracking-tight mt-8 mb-4" lang="ne">
-                                                {trimmed}
-                                            </p>
-                                        );
-                                    }
-
-                                    // 5. Body prose — default
-                                    return (
-                                        <p key={i} className="font-sans text-[#B0B8C8] text-sm md:text-[15px] leading-[1.85]" lang="ne">
-                                            {trimmed}
-                                        </p>
-                                    );
-                                })}
-                            </div>
+                        {displayHtml ? (
+                            <div 
+                                className="html-lore-content"
+                                dangerouslySetInnerHTML={{ __html: displayHtml }} 
+                            />
                         ) : (
                             <p className="font-sans text-[#B0B8C8]/40 text-sm italic">
                                 lore_ne field is empty in the markdown file.
                             </p>
                         )}
+                        
+                        <style>{`
+                            .html-lore-content p {
+                                font-family: var(--font-mukta), sans-serif;
+                                color: #B0B8C8;
+                                font-size: 15px;
+                                line-height: 1.85;
+                                margin-bottom: 1.5rem;
+                            }
+                            .html-lore-content h1, .html-lore-content h2, .html-lore-content h3 {
+                                font-family: var(--font-bebas), sans-serif;
+                                color: #C41E3A;
+                                letter-spacing: 0.05em;
+                                margin-top: 2rem;
+                                margin-bottom: 1rem;
+                            }
+                            .html-lore-content blockquote {
+                                border-left: 4px solid #C9A84C;
+                                padding-left: 2rem;
+                                margin: 1rem 0;
+                                background: linear-gradient(to right, rgba(201, 168, 76, 0.08), transparent);
+                                padding-top: 1.25rem;
+                                padding-bottom: 1.25rem;
+                            }
+                            .html-lore-content blockquote p {
+                                font-style: italic;
+                                color: #E8E8E8;
+                                font-size: 17px;
+                                margin-bottom: 0;
+                            }
+                            .html-lore-content .custom-pull-quote {
+                                font-family: 'Mukta', sans-serif;
+                                font-size: 1.5rem;
+                                font-style: italic;
+                                font-weight: 700;
+                                color: #C41E3A;
+                                text-align: center;
+                                margin: 2rem 0;
+                                padding: 1.5rem;
+                                border-top: 2px solid #1E3A8A;
+                                border-bottom: 2px solid #1E3A8A;
+                                background: rgba(30, 58, 138, 0.1);
+                                position: relative;
+                            }
+                            .html-lore-content img {
+                                max-width: 100%;
+                                height: auto;
+                                border-radius: 8px;
+                                margin: 2rem 0;
+                                border: 1px solid rgba(255,255,255,0.1);
+                            }
+                            .html-lore-content img[style*="float: left"] {
+                                margin: 0 1.5rem 1rem 0;
+                            }
+                            .html-lore-content img[style*="float: right"] {
+                                margin: 0 0 1rem 1.5rem;
+                            }
+                        `}</style>
                     </div>
 
                     {/* Right Column: AI Discovery Sidebar — DO NOT TOUCH */}

@@ -4,6 +4,8 @@ import { useEditor, EditorContent, Node } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import TextAlign from '@tiptap/extension-text-align';
+import { Color } from '@tiptap/extension-color';
+import { TextStyle } from '@tiptap/extension-text-style';
 import { 
   Bold, Italic, Strikethrough, Heading1, Heading2, Heading3, 
   Quote, AlignLeft, AlignCenter, AlignRight, AlignJustify, 
@@ -158,11 +160,26 @@ const MenuBar = ({ editor }: { editor: any }) => {
       >
         <ImageIcon size={16} />
       </button>
+
+      <div className="w-px h-6 bg-white/10 mx-2" />
+      <input
+        type="color"
+        onInput={event => editor.chain().focus().setColor((event.target as HTMLInputElement).value).run()}
+        value={editor.getAttributes('textStyle').color || '#B0B8C8'}
+        className="w-8 h-8 rounded border-none cursor-pointer bg-transparent p-0"
+        title="Text Color"
+      />
     </div>
   );
 };
 
 export default function AdminEditor({ content, onChange }: { content: string, onChange: (html: string) => void }) {
+  // Convert old plain text/markdown into paragraphs so it doesn't bunch up
+  let initialContent = content;
+  if (initialContent && !initialContent.includes('<p>') && !initialContent.includes('<h')) {
+    initialContent = initialContent.split('\n').filter(l => l.trim()).map(l => `<p>${l}</p>`).join('');
+  }
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -173,9 +190,11 @@ export default function AdminEditor({ content, onChange }: { content: string, on
       TextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
+      Color,
+      TextStyle,
       PullQuote,
     ],
-    content: content,
+    content: initialContent,
     editorProps: {
       attributes: {
         class: 'prose prose-invert prose-p:font-mukta prose-headings:font-bebas max-w-none min-h-[400px] p-6 focus:outline-none',
@@ -230,6 +249,34 @@ export default function AdminEditor({ content, onChange }: { content: string, on
         }
         .editor-container img[style*="float: right"] {
           margin: 0 0 1rem 1.5rem;
+        }
+        .editor-container p {
+          font-family: var(--font-mukta), sans-serif;
+          color: #B0B8C8;
+          font-size: 15px;
+          line-height: 1.85;
+          margin-bottom: 1.5rem;
+        }
+        .editor-container h1, .editor-container h2, .editor-container h3 {
+          font-family: var(--font-bebas), sans-serif;
+          color: #C41E3A;
+          letter-spacing: 0.05em;
+          margin-top: 2rem;
+          margin-bottom: 1rem;
+        }
+        .editor-container blockquote {
+          border-left: 4px solid #C9A84C;
+          padding-left: 2rem;
+          margin: 1rem 0;
+          background: linear-gradient(to right, rgba(201, 168, 76, 0.08), transparent);
+          padding-top: 1.25rem;
+          padding-bottom: 1.25rem;
+        }
+        .editor-container blockquote p {
+          font-style: italic;
+          color: #E8E8E8;
+          font-size: 17px;
+          margin-bottom: 0;
         }
       `}</style>
     </div>
