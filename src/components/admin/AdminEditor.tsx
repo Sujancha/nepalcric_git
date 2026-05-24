@@ -27,10 +27,10 @@ const PullQuote = Node.create({
   
   addCommands() {
     return {
-      setPullQuote: () => ({ commands }) => {
+      setPullQuote: () => ({ commands }: { commands: any }) => {
         return commands.toggleNode(this.name, 'paragraph');
       },
-    };
+    } as any;
   },
 });
 
