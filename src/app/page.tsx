@@ -13,6 +13,9 @@ export default function Home() {
   const scoreboardPath = path.join(process.cwd(), "content", "pages", "scoreboard.json");
   const scoreboardData = JSON.parse(fs.readFileSync(scoreboardPath, "utf8"));
 
+  const lockerRoomPath = path.join(process.cwd(), "content", "pages", "locker-room.json");
+  const lockerRoomData = JSON.parse(fs.readFileSync(lockerRoomPath, "utf8"));
+
   return (
     <div className="w-full bg-[#07080F]">
       {/* 1. Balen Shah Takeover — Full-screen hero */}
@@ -45,7 +48,7 @@ export default function Home() {
 
       {/* 6. Locker Room */}
       <ScrollReveal direction="up" delay={0}>
-        <StorytellingHub />
+        <StorytellingHub stories={lockerRoomData.stories} />
       </ScrollReveal>
 
       {/* 7. Premium Fan Photography Grid */}

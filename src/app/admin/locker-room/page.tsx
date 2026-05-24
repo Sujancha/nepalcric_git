@@ -2,11 +2,13 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { inputStyle, labelStyle, sectionStyle, saveBtnStyle } from '../adminStyles';
+import { inputStyle, labelStyle, sectionStyle, saveBtnStyle, cancelBtnStyle } from '../adminStyles';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
+type ActiveTab = 'archive' | 'featured';
 
-interface Story {
+// ─── ARCHIVE story (locker-room page) ───
+interface ArchiveStory {
   id: string;
   title: string;
   date: string;
@@ -15,155 +17,291 @@ interface Story {
   thumb: string;
 }
 
-interface GithubFileResponse {
-  content: string;
-  sha: string;
-  error?: string;
+// ─── FEATURED story (homepage Storytelling Hub) ───
+interface FeaturedStory {
+  type: string;
+  title: string;
+  date: string;
+  span: string;
+  image: string;
+  slug: string;
+  isPlayable: boolean;
+  videoId: string;
 }
 
-interface GithubPutResponse {
-  success?: boolean;
-  error?: string;
-}
-
-const FILE_PATH = 'content/locker-room.json';
-
-function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = '#C9A84C';
 }
-function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)';
 }
 
-function newStory(): Story {
-  return {
-    id: `story-${Date.now()}`,
-    title: '',
-    date: '',
-    era: '',
-    description: '',
-    thumb: '',
-  };
+function newArchiveStory(): ArchiveStory {
+  return { id: `story-${Date.now()}`, title: '', date: '', era: '', description: '', thumb: '' };
 }
 
+function newFeaturedStory(): FeaturedStory {
+  return { type: '', title: '', date: '', span: 'md:col-span-1 md:row-span-1', image: '', slug: '', isPlayable: false, videoId: '' };
+}
+
+const SPAN_OPTIONS = [
+  { label: '1×1 (Normal)', value: 'md:col-span-1 md:row-span-1' },
+  { label: '2×1 (Wide)', value: 'md:col-span-2 md:row-span-1' },
+  { label: '2×2 (Hero)', value: 'md:col-span-2 md:row-span-2' },
+];
+
 export default function AdminLockerRoomPage() {
-  const [stories, setStories] = useState<Story[]>([]);
-  const [sha, setSha] = useState('');
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<ActiveTab>('archive');
+
+  // ── Archive state ──
+  const [archiveStories, setArchiveStories] = useState<ArchiveStory[]>([]);
+  const [archiveSha, setArchiveSha] = useState('');
+  const [archiveExpanded, setArchiveExpanded] = useState<string | null>(null);
+
+  // ── Featured state ──
+  const [featuredStories, setFeaturedStories] = useState<FeaturedStory[]>([]);
+  const [featuredSha, setFeaturedSha] = useState('');
+  const [featuredExpanded, setFeaturedExpanded] = useState<number | null>(null);
+
+  // ── Shared state ──
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState('');
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle');
   const [saveError, setSaveError] = useState('');
-  const [showPanel, setShowPanel] = useState(false);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     setLoadError('');
     try {
-      const res = await fetch(`/api/admin/github?path=${encodeURIComponent(FILE_PATH)}`);
-      const data = (await res.json()) as GithubFileResponse;
-      if (!res.ok) {
-        setLoadError(data.error ?? `फाइल लोड गर्न सकिएन (${res.status})`);
-        return;
-      }
-      const parsed = JSON.parse(data.content) as { stories: Story[] };
-      setStories(parsed.stories ?? []);
-      setSha(data.sha);
-    } catch (err) {
-      setLoadError(`लोड त्रुटि: ${err instanceof Error ? err.message : 'अज्ञात'}`);
-    } finally {
-      setLoading(false);
-    }
+      const res = await fetch('/api/admin/parse-locker-room');
+      const data = await res.json();
+      if (!res.ok) { setLoadError(data.error ?? `फाइल लोड गर्न सकिएन (${res.status})`); return; }
+      setArchiveStories(data.archive?.stories ?? []);
+      setArchiveSha(data.archiveSha ?? '');
+      setFeaturedStories(data.featured?.stories ?? []);
+      setFeaturedSha(data.featuredSha ?? '');
+    } catch { setLoadError('नेटवर्क त्रुटि: फाइल लोड हुन सकेन।'); }
+    finally { setLoading(false); }
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  useEffect(() => { fetchData(); }, [fetchData]);
 
-  async function handleSave() {
+  async function handleSave(target: 'archive' | 'featured') {
+    const sha = target === 'archive' ? archiveSha : featuredSha;
     if (!sha) return;
     setSaveStatus('saving');
     setSaveError('');
     try {
-      const jsonContent = JSON.stringify({ stories }, null, 2);
-      const res = await fetch('/api/admin/github', {
-        method: 'PUT',
+      const data = target === 'archive' ? { stories: archiveStories } : { stories: featuredStories };
+      const res = await fetch('/api/admin/parse-locker-room', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          path: FILE_PATH,
-          content: jsonContent,
-          sha,
-          message: 'admin: update locker room stories',
-        }),
+        body: JSON.stringify({ target, data, sha }),
       });
-      const data = (await res.json()) as GithubPutResponse;
-      if (res.ok && data.success) {
+      const resData = await res.json();
+      if (res.ok && resData.success) {
         setSaveStatus('saved');
         await fetchData();
         setTimeout(() => setSaveStatus('idle'), 5000);
       } else {
         setSaveStatus('error');
-        setSaveError(data.error ?? `सेभ हुन सकेन (${res.status})`);
+        setSaveError(resData.error ?? `सेभ हुन सकेन (${res.status})`);
       }
-    } catch {
-      setSaveStatus('error');
-      setSaveError('नेटवर्क त्रुटि: सेभ हुन सकेन।');
-    }
+    } catch { setSaveStatus('error'); setSaveError('नेटवर्क त्रुटि: सेभ हुन सकेन।'); }
   }
 
-  function addStory() {
-    const entry = newStory();
-    setStories([entry, ...stories]);
-    setExpandedId(entry.id);
-  }
+  const canSave = !loading && saveStatus !== 'saving';
 
-  function removeStory(id: string) {
-    setStories(stories.filter((s) => s.id !== id));
-    if (expandedId === id) setExpandedId(null);
-  }
+  // ── Tab: ARCHIVE ──
+  const ArchiveTab = () => (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <p style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
+          /locker-room पृष्ठमा देखिने ऐतिहासिक कथाहरू
+        </p>
+        <button
+          onClick={() => { const s = newArchiveStory(); setArchiveStories([s, ...archiveStories]); setArchiveExpanded(s.id); }}
+          style={{ background: 'transparent', border: '1px solid rgba(196,30,58,0.5)', color: '#C41E3A', padding: '0.4rem 1rem', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
+        >+ नयाँ कथा</button>
+      </div>
 
-  function updateStory(id: string, field: keyof Omit<Story, 'id'>, value: string) {
-    setStories(stories.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
-  }
+      {archiveStories.map((story) => {
+        const isOpen = archiveExpanded === story.id;
+        return (
+          <div key={story.id} style={{ marginBottom: '0.6rem', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', borderRadius: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', cursor: 'pointer', userSelect: 'none' }}
+              onClick={() => setArchiveExpanded(isOpen ? null : story.id)}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <span style={{ color: '#6B7280', fontSize: '0.65rem', width: '10px' }}>{isOpen ? '▼' : '▶'}</span>
+                <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#E8E8E8' }}>{story.title || '(शीर्षक छैन)'}</span>
+                {story.era && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.6rem', color: '#C9A84C', letterSpacing: '0.15em', textTransform: 'uppercase' }}>{story.era}</span>}
+              </div>
+              <button onClick={(e) => { e.stopPropagation(); setArchiveStories(archiveStories.filter(s => s.id !== story.id)); if (archiveExpanded === story.id) setArchiveExpanded(null); }}
+                style={{ background: 'transparent', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1, padding: '0 4px' }}>×</button>
+            </div>
+            {isOpen && (
+              <div style={{ padding: '0.25rem 1rem 1.25rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                {([['title', 'शीर्षक'], ['era', 'युग'], ['date', 'मिति'], ['thumb', 'Thumbnail URL']] as [keyof ArchiveStory, string][]).map(([field, lbl]) => (
+                  <div key={field} style={sectionStyle}>
+                    <label style={labelStyle}>{lbl}</label>
+                    <input type="text" value={story[field] as string} onChange={e => setArchiveStories(archiveStories.map(s => s.id === story.id ? { ...s, [field]: e.target.value } : s))}
+                      style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  </div>
+                ))}
+                <div style={sectionStyle}>
+                  <label style={labelStyle}>विवरण</label>
+                  <textarea value={story.description} onChange={e => setArchiveStories(archiveStories.map(s => s.id === story.id ? { ...s, description: e.target.value } : s))}
+                    rows={4} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }} onFocus={focusGold} onBlur={blurDim} />
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
-  const canSave = !loading && !!sha && saveStatus !== 'saving';
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <button onClick={() => handleSave('archive')} disabled={!canSave}
+          style={{ ...saveBtnStyle, background: canSave ? '#C41E3A' : '#6B7280', cursor: canSave ? 'pointer' : 'not-allowed' }}>
+          ✓ अभिलेख सेभ गर्नुस्
+        </button>
+      </div>
+    </>
+  );
+
+  // ── Tab: FEATURED ──
+  const FeaturedTab = () => (
+    <>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <p style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
+          Homepage "लकर रुमका कथाहरू" ग्रिडमा देखिने फिचर्ड कथाहरू
+        </p>
+        <button
+          onClick={() => { const s = newFeaturedStory(); setFeaturedStories([...featuredStories, s]); setFeaturedExpanded(featuredStories.length); }}
+          style={{ background: 'transparent', border: '1px solid rgba(196,30,58,0.5)', color: '#C41E3A', padding: '0.4rem 1rem', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
+        >+ नयाँ कार्ड</button>
+      </div>
+
+      {featuredStories.map((story, idx) => {
+        const isOpen = featuredExpanded === idx;
+        return (
+          <div key={idx} style={{ marginBottom: '0.6rem', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.02)', borderRadius: 2 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', cursor: 'pointer', userSelect: 'none' }}
+              onClick={() => setFeaturedExpanded(isOpen ? null : idx)}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <span style={{ color: '#6B7280', fontSize: '0.65rem', width: '10px' }}>{isOpen ? '▼' : '▶'}</span>
+                <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#E8E8E8' }}>{story.title || '(शीर्षक छैन)'}</span>
+                {story.type && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.6rem', color: '#C9A84C', letterSpacing: '0.15em', textTransform: 'uppercase' }}>{story.type}</span>}
+                {story.isPlayable && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.55rem', color: '#4ade80', letterSpacing: '0.1em', textTransform: 'uppercase' }}>▶ VIDEO</span>}
+              </div>
+              <button onClick={(e) => { e.stopPropagation(); setFeaturedStories(featuredStories.filter((_, i) => i !== idx)); if (featuredExpanded === idx) setFeaturedExpanded(null); }}
+                style={{ background: 'transparent', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: '1.1rem', lineHeight: 1, padding: '0 4px' }}>×</button>
+            </div>
+            {isOpen && (
+              <div style={{ padding: '0.25rem 1rem 1.25rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+                  {([['type', 'वर्ग (Tag)'], ['title', 'शीर्षक'], ['date', 'मिति'], ['slug', 'Slug (for link)']] as [keyof FeaturedStory, string][]).map(([field, lbl]) => (
+                    <div key={field} style={{ ...sectionStyle, gridColumn: field === 'title' ? '1 / -1' : 'auto' }}>
+                      <label style={labelStyle}>{lbl}</label>
+                      <input type="text" value={story[field] as string} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, [field]: e.target.value } : s))}
+                        style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                  ))}
+                </div>
+                <div style={sectionStyle}>
+                  <label style={labelStyle}>Image URL</label>
+                  <input type="text" value={story.image} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, image: e.target.value } : s))}
+                    style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+                  <div style={sectionStyle}>
+                    <label style={labelStyle}>Grid Size (Span)</label>
+                    <select value={story.span} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, span: e.target.value } : s))}
+                      style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                      {SPAN_OPTIONS.map(o => <option key={o.value} value={o.value} style={{ background: '#07080F' }}>{o.label}</option>)}
+                    </select>
+                  </div>
+                  <div style={sectionStyle}>
+                    <label style={labelStyle}>Video ID (if playable)</label>
+                    <input type="text" value={story.videoId} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, videoId: e.target.value } : s))}
+                      style={inputStyle} onFocus={focusGold} onBlur={blurDim} placeholder="e.g. dQw4w9WgXcQ" />
+                  </div>
+                </div>
+                <div style={sectionStyle}>
+                  <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
+                    <input type="checkbox" checked={story.isPlayable} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, isPlayable: e.target.checked } : s))}
+                      style={{ width: '1.1rem', height: '1.1rem', accentColor: '#C41E3A', cursor: 'pointer' }} />
+                    <span>Video प्लेयर देखाउनुस् (isPlayable)</span>
+                  </label>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <button onClick={() => handleSave('featured')} disabled={!canSave}
+          style={{ ...saveBtnStyle, background: canSave ? '#C41E3A' : '#6B7280', cursor: canSave ? 'pointer' : 'not-allowed' }}>
+          ✓ Homepage ग्रिड सेभ गर्नुस्
+        </button>
+      </div>
+    </>
+  );
 
   return (
-    <div className="bg-[#07080F] min-h-screen selection:bg-[#C41E3A] selection:text-white pb-32 relative font-sans">
+    <div style={{ minHeight: '100vh', background: '#07080F', padding: '2rem 1.5rem' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
 
-      {/* Hero Section */}
-      <section className="relative h-[70vh] w-full overflow-hidden flex flex-col justify-end">
-        <div
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
-            filter: "brightness(0.6)",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#07080F] via-[#07080F]/40 to-transparent" />
-
-        <div className="relative z-20 px-6 lg:px-12 w-full max-w-7xl mx-auto pb-16 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_both]">
-          <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", color: "#C9A84C", letterSpacing: "0.3em", textTransform: "uppercase", marginBottom: "8px", display: "block" }}>
-            विशेष वृत्तचित्र
-          </span>
-          <h1 className="text-white text-[clamp(48px,8vw,90px)] leading-[0.9] mb-8" style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }}>
-            नेपाली क्रिकेटको इतिहास
-          </h1>
-          <button className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-8 py-4 hover:border-[#C41E3A] hover:bg-[#C41E3A]/20 transition-all duration-300 group">
-            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "18px", fontWeight: 700, color: "white" }}>
-              पढ्नुस्
-            </span>
-          </button>
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '2rem', paddingBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.08)', flexWrap: 'wrap', gap: '1rem' }}>
+          <div>
+            <h1 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: '1.75rem', letterSpacing: '0.08em', color: '#E8E8E8', margin: 0, lineHeight: 1 }}>
+              लकर रुम
+            </h1>
+            <p style={{ fontFamily: 'var(--font-jetbrains-mono), monospace', fontSize: '0.6rem', color: '#6B7280', marginTop: '0.35rem', margin: '0.35rem 0 0 0' }}>
+              content/locker-room.json · content/pages/locker-room.json
+            </p>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            {saveStatus === 'saving' && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C9A84C' }}>सेभ हुँदैछ...</span>}
+            {saveStatus === 'saved' && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#4ade80' }}>✓ सेभ भयो</span>}
+            {saveStatus === 'error' && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: '#C41E3A' }}>⚠ त्रुटि</span>}
+          </div>
         </div>
-      </section>
 
-      {/* Archive Stories */}
-      <section className="relative z-20 px-6 lg:px-12 w-full max-w-7xl mx-auto mt-12">
-        <div className="flex items-center mb-8">
-          <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", color: "#C9A84C", textTransform: "uppercase", marginRight: "16px", letterSpacing: "0.25em" }}>
-            इतिहासको अभिलेख
-          </span>
-          <div className="flex-grow border-t border-[#C9A84C] opacity-40" />
+        {/* Status banners */}
+        {saveStatus === 'saved' && (
+          <div style={{ background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.2)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#4ade80' }}>
+            ✓ सेभ भयो — Vercel मा प्रकाशित हुँदैछ (~१ मिनेट)
+          </div>
+        )}
+        {loadError && (
+          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
+            ⚠ {loadError}
+          </div>
+        )}
+        {saveStatus === 'error' && saveError && (
+          <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.75rem 1rem', marginBottom: '1.5rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: '#C41E3A' }}>
+            ⚠ {saveError}
+          </div>
+        )}
+
+        {/* Tabs */}
+        <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: '2rem', gap: '0' }}>
+          {([['archive', 'इतिहासको अभिलेख', '/locker-room'], ['featured', 'Homepage ग्रिड', 'Storytelling Hub']] as [ActiveTab, string, string][]).map(([tab, label, sub]) => (
+            <button key={tab} onClick={() => setActiveTab(tab)}
+              style={{
+                background: 'transparent', border: 'none', padding: '0.75rem 1.5rem', cursor: 'pointer',
+                fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.75rem', letterSpacing: '0.12em', textTransform: 'uppercase',
+                color: activeTab === tab ? '#E8E8E8' : 'rgba(255,255,255,0.4)',
+                borderBottom: activeTab === tab ? '2px solid #C41E3A' : '2px solid transparent',
+                marginBottom: '-1px', transition: 'color 200ms',
+                display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px',
+              }}>
+              {label}
+              <span style={{ fontSize: '0.55rem', color: activeTab === tab ? '#C9A84C' : '#6B7280', textTransform: 'none', letterSpacing: '0' }}>{sub}</span>
+            </button>
+          ))}
         </div>
 
         {loading ? (
@@ -171,240 +309,16 @@ export default function AdminLockerRoomPage() {
             लोड हुँदैछ...
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {stories.map((story, idx) => {
-              let overlayBg: string | undefined;
-              if (idx === 0) overlayBg = "linear-gradient(135deg, rgba(196,30,58,0.35), rgba(0,0,0,0.6))";
-              else if (idx === 2) overlayBg = "linear-gradient(135deg, rgba(0,56,147,0.35), rgba(0,0,0,0.6))";
-              else if (idx === 3) overlayBg = "linear-gradient(135deg, rgba(201,168,76,0.25), rgba(0,0,0,0.65))";
-              else if (idx === 5) overlayBg = "linear-gradient(135deg, rgba(196,30,58,0.2), rgba(0,56,147,0.2))";
-
-              return (
-                <Link key={story.id} href={`/admin/locker-room/${story.id}`} className="flex flex-col group cursor-pointer animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both]" style={{ animationDelay: `${idx * 0.1}s`, textDecoration: 'none' }}>
-                  <div className="relative aspect-video rounded-sm overflow-hidden bg-[#0a0f16] border border-white/5 mb-4 shadow-lg">
-                    <div
-                      className="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-400 ease-[cubic-bezier(0.76,0,0.24,1)] grayscale-[80%] brightness-[0.6] group-hover:grayscale-0 group-hover:brightness-[0.9] group-hover:scale-105"
-                      style={{ backgroundImage: `url(${story.thumb})` }}
-                    />
-                    {overlayBg && (
-                      <div className="absolute inset-0 pointer-events-none transition-opacity duration-400 group-hover:opacity-0" style={{ background: overlayBg }} />
-                    )}
-                  </div>
-                  <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", color: "#C9A84C", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: "6px" }}>
-                    {story.era}
-                  </span>
-                  <h3
-                    className="group-hover:text-[#C9A84C] transition-colors duration-300"
-                    style={{ fontFamily: "Mukta, sans-serif", fontSize: "18px", fontWeight: 600, color: "#FFFFFF", lineHeight: 1.3, marginBottom: "6px" }}
-                  >
-                    {story.title}
-                  </h3>
-                  <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em", marginBottom: "10px" }}>
-                    {story.date}
-                  </span>
-                  <p
-                    style={{
-                      fontFamily: "Mukta, sans-serif",
-                      fontSize: "14px",
-                      color: "rgba(255,255,255,0.45)",
-                      lineHeight: 1.6,
-                      margin: 0,
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {story.description}
-                  </p>
-                </Link>
-              );
-            })}
-          </div>
+          activeTab === 'archive' ? <ArchiveTab /> : <FeaturedTab />
         )}
-      </section>
 
-      {/* Closing Line */}
-      <div style={{ textAlign: "center", padding: "80px 0 60px 0" }}>
-        <p style={{ fontFamily: "Mukta, sans-serif", fontStyle: "italic", fontSize: "clamp(14px, 1.6vw, 17px)", color: "rgba(255,255,255,0.18)", margin: 0 }}>
-          ती क्षणहरू — जो स्कोरबोर्डमा छैनन् तर हृदयमा छन्।
-        </p>
+        {/* Back link */}
+        <div style={{ marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <Link href="/admin/dashboard" style={{ textDecoration: 'none' }}>
+            <button style={cancelBtnStyle}>← ड्यासबोर्ड</button>
+          </Link>
+        </div>
       </div>
-
-      {/* Gold FAB */}
-      <button
-        onClick={() => setShowPanel(true)}
-        title="लकर रुम सम्पादन"
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 1000,
-          width: '56px',
-          height: '56px',
-          borderRadius: '50%',
-          background: '#C9A84C',
-          border: 'none',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(201,168,76,0.4)',
-          color: '#07080F',
-          fontSize: '22px',
-          lineHeight: 1,
-          transition: 'transform 150ms ease, box-shadow 150ms ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = 'scale(1.08)';
-          e.currentTarget.style.boxShadow = '0 6px 28px rgba(201,168,76,0.6)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = '0 4px 20px rgba(201,168,76,0.4)';
-        }}
-      >
-        ✏
-      </button>
-
-      {/* Backdrop + Slide-in edit panel */}
-      {showPanel && (
-        <>
-          <div
-            onClick={() => setShowPanel(false)}
-            style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 999 }}
-          />
-          <div
-            style={{
-              position: 'fixed',
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: '480px',
-              maxWidth: '100vw',
-              background: '#0D1B2A',
-              borderLeft: '1px solid rgba(196,30,58,0.3)',
-              zIndex: 1000,
-              display: 'flex',
-              flexDirection: 'column',
-              transform: 'translateX(0)',
-              transition: 'transform 300ms cubic-bezier(0.76,0,0.24,1)',
-            }}
-          >
-            {/* Panel header */}
-            <div style={{ padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.07)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-              <h2 style={{ fontFamily: 'var(--font-bebas), sans-serif', fontSize: '1.4rem', letterSpacing: '0.08em', color: '#C41E3A', margin: 0, lineHeight: 1 }}>
-                इतिहासको अभिलेख
-              </h2>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <button
-                  onClick={addStory}
-                  style={{ background: 'transparent', border: '1px solid rgba(196,30,58,0.4)', color: '#C41E3A', padding: '0.4rem 0.8rem', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
-                >
-                  + नयाँ
-                </button>
-                <button
-                  onClick={() => setShowPanel(false)}
-                  style={{ background: 'transparent', border: 'none', color: '#6B7280', fontSize: '20px', cursor: 'pointer', lineHeight: 1, padding: 0 }}
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-
-            {/* Status banners */}
-            <div style={{ padding: '0 20px', flexShrink: 0 }}>
-              {saveStatus === 'saved' && (
-                <div style={{ background: 'rgba(74,222,128,0.07)', border: '1px solid rgba(74,222,128,0.2)', padding: '0.6rem 0.75rem', marginTop: '0.75rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.8rem', color: '#4ade80' }}>
-                  ✓ सेभ भयो — Vercel मा प्रकाशित हुँदैछ (~१ मिनेट)
-                </div>
-              )}
-              {loadError && (
-                <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.6rem 0.75rem', marginTop: '0.75rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.8rem', color: '#C41E3A' }}>
-                  ⚠ {loadError}
-                </div>
-              )}
-              {saveStatus === 'error' && saveError && (
-                <div style={{ background: 'rgba(196,30,58,0.08)', border: '1px solid rgba(196,30,58,0.3)', padding: '0.6rem 0.75rem', marginTop: '0.75rem', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.8rem', color: '#C41E3A' }}>
-                  ⚠ {saveError}
-                </div>
-              )}
-            </div>
-
-            {/* Panel body */}
-            <div style={{ flex: 1, overflowY: 'auto', padding: '16px 20px' }}>
-              {loading ? (
-                <div style={{ padding: '3rem 0', textAlign: 'center', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#6B7280' }}>
-                  लोड हुँदैछ...
-                </div>
-              ) : (
-                stories.map((story) => {
-                  const isOpen = expandedId === story.id;
-                  return (
-                    <div key={story.id} style={{ marginBottom: '0.75rem', border: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)', borderRadius: 2 }}>
-                      <div
-                        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 1rem', cursor: 'pointer', userSelect: 'none' }}
-                        onClick={() => setExpandedId(isOpen ? null : story.id)}
-                      >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                          <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', color: '#6B7280', width: '12px', flexShrink: 0 }}>
-                            {isOpen ? '▼' : '▶'}
-                          </span>
-                          <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#E8E8E8' }}>
-                            {story.title || '(शीर्षक छैन)'}
-                          </span>
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); removeStory(story.id); }}
-                          style={{ background: 'transparent', border: 'none', color: '#6B7280', cursor: 'pointer', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.6rem', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '0.2rem 0.4rem' }}
-                        >
-                          ×
-                        </button>
-                      </div>
-
-                      {isOpen && (
-                        <div style={{ padding: '0 1rem 1.25rem 1rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                          <div style={{ ...sectionStyle, marginTop: '1rem' }}>
-                            <label style={labelStyle}>शीर्षक</label>
-                            <input type="text" value={story.title} onChange={(e) => updateStory(story.id, 'title', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                          </div>
-                          <div style={sectionStyle}>
-                            <label style={labelStyle}>मिति</label>
-                            <input type="text" value={story.date} onChange={(e) => updateStory(story.id, 'date', e.target.value)} style={{ ...inputStyle, maxWidth: '220px' }} onFocus={focusGold} onBlur={blurDim} />
-                          </div>
-                          <div style={sectionStyle}>
-                            <label style={labelStyle}>युग</label>
-                            <input type="text" value={story.era} onChange={(e) => updateStory(story.id, 'era', e.target.value)} style={{ ...inputStyle, maxWidth: '280px' }} onFocus={focusGold} onBlur={blurDim} />
-                          </div>
-                          <div style={sectionStyle}>
-                            <label style={labelStyle}>विवरण</label>
-                            <textarea value={story.description} onChange={(e) => updateStory(story.id, 'description', e.target.value)} rows={4} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }} onFocus={focusGold} onBlur={blurDim} />
-                          </div>
-                          <div style={sectionStyle}>
-                            <label style={labelStyle}>Thumbnail URL</label>
-                            <input type="text" value={story.thumb} onChange={(e) => updateStory(story.id, 'thumb', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })
-              )}
-            </div>
-
-            {/* Panel footer */}
-            <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
-              <button
-                onClick={handleSave}
-                disabled={!canSave}
-                style={{ ...saveBtnStyle, width: '100%', background: canSave ? '#C41E3A' : '#6B7280', cursor: canSave ? 'pointer' : 'not-allowed' }}
-              >
-                {saveStatus === 'saving' ? 'सेभ हुँदैछ...' : 'सबै परिवर्तन सेभ गर्नुस् →'}
-              </button>
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 }

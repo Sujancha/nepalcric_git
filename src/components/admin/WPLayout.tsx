@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Users, BookOpen, Image as ImageIcon, Settings, LogOut, ExternalLink, Calendar, Activity } from 'lucide-react';
+import { LayoutDashboard, Users, BookOpen, Image as ImageIcon, Settings, LogOut, ExternalLink, Calendar, Activity, Film } from 'lucide-react';
 
 const SIDEBAR_LINKS = [
   { href: '/admin/dashboard', label: 'ड्यासबोर्ड', icon: LayoutDashboard },
@@ -10,6 +10,7 @@ const SIDEBAR_LINKS = [
   { href: '/admin/stories', label: 'कथाहरू', icon: BookOpen },
   { href: '/admin/match-day', label: 'म्याच डे', icon: Calendar },
   { href: '/admin/scoreboard', label: 'स्कोरबोर्ड (Live)', icon: Activity },
+  { href: '/admin/locker-room', label: 'लकर रुम', icon: Film },
   { href: '/admin/media', label: 'मिडिया (Media)', icon: ImageIcon },
   { href: '/admin/settings', label: 'सेटिङ्स', icon: Settings },
 ];

@@ -3,7 +3,18 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
-export default function StorytellingHub() {
+interface FeaturedStory {
+    type: string;
+    title: string;
+    date: string;
+    span: string;
+    image: string;
+    slug: string;
+    isPlayable: boolean;
+    videoId: string;
+}
+
+export default function StorytellingHub({ stories }: { stories: FeaturedStory[] }) {
     const [activeVideo, setActiveVideo] = useState<string | null>(null);
     const [isAnimating, setIsAnimating] = useState(false);
 
@@ -30,44 +41,7 @@ export default function StorytellingHub() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [activeVideo, closeVideo]);
 
-    const stories = [
-        {
-            type: "विश्वकप",
-            title: "एक रन: डलासको त्यो रात जब नेपालले विश्वलाई रुवायो",
-            date: "जुन १५, २०२४",
-            span: "md:col-span-2 md:row-span-2",
-            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            slug: "nepal-vs-south-africa-one-run",
-            isPlayable: false
-        },
-        {
-            type: "म्याच कथा",
-            title: "मायाको दिन, करणको जादु",
-            date: "फेब्रुअरी १४, २०२३",
-            span: "md:col-span-1 md:row-span-1",
-            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            slug: "karan-kc-valentines-day-miracle",
-            isPlayable: false,
-        },
-        {
-            type: "न्युज",
-            title: "नेपाली फ्यानको सागर: सेन्ट भिन्सेन्टमा 'होम अवे फ्रम होम'",
-            date: "१ हप्ता अघि",
-            span: "md:col-span-1 md:row-span-1",
-            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-            slug: "nepal-fans-dallas",
-            isPlayable: false,
-        },
-        {
-            type: "ट्रेनिङ",
-            title: "सोमपाल र करण: एक दशकको अटूट युद्ध",
-            date: "२ हप्ता अघि",
-            span: "md:col-span-2 md:row-span-1",
-            image: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-            isPlayable: true,
-            videoId: "video-2"
-        }
-    ];
+    // stories are now injected from parent via props
 
     return (
         <section id="stories" className="py-24 bg-[#07080F] border-b border-t border-white/5 mt-1 scroll-mt-20">
