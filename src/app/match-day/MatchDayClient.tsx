@@ -2,7 +2,27 @@
 
 import { useEffect, useState } from "react";
 
-export default function MatchDayClient() {
+export interface Fixture {
+    id: string;
+    date: string;
+    time: string;
+    nepaliName: string;
+    venue: string;
+    format: string;
+    threat: number;
+    threatLevel: string;
+    threatColor: string;
+    weapon: string;
+    danger: string;
+    h2h: string;
+}
+
+export interface MatchDayData {
+    targetDate: string;
+    fixtures: Fixture[];
+}
+
+export default function MatchDayClient({ data }: { data: MatchDayData }) {
     const [mounted, setMounted] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [copied, setCopied] = useState(false);
@@ -27,11 +47,11 @@ export default function MatchDayClient() {
     useEffect(() => {
         if (!mounted) return;
 
-        const targetDate = new Date('2026-03-15T10:00:00+05:45').getTime();
+        const targetTime = new Date(data.targetDate).getTime();
 
         const timer = setInterval(() => {
             const now = new Date().getTime();
-            const diff = targetDate - now;
+            const diff = targetTime - now;
 
             if (diff < 0) {
                 clearInterval(timer);
@@ -54,22 +74,13 @@ export default function MatchDayClient() {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [mounted]);
-
-    const initialFixtures = [
-        { id: "01", date: "SEP 16", time: "19:45 NPT", nepaliName: "क्यानडाविरुद्ध", venue: "King City, Canada", format: "ओडीआई", threat: 75, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "रोहित पौडेल", danger: "साद बिन जफर", h2h: "नेपाल ३-१ क्यानडा" },
-        { id: "02", date: "SEP 18", time: "19:45 NPT", nepaliName: "ओमानविरुद्ध", venue: "King City, Canada", format: "ओडीआई", threat: 85, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "सन्दीप लामिछाने", danger: "आकिब इलियास", h2h: "नेपाल ४-३ ओमान" },
-        { id: "03", date: "SEP 22", time: "19:45 NPT", nepaliName: "क्यानडाविरुद्ध", venue: "King City, Canada", format: "ओडीआई", threat: 75, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "दीपेन्द्र सिंह ऐरी", danger: "निकोलस किर्टन", h2h: "नेपाल ३-१ क्यानडा" },
-        { id: "04", date: "SEP 24", time: "19:45 NPT", nepaliName: "ओमानविरुद्ध", venue: "King City, Canada", format: "ओडीआई", threat: 85, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "कुशल मल्ल", danger: "जिशान मकसूद", h2h: "नेपाल ४-३ ओमान" },
-        { id: "05", date: "OCT 25", time: "21:15 NPT", nepaliName: "अमेरिकाविरुद्ध", venue: "Dallas, USA", format: "ओडीआई", threat: 90, threatLevel: "CRITICAL", threatColor: "#C41E3A", weapon: "कुशल भुर्तेल", danger: "सौरभ नेत्रावलकर", h2h: "नेपाल ३-२ अमेरिका" },
-        { id: "06", date: "OCT 27", time: "21:15 NPT", nepaliName: "स्कटल्यान्डविरुद्ध", venue: "Dallas, USA", format: "ओडीआई", threat: 80, threatLevel: "HIGH", threatColor: "#C41E3A", weapon: "गुलशन झा", danger: "रिची बेरिंग्टन", h2h: "नेपाल ३-३ स्कटल्यान्ड" }
-    ];
+    }, [mounted, data.targetDate]);
 
     // Determine past status based on real current date
     const today = new Date();
 
     // Sort chronologically and determine past status
-    const fixtures = initialFixtures.map(f => {
+    const fixtures = data.fixtures.map(f => {
         const fixtureDate = new Date(`${f.date} 2026`);
         return { ...f, past: fixtureDate < today, timestamp: fixtureDate.getTime() };
     }).sort((a, b) => a.timestamp - b.timestamp);
