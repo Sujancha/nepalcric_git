@@ -30,7 +30,14 @@ const navLinks = [
     { name: "फ्यान जोन", href: "/fanzone" },
 ];
 
-export default function Navbar() {
+interface ScoreboardData {
+    isLive: boolean;
+    matchTitle: string;
+    matchStatus: string;
+    pulseText: string;
+}
+
+export default function Navbar({ scoreboardData }: { scoreboardData?: ScoreboardData }) {
     const pathname = usePathname();
 
     // The admin dashboard has its own WPLayout sidebar. Do not render this site-wide Navbar.
@@ -53,7 +60,7 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
 
-    const isLiveMatch = true;
+    const isLiveMatch = scoreboardData?.isLive ?? false;
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 10);

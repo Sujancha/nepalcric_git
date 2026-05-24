@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CricketScrollJourney from "@/components/layout/CricketScrollJourney";
+import fs from "fs";
+import path from "path";
 
 // Display Font (English Headlines)
 const bebasNeue = Bebas_Neue({
@@ -54,11 +56,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const scoreboardPath = path.join(process.cwd(), "content", "pages", "scoreboard.json");
+  const scoreboardData = JSON.parse(fs.readFileSync(scoreboardPath, "utf8"));
+
   return (
     <html lang="ne">
       <body className={`${bebasNeue.variable} ${mukta.variable} ${barlowCondensed.variable} ${jetbrainsMono.variable} antialiased`}>
         <div className="min-h-screen flex flex-col pt-16">
-          <Navbar />
+          <Navbar scoreboardData={scoreboardData} />
           <CricketScrollJourney />
           <main className="flex-grow">{children}</main>
           <Footer />

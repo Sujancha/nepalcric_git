@@ -4,7 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function HeroSection() {
+interface ScoreboardData {
+    isLive: boolean;
+    matchTitle: string;
+    matchStatus: string;
+    pulseText: string;
+}
+
+export default function HeroSection({ scoreboardData }: { scoreboardData?: ScoreboardData }) {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
     const [mounted, setMounted] = useState(false);
     interface Particle {
@@ -14,8 +21,7 @@ export default function HeroSection() {
     const [particles, setParticles] = useState<Particle[]>([]);
     const [showPreloader, setShowPreloader] = useState(true);
 
-    // Simulate live match state for Phase 1 requirements
-    const isLiveMatch = false;
+    const isLiveMatch = scoreboardData?.isLive ?? false;
 
     useEffect(() => {
         if (sessionStorage.getItem('hasVisited')) {
@@ -305,7 +311,7 @@ export default function HeroSection() {
                         color: '#FFFFFF',
                         letterSpacing: '0'
                     }}>
-                        नेपाल VS UAE · MATCH IN PROGRESS
+                        {scoreboardData?.matchTitle} · {scoreboardData?.matchStatus}
                     </span>
                     <span style={{
                         fontFamily: 'Barlow Condensed, sans-serif',

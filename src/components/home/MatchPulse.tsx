@@ -2,9 +2,15 @@
 
 import { useEffect, useState } from "react";
 
-export default function MatchPulse() {
-    // Simulate live match state for Phase 1 requirements
-    const isLiveMatch = true;
+interface ScoreboardData {
+    isLive: boolean;
+    matchTitle: string;
+    matchStatus: string;
+    pulseText: string;
+}
+
+export default function MatchPulse({ scoreboardData }: { scoreboardData?: ScoreboardData }) {
+    const isLiveMatch = scoreboardData?.isLive ?? false;
     const [isStale, setIsStale] = useState(false);
 
     useEffect(() => {
@@ -37,11 +43,11 @@ export default function MatchPulse() {
 
                 {!isStale ? (
                     <p className="font-sans text-[#B0B8C8] text-lg leading-relaxed max-w-3xl">
-                        नेपालले बलिङमा सानदार सुरुवात गर्दै युएईका टप अर्डरलाई ध्वस्त बनाएको छ। दीपेन्द्र सिंह ऐरीको स्पीन ट्रयापले ब्याट्सम्यानलाई खुल्न दिएको छैन, रन रेट निरन्तर दबाबमा छ।
+                        {scoreboardData?.pulseText}
                     </p>
                 ) : (
                     <p className="font-sans font-bold text-stadium-white text-xl uppercase tracking-wider opacity-60">
-                        Match in Progress...
+                        {scoreboardData?.matchStatus}
                     </p>
                 )}
             </div>

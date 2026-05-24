@@ -6,8 +6,13 @@ import Voices from "@/components/home/Voices";
 import StorytellingHub from "@/components/home/StorytellingHub";
 import FanSpotlight from "@/components/home/FanSpotlight";
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import fs from "fs";
+import path from "path";
 
 export default function Home() {
+  const scoreboardPath = path.join(process.cwd(), "content", "pages", "scoreboard.json");
+  const scoreboardData = JSON.parse(fs.readFileSync(scoreboardPath, "utf8"));
+
   return (
     <div className="w-full bg-[#07080F]">
       {/* 1. Balen Shah Takeover — Full-screen hero */}
@@ -21,11 +26,11 @@ export default function Home() {
       />
 
       {/* 2. Cinematic Cricket Hero */}
-      <HeroSection />
+      <HeroSection scoreboardData={scoreboardData} />
 
       {/* 3. Editorial Guard */}
       <ScrollReveal direction="down" delay={0}>
-        <MatchPulse />
+        <MatchPulse scoreboardData={scoreboardData} />
       </ScrollReveal>
 
       {/* 4. The Magazine Grid */}
