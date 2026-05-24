@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import StoryArticleClient from "./StoryArticleClient";
-import { stories } from "@/lib/storiesData";
+import { getStoryBySlug } from "@/lib/getStories";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -11,21 +11,21 @@ export async function generateMetadata(
     { params }: Props
 ): Promise<Metadata> {
     const { slug } = await params;
-    const story = stories.find(s => s.slug === slug);
+    const storyData = getStoryBySlug(slug);
 
-    if (!story) {
+    if (!storyData) {
         return {
             title: "Story Not Found",
         };
     }
 
     return {
-        title: story.title,
-        description: story.lede,
+        title: storyData.data.title,
+        description: storyData.data.lede,
         openGraph: {
             type: "article",
             locale: "ne_NP",
-            images: [story.heroImage],
+            images: [storyData.data.heroImage],
         },
         twitter: {
             card: "summary_large_image",
@@ -35,11 +35,11 @@ export async function generateMetadata(
 
 export default async function StoryArticlePage({ params }: Props) {
     const { slug } = await params;
-    const story = stories.find(s => s.slug === slug);
+    const storyData = getStoryBySlug(slug);
 
-    if (!story) {
+    if (!storyData) {
         notFound();
     }
 
-    return <StoryArticleClient story={story} />;
+    return <StoryArticleClient story={storyData.data} htmlContent={storyData.content} />;
 }

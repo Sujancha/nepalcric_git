@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { stories } from "@/lib/storiesData";
+import { getAllStories } from "@/lib/getStories";
 
 export const metadata: Metadata = {
     title: "कथाहरू",
@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function StoriesArchivePage() {
+    const stories = getAllStories();
     const featuredStories = stories.filter(s => s.featured);
     const allStories = stories;
 

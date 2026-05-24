@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Section, stories, Story } from "@/lib/storiesData";
+import { getAllStories, StoryFrontmatter } from "@/lib/getStories";
 
-export default function StoryArticleClient({ story }: { story: Story }) {
+export default function StoryArticleClient({ story, htmlContent }: { story: StoryFrontmatter, htmlContent: string }) {
     const [scrollY, setScrollY] = useState(0);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export default function StoryArticleClient({ story }: { story: Story }) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Get recommended story (next in list or first if last)
+    const stories = getAllStories();
     const currentIndex = stories.findIndex(s => s.slug === story.slug);
     const recoStory = stories[(currentIndex + 1) % stories.length];
 
@@ -81,62 +81,140 @@ export default function StoryArticleClient({ story }: { story: Story }) {
                             {story.lede}
                         </div>
 
-                        {story.content.map((section: Section, idx: number) => {
-                            switch (section.type) {
-                                case 'paragraph':
-                                    return (
-                                        <p key={idx} className={idx === 0 ? "first-letter:font-display first-letter:text-7xl first-letter:text-[#C41E3A] first-letter:mr-3 first-letter:float-left first-line:uppercase first-line:tracking-widest" : ""}>
-                                            {section.text}
-                                        </p>
-                                    );
-                                case 'pullquote':
-                                    return (
-                                        <blockquote key={idx} className="relative my-20 -mx-6 md:-mx-16 lg:-mx-24 pl-8 md:pl-12 py-8 border-l-4 border-[#C9A84C] bg-gradient-to-r from-white/[0.03] to-transparent">
-                                            <span className="absolute top-0 left-6 font-display font-black text-[6rem] leading-none text-[#C9A84C]/20 select-none pointer-events-none -mt-8">
-                                                &ldquo;
-                                            </span>
-                                            <p className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-stadium-white leading-[1.2] tracking-[-0.02em] drop-shadow-lg relative z-10">
-                                                {section.text}
-                                            </p>
-                                            {section.attribution && (
-                                                <cite className="block mt-6 font-sans font-bold text-[#C9A84C] text-sm uppercase tracking-widest not-italic">
-                                                    {section.attribution}
-                                                </cite>
-                                            )}
-                                        </blockquote>
-                                    );
-                                case 'isolated':
-                                    return (
-                                        <div key={idx} className="flex justify-center my-16">
-                                            <span className="font-display font-black text-4xl md:text-6xl text-stadium-white uppercase tracking-tighter text-center border-y border-white/10 py-6 px-12">
-                                                {section.text}
-                                            </span>
-                                        </div>
-                                    );
-                                case 'imagebreak':
-                                    return (
-                                        <div key={idx} className="relative my-24 -mx-6 md:-mx-16 lg:-mx-24 aspect-[21/9] overflow-hidden rounded-sm border border-white/5">
-                                            <Image
-                                                src={section.image || ''}
-                                                alt={section.caption || "Story Image"}
-                                                fill
-                                                className="object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700"
-                                            />
-                                            {section.caption && (
-                                                <div className="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md px-4 py-2 border border-white/10">
-                                                    <span className="font-sans text-[10px] text-white/70 uppercase tracking-widest">{section.caption}</span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    );
-                                default:
-                                    return null;
-                            }
-                        })}
-
+                        <div 
+                            className="story-content" 
+                            dangerouslySetInnerHTML={{ __html: htmlContent }} 
+                        />
                     </div>
                 </div>
             </article>
+
+            <style jsx global>{`
+                /* Story HTML Content Styling */
+                .story-content p {
+                    margin-bottom: 2rem;
+                }
+                .story-content p:first-of-type {
+                    font-family: var(--font-display), sans-serif;
+                    font-size: 1.5rem;
+                }
+                .story-content p:first-of-type::first-letter {
+                    font-family: var(--font-display), sans-serif;
+                    font-size: 4.5rem;
+                    color: #C41E3A;
+                    margin-right: 0.75rem;
+                    float: left;
+                    line-height: 1;
+                }
+                
+                .story-content h3 {
+                    display: flex;
+                    justify-content: center;
+                    margin: 4rem 0;
+                    font-family: var(--font-display), sans-serif;
+                    font-weight: 900;
+                    font-size: 2.25rem;
+                    color: #E8E8E8;
+                    text-transform: uppercase;
+                    letter-spacing: -0.05em;
+                    text-align: center;
+                    border-top: 1px solid rgba(255,255,255,0.1);
+                    border-bottom: 1px solid rgba(255,255,255,0.1);
+                    padding: 1.5rem 3rem;
+                }
+                
+                @media (min-width: 768px) {
+                    .story-content h3 {
+                        font-size: 3.75rem;
+                    }
+                }
+                
+                .story-content img {
+                    width: 100%;
+                    height: auto;
+                    margin: 4rem 0;
+                    border-radius: 0.125rem;
+                    border: 1px solid rgba(255,255,255,0.05);
+                    filter: grayscale(30%);
+                    transition: filter 0.7s;
+                }
+                
+                .story-content img:hover {
+                    filter: grayscale(0%);
+                }
+                
+                .story-content .custom-pull-quote {
+                    position: relative;
+                    margin: 5rem -1.5rem;
+                    padding: 2rem 2rem 2rem 2rem;
+                    border-left: 4px solid #C9A84C;
+                    background: linear-gradient(to right, rgba(255,255,255,0.03), transparent);
+                }
+                
+                @media (min-width: 768px) {
+                    .story-content .custom-pull-quote {
+                        margin: 5rem -4rem;
+                        padding-left: 3rem;
+                    }
+                }
+                
+                @media (min-width: 1024px) {
+                    .story-content .custom-pull-quote {
+                        margin: 5rem -6rem;
+                    }
+                }
+                
+                .story-content .custom-pull-quote::before {
+                    content: "“";
+                    position: absolute;
+                    top: 0;
+                    left: 1.5rem;
+                    font-family: var(--font-display), sans-serif;
+                    font-weight: 900;
+                    font-size: 6rem;
+                    line-height: 1;
+                    color: rgba(201,168,76,0.2);
+                    user-select: none;
+                    pointer-events: none;
+                    margin-top: -2rem;
+                }
+                
+                .story-content .custom-pull-quote p:first-child {
+                    font-family: var(--font-display), sans-serif;
+                    font-weight: 900;
+                    font-size: 1.875rem;
+                    color: #E8E8E8;
+                    line-height: 1.2;
+                    letter-spacing: -0.02em;
+                    margin-bottom: 0;
+                    position: relative;
+                    z-index: 10;
+                }
+                
+                @media (min-width: 768px) {
+                    .story-content .custom-pull-quote p:first-child {
+                        font-size: 2.25rem;
+                    }
+                }
+                
+                @media (min-width: 1024px) {
+                    .story-content .custom-pull-quote p:first-child {
+                        font-size: 3rem;
+                    }
+                }
+                
+                .story-content .custom-pull-quote p:last-child {
+                    display: block;
+                    margin-top: 1.5rem;
+                    font-family: var(--font-sans), sans-serif;
+                    font-weight: 700;
+                    color: #C9A84C;
+                    font-size: 0.875rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    margin-bottom: 0;
+                }
+            `}</style>
 
             {/* Recommended Context */}
             {recoStory && (

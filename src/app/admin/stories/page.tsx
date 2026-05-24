@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { stories } from '@/lib/storiesData';
+import { getAllStories } from '@/lib/getStories';
 
 export default function AdminStoriesPage() {
+    const stories = getAllStories();
     const featured = stories.filter((s) => s.featured);
     const rest = stories.filter((s) => !s.featured);
 
@@ -51,30 +52,24 @@ export default function AdminStoriesPage() {
                     </div>
                 </div>
 
-                {/* Edit note */}
-                <div
-                    style={{
-                        background: 'rgba(201,168,76,0.05)',
-                        border: '1px solid rgba(201,168,76,0.15)',
-                        padding: '0.75rem 1rem',
-                        marginBottom: '2.5rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.6rem',
-                    }}
-                >
-                    <span style={{ color: '#C9A84C', fontSize: '14px' }}>ℹ</span>
-                    <p
+                {/* Add Story Button could go here */}
+                <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'flex-end' }}>
+                    <Link
+                        href="#"
                         style={{
                             fontFamily: 'var(--font-barlow), sans-serif',
-                            fontSize: '0.7rem',
+                            fontSize: '0.75rem',
                             letterSpacing: '0.1em',
-                            color: '#C9A84C',
-                            margin: 0,
+                            textTransform: 'uppercase',
+                            background: '#C41E3A',
+                            color: 'white',
+                            padding: '0.6rem 1.2rem',
+                            borderRadius: '4px',
+                            textDecoration: 'none',
                         }}
                     >
-                        कथाहरू <code style={{ fontFamily: 'monospace', background: 'rgba(255,255,255,0.08)', padding: '0 4px' }}>src/lib/storiesData.ts</code> मा सम्पादन गर्नुस्
-                    </p>
+                        + नयाँ कथा थप्नुस्
+                    </Link>
                 </div>
 
                 {/* Featured stories */}
@@ -196,8 +191,7 @@ function StoryRow({ story }: { story: { slug: string; title: string; category: s
                 </div>
             </div>
             <Link
-                href={`/story/${story.slug}`}
-                target="_blank"
+                href={`/admin/story/${story.slug}`}
                 rel="noopener noreferrer"
                 style={{
                     fontFamily: 'var(--font-barlow), sans-serif',
