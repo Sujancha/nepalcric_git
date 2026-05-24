@@ -11,7 +11,7 @@ These are not suggestions. Every violation found in the Rohit Paudel session has
 ### PROSE QUALITY
 - **No cheap fragmented prose.** Proper paragraphs throughout — minimum 3–5 sentences each. The prose must breathe and develop, not flicker.
 - **Von Restorff isolation: maximum 4 per piece.** Single isolated lines exist only when they are genuinely, undeniably earned — a gut-punch, a statistical revelation, a one-word emotional disclosure. Count them. If you exceed 4, cut the weakest ones back into paragraphs.
-- **Netflix documentary depth at Cinematic level.** Every section must feel fully developed — the reader should feel they are inside the moment, not being told about it from the outside.
+- **HYPER-DETAILED NETFLIX DOCUMENTARY DEPTH (CRITICAL OBLIGATION):** Every section must be extensively detailed, immersive, and heavy with sensory information (sweat, sound, tension). The writing must be so detailed that "no one else has ever written anything like it." Generic summaries, rushed paragraphs, and one-liners are strictly forbidden. You must make the reader feel they are inside the exact second the event happened. Expand on the psychology, the environment, and the stakes.
 - **Statistics are weapons, not data.** Never write "top run-scorer." Always write "279 runs in 7 matches, team last place, alone." The human cost of the statistic is the story. Exact numbers always. Vague claims never.
 - **No translated-English sentence rhythms.** Think in Nepali. The Connective Tissue Rule applies: flowing gravity through verb-nesting, not "र" chains.
 - **Never name emotions.** Show through body, environment, and sensation. "उसको हत्केलामा पसिना थियो" not "उ डराएको थियो।"
@@ -86,7 +86,7 @@ Generate the content. Apply the depth level confirmed in Step 3. If Cinematic, t
 7. Count planned Von Restorff isolations — must be 4 or fewer
 
 **Writing rules (The Aarif Sheikh Cinematic Standard):**
-- **Netflix Documentary Depth:** Every emotional beat must breathe. Atmosphere must be heavy. Contrast profound struggles against visceral sensory details.
+- **Netflix Documentary Depth (Extreme Level):** Every emotional beat must breathe. Atmosphere must be thick. Do not rush. Stretch moments of tension. Write long, deeply resonant paragraphs. Never summarize what you can show. Generic one-liners are grounds for failure.
 - **Section Length:** Minimum 3 to 5 full, rich paragraphs per section. Do NOT rush the narrative.
 - **Sensory Reality:** Exploit smell, sound, weather, and physical weight (e.g., the smell of a border town, the biting cold, the deafening silence of a room).
 - Open every section with a moment, never a fact
@@ -96,6 +96,19 @@ Generate the content. Apply the depth level confirmed in Step 3. If Cinematic, t
 - Bridge transition at the end of every section (italicised)
 - The "तपाईं" weapon used max 5 times, each targeting a different wound
 - The final line contains "तपाईं" and leaves something unresolved
+
+### THE GULSHAN JHA DEEP-DIVE EXPANSION (The Baseline Multi-Act Structure)
+*Established during the Gulshan Jha profile rewrite. This is the new minimum standard for comprehensiveness.*
+
+A player's profile cannot just be a summary of their recent stats. It MUST be an "All-in-One" documentary hub capturing everything fans remember. Before finalizing Step 4, force the narrative into a **baseline 6 to 8+ Act Epic Structure**. This is just the starting point for research. Expand as the player's history demands:
+1. **The Origins:** The obscure beginnings, the geographical roots, the early unnoticed grind.
+2. **The Phenomenon/Arrival:** The sudden breakthrough moment (e.g., Mayor's Cup, U-19 heroics) that shocked the domestic circuit.
+3. **The Turning Point:** The specific match or over that proved they belonged at the highest level (e.g., Gulshan's 20 runs off Waseem).
+4. **The Hero:** The definitive match-winning performance that achieved a historic milestone for the country (e.g., qualifying for the Asia Cup/World Cup).
+5. **The Tragedy/Heartbreak:** The darkest, most painful moment on the world stage (e.g., the 1-run loss in St. Vincent). A 'clutch player' isn't defined by always winning, but by surviving heartbreak.
+6. **The Resurrection:** The ultimate evolution. How they bounced back from the tragedy to set new records.
+
+If the draft does not contain these 6 Acts, you have not researched deep enough. Use web search to dig until you find the tragedy and the turning points.
 
 ---
 
@@ -244,3 +257,4 @@ Has the atmosphere been achieved — yes or no? If no, what specifically needs t
 | 6 | "Cheap fragmented prose" scattered throughout drafts | Rohit Paudel | Max 4 Von Restorff isolations; proper paragraphs default |
 | 7 | Missing bridge transitions between sections | Rohit Paudel | Bridge transition mandatory at every section end |
 | 8 | "Inferred kitchen-table dialogue" for father | Dipendra Airee | No inferred personal memories without verified source |
+| 9 | Stopping at a generic summary instead of an "All-in-One" hub | Gulshan Jha | Mandated the "6-Act Deep-Dive Expansion" for all future profiles to ensure no fan-favorite moment or heartbreaking tragedy is missed |
