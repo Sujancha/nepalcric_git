@@ -202,8 +202,19 @@ export default function AdminLockerRoomPage() {
                   {([['type', 'वर्ग (Tag)'], ['title', 'शीर्षक'], ['date', 'मिति'], ['slug', 'Slug (for link)']] as [keyof FeaturedStory, string][]).map(([field, lbl]) => (
                     <div key={field} style={{ ...sectionStyle, gridColumn: field === 'title' ? '1 / -1' : 'auto' }}>
                       <label style={labelStyle}>{lbl}</label>
-                      <input type="text" value={story[field] as string} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, [field]: e.target.value } : s))}
-                        style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                      {field === 'type' ? (
+                        <select value={story[field] as string} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, [field]: e.target.value } : s))} style={{...inputStyle, cursor: 'pointer'}} onFocus={focusGold} onBlur={blurDim}>
+                          <option value="" style={{ background: '#07080F' }}>छान्नुहोस्...</option>
+                          <option value="कथा" style={{ background: '#07080F' }}>कथा</option>
+                          <option value="भिडियो" style={{ background: '#07080F' }}>भिडियो</option>
+                          <option value="ग्यालरी" style={{ background: '#07080F' }}>ग्यालरी</option>
+                          <option value="अन्तर्वार्ता" style={{ background: '#07080F' }}>अन्तर्वार्ता</option>
+                          <option value="म्याच रिपोर्ट" style={{ background: '#07080F' }}>म्याच रिपोर्ट</option>
+                        </select>
+                      ) : (
+                        <input type="text" value={story[field] as string} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, [field]: e.target.value } : s))}
+                          style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                      )}
                     </div>
                   ))}
                 </div>

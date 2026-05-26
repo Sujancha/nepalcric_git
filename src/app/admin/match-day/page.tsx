@@ -26,10 +26,10 @@ interface MatchDayData {
   fixtures: Fixture[];
 }
 
-function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = '#C9A84C';
 }
-function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)';
 }
 
@@ -268,7 +268,12 @@ export default function MatchDayAdminPage() {
                   </div>
                   <div>
                     <label style={labelStyle}>फरम्याट (Format)</label>
-                    <input type="text" value={fixture.format} onChange={(e) => updateFixture(idx, 'format', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    <select value={fixture.format} onChange={(e) => updateFixture(idx, 'format', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                      <option value="ओडीआई" style={{ background: '#07080F' }}>ओडीआई (ODI)</option>
+                      <option value="टी-ट्वान्टी" style={{ background: '#07080F' }}>टी-ट्वान्टी (T20I)</option>
+                      <option value="टेस्ट" style={{ background: '#07080F' }}>टेस्ट (Test)</option>
+                      <option value="अभ्यास खेल" style={{ background: '#07080F' }}>अभ्यास खेल (Warm-up)</option>
+                    </select>
                   </div>
                 </div>
 
@@ -279,11 +284,21 @@ export default function MatchDayAdminPage() {
                   </div>
                   <div>
                     <label style={labelStyle}>खतरा स्तर (Level)</label>
-                    <input type="text" value={fixture.threatLevel} onChange={(e) => updateFixture(idx, 'threatLevel', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    <select value={fixture.threatLevel} onChange={(e) => updateFixture(idx, 'threatLevel', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                      <option value="LOW" style={{ background: '#07080F' }}>LOW (न्यून)</option>
+                      <option value="MEDIUM" style={{ background: '#07080F' }}>MEDIUM (मध्यम)</option>
+                      <option value="HIGH" style={{ background: '#07080F' }}>HIGH (उच्च)</option>
+                      <option value="EXTREME" style={{ background: '#07080F' }}>EXTREME (अत्यधिक)</option>
+                    </select>
                   </div>
                   <div>
                     <label style={labelStyle}>खतरा रङ (Color)</label>
-                    <input type="text" value={fixture.threatColor} onChange={(e) => updateFixture(idx, 'threatColor', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    <select value={fixture.threatColor} onChange={(e) => updateFixture(idx, 'threatColor', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                      <option value="#10B981" style={{ background: '#07080F' }}>Green (Low)</option>
+                      <option value="#F59E0B" style={{ background: '#07080F' }}>Amber (Medium)</option>
+                      <option value="#C9A84C" style={{ background: '#07080F' }}>Gold (High)</option>
+                      <option value="#C41E3A" style={{ background: '#07080F' }}>Red (Extreme)</option>
+                    </select>
                   </div>
                 </div>
 

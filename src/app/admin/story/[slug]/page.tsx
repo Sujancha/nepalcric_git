@@ -29,10 +29,10 @@ interface CommitResponse {
   detail?: string;
 }
 
-function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = '#C9A84C';
 }
-function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.15)';
 }
 
@@ -256,14 +256,21 @@ export default function StoryEditorPage() {
             <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
               <div style={{ flex: 1, ...sectionStyle, marginBottom: 0 }}>
                 <label style={labelStyle}>वर्ग (Category)</label>
-                <input
-                  type="text"
+                <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  style={inputStyle}
+                  style={{ ...inputStyle, cursor: 'pointer' }}
                   onFocus={focusGold}
                   onBlur={blurDim}
-                />
+                >
+                  <option value="" style={{ background: '#07080F' }}>छान्नुहोस्...</option>
+                  <option value="अन्तर्वार्ता" style={{ background: '#07080F' }}>अन्तर्वार्ता</option>
+                  <option value="कथा" style={{ background: '#07080F' }}>कथा</option>
+                  <option value="प्रोफाइल" style={{ background: '#07080F' }}>प्रोफाइल</option>
+                  <option value="म्याच रिपोर्ट" style={{ background: '#07080F' }}>म्याच रिपोर्ट</option>
+                  <option value="विश्लेषण" style={{ background: '#07080F' }}>विश्लेषण</option>
+                  <option value="पर्दा पछाडि" style={{ background: '#07080F' }}>पर्दा पछाडि</option>
+                </select>
               </div>
               <div style={{ flex: 1, ...sectionStyle, marginBottom: 0 }}>
                 <label style={labelStyle}>मिति (Date)</label>
@@ -278,14 +285,22 @@ export default function StoryEditorPage() {
               </div>
               <div style={{ flex: 1, ...sectionStyle, marginBottom: 0 }}>
                 <label style={labelStyle}>पढ्ने समय (Read Time)</label>
-                <input
-                  type="text"
+                <select
                   value={readTime}
                   onChange={(e) => setReadTime(e.target.value)}
-                  style={inputStyle}
+                  style={{ ...inputStyle, cursor: 'pointer' }}
                   onFocus={focusGold}
                   onBlur={blurDim}
-                />
+                >
+                  <option value="" style={{ background: '#07080F' }}>छान्नुहोस्...</option>
+                  <option value="१ मिनेटको" style={{ background: '#07080F' }}>१ मिनेटको</option>
+                  <option value="२ मिनेटको" style={{ background: '#07080F' }}>२ मिनेटको</option>
+                  <option value="३ मिनेटको" style={{ background: '#07080F' }}>३ मिनेटको</option>
+                  <option value="४ मिनेटको" style={{ background: '#07080F' }}>४ मिनेटको</option>
+                  <option value="५ मिनेटको" style={{ background: '#07080F' }}>५ मिनेटको</option>
+                  <option value="७ मिनेटको" style={{ background: '#07080F' }}>७ मिनेटको</option>
+                  <option value="१० मिनेटको" style={{ background: '#07080F' }}>१० मिनेटको</option>
+                </select>
               </div>
             </div>
 
