@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 export default function FanZonePage() {
     const filePath = path.join(process.cwd(), "content", "pages", "fanzone.json");
     const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    return <FanZoneClient fans={data.fans} chants={data.chants} />;
+    return <FanZoneClient fans={data.fans} chants={data.chants} fanCraze={data.fanCraze || []} />;
 }

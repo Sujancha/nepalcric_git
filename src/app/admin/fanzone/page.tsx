@@ -12,6 +12,7 @@ interface Fan {
   city: string;
   memory: string;
   chant: string;
+  fullStory?: string;
 }
 
 interface Chant {
@@ -32,7 +33,7 @@ function blurDim(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HT
 }
 
 function newFan(): Fan {
-  return { name: '', city: '', memory: '', chant: '' };
+  return { name: '', city: '', memory: '', chant: '', fullStory: '' };
 }
 
 function newChant(): Chant {
@@ -100,17 +101,17 @@ export default function AdminFanZonePage() {
     setData({ ...data, chants });
   };
 
-  // ── Tab: FANS ──
+  // ── Tab: FANS (Repurposed to Historic Milestones) ──
   const FansTab = () => (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <p style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem', color: 'rgba(255,255,255,0.45)', margin: 0 }}>
-          "फ्यान पर्खाल" मा देखिने प्रशंसकहरूको सम्झना
+          "ऐतिहासिक क्षणहरू" ग्यालरीमा देखिने गौरवशाली माइलस्टोनहरू
         </p>
         <button
           onClick={() => { if (!data) return; setData({ ...data, fans: [...data.fans, newFan()] }); setFanExpanded(data.fans.length); }}
           style={{ background: 'transparent', border: '1px solid rgba(196,30,58,0.5)', color: '#C41E3A', padding: '0.4rem 1rem', fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.65rem', letterSpacing: '0.15em', textTransform: 'uppercase', cursor: 'pointer', borderRadius: 2 }}
-        >+ नयाँ फ्यान</button>
+        >+ नयाँ क्षण थप्नुस्</button>
       </div>
 
       {data?.fans.map((fan, idx) => {
@@ -121,7 +122,7 @@ export default function AdminFanZonePage() {
               onClick={() => setFanExpanded(isOpen ? null : idx)}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                 <span style={{ color: '#6B7280', fontSize: '0.65rem', width: '10px' }}>{isOpen ? '▼' : '▶'}</span>
-                <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#E8E8E8' }}>{fan.name || '(नाम छैन)'}</span>
+                <span style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.9rem', fontWeight: 600, color: '#E8E8E8' }}>{fan.name || '(शीर्षक छैन)'}</span>
                 {fan.city && <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.6rem', color: '#C9A84C', letterSpacing: '0.15em', textTransform: 'uppercase' }}>{fan.city}</span>}
               </div>
               <button onClick={(e) => { e.stopPropagation(); if (!data) return; setData({ ...data, fans: data.fans.filter((_, i) => i !== idx) }); if (fanExpanded === idx) setFanExpanded(null); }}
@@ -129,24 +130,29 @@ export default function AdminFanZonePage() {
             </div>
             {isOpen && (
               <div style={{ padding: '0.25rem 1rem 1.25rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                   <div style={sectionStyle}>
-                    <label style={labelStyle}>नाम</label>
-                    <input type="text" value={fan.name} onChange={e => updateFan(idx, 'name', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    <label style={labelStyle}>ऐतिहासिक क्षणको शीर्षक</label>
+                    <input type="text" value={fan.name} onChange={e => updateFan(idx, 'name', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} placeholder="उदा: २०१४ टी-२० विश्वकप पदार्पण" />
                   </div>
                   <div style={sectionStyle}>
-                    <label style={labelStyle}>शहर</label>
-                    <input type="text" value={fan.city} onChange={e => updateFan(idx, 'city', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    <label style={labelStyle}>स्थान र वर्ष / मिति</label>
+                    <input type="text" value={fan.city} onChange={e => updateFan(idx, 'city', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} placeholder="उदा: चटगाउँ, बंगलादेश" />
                   </div>
                 </div>
                 <div style={sectionStyle}>
-                  <label style={labelStyle}>सम्झना (Memory)</label>
+                  <label style={labelStyle}>विस्तृत विवरण (Description)</label>
                   <textarea value={fan.memory} onChange={e => updateFan(idx, 'memory', e.target.value)}
-                    rows={3} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }} onFocus={focusGold} onBlur={blurDim} />
+                    rows={3} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }} onFocus={focusGold} onBlur={blurDim} placeholder="ऐतिहासिक क्षणको विस्तृत जानकारी लेख्नुहोस्..." />
                 </div>
                 <div style={sectionStyle}>
-                  <label style={labelStyle}>नारा (Chant)</label>
-                  <input type="text" value={fan.chant} onChange={e => updateFan(idx, 'chant', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  <label style={labelStyle}>पूर्ण ऐतिहासिक कथा (Full Narrative/Story)</label>
+                  <textarea value={fan.fullStory ?? ''} onChange={e => updateFan(idx, 'fullStory', e.target.value)}
+                    rows={6} style={{ ...inputStyle, resize: 'vertical', lineHeight: 1.7 }} onFocus={focusGold} onBlur={blurDim} placeholder="ऐतिहासिक क्षणको पूर्ण कथा/रोमाञ्चक विवरण यहाँ लेख्नुहोस्..." />
+                </div>
+                <div style={sectionStyle}>
+                  <label style={labelStyle}>उपाधि / वर्ग ट्याग</label>
+                  <input type="text" value={fan.chant} onChange={e => updateFan(idx, 'chant', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} placeholder="उदा: विश्वकप इतिहास" />
                 </div>
               </div>
             )}
@@ -226,7 +232,7 @@ export default function AdminFanZonePage() {
 
         {/* Tabs */}
         <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: '2rem' }}>
-          {([['fans', 'फ्यान पर्खाल', 'Fan Wall'], ['chants', 'मैदानको आवाज', 'Chant Board']] as [ActiveTab, string, string][]).map(([tab, label, sub]) => (
+          {([['fans', 'ऐतिहासिक क्षणहरू', 'Historic Moments'], ['chants', 'मैदानको आवाज', 'Chant Board']] as [ActiveTab, string, string][]).map(([tab, label, sub]) => (
             <button key={tab} onClick={() => setActiveTab(tab)}
               style={{
                 background: 'transparent', border: 'none', padding: '0.75rem 1.5rem', cursor: 'pointer',
