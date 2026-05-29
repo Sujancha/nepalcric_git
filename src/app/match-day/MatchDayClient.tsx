@@ -149,8 +149,29 @@ export function formatNepaliDate(dateStr: string): string {
 }
 
 export function formatNepaliTime(timeStr: string): string {
-    const nepaliDigits = timeStr.replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
-    return nepaliDigits.replace("NPT", "नेपाली समय (NPT)");
+    // Input format: e.g. "19:45 NPT" or "21:15 NPT"
+    try {
+        const cleanTime = timeStr.replace(" NPT", "").trim();
+        const parts = cleanTime.split(":");
+        const hours = parseInt(parts[0], 10);
+        const minutes = parseInt(parts[1], 10);
+        
+        if (isNaN(hours) || isNaN(minutes)) {
+            const nepaliDigits = timeStr.replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+            return nepaliDigits.replace("NPT", "नेपाली समय");
+        }
+        
+        const isPm = hours >= 12;
+        const dispHours = hours % 12 || 12;
+        const amPmStr = isPm ? "बेलुकी" : "बिहान";
+        const nepaliHours = dispHours.toString().replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+        const nepaliMinutes = minutes.toString().padStart(2, '0').replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+        
+        return `${amPmStr} ${nepaliHours}:${nepaliMinutes} बजे (नेपाली समय)`;
+    } catch(e) {
+        const nepaliDigits = timeStr.replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+        return nepaliDigits.replace("NPT", "नेपाली समय");
+    }
 }
 
 export function formatNumberToNepali(num: number | string): string {
@@ -176,6 +197,26 @@ const FLAG_MAP: Record<string, { np: string; opp: string }> = {
  * The `side` prop controls the perspective-tilt direction so both flags
  * lean slightly inward toward the VS centre, creating a face-off feel.
  */
+
+// ─── PLAYER IMAGE MAPPING ───
+const CHAMPION_IMAGES: Record<string, string> = {
+    "रोहित पौडेल": "/images/rohit_paudel.jpg",
+    "सन्दीप लामिछाने": "/images/sandeep.webp",
+    "दीपेन्द्र सिंह ऐरी": "/images/dipendra_airee.jpg",
+    "कुशल भुर्तेल": "/images/kushal_bhurtel.webp"
+};
+
+// ─── VENUE LOCALIZATION DICTIONARY ───
+const VENUE_TRANSLATIONS: Record<string, string> = {
+    "King City, Canada": "किङ सिटी, क्यानडा",
+    "Dallas, USA": "डलास, संयुक्त राज्य अमेरिका",
+    "Windward, St. Vincent": "विन्डवर्ड, सेन्ट भिन्सेन्ट"
+};
+
+function getLocalizedVenue(venue: string): string {
+    return VENUE_TRANSLATIONS[venue] || venue;
+}
+
 function FlagImg({ code, side, size = 44 }: { code: string; side: "left" | "right"; size?: number }) {
     const tilt = side === "left" ? "rotateY(8deg)" : "rotateY(-8deg)";
     return (
@@ -502,7 +543,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
                         {/* Format + date pill */}
                         <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.28em" }} className="text-[#C9A84C]/70 font-black uppercase tracking-widest mb-3">
-                            {activeMatch.format} &nbsp;·&nbsp; {formatNepaliDate(activeMatch.date)}, २०२६ &nbsp;·&nbsp; {activeMatch.venue}
+                            {activeMatch.format} &nbsp;·&nbsp; {formatNepaliDate(activeMatch.date)}, २०२६ &nbsp;·&nbsp; {getLocalizedVenue(activeMatch.venue)}
                         </span>
 
                         {/* THE CLASH PLATE */}
@@ -576,8 +617,8 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.18em" }} className="text-white/50 font-black uppercase">
                                     खेल सुरु हुनमा&nbsp;
                                 </span>
-                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "15px" }} className="text-white font-black">
-                                    {timeLeft.days}<span className="text-white/30 mx-0.5">d</span> {timeLeft.hours}<span className="text-white/30 mx-0.5">h</span> {timeLeft.minutes}<span className="text-white/30 mx-0.5">m</span> {timeLeft.seconds}<span className="text-white/30 mx-0.5">s</span>
+                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "14px", fontWeight: 800 }} className="text-white tracking-wide">
+                                    {timeLeft.days} दिन &nbsp;&middot;&nbsp; {timeLeft.hours} घण्टा &nbsp;&middot;&nbsp; {timeLeft.minutes} मिनेट &nbsp;&middot;&nbsp; {timeLeft.seconds} सेकेन्ड
                                 </span>
                             </div>
                         )}
@@ -646,60 +687,346 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
                         {selectedTab === "weapon" && (
                             <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
-                                {/* Nepal Profile card (Left Wing) */}
-                                <div className="lg:col-span-5 bg-gradient-to-br from-[#0b1222]/90 to-[#05070d]/90 border border-white/5 p-6 md:p-8 rounded-sm relative overflow-hidden h-[280px] flex flex-col justify-between">
-                                    <div style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "160px", color: "rgba(30, 58, 138, 0.03)" }} className="absolute -bottom-16 -right-6 font-black select-none pointer-events-none z-0">
-                                        #१७
+                                
+                                {/* 🖼️ Player Photo/Tac Dossier Frame Column */}
+                                <div className="lg:col-span-3 flex justify-center">
+                                    <div className="relative w-[240px] h-[310px] bg-[#05070d] border border-white/10 rounded-sm overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.8)] group select-none">
+                                        
+                                        {/* Corner cut overlays (Tactical Border) */}
+                                        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C9A84C] z-20" />
+                                        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-white/20 z-20" />
+                                        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-white/20 z-20" />
+                                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C41E3A] z-20" />
+                                        
+                                        {/* Heartbeat sweep line */}
+                                        <div className="absolute inset-x-0 h-[1.5px] bg-[#C41E3A]/40 top-0 shadow-[0_0_8px_#C41E3A] z-20 animate-[sweepEffect_2.2s_infinite]" />
+
+                                        {CHAMPION_IMAGES[activeMatch.weapon] ? (
+                                            <>
+                                                {/* Gritty duotone sports image overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" />
+                                                <div className="absolute inset-0 bg-gradient-to-tr from-[#1E3A8A]/35 via-transparent to-[#C41E3A]/20 mix-blend-color-dodge z-10 pointer-events-none" />
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img 
+                                                    src={CHAMPION_IMAGES[activeMatch.weapon]} 
+                                                    alt={activeMatch.weapon}
+                                                    className="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700 select-none"
+                                                />
+                                            </>
+                                        ) : (
+                                            /* Holographic Classified Tactical Wireframe Avatar */
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#0b1222] to-[#04060b] select-none">
+                                                {/* Rotating radar graphic */}
+                                                <div className="relative w-36 h-36 border border-dashed border-[#C41E3A]/20 rounded-full flex items-center justify-center animate-[sbSpotlightSpin_20s_linear_infinite]">
+                                                    <div className="w-28 h-28 border border-white/5 rounded-full flex items-center justify-center" />
+                                                    <div className="absolute top-0 w-2.5 h-2.5 bg-[#C41E3A] rounded-full animate-ping" />
+                                                    <div className="absolute bottom-0 w-1.5 h-1.5 bg-[#C9A84C] rounded-full" />
+                                                </div>
+                                                
+                                                {/* Holographic fingerprints/scanlines */}
+                                                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.015)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                                                
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.2em" }} className="text-[#C41E3A] font-black uppercase mt-6 tracking-widest text-center animate-pulse">
+                                                    CLASSIFIED SIGNAL IDENT
+                                                </span>
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.12em" }} className="text-white/20 uppercase mt-1 tracking-wider text-center">
+                                                    INTEL SECURE // THREAT ANALYSIS
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        {/* Status Telemetry Banner */}
+                                        <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center bg-black/70 backdrop-blur-md px-3 py-1.5 border border-white/5 rounded-sm select-none">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase">
+                                                WARRIOR DOSSIER //
+                                            </span>
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px" }} className="text-white/80 font-black uppercase">
+                                                {activeMatch.format}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="relative z-10">
-                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.2em" }} className="text-[#D32F2F] font-black uppercase tracking-widest block mb-2">
-                                            OUR CHAMPION // मुख्य योद्धा
+                                </div>
+
+                                {/* 📋 Warrior Description & Tactical Attributes Gauge Sheets */}
+                                <div className="lg:col-span-4 space-y-5">
+                                    <div className="border-l-2 border-[#C9A84C] pl-4 space-y-1">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase block tracking-widest">
+                                            OUR MATCH WINNER // हाम्रो मुख्य योद्धा
                                         </span>
-                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-2">
+                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-1">
                                             {activeChronicle.championName}
                                         </h3>
-                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#C41E3A] text-[13px] block font-bold">
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/40 text-[13px] block font-bold">
                                             {activeChronicle.championDesc}
                                         </span>
                                     </div>
-                                    <div className="relative z-10 bg-[rgba(196,30,58,0.03)] border border-[rgba(196,30,58,0.12)] p-4 rounded-sm">
-                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13px] leading-relaxed m-0 text-justify">
-                                            विपक्षी बलरहरूका लागि यमराज जस्तै विष्फोटक ब्याट्सम्यान र घातक स्पिनर। छ बलमा छक्का प्रहार गर्न सक्ने असाधारण क्षमता र विश्वस्तरीय फिल्डिङले यिनलाई आधुनिक क्रिकेटको सर्वोत्कृष्ट अलराउन्डर सावित गर्छ।
-                                        </p>
+
+                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[14.5px] leading-relaxed text-justify m-0">
+                                        {activeMatch.id === "01" && "नेपाली ब्याटिङ लाइनअपको मेरुदण्ड। रोहित पौडेल कठिन परिस्थितिमा संयमित भएर क्रिजमा टिकिरहने र आवश्यकता अनुसार गियर परिवर्तन गरी विपक्षी बलिङलाई ध्वस्त पार्न सक्ने कुशल म्याच विनर हुन्। कप्तानी भूमिकामा यिनको रणनीतिक सुझबुझ र धैर्य नै हाम्रो पहिलो भरोसा हो।"}
+                                        {activeMatch.id === "02" && "विश्वस्तरिय स्पिनका जादूगर। सन्दीप लामिछानेको नाडीबाट फुत्किने जादुमयी लेग-स्पिन र तीब्र गतिको गुगली विपक्षी ब्याट्सम्यानहरूका लागि सधैं रहस्य बन्ने गर्छ। यिनको सटिक बलिङ र बीचका ओभरहरूमा लगातार विकेट झार्ने असाधारण खुबीले जुनसुकै क्षण खेललाई नेपालको कब्जामा ल्याउँछ।"}
+                                        {activeMatch.id === "03" && "मैदानमा आगो ओकल्ने नेपाली क्रिकेटको सर्वोत्कृष्ट अलराउन्डर। ६ बलमा ६ छक्का प्रहार गरेर इतिहासको सिमाना कोरेका दीपेन्द्र सिंह ऐरी विष्फोटक ब्याटिङ, कसिलो अफ-स्पिन, र चील झैं छिटो दौडने फिल्डिङका साथ खेलको जुनसुकै मोडमा विपक्षीलाई निस्तेज पार्न सक्षम छन्।"}
+                                        {activeMatch.id === "04" && "विष्फोटक बायाँ हाते ब्याट्सम्यान र घातक स्पिनर। कुशल मल्लको ब्याट जब मैदानमा चल्छ, विपक्षी बलरहरू दिशाहीन हुन पुग्छन्। यिनको तीव्र आक्रामक प्रहार र महत्वपूर्ण मोडहरूमा साझेदारी तोड्ने स्पिन बलिङले विपक्षी शिविरमा सधैं त्रास र सनसनी फैलाउँछ।"}
+                                        {activeMatch.id === "05" && "नेपाली ओपनिङ ब्याटिङका मुख्य हतियार। कुशल भुर्तेलको विष्फोटक ब्याटिङ र मैदानका सबै दिशामा बाउन्ड्री प्रहार गर्न सक्ने बहुमुखी प्रहार क्षमताले सुरुवाती पावरप्लेमै नेपाललाई विशाल गति दिन्छ। यिनको आक्रामक शैली र उच्च आत्मविश्वासले विपक्षी टोलीको बलियो रणनीतिलाई पहिलो ओभरमै निस्तेज पार्छ।"}
+                                        {activeMatch.id === "06" && "नेपाली क्रिकेटका युवा सनसनी र बहुप्रतिभाशाली तीव्र गतिका अलराउन्डर। गुलशन झा मध्यक्रममा कडा र विष्फोटक प्रहार गर्न सक्ने ब्याटिङ क्षमता र कसिलो बायाँ हाते तीब्र बलिङका साथ जुनसुकै परिस्थितिमा पनि निर्णायक बन्न सक्छन्। यिनको युवा उर्जा र साहस नै नेपाली क्रिकेटको भविष्य हो।"}
+                                    </p>
+
+                                    {/* 📊 Tactical Attributes Dashboard Gauges */}
+                                    <div className="bg-[#05070c]/90 border border-white/5 p-5 rounded-sm space-y-4 relative overflow-hidden select-none">
+                                        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.008)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                                        
+                                        <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/30 font-black uppercase">TACTICAL ATTRIBUTES // लडाकु क्षमता</span>
+                                            <span className="text-[#C9A84C] text-[10px] font-black uppercase animate-pulse">ACTIVE FEED</span>
+                                        </div>
+
+                                        {/* Attribute 1 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-white/60 tracking-wider">
+                                                    {activeMatch.id === "01" && "LEADERSHIP INTELLIGENCE // कप्तानी रणनीतिक स्तर"}
+                                                    {activeMatch.id === "02" && "SPIN VARIATION RADAR // स्पिन विविधता"}
+                                                    {activeMatch.id === "03" && "STRIKE POTENTIAL ENERGY // ब्याटिङ विष्फोटक स्तर"}
+                                                    {activeMatch.id === "04" && "EXPLOSIVE CAPACITY // तीव्र प्रहार दर"}
+                                                    {activeMatch.id === "05" && "STRIKE ENERGY // पावरप्ले गति"}
+                                                    {activeMatch.id === "06" && "PACE VELOCITY // तीव्र बलिङ गति"}
+                                                </span>
+                                                <span className="text-[#C9A84C]">
+                                                    {activeMatch.id === "01" && "९८%"}
+                                                    {activeMatch.id === "02" && "९९%"}
+                                                    {activeMatch.id === "03" && "९७%"}
+                                                    {activeMatch.id === "04" && "९६%"}
+                                                    {activeMatch.id === "05" && "९५%"}
+                                                    {activeMatch.id === "06" && "९०%"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-[#C9A84C] rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "98%" : activeMatch.id === "02" ? "99%" : activeMatch.id === "03" ? "97%" : activeMatch.id === "04" ? "96%" : activeMatch.id === "05" ? "95%" : "90%" }} 
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Attribute 2 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-white/60 tracking-wider">
+                                                    {activeMatch.id === "01" && "ANCHOR INTEGRITY // क्रिजको अडान"}
+                                                    {activeMatch.id === "02" && "CRUTCH WICKETS TELEMETRY // मुख्य विकेट लिने दर"}
+                                                    {activeMatch.id === "03" && "FIELDING RADIUS RATE // फिल्डिङ कभरेज क्षेत्र"}
+                                                    {activeMatch.id === "04" && "CLUTCH COEFFICIENT // कठिन परिस्थिति योगदान"}
+                                                    {activeMatch.id === "05" && "FIELDING RADUS // फिल्डिङ गति"}
+                                                    {activeMatch.id === "06" && "EXPLOSIVE STRIKE RANGE // फिनिसिङ क्षमता"}
+                                                </span>
+                                                <span className="text-white/80">
+                                                    {activeMatch.id === "01" && "९५%"}
+                                                    {activeMatch.id === "02" && "९६%"}
+                                                    {activeMatch.id === "03" && "९८%"}
+                                                    {activeMatch.id === "04" && "९०%"}
+                                                    {activeMatch.id === "05" && "९२%"}
+                                                    {activeMatch.id === "06" && "८८%"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-[#1E3A8A] rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "95%" : activeMatch.id === "02" ? "96%" : activeMatch.id === "03" ? "98%" : activeMatch.id === "04" ? "90%" : activeMatch.id === "05" ? "92%" : "88%" }} 
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Attribute 3 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-white/60 tracking-wider">
+                                                    {activeMatch.id === "01" && "STRIKE RATE ENERGY // ब्याटिङ गति"}
+                                                    {activeMatch.id === "02" && "PRESSURE RESISTANCE // दबाब प्रतिरोध"}
+                                                    {activeMatch.id === "03" && "GAME CHANGE COEFFICIENT // खेल परिवर्तन दर"}
+                                                    {activeMatch.id === "04" && "SPIN TACTICAL STRENGTH // स्पिन विकेट योगदान"}
+                                                    {activeMatch.id === "05" && "MATCH WINNER RATIO // म्याच विनर दर"}
+                                                    {activeMatch.id === "06" && "YOUTH ENERGY INDEX // युवा हिम्मत स्तर"}
+                                                </span>
+                                                <span className="text-[#C41E3A]">
+                                                    {activeMatch.id === "01" && "८८%"}
+                                                    {activeMatch.id === "02" && "९२%"}
+                                                    {activeMatch.id === "03" && "९५%"}
+                                                    {activeMatch.id === "04" && "८५%"}
+                                                    {activeMatch.id === "05" && "९४%"}
+                                                    {activeMatch.id === "06" && "९५%"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-[#C41E3A] rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "88%" : activeMatch.id === "02" ? "92%" : activeMatch.id === "03" ? "95%" : activeMatch.id === "04" ? "85%" : activeMatch.id === "05" ? "94%" : "95%" }} 
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="lg:col-span-2 flex justify-center">
-                                    {renderCountdownOrb()}
                                 </div>
                             </div>
                         )}
 
                         {selectedTab === "danger" && (
                             <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
-                                {/* Opponent profile card (Right Wing) */}
-                                <div className="lg:col-span-5 bg-gradient-to-br from-[#1c1811]/90 to-[#07080f]/90 border border-white/5 p-6 md:p-8 rounded-sm relative overflow-hidden h-[280px] flex flex-col justify-between">
-                                    <div style={{ fontFamily: "Mukta, sans-serif", fontSize: "140px", color: "rgba(201, 168, 76, 0.02)" }} className="absolute -bottom-16 -right-6 font-black select-none pointer-events-none z-0">
-                                        {opponentName}
+                                
+                                {/* 🖼️ Opponent Classified Threat Dossier Column */}
+                                <div className="lg:col-span-3 flex justify-center">
+                                    <div className="relative w-[240px] h-[310px] bg-[#0c0805] border border-white/10 rounded-sm overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.8)] group select-none">
+                                        
+                                        {/* Tactical warning border */}
+                                        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C41E3A] z-20" />
+                                        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-white/10 z-20" />
+                                        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-white/10 z-20" />
+                                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C41E3A] z-20" />
+                                        
+                                        {/* Glowing target crosshair */}
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#C41E3A]/20 rounded-full flex items-center justify-center animate-[vsPulse_2.5s_ease-in-out_infinite]">
+                                            <div className="w-24 h-24 border border-dashed border-[#C41E3A]/15 rounded-full flex items-center justify-center" />
+                                            <div className="absolute w-4 h-[1.5px] bg-[#C41E3A]" />
+                                            <div className="absolute h-4 w-[1.5px] bg-[#C41E3A]" />
+                                        </div>
+
+                                        {/* Holographic fingerprints/scanlines */}
+                                        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(211,47,47,0.025)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+
+                                        {/* Dynamic radar scanner line */}
+                                        <div className="absolute inset-x-0 h-[1.5px] bg-[#C9A84C]/40 top-0 shadow-[0_0_8px_#C9A84C] z-20 animate-[sweepEffect_2.5s_infinite]" />
+
+                                        {/* Dark silhouette profile placeholder */}
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#1c0808] to-[#04060b] select-none">
+                                            <div className="relative w-36 h-36 border border-[#C41E3A]/30 rounded-full flex items-center justify-center bg-black/60 shadow-[0_0_30px_rgba(211,47,47,0.08)]">
+                                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" className="shrink-0 text-white/10 animate-[vsPulse_3s_ease-in-out_infinite]">
+                                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </div>
+                                            
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.2em" }} className="text-[#C41E3A] font-black uppercase mt-6 tracking-widest text-center animate-pulse">
+                                                CLASSIFIED ENEMY TARGET
+                                            </span>
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.12em" }} className="text-[#C9A84C] font-black uppercase mt-1 tracking-wider text-center">
+                                                THREAT IDENT: {activeMatch.danger.toUpperCase()}
+                                            </span>
+                                        </div>
+
+                                        {/* Status Telemetry Banner */}
+                                        <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-center bg-black/75 backdrop-blur-md px-3 py-1.5 border border-white/5 rounded-sm select-none">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.15em" }} className="text-[#C41E3A] font-black uppercase">
+                                                TARGET TELEMETRY //
+                                            </span>
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px" }} className="text-white/80 font-black uppercase">
+                                                {activeMatch.format}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div className="relative z-10">
-                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block mb-2">
-                                            RIVAL THREAT // विपक्षी खतरा चेतावनी
+                                </div>
+
+                                {/* 📋 Threat Description & Attributes Matrix */}
+                                <div className="lg:col-span-4 space-y-5">
+                                    <div className="border-l-2 border-[#C41E3A] pl-4 space-y-1">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C41E3A] font-black uppercase block tracking-widest">
+                                            RIVAL THREAT MATRIX // विपक्षी मुख्य खतरा
                                         </span>
-                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-2">
+                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-1">
                                             {activeChronicle.dangerName}
                                         </h3>
-                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#D32F2F] text-[13px] block font-bold">
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#C41E3A] text-[13px] block font-bold">
                                             {activeChronicle.dangerDesc}
                                         </span>
                                     </div>
-                                    <div className="relative z-10 bg-[rgba(211,47,47,0.03)] border border-[rgba(211,47,47,0.12)] p-4 rounded-sm">
-                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13px] leading-relaxed m-0 text-justify">
-                                            विपक्षी टोलीको सबैभन्दा ठूलो म्याच विनर र मुख्य हतियार। कसिलो बलिङ वा विष्फोटक ब्याटिङले यिनले कुनै पनि समय खेलको दिशा बदल्न सक्छन्। यिनलाई सुरुमै घेराबन्दीमा पारेर पन्छाउनु नेपाली टोलीको पहिलो र मुख्य गुरुत्तर दायित्व हुनेछ।
-                                        </p>
+
+                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[14.5px] leading-relaxed text-justify m-0">
+                                        {activeMatch.id === "01" && "क्यानडाका चतुर कप्तान र विश्वस्तरीय बायाँ हाते स्पिनर। साद बिन जफर कसिलो बलिङका साथै क्रिजको अवस्था बुझेर विपक्षी ब्याट्सम्यानलाई धरापमा पार्न खप्पिस छन्। यिनको अनुभव र दबावपूर्ण स्थितिमा खेलको दिशा परिवर्तन गर्ने क्षमता हाम्रा लागि गम्भीर चुनौती हो।"}
+                                        {activeMatch.id === "02" && "ओमानका विष्फोटक अलराउन्डर र मुख्य स्तम्भ। आकिब इलियास आक्रामक ब्याटिङका साथै आफ्नो स्पिन बलिङले कुनै पनि बेला साझेदारी तोड्न माहिर छन्। यिनको विष्फोटक शैली र मैदानमा रहने आक्रामक उर्जालाई छिट्टै घेराबन्दीमा पार्नु नेपाली टोलीको पहिलो चुनौती हुनेछ।"}
+                                        {activeMatch.id === "03" && "क्यानडाका प्रमुख ब्याट्सम्यान र म्याच विनर। निकोलस किर्टन मध्यक्रममा लगातार बलियो साझेदारी बनाउने र पावरप्लेपछि तीव्र गतिमा रन बटुल्न असाधारण क्षमता राख्छन्। यिनको विकेट समयमै नझारे नेपाली बलिङमा ठूलो दबाव सिर्जना हुन सक्छ।"}
+                                        {activeMatch.id === "04" && "ओमानका अनुभवी र चतुर स्पिन अलराउन्डर। जिशान मकसूद दबाबको अवस्थामा विकेट रोक्न र आफ्नो अनुभवी बलिङ र ब्याटिङले नेपाललाई अप्ठ्यारोमा पार्न सक्ने म्याच विनर हुन्। यिनको सटिक स्पिन रणनीतिलाई सुरुमै असफल पार्नुपर्छ।"}
+                                        {activeMatch.id === "05" && "संयुक्त राज्य अमेरिकाका मुख्य तीब्र गतिका बलर। सौरभ नेत्रावलकर सटीक इन-स्विंग र मृत्यु ओभर (Death Overs) मा अचूक योर्कर प्रहार करना सिपालु छन्। विश्वकपमा नेपाललाई अप्ठ्यारोमा पारेका यिनको बलिङलाई निस्तेज पार्न नेपाली ओपनरहरू सतर्क हुनुपर्नेछ।"}
+                                        {activeMatch.id === "06" && "स्कटल्यान्डका अनुभवी कप्तान र मध्यक्रमका खम्बा। रिची बेरिंग्टन दबाब झेल्दै कठिन इनिङ्स खेल्न र कप्तानी सुझबुझका साथ खेल नियन्त्रणमा लिन खप्पिस छन्। यिनलाई सस्तोमै आउट गर्नु हाम्रो जीतका लागि अनिवार्य सर्त हो।"}
+                                    </p>
+
+                                    {/* 📊 Threat Attributes Matrix Dashboard */}
+                                    <div className="bg-[#0c0505]/95 border border-[#C41E3A]/20 p-5 rounded-sm space-y-4 relative overflow-hidden select-none">
+                                        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.008)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                                        
+                                        <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#C41E3A] font-black uppercase">THREAT ASSESSMENT // शत्रुको शक्ति स्तर</span>
+                                            <span className="text-[#C41E3A] text-[10px] font-black uppercase animate-pulse">WAR TARGET</span>
+                                        </div>
+
+                                        {/* Threat Attribute 1 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-white/60 tracking-wider">
+                                                    THREAT INDEX // समग्र खतरा गुणांक
+                                                </span>
+                                                <span className="text-[#C41E3A]">
+                                                    {activeMatch.id === "01" && "९२%"}
+                                                    {activeMatch.id === "02" && "९६%"}
+                                                    {activeMatch.id === "03" && "९०%"}
+                                                    {activeMatch.id === "04" && "९२%"}
+                                                    {activeMatch.id === "05" && "९७%"}
+                                                    {activeMatch.id === "06" && "९४%"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-[#C41E3A] rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "92%" : activeMatch.id === "02" ? "96%" : activeMatch.id === "03" ? "90%" : activeMatch.id === "04" ? "92%" : activeMatch.id === "05" ? "97%" : "94%" }} 
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Threat Attribute 2 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-white/60 tracking-wider">
+                                                    {activeMatch.id === "01" && "SPIN STABILIZATION // स्पिन नियन्त्रण क्षमता"}
+                                                    {activeMatch.id === "02" && "EXPLOSIVE ATTACK // ब्याटिङ प्रहार स्तर"}
+                                                    {activeMatch.id === "03" && "BOUNDARY VELOCITY // चौका प्रहार दर"}
+                                                    {activeMatch.id === "04" && "SPIN TACTICAL DEPTH // स्पिन जाल रणनीति"}
+                                                    {activeMatch.id === "05" && "SWING SPEED PRECISION // इन-स्विंग सटीक स्तर"}
+                                                    {activeMatch.id === "06" && "MIDDLE ORDER INTEGRITY // मध्यक्रम ब्याटिङ बल"}
+                                                </span>
+                                                <span className="text-white/80">
+                                                    {activeMatch.id === "01" && "९०%"}
+                                                    {activeMatch.id === "02" && "९५%"}
+                                                    {activeMatch.id === "03" && "८८%"}
+                                                    {activeMatch.id === "04" && "९१%"}
+                                                    {activeMatch.id === "05" && "९६%"}
+                                                    {activeMatch.id === "06" && "९२%"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-white/20 rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "90%" : activeMatch.id === "02" ? "95%" : activeMatch.id === "03" ? "88%" : activeMatch.id === "04" ? "91%" : activeMatch.id === "05" ? "96%" : "92%" }} 
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Threat Attribute 3 */}
+                                        <div className="space-y-1.5">
+                                            <div className="flex justify-between text-[11px] font-bold">
+                                                <span className="text-[#C9A84C] tracking-wider">
+                                                    INTEL COUNTERMEASURE // रणनीतिक प्रत्याक्रमण रणनीति
+                                                </span>
+                                                <span className="text-[#C9A84C]">
+                                                    {activeMatch.id === "01" && "८५% -- TACTICAL SIEGE"}
+                                                    {activeMatch.id === "02" && "९२% -- SPIN CORRIDOR"}
+                                                    {activeMatch.id === "03" && "८५% -- PRESSURE COVER"}
+                                                    {activeMatch.id === "04" && "९५% -- SEAM ASSAULT"}
+                                                    {activeMatch.id === "05" && "९४% -- BOUNDARY SIEGE"}
+                                                    {activeMatch.id === "06" && "९५% -- PACE SURGE"}
+                                                </span>
+                                            </div>
+                                            <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
+                                                <div 
+                                                    className="h-full bg-[#C9A84C] rounded-full" 
+                                                    style={{ width: activeMatch.id === "01" ? "85%" : activeMatch.id === "02" ? "92%" : activeMatch.id === "03" ? "85%" : activeMatch.id === "04" ? "95%" : activeMatch.id === "05" ? "94%" : "95%" }} 
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="lg:col-span-2 flex justify-center">
-                                    {renderCountdownOrb()}
                                 </div>
                             </div>
                         )}
@@ -754,91 +1081,170 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                 </div>
             </section>
 
-            {/* ── 🗺️ RESTORED & UPGRADED INTERACTIVE MATCH CARDS GRID (ROSTER) ── */}
-            <section className="max-w-6xl mx-auto px-6 relative z-10 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_1.0s_both]">
+            {/* ── 🗺️ VISCERAL TECTONIC COMBAT JOURNEY TIMELINE (CAMPAIGN TIMELINE) ── */}
+            <section className="max-w-6xl mx-auto px-6 relative z-10 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_1.0s_both] pb-20">
                 
-                <div className="flex items-center gap-4 mb-10">
+                <div className="flex items-center gap-4 mb-14">
                     <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", letterSpacing: "0.25em" }} className="text-[#C9A84C] font-black uppercase tracking-wider shrink-0">
                         युद्ध अभियान श्रृंखला // CAMPAIGN TIMELINE
                     </span>
                     <div className="flex-grow border-t border-white/5 opacity-40" />
                 </div>
 
-                {/* Minimalist manifest-style vertical match timeline */}
-                <div className="flex flex-col gap-3 max-w-5xl mx-auto">
-                    {resolvedFixtures.map((fix) => {
-                        const isCompleted = fix.past;
-                        const isActiveSelection = fix.id === activeMatchId;
+                {/* Tactical Vertical Timeline Track Container */}
+                <div className="relative max-w-4xl mx-auto pl-12 md:pl-16">
+                    
+                    {/* The physical glowing, dashed timeline cable line */}
+                    <div className="absolute left-[20px] md:left-[26px] top-6 bottom-6 w-[1.5px] border-l border-dashed border-white/10 z-0 pointer-events-none" />
 
-                        return (
-                            <div
-                                key={fix.id}
-                                onClick={() => {
-                                    setSelectedMatchId(fix.id);
-                                    setSelectedTab("chronicle");
-                                    if (typeof navigator !== "undefined" && navigator.vibrate) {
-                                        navigator.vibrate([10, 5, 10]);
-                                    }
-                                }}
-                                className={`flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:py-4 md:px-8 cursor-pointer transition-all duration-300 border-l-[3px] rounded-sm bg-[#090d16]/30 ${
-                                    isActiveSelection 
-                                        ? "border-l-[#C9A84C] bg-white/[0.03] border-white/10 shadow-[0_4px_20px_rgba(201,168,76,0.03)]" 
-                                        : "border-l-transparent border-white/5 hover:border-white/10 hover:bg-white/[0.01]"
-                                } border-t border-r border-b`}
-                            >
-                                {/* Left side: Mission ID, status indicator, date & format */}
-                                <div className="flex items-center gap-6 shrink-0">
-                                    <div className="flex items-center gap-2.5">
-                                        <span className={`h-1.5 w-1.5 rounded-full ${
-                                            isCompleted ? "bg-white/20" : "bg-[#D32F2F] animate-pulse"
-                                        }`} />
-                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.15em" }} className="text-white/40 font-black uppercase">
-                                            M_{fix.id}
-                                        </span>
-                                    </div>
+                    <div className="flex flex-col gap-8">
+                        {resolvedFixtures.map((fix) => {
+                            const isCompleted = fix.past;
+                            const isActiveSelection = fix.id === activeMatchId;
+
+                            // Translate venue to Devanagari using our helper
+                            const localizedVenue = getLocalizedVenue(fix.venue);
+                            
+                            // Format time nicely in Devanagari 12-hour format
+                            const localizedTime = formatNepaliTime(fix.time);
+
+                            return (
+                                <div
+                                    key={fix.id}
+                                    onClick={() => {
+                                        setSelectedMatchId(fix.id);
+                                        setSelectedTab("chronicle");
+                                        if (typeof navigator !== "undefined" && navigator.vibrate) {
+                                            navigator.vibrate([10, 5, 10]);
+                                        }
+                                    }}
+                                    className="relative flex items-center w-full"
+                                >
                                     
-                                    <div className="flex flex-col">
-                                        <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C]/90 text-[13px] leading-tight">
-                                            {formatNepaliDate(fix.date)}
-                                        </span>
-                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.05em" }} className="text-white/30 uppercase mt-0.5 tracking-wider font-semibold">
-                                            {fix.format}
-                                        </span>
+                                    {/* 🔘 The Tectonic circular node on the timeline path */}
+                                    <div className="absolute left-[-40px] md:left-[-49px] z-10 flex items-center justify-center w-10 h-10 select-none pointer-events-none">
+                                        {isActiveSelection ? (
+                                            <div className="relative flex items-center justify-center">
+                                                {/* Double pulsing rings for selected/active */}
+                                                <span className="absolute w-7 h-7 bg-[#C41E3A]/20 border border-[#C41E3A]/40 rounded-full animate-ping" />
+                                                <span className="absolute w-5 h-5 bg-[#C9A84C]/35 rounded-full" />
+                                                <span className="relative w-2.5 h-2.5 bg-[#C41E3A] rounded-full border border-white/30" />
+                                            </div>
+                                        ) : isCompleted ? (
+                                            <div className="relative flex items-center justify-center">
+                                                {/* Golden solid completed node */}
+                                                <span className="w-5 h-5 bg-[#07080F] border-2 border-[#C9A84C]/60 rounded-full flex items-center justify-center">
+                                                    <span className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" />
+                                                </span>
+                                            </div>
+                                        ) : (
+                                            <div className="relative flex items-center justify-center">
+                                                {/* Muted future node */}
+                                                <span className="w-4 h-4 bg-[#07080F] border border-white/10 rounded-full flex items-center justify-center">
+                                                    <span className="w-1 h-1 bg-white/10 rounded-full" />
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* 📦 The Tactical Campaign Card */}
+                                    <div
+                                        className={`flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 w-full cursor-pointer transition-all duration-300 rounded-sm relative overflow-hidden bg-gradient-to-br from-[#090d16]/30 to-[#04060b]/40 border ${
+                                            isActiveSelection 
+                                                ? "border-[#C9A84C] bg-white/[0.03] shadow-[0_15px_40px_rgba(201,168,76,0.06)] scale-[1.01]" 
+                                                : "border-white/5 hover:border-white/10 hover:bg-white/[0.01]"
+                                        }`}
+                                    >
+                                        
+                                        {/* Background radar grid pattern for selected match */}
+                                        {isActiveSelection && (
+                                            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(201,168,76,0.01)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                                        )}
+
+                                        {/* 1. OVERLAPPING TILTED FLAG FACEOFF DUEL (THE FLAG INTEGRATION) */}
+                                        <div className="flex items-center gap-4 shrink-0">
+                                            
+                                            {/* Flag Faceoff Container */}
+                                            <div className="relative flex items-center w-[95px] h-[48px] select-none pointer-events-none shrink-0">
+                                                {/* Nepal Flag (Left - Inward Tilt) */}
+                                                <div className="absolute left-0 z-10">
+                                                    <FlagImg
+                                                        code={FLAG_MAP[fix.id]?.np ?? "np"}
+                                                        side="left"
+                                                        size={26}
+                                                    />
+                                                </div>
+                                                
+                                                {/* Tactical VS Overlay divider ring */}
+                                                <div style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="absolute left-[36px] z-20 flex items-center justify-center w-5 h-5 bg-[#05070c] border border-white/10 text-white text-[9.5px] font-black rounded-full shadow-[0_0_10px_black]">
+                                                    VS
+                                                </div>
+
+                                                {/* Opponent Flag (Right - Inward Tilt) */}
+                                                <div className="absolute right-0 z-10">
+                                                    <FlagImg
+                                                        code={FLAG_MAP[fix.id]?.opp ?? "xx"}
+                                                        side="right"
+                                                        size={26}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* Mission Index & Format details */}
+                                            <div className="flex flex-col">
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10.5px", letterSpacing: "0.15em" }} className={`font-black uppercase tracking-wider block ${
+                                                    isActiveSelection ? "text-[#C41E3A]" : isCompleted ? "text-[#C9A84C]" : "text-white/30"
+                                                }`}>
+                                                    MISSION #{fix.id} {isCompleted ? "// HISTORY" : "// FUTURE"}
+                                                </span>
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.05em" }} className="text-white/30 uppercase mt-0.5 tracking-wider font-black">
+                                                    {fix.format} CHAMPIONSHIP
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        {/* 2. MATCHUP TITLE AND LOCALIZED VENUE */}
+                                        <div className="flex-1 min-w-0 md:px-6">
+                                            <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[17px] md:text-[19px] leading-snug m-0">
+                                                नेपाल <span className="text-[#C41E3A] mx-1">बनाम</span> {fix.nepaliName.replace("विरुद्ध", "")}
+                                            </h3>
+                                            
+                                            {/* Localized Devanagari Venue */}
+                                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "12px" }} className="text-white/35 block mt-0.5 font-bold">
+                                                {localizedVenue}
+                                            </span>
+                                        </div>
+
+                                        {/* 3. LOCALIZED DATE-TIME & STATUS BADGES */}
+                                        <div className="flex flex-col md:items-end justify-center gap-2.5 shrink-0">
+                                            {/* Fully Localized Date & Time (All Devanagari, no English mixed!) */}
+                                            <div className="flex flex-col md:items-end leading-tight">
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px]">
+                                                    {formatNepaliDate(fix.date)}
+                                                </span>
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "10.5px" }} className="text-white/30 mt-0.5">
+                                                    {localizedTime}
+                                                </span>
+                                            </div>
+
+                                            {/* Status Badge */}
+                                            {isCompleted ? (
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#C9A84C] font-black uppercase border border-[#C9A84C]/25 bg-[#C9A84C]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
+                                                    सम्पन्न
+                                                </span>
+                                            ) : (
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#D32F2F] font-black uppercase border border-[#D32F2F]/25 bg-[#D32F2F]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
+                                                    आगामी
+                                                </span>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-
-                                {/* Center: Matchup and Venue */}
-                                <div className="flex-1 min-w-0 md:px-6">
-                                    <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[16px] md:text-[18px] leading-snug m-0">
-                                        नेपाल <span className="text-[#C41E3A] mx-1.5">vs</span> {fix.nepaliName.replace("विरुद्ध", "")}
-                                    </h3>
-                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/30 text-[12px] m-0 mt-0.5 truncate max-w-md">
-                                        {fix.venue}
-                                    </p>
-                                </div>
-
-                                {/* Right side: Monospace Time & clean status tag */}
-                                <div className="flex items-center justify-between md:justify-end gap-5 shrink-0">
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 font-bold uppercase md:text-right">
-                                        {formatNepaliTime(fix.time).replace("नेपाली समय (NPT)", "NPT")}
-                                    </span>
-
-                                    {isCompleted ? (
-                                        <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#C9A84C] font-black uppercase border border-[#C9A84C]/25 bg-[#C9A84C]/5 px-2.5 py-0.5 rounded-sm tracking-wider">
-                                            सम्पन्न
-                                        </span>
-                                    ) : (
-                                        <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#D32F2F] font-black uppercase border border-[#D32F2F]/25 bg-[#D32F2F]/5 px-2.5 py-0.5 rounded-sm tracking-wider">
-                                            आगामी
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        );
-                    })}
+                            );
+                        })}
+                    </div>
                 </div>
             </section>
-
             {/* ── FOOTER SLOGAN ── */}
             <div className="mt-28 pt-20 pb-6 flex justify-center relative z-10 select-none">
                 <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.18)", letterSpacing: "0.05em", textAlign: "center", display: "block" }}>
