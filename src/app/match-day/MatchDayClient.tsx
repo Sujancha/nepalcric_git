@@ -1433,18 +1433,40 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 {/* Nepal Fighter */}
                                 <div className="bg-[#1E3A8A]/5 border border-[#1E3A8A]/15 rounded-lg p-5 flex flex-col justify-between relative group hover:border-[#1E3A8A]/35 transition-all duration-300">
                                     <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-[#1E3A8A]/50 select-none">FORCE_A // NEPAL</div>
-                                    <div className="space-y-3">
-                                        <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TACTICAL ASSET</span>
-                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
-                                            {selectedMatchupId === "rohit-saad" && "रोहित पौडेल"}
-                                            {selectedMatchupId === "sandeep-aqib" && "सन्दीप लामिछाने"}
-                                            {selectedMatchupId === "dipendra-kirton" && "दीपेन्द्र सिंह ऐरी"}
-                                        </h5>
-                                        <span className="text-white/45 text-[11.5px] block font-mono">
-                                            {selectedMatchupId === "rohit-saad" && "ROLE: Middle-Order Anchor / Captain"}
-                                            {selectedMatchupId === "sandeep-aqib" && "ROLE: Leg-Spin Mastermind"}
-                                            {selectedMatchupId === "dipendra-kirton" && "ROLE: Explosive Finisher"}
-                                        </span>
+                                    
+                                    {/* Flex layout for Info + Photo */}
+                                    <div className="flex gap-4 items-start">
+                                        <div className="space-y-3 flex-1 min-w-0">
+                                            <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TACTICAL ASSET</span>
+                                            <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
+                                                {selectedMatchupId === "rohit-saad" && "रोहित पौडेल"}
+                                                {selectedMatchupId === "sandeep-aqib" && "सन्दीप लामिछाने"}
+                                                {selectedMatchupId === "dipendra-kirton" && "दीपेन्द्र सिंह ऐरी"}
+                                            </h5>
+                                            <span className="text-white/45 text-[11.5px] block font-mono leading-tight">
+                                                {selectedMatchupId === "rohit-saad" && "ROLE: Middle-Order Anchor / Captain"}
+                                                {selectedMatchupId === "sandeep-aqib" && "ROLE: Leg-Spin Mastermind"}
+                                                {selectedMatchupId === "dipendra-kirton" && "ROLE: Explosive Finisher"}
+                                            </span>
+                                        </div>
+
+                                        {/* Player photo frame */}
+                                        <div className="w-[90px] h-[115px] relative rounded-md border border-white/10 overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.6)] shrink-0 select-none bg-black/40">
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
+                                            <div className="absolute inset-0 bg-[#1E3A8A]/10 mix-blend-multiply z-10 pointer-events-none" />
+                                            {selectedMatchupId === "rohit-saad" && (
+                                                /* eslint-disable-next-line @next/next/no-img-element */
+                                                <img src="/images/rohit_paudel.jpg" alt="Rohit" className="w-full h-full object-cover grayscale-[10%]" />
+                                            )}
+                                            {selectedMatchupId === "sandeep-aqib" && (
+                                                /* eslint-disable-next-line @next/next/no-img-element */
+                                                <img src="/images/sandeep.webp" alt="Sandeep" className="w-full h-full object-cover grayscale-[10%]" />
+                                            )}
+                                            {selectedMatchupId === "dipendra-kirton" && (
+                                                /* eslint-disable-next-line @next/next/no-img-element */
+                                                <img src="/images/dipendra_airee.jpg" alt="Dipendra" className="w-full h-full object-cover grayscale-[10%]" />
+                                            )}
+                                        </div>
                                     </div>
                                     
                                     {/* Stats grid */}
@@ -1457,7 +1479,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 {selectedMatchupId === "dipendra-kirton" && "90%"}
                                             </span>
                                         </div>
-                                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                        <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
                                             <div 
                                                 className="h-full bg-[#1E3A8A] rounded-full" 
                                                 style={{ width: selectedMatchupId === "rohit-saad" ? "88%" : selectedMatchupId === "sandeep-aqib" ? "92%" : "90%" }}
@@ -1488,18 +1510,49 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 {/* Opponent Fighter */}
                                 <div className="bg-[#D32F2F]/5 border border-[#D32F2F]/15 rounded-lg p-5 flex flex-col justify-between relative group hover:border-[#D32F2F]/35 transition-all duration-300">
                                     <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-[#D32F2F]/50 select-none">FORCE_B // OPPONENT</div>
-                                    <div className="space-y-3">
-                                        <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TARGET TARGETED</span>
-                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
-                                            {selectedMatchupId === "rohit-saad" && "साद बिन जफर"}
-                                            {selectedMatchupId === "sandeep-aqib" && "आकिब इलियास"}
-                                            {selectedMatchupId === "dipendra-kirton" && "निकोलस किर्टन"}
-                                        </h5>
-                                        <span className="text-white/45 text-[11.5px] block font-mono">
-                                            {selectedMatchupId === "rohit-saad" && "ROLE: Chatur Left-Arm Spinner"}
-                                            {selectedMatchupId === "sandeep-aqib" && "ROLE: Explosive All-Rounder / Captain"}
-                                            {selectedMatchupId === "dipendra-kirton" && "ROLE: Middle-Order Match Winner"}
-                                        </span>
+                                    
+                                    {/* Flex layout for Info + Radar Scan */}
+                                    <div className="flex gap-4 items-start">
+                                        <div className="space-y-3 flex-1 min-w-0">
+                                            <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TARGET TARGETED</span>
+                                            <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
+                                                {selectedMatchupId === "rohit-saad" && "साद बिन जफर"}
+                                                {selectedMatchupId === "sandeep-aqib" && "आकिब इलियास"}
+                                                {selectedMatchupId === "dipendra-kirton" && "निकोलस किर्टन"}
+                                            </h5>
+                                            <span className="text-white/45 text-[11.5px] block font-mono leading-tight">
+                                                {selectedMatchupId === "rohit-saad" && "ROLE: Chatur Left-Arm Spinner"}
+                                                {selectedMatchupId === "sandeep-aqib" && "ROLE: Explosive All-Rounder / Captain"}
+                                                {selectedMatchupId === "dipendra-kirton" && "ROLE: Middle-Order Match Winner"}
+                                            </span>
+                                        </div>
+
+                                        {/* Opponent Radar Flag Frame */}
+                                        <div className="w-[90px] h-[115px] relative rounded-md border border-white/10 overflow-hidden shadow-[0_8px_20px_rgba(0,0,0,0.6)] shrink-0 select-none bg-black/60">
+                                            {/* Flag cover backdrop */}
+                                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            <img 
+                                                src={`https://flagcdn.com/w160/${selectedMatchupId === "sandeep-aqib" ? "om" : "ca"}.png`} 
+                                                alt="Rival Flag" 
+                                                className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-luminosity grayscale-[30%] pointer-events-none" 
+                                            />
+                                            {/* Vignette */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
+                                            
+                                            {/* Radar Scanning Line */}
+                                            <div className="absolute inset-x-0 h-[1.5px] bg-[#D32F2F]/60 top-0 shadow-[0_0_6px_#D32F2F] z-20 animate-[sweepEffect_2.5s_infinite]" />
+                                            
+                                            {/* Rotating graphic overlay */}
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center p-2 z-10">
+                                                <div className="w-12 h-12 border border-dashed border-[#D32F2F]/30 rounded-full flex items-center justify-center animate-[sbSpotlightSpin_12s_linear_infinite] relative">
+                                                    <div className="w-8 h-8 border border-white/5 rounded-full flex items-center justify-center" />
+                                                    <div className="absolute top-0 w-1.5 h-1.5 bg-[#D32F2F] rounded-full animate-ping" />
+                                                </div>
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "7px", letterSpacing: "0.1em" }} className="text-[#D32F2F] font-black uppercase mt-1.5 tracking-widest text-center animate-pulse">
+                                                    LOCK_ON
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     {/* Stats grid */}
@@ -1512,7 +1565,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 {selectedMatchupId === "dipendra-kirton" && "88%"}
                                             </span>
                                         </div>
-                                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                        <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
                                             <div 
                                                 className="h-full bg-[#D32F2F] rounded-full" 
                                                 style={{ width: selectedMatchupId === "rohit-saad" ? "85%" : selectedMatchupId === "sandeep-aqib" ? "95%" : "88%" }}
