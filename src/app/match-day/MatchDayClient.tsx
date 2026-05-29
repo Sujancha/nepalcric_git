@@ -198,7 +198,7 @@ function FlagImg({ code, side, size = 44 }: { code: string; side: "left" | "righ
                 alt={code.toUpperCase()}
                 width={Math.round(size * 1.5)}
                 height={size}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                style={{ width: "100%", height: "100%", objectFit: code === "np" ? "contain" : "cover", display: "block" }}
                 loading="eager"
             />
         </div>
@@ -432,7 +432,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
             </div>
 
             {/* ── PREMIUM CINEMATIC PARALLAX COVER ── */}
-            <section className="relative h-[42vh] w-full overflow-hidden after:absolute after:bottom-0 after:left-0 after:w-full after:h-[120px] after:bg-gradient-to-t after:from-[#07080F] after:to-transparent after:z-10 flex items-end">
+            <section className="relative h-[55vh] min-h-[480px] w-full overflow-hidden after:absolute after:bottom-0 after:left-0 after:w-full after:h-[240px] after:bg-gradient-to-t after:from-[#07080F] after:to-transparent after:z-10 flex items-end pb-28">
                 <div
                     className="absolute inset-0 w-full h-full bg-cover bg-top animate-ken-burns"
                     style={{
@@ -466,7 +466,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
             </section>
 
             {/* ── 📚 THE STADIUM JUMBOTRON BROADCAST BATTLEFIELD DECK (SPOTLIGHT REDESIGN) ── */}
-            <section className="relative z-10 max-w-6xl mx-auto px-6 mb-16 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.8s_both]">
+            <section className="relative z-20 max-w-6xl mx-auto px-6 mb-20 -mt-20 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.8s_both]">
                 
                 {/* Dossier Pinned Header Bar */}
                 <div className="w-full flex items-center justify-between bg-black/60 backdrop-blur-md px-5 py-3 border border-white/5 border-b-0 rounded-t-sm text-[9.5px] font-bold text-white/30 tracking-widest uppercase">
@@ -583,7 +583,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         )}
                         {activeMatch.past && (
                             <div className="flex items-center gap-2 mt-5 bg-[#C9A84C]/8 border border-[#C9A84C]/20 px-5 py-2 rounded-sm">
-                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px] uppercase tracking-wider">✓ यो मुकाबला सम्पन्न भयो</span>
+                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px] uppercase tracking-wider">यो मुकाबला सम्पन्न भयो</span>
                             </div>
                         )}
                     </div>
@@ -738,16 +738,16 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                     </div>
 
                     {/* Telemetry info footer */}
-                    <div className="w-full bg-[#05070c]/90 border-t border-white/5 px-6 py-4 rounded-sm flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-medium text-white/50">
-                        <span className="flex items-center gap-2 text-center md:text-left">
-                            🏟️ <strong className="text-white font-bold">{activeMatch.venue}</strong>
-                            &nbsp;&middot;&nbsp; 
-                            📅 {formatNepaliDate(activeMatch.date)}, २०२६
-                            &nbsp;&middot;&nbsp; 
-                            ⏰ {formatNepaliTime(activeMatch.time)}
-                        </span>
-                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="font-bold uppercase tracking-wider text-center md:text-right">
-                            H2H रेकर्ड: <span className="text-[#C9A84C] ml-1.5">{activeMatch.h2h}</span>
+                    <div className="w-full bg-[#05070c]/95 border-t border-white/5 px-8 py-5 rounded-sm flex flex-col md:flex-row justify-between items-center gap-6 text-[11px] font-semibold text-white/40 tracking-wider">
+                        <div className="flex flex-col md:flex-row md:items-center gap-3 md:gap-8 text-center md:text-left">
+                            <span className="uppercase"><span className="text-white/20 mr-1.5">LOC //</span> <strong className="text-white/80 font-bold">{activeMatch.venue}</strong></span>
+                            <span className="hidden md:inline text-white/10">|</span>
+                            <span className="uppercase"><span className="text-white/20 mr-1.5">DATE //</span> <strong className="text-[#C9A84C] font-bold">{formatNepaliDate(activeMatch.date)}, २०२६</strong></span>
+                            <span className="hidden md:inline text-white/10">|</span>
+                            <span className="uppercase"><span className="text-white/20 mr-1.5">TIME //</span> <strong className="text-white/80 font-bold">{formatNepaliTime(activeMatch.time).replace("नेपाली समय (NPT)", "NPT")}</strong></span>
+                        </div>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.15em" }} className="font-black uppercase tracking-wider text-center md:text-right">
+                            H2H RECORD // <span className="text-[#C41E3A] ml-1.5">{activeMatch.h2h}</span>
                         </span>
                     </div>
 
@@ -764,147 +764,75 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                     <div className="flex-grow border-t border-white/5 opacity-40" />
                 </div>
 
-                {/* Match Day Bento Grid Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {resolvedFixtures.map((fix, idx) => {
+                {/* Minimalist manifest-style vertical match timeline */}
+                <div className="flex flex-col gap-3 max-w-5xl mx-auto">
+                    {resolvedFixtures.map((fix) => {
                         const isCompleted = fix.past;
                         const isActiveSelection = fix.id === activeMatchId;
-                        const isRadarActive = !fix.past && fix.id === (upcomingFixtures[0]?.id ?? "");
-                        const isHovered = hoveredCard === fix.id;
-
-                        // outcome theme border based on victory/threat
-                        const isVictory = fix.h2h.includes("नेपाल") && !fix.past;
 
                         return (
                             <div
                                 key={fix.id}
-                                onMouseEnter={() => setHoveredCard(fix.id)}
-                                onMouseLeave={() => setHoveredCard(null)}
                                 onClick={() => {
                                     setSelectedMatchId(fix.id);
                                     setSelectedTab("chronicle");
                                     if (typeof navigator !== "undefined" && navigator.vibrate) {
-                                        navigator.vibrate([10, 5, 10]); // physical tick
+                                        navigator.vibrate([10, 5, 10]);
                                     }
                                 }}
-                                className={`flex flex-col relative rounded-[2px] p-[24px_28px] cursor-pointer transition-all duration-300 overflow-hidden bg-[#090d16]/30 ${
+                                className={`flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 md:py-4 md:px-8 cursor-pointer transition-all duration-300 border-l-[3px] rounded-sm bg-[#090d16]/30 ${
                                     isActiveSelection 
-                                        ? "border-[#C9A84C] bg-white/[0.04] shadow-[0_8px_30px_rgba(201,168,76,0.06)] scale-[1.01]" 
-                                        : "border-white/5 hover:border-white/15 hover:bg-white/[0.01]"
-                                } ${isCompleted ? "opacity-60 grayscale-[40%]" : ""}`}
-                                style={{
-                                    borderTopWidth: "3px",
-                                    borderTopColor: isCompleted ? "#C9A84C" : fix.threatColor,
-                                    borderLeftWidth: "1px",
-                                    borderRightWidth: "1px",
-                                    borderBottomWidth: "1px"
-                                }}
+                                        ? "border-l-[#C9A84C] bg-white/[0.03] border-white/10 shadow-[0_4px_20px_rgba(201,168,76,0.03)]" 
+                                        : "border-l-transparent border-white/5 hover:border-white/10 hover:bg-white/[0.01]"
+                                } border-t border-r border-b`}
                             >
-                                {/* Background Year Stamp */}
-                                <div style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "70px", color: "rgba(255,255,255,0.01)" }} className="absolute -bottom-6 -right-2 font-black select-none pointer-events-none select-none">
-                                    २०२६
-                                </div>
-
-                                {/* Custom Gold Stamped Watermark for completed matches */}
-                                {isCompleted && (
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] border-4 border-double border-[#C9A84C]/25 text-[#C9A84C]/25 font-black uppercase text-[26px] tracking-widest px-4 py-1.5 rounded-sm select-none pointer-events-none select-none z-10">
-                                        ✓ सम्पन्न
+                                {/* Left side: Mission ID, status indicator, date & format */}
+                                <div className="flex items-center gap-6 shrink-0">
+                                    <div className="flex items-center gap-2.5">
+                                        <span className={`h-1.5 w-1.5 rounded-full ${
+                                            isCompleted ? "bg-white/20" : "bg-[#D32F2F] animate-pulse"
+                                        }`} />
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.15em" }} className="text-white/40 font-black uppercase">
+                                            M_{fix.id}
+                                        </span>
                                     </div>
-                                )}
-
-                                {/* Mission Top Row */}
-                                <div className="flex justify-between items-center mb-4 relative z-10">
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className={`font-black uppercase tracking-wider block ${
-                                        isActiveSelection ? "text-[#D32F2F]" : isCompleted ? "text-[#C9A84C]" : "text-white/30"
-                                    }`}>
-                                        MISSION #{fix.id} {isCompleted ? "// HISTORY" : "// FUTURE CLASH"}
-                                    </span>
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 font-bold uppercase">
-                                        {formatNepaliDate(fix.date)} &middot; {formatNepaliTime(fix.time)}
-                                    </span>
-                                </div>
-
-                                <div className="w-full border-t border-white/5 mb-4" />
-
-                                {/* Opponent & Format Row */}
-                                <div className="flex justify-between items-end mb-4 relative z-10">
-                                    <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[24px] leading-none m-0">
-                                        {fix.nepaliName}
-                                    </h3>
-                                    <div className="flex items-center gap-3">
-                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.1em" }} className="font-bold border border-white/10 px-2 py-0.5 rounded-sm uppercase tracking-wider text-white/40">
+                                    
+                                    <div className="flex flex-col">
+                                        <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C]/90 text-[13px] leading-tight">
+                                            {formatNepaliDate(fix.date)}
+                                        </span>
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.05em" }} className="text-white/30 uppercase mt-0.5 tracking-wider font-semibold">
                                             {fix.format}
                                         </span>
-                                        {isRadarActive && (
-                                            <span className="relative flex h-2 w-2">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D32F2F] opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D32F2F]"></span>
-                                            </span>
-                                        )}
                                     </div>
                                 </div>
 
-                                {/* Mini Threat Meter */}
-                                <div className="flex items-center gap-4 mb-4 relative z-10">
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.1em" }} className="text-white/30 font-bold uppercase shrink-0 w-[55px]">THREAT INDEX</span>
-                                    <div className="flex-1 h-[2.5px] bg-white/5 rounded-full overflow-hidden">
-                                        <div
-                                            className="h-full rounded-full"
-                                            style={{ 
-                                                width: mounted ? `${fix.threat}%` : '0%', 
-                                                background: isCompleted ? "#C9A84C" : fix.threatColor,
-                                                boxShadow: `0 0 6px ${isCompleted ? "#C9A84C" : fix.threatColor}`,
-                                                transition: 'width 1.5s cubic-bezier(0.76,0,0.24,1)' 
-                                            }}
-                                        />
-                                    </div>
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10.5px", color: isCompleted ? "#C9A84C" : fix.threatColor }} className="font-black uppercase w-[55px] text-right">
-                                        {formatNumberToNepali(fix.threat)}%
-                                    </span>
-                                </div>
-
-                                {/* Intel Lines */}
-                                <div className="flex flex-col gap-1.5 mb-5 relative z-10">
-                                    {/* Our weapon — crossed-bats SVG */}
-                                    <div className="flex items-center gap-2.5">
-                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="shrink-0" style={{ color: "rgba(201,168,76,0.85)" }}>
-                                            <path d="M4 20L14 10M14 10L18 6L22 2L18 6M14 10L10 14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                            <circle cx="5.5" cy="18.5" r="1.8" stroke="currentColor" strokeWidth="1.5"/>
-                                        </svg>
-                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] tracking-wide">{fix.weapon}</span>
-                                    </div>
-                                    {/* Their danger — warning triangle SVG */}
-                                    <div className="flex items-center gap-2.5">
-                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="shrink-0" style={{ color: "rgba(211,47,47,0.85)" }}>
-                                            <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                                        </svg>
-                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] tracking-wide">{fix.danger}</span>
-                                    </div>
-                                </div>
-
-                                {/* Venue Row */}
-                                <div className="flex justify-between items-center mt-auto pt-3.5 border-t border-white/5 relative z-10 text-[11.5px] font-medium text-white/30">
-                                    <span className="flex items-center gap-1.5 truncate pr-4">
-                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="shrink-0" style={{ color: "rgba(255,255,255,0.25)" }}>
-                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                                        </svg>
+                                {/* Center: Matchup and Venue */}
+                                <div className="flex-1 min-w-0 md:px-6">
+                                    <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[16px] md:text-[18px] leading-snug m-0">
+                                        नेपाल <span className="text-[#C41E3A] mx-1.5">vs</span> {fix.nepaliName.replace("विरुद्ध", "")}
+                                    </h3>
+                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/30 text-[12px] m-0 mt-0.5 truncate max-w-md">
                                         {fix.venue}
+                                    </p>
+                                </div>
+
+                                {/* Right side: Monospace Time & clean status tag */}
+                                <div className="flex items-center justify-between md:justify-end gap-5 shrink-0">
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 font-bold uppercase md:text-right">
+                                        {formatNepaliTime(fix.time).replace("नेपाली समय (NPT)", "NPT")}
                                     </span>
-                                    {!isCompleted && (
-                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className={`font-black transition-all duration-300 ${
-                                            isHovered ? "text-[#C9A84C] opacity-100 translate-x-1" : "text-[#C9A84C]/50 opacity-0"
-                                        }`}>
-                                            विवरण &rarr;
+
+                                    {isCompleted ? (
+                                        <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#C9A84C] font-black uppercase border border-[#C9A84C]/25 bg-[#C9A84C]/5 px-2.5 py-0.5 rounded-sm tracking-wider">
+                                            सम्पन्न
+                                        </span>
+                                    ) : (
+                                        <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#D32F2F] font-black uppercase border border-[#D32F2F]/25 bg-[#D32F2F]/5 px-2.5 py-0.5 rounded-sm tracking-wider">
+                                            आगामी
                                         </span>
                                     )}
                                 </div>
-
-                                {/* Unique Decisive tag */}
-                                {fix.id === "02" && (
-                                    <span style={{ fontSize: "7.5px", fontFamily: "Barlow Condensed, sans-serif", letterSpacing: "0.15em" }} className="absolute top-3 right-3 bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#C9A84C] font-extrabold px-1.5 py-0.5 rounded-sm uppercase tracking-wider whitespace-nowrap">
-                                        निर्णायक मुकाबला
-                                    </span>
-                                )}
                             </div>
                         );
                     })}
