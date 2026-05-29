@@ -259,6 +259,13 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
     const [selectedTab, setSelectedTab] = useState<"chronicle" | "weapon" | "danger" | "h2h">("chronicle");
     const [sweepActive, setSweepActive] = useState(false);
+
+    // Interactive Tectonic War Room State Hooks
+    const [selectedMatchupId, setSelectedMatchupId] = useState<string>("rohit-saad");
+    const [activePitchZone, setActivePitchZone] = useState<"bounce" | "spin" | "swing">("spin");
+    const [votedOption, setVotedOption] = useState<string | null>(null);
+    const [pollVotes, setPollVotes] = useState({ opA: 45, opB: 35, opC: 20 });
+    const [activeSound, setActiveSound] = useState<string | null>(null);
     
     interface Particle {
         width: string; height: string; left: string; top: string;
@@ -314,6 +321,29 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
     const activeMatchId = selectedMatchId || (resolvedFixtures[0]?.id ?? "");
     const activeMatch = resolvedFixtures.find(f => f.id === activeMatchId) || resolvedFixtures[0];
 
+    // Sync Prediction Poll state based on active match id
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const savedVote = localStorage.getItem(`nepalcric_vote_${activeMatchId}`);
+            if (savedVote) {
+                setVotedOption(savedVote);
+                const savedVotes = localStorage.getItem(`nepalcric_votes_data_${activeMatchId}`);
+                if (savedVotes) {
+                    try {
+                        setPollVotes(JSON.parse(savedVotes));
+                    } catch(e) {}
+                }
+            } else {
+                setVotedOption(null);
+                // Seed random realistic votes
+                const baseA = 40 + Math.floor(Math.random() * 15);
+                const baseB = 25 + Math.floor(Math.random() * 10);
+                const baseC = 100 - baseA - baseB;
+                setPollVotes({ opA: baseA, opB: baseB, opC: baseC });
+            }
+        }
+    }, [activeMatchId]);
+
     const opponentName = activeMatch 
         ? activeMatch.nepaliName.replace("विरुद्ध", "") 
         : "प्रतिद्वन्द्वी";
@@ -330,15 +360,15 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
     // Dynamic countdown target clock linked strictly to the active focused match
     const [timeLeft, setTimeLeft] = useState({
-        days: "००",
-        hours: "००",
-        minutes: "००",
-        seconds: "००"
+        days: "00",
+        hours: "00",
+        minutes: "00",
+        seconds: "00"
     });
 
     useEffect(() => {
         if (!mounted || !activeMatch || activeMatch.past) {
-            setTimeLeft({ days: "००", hours: "००", minutes: "००", seconds: "००" });
+            setTimeLeft({ days: "00", hours: "00", minutes: "00", seconds: "00" });
             return;
         }
 
@@ -350,7 +380,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
             if (diff < 0) {
                 clearInterval(timer);
-                setTimeLeft({ days: "००", hours: "००", minutes: "००", seconds: "००" });
+                setTimeLeft({ days: "00", hours: "00", minutes: "00", seconds: "00" });
                 return;
             }
 
@@ -359,13 +389,13 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            const formatNepali = (num: number) => num.toString().padStart(2, '0').replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+            const formatStandard = (num: number) => num.toString().padStart(2, '0');
 
             setTimeLeft({
-                days: formatNepali(days),
-                hours: formatNepali(hours),
-                minutes: formatNepali(minutes),
-                seconds: formatNepali(seconds)
+                days: formatStandard(days),
+                hours: formatStandard(hours),
+                minutes: formatStandard(minutes),
+                seconds: formatStandard(seconds)
             });
         }, 1000);
 
@@ -383,6 +413,83 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
         }
     };
 
+    const playSynthSound = (type: string) => {
+        try {
+            // @ts-ignore
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            
+            if (type === "drums") {
+                // Synthesize a heavy bass drum beat (Rhino war drum)
+                for (let i = 0; i < 4; i++) {
+                    const time = ctx.currentTime + i * 0.6;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = "triangle";
+                    osc.frequency.setValueAtTime(85, time);
+                    osc.frequency.exponentialRampToValueAtTime(0.01, time + 0.35);
+                    gain.gain.setValueAtTime(0.85, time);
+                    gain.gain.exponentialRampToValueAtTime(0.01, time + 0.35);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(time);
+                    osc.stop(time + 0.45);
+                }
+            } else if (type === "shanka") {
+                // Synthesize a high-pitch brass shanka drone
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(220, ctx.currentTime);
+                osc.frequency.linearRampToValueAtTime(320, ctx.currentTime + 1.2);
+                osc.frequency.linearRampToValueAtTime(220, ctx.currentTime + 2.0);
+                
+                gain.gain.setValueAtTime(0, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.4);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 2.2);
+                
+                const filter = ctx.createBiquadFilter();
+                filter.type = "lowpass";
+                filter.frequency.setValueAtTime(550, ctx.currentTime);
+                
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 2.3);
+            } else if (type === "roar") {
+                // Synthesize stadium crowd cheer white noise
+                const bufferSize = ctx.sampleRate * 2.2;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+                const noiseNode = ctx.createBufferSource();
+                noiseNode.buffer = buffer;
+                
+                const filter = ctx.createBiquadFilter();
+                filter.type = "bandpass";
+                filter.frequency.value = 380;
+                filter.Q.value = 1.0;
+                
+                const gain = ctx.createGain();
+                gain.gain.setValueAtTime(0, ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.4, ctx.currentTime + 0.4);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 2.2);
+                
+                noiseNode.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+                noiseNode.start();
+                noiseNode.stop(ctx.currentTime + 2.2);
+            }
+        } catch (e) {
+            console.log("Web Audio not supported or blocked");
+        }
+    };
+
     // Tabs for Jumbotron layer projector switcher
     const dossierTabs = [
         { id: "chronicle", num: "०१", label: "महा-भिडन्त", sub: "THE BATTLEFRONT" },
@@ -394,52 +501,81 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
     // Helper to render the circular NPT Countdown compass
     const renderCountdownOrb = () => {
         return (
-            <div className="relative flex flex-col items-center justify-center bg-[#05080f]/95 border border-[#C9A84C]/25 rounded-full w-[210px] h-[210px] shadow-[0_0_50px_rgba(201,168,76,0.15),inset_0_0_20px_rgba(201,168,76,0.06)] select-none p-4 text-center transition-all duration-500 hover:border-[#D32F2F]/40 hover:shadow-[0_0_55px_rgba(211,47,47,0.18)] animate-[vsPulse_3s_ease-in-out_infinite]">
+            <div className="relative flex flex-col items-center justify-between bg-[#05080f]/90 border border-[#C9A84C]/20 rounded-xl w-full max-w-[340px] shadow-[0_15px_50px_rgba(0,0,0,0.8),inset_0_0_20px_rgba(201,168,76,0.03)] select-none p-5 text-center transition-all duration-500 hover:border-[#D32F2F]/30 hover:shadow-[0_15px_55px_rgba(211,47,47,0.12)] border-t-[#C9A84C]/40 border-b-white/5">
                 
-                {/* Rotating gear radar lines */}
-                <div className="absolute inset-2 border border-dashed border-white/5 rounded-full animate-[sbSpotlightSpin_30s_linear_infinite] pointer-events-none" />
-                <div className="absolute inset-4 border border-white/5 rounded-full pointer-events-none" />
-                
-                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block mb-2.5">
-                    {activeMatch.past ? "समाप्त मिशन" : "LIVE NPT COUNTDOWN"}
-                </span>
+                {/* Tech grid corner brackets for high-tech feeling */}
+                <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-[#C9A84C]/40 rounded-tl-sm pointer-events-none" />
+                <div className="absolute top-0 right-0 w-2.5 h-2.5 border-t-2 border-r-2 border-[#C9A84C]/40 rounded-tr-sm pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-b-2 border-l-2 border-white/10 rounded-bl-sm pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-white/10 rounded-br-sm pointer-events-none" />
+
+                {/* Subtle digital scanning lines */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.005)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+
+                <div className="flex items-center gap-1.5 justify-center mb-3.5 border-b border-white/5 pb-2.5 w-full">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#C9A84C] animate-pulse" />
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.25em" }} className="text-[#C9A84C] font-black uppercase tracking-widest">
+                        {activeMatch.past ? "सम्पन्न भिडन्त" : "NPT COUNTDOWN SENSOR"}
+                    </span>
+                </div>
 
                 {activeMatch.past ? (
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center py-6 w-full">
                         <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-[28px] text-[#C9A84C] tracking-wide leading-none">✓ सम्पन्न</span>
-                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.1em" }} className="text-white/35 uppercase mt-1">HISTORIC CLASH</span>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/35 uppercase mt-2">HISTORIC CLASH COMPLETED</span>
                     </div>
                 ) : (
-                    <div className="flex items-center gap-1 justify-center mb-3">
-                        <div className="flex flex-col items-center">
-                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.days}</span>
-                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">दिन</span>
+                    <div className="grid grid-cols-4 gap-2 w-full mb-3">
+                        {/* Days slot */}
+                        <div className="bg-white/[0.02] border border-white/5 rounded-lg py-2.5 px-1 relative overflow-hidden group hover:border-[#C9A84C]/30 transition-all duration-300">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[26px] font-black leading-none block tracking-tight select-all drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+                                {timeLeft.days}
+                            </span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9px" }} className="text-[#C9A84C] font-black uppercase tracking-wide block mt-1">
+                                दिन
+                            </span>
+                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "7px" }} className="text-white/20 block tracking-widest mt-0.5">DAYS</span>
                         </div>
-                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
-                        
-                        <div className="flex flex-col items-center">
-                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.hours}</span>
-                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">घण्टा</span>
+
+                        {/* Hours slot */}
+                        <div className="bg-white/[0.02] border border-white/5 rounded-lg py-2.5 px-1 relative overflow-hidden group hover:border-[#C9A84C]/30 transition-all duration-300">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[26px] font-black leading-none block tracking-tight select-all drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+                                {timeLeft.hours}
+                            </span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9px" }} className="text-[#C9A84C] font-black uppercase tracking-wide block mt-1">
+                                घण्टा
+                            </span>
+                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "7px" }} className="text-white/20 block tracking-widest mt-0.5">HOURS</span>
                         </div>
-                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
-                        
-                        <div className="flex flex-col items-center">
-                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.minutes}</span>
-                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">मिनेट</span>
+
+                        {/* Minutes slot */}
+                        <div className="bg-white/[0.02] border border-white/5 rounded-lg py-2.5 px-1 relative overflow-hidden group hover:border-[#C9A84C]/30 transition-all duration-300">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[26px] font-black leading-none block tracking-tight select-all drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+                                {timeLeft.minutes}
+                            </span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9px" }} className="text-[#C9A84C] font-black uppercase tracking-wide block mt-1">
+                                मिनेट
+                            </span>
+                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "7px" }} className="text-white/20 block tracking-widest mt-0.5">MINS</span>
                         </div>
-                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
-                        
-                        <div className="flex flex-col items-center">
-                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.seconds}</span>
-                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">सेकेन्ड</span>
+
+                        {/* Seconds slot */}
+                        <div className="bg-white/[0.02] border border-white/5 rounded-lg py-2.5 px-1 relative overflow-hidden group hover:border-[#C9A84C]/30 transition-all duration-300">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[26px] font-black leading-none block tracking-tight select-all drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]">
+                                {timeLeft.seconds}
+                            </span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9px" }} className="text-[#C9A84C] font-black uppercase tracking-wide block mt-1">
+                                सेकेन्ड
+                            </span>
+                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "7px" }} className="text-white/20 block tracking-widest mt-0.5">SECS</span>
                         </div>
                     </div>
                 )}
 
                 {/* VS Emblem / Live marker */}
-                <div className="flex items-center gap-1.5 mt-2">
-                    <span className={`h-1.5 w-1.5 rounded-full ${activeMatch.past ? "bg-[#C9A84C]" : "bg-[#D32F2F] animate-pulse"}`} />
-                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.15em" }} className="text-white/50 uppercase font-black">
+                <div className="flex items-center gap-2 mt-2 border-t border-white/5 pt-2.5 w-full justify-center">
+                    <span className={`h-2 w-2 rounded-full ${activeMatch.past ? "bg-[#C9A84C]" : "bg-[#D32F2F] animate-[ping_1.5s_infinite]"}`} />
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.15em" }} className="text-white/60 uppercase font-black tracking-widest">
                         NEPAL VS {opponentName}
                     </span>
                 </div>
@@ -609,25 +745,9 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         </div>
 
                         {/* Time countdown strip */}
-                        {!activeMatch.past && (
-                            <div className="flex items-center gap-3 mt-5 bg-[#D32F2F]/8 border border-[#D32F2F]/15 px-5 py-2 rounded-sm">
-                                <span className="relative flex h-1.5 w-1.5">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D32F2F] opacity-75" />
-                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#D32F2F]" />
-                                </span>
-                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.18em" }} className="text-white/50 font-black uppercase">
-                                    खेल सुरु हुनमा&nbsp;
-                                </span>
-                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "14px", fontWeight: 800 }} className="text-white tracking-wide">
-                                    {timeLeft.days} दिन &nbsp;&middot;&nbsp; {timeLeft.hours} घण्टा &nbsp;&middot;&nbsp; {timeLeft.minutes} मिनेट &nbsp;&middot;&nbsp; {timeLeft.seconds} सेकेन्ड
-                                </span>
-                            </div>
-                        )}
-                        {activeMatch.past && (
-                            <div className="flex items-center gap-2 mt-5 bg-[#C9A84C]/8 border border-[#C9A84C]/20 px-5 py-2 rounded-sm">
-                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px] uppercase tracking-wider">यो मुकाबला सम्पन्न भयो</span>
-                            </div>
-                        )}
+                        <div className="mt-8 w-full flex justify-center relative z-10">
+                            {renderCountdownOrb()}
+                        </div>
                     </div>
                     {/* 2. DYNAMIC TABS SELECTOR */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 relative z-10 max-w-4xl mx-auto mt-12 mb-16 select-none">
@@ -1042,10 +1162,10 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         )}
 
                         {selectedTab === "h2h" && (
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                            <div className="w-full animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
                                 
-                                {/* Tactical Compare Dossier Column (8 cols) */}
-                                <div className="lg:col-span-8 space-y-5">
+                                {/* Tactical Compare Dossier Column (Full Width) */}
+                                <div className="space-y-5 w-full">
                                     <div className="border-l-2 border-[#C9A84C] pl-4 space-y-1">
                                         <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase block tracking-widest">
                                             COMBAT FIELD ANALYSIS // भिडन्त इतिहास र रेकर्ड
@@ -1106,13 +1226,8 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                         {/* Compare Metric 3: Narrative summary paragraph */}
                                         <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13.5px] leading-relaxed text-justify mt-2 m-0">
                                             इतिहास साक्षी छ कि नेपाली क्रिकेटको यो युद्धमा दुवै टोलीले रगत र पसिना बगाएका छन्। यो खेल पुरानो हिसाब चुक्ता गर्ने, हिमालको सिंह झैं गर्जने र २२ गजको पीचमा आफ्नो साम्राज्य खडा गर्ने ऐतिहासिक मौका हो।
-                                        </p>
+                                         </p>
                                     </div>
-                                </div>
-
-                                {/* Radial Countdown Orb Column (4 cols) */}
-                                <div className="lg:col-span-4 flex justify-center">
-                                    {renderCountdownOrb()}
                                 </div>
                             </div>
                         )}
@@ -1132,6 +1247,556 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         </span>
                     </div>
 
+                </div>
+            </section>
+
+            {/* ── ⚔️ STRATEGIC WAR ROOM: DYNAMIC FAN ENGAGEMENT BLUEPRINT ── */}
+            <section className="max-w-6xl mx-auto px-6 relative z-10 select-none mb-20 animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.8s_both]">
+                <div className="flex items-center gap-4 mb-10">
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", letterSpacing: "0.25em" }} className="text-[#C9A84C] font-black uppercase tracking-wider shrink-0">
+                        रणनीतिक युद्ध कोठा // STRATEGIC WAR ROOM
+                    </span>
+                    <div className="flex-grow border-t border-white/5 opacity-40" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    {/* Left Column (8 cols): Pitch hotspot & Matchup simulator */}
+                    <div className="lg:col-span-8 space-y-8">
+                        
+                        {/* 1. Tactical Pitch Hotspots Map */}
+                        <div className="bg-[#05070c]/90 border border-white/5 p-6 rounded-sm space-y-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-white/20 select-none">// SYSTEM_CORE_MAP v2.8</div>
+                            <div className="border-l-2 border-[#C9A84C] pl-4 space-y-0.5">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block">
+                                    TACTICAL BATTLEFIELD BLUEPRINT
+                                </span>
+                                <h4 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0">
+                                    २२-गज रणनीतिक नक्सा (Pitch Hotspots)
+                                </h4>
+                            </div>
+
+                            <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/50 text-[12.5px] m-0">
+                                पिचको विभिन्न रणनीतिक क्षेत्रमा ट्याप गरी जीत प्राप्त गर्ने अचूक रणनीति र कमजोरी पत्ता लगाउनुहोस्।
+                            </p>
+
+                            {/* Beautiful SVG Interactive Cricket Pitch */}
+                            <div className="relative w-full bg-black/40 border border-white/5 rounded-xl p-6 flex flex-col items-center justify-center overflow-hidden">
+                                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(30,58,138,0.12)_0%,transparent_70%)] pointer-events-none" />
+                                
+                                {/* SVG Pitch representation */}
+                                <svg width="100%" height="160" viewBox="0 0 600 160" className="w-full">
+                                    {/* Outer green field boundary (faded) */}
+                                    <rect x="0" y="0" width="600" height="160" fill="transparent" />
+                                    
+                                    {/* The Turf Pitch strip */}
+                                    <rect x="80" y="45" width="440" height="70" fill="#2d281c" stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" rx="3" className="shadow-2xl" />
+                                    
+                                    {/* Crease lines Left */}
+                                    <line x1="120" y1="45" x2="120" y2="115" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" strokeDasharray="3 2" />
+                                    <line x1="100" y1="52" x2="100" y2="108" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                                    {/* Wickets Left */}
+                                    <circle cx="100" cy="73" r="2.5" fill="#C9A84C" />
+                                    <circle cx="100" cy="80" r="2.5" fill="#C9A84C" />
+                                    <circle cx="100" cy="87" r="2.5" fill="#C9A84C" />
+
+                                    {/* Crease lines Right */}
+                                    <line x1="480" y1="45" x2="480" y2="115" stroke="rgba(255,255,255,0.25)" strokeWidth="1.5" strokeDasharray="3 2" />
+                                    <line x1="500" y1="52" x2="500" y2="108" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" />
+                                    {/* Wickets Right */}
+                                    <circle cx="500" cy="73" r="2.5" fill="#C9A84C" />
+                                    <circle cx="500" cy="80" r="2.5" fill="#C9A84C" />
+                                    <circle cx="500" cy="87" r="2.5" fill="#C9A84C" />
+
+                                    {/* Interactive Hotspot 1: Swing Zone (Left Bowler end) */}
+                                    <g onClick={() => setActivePitchZone("swing")} className="cursor-pointer group">
+                                        <rect x="135" y="48" width="80" height="64" fill={activePitchZone === "swing" ? "rgba(30,58,138,0.25)" : "transparent"} stroke={activePitchZone === "swing" ? "#1E3A8A" : "rgba(255,255,255,0.06)"} strokeWidth="1.5" rx="3" className="transition-all duration-300" />
+                                        <circle cx="175" cy="80" r="8" className={`transition-all duration-500 ${activePitchZone === "swing" ? "fill-[#1E3A8A] stroke-white stroke-2 scale-110" : "fill-[#1E3A8A]/30 stroke-[#1E3A8A]/60 animate-pulse"}`} />
+                                        <text x="175" y="83" fill="#fff" fontSize="9" fontWeight="900" textAnchor="middle" style={{ fontFamily: "Barlow, sans-serif" }}>W</text>
+                                    </g>
+
+                                    {/* Interactive Hotspot 2: Spin Corridor (Center) */}
+                                    <g onClick={() => setActivePitchZone("spin")} className="cursor-pointer group">
+                                        <rect x="250" y="48" width="100" height="64" fill={activePitchZone === "spin" ? "rgba(201,168,76,0.18)" : "transparent"} stroke={activePitchZone === "spin" ? "#C9A84C" : "rgba(255,255,255,0.06)"} strokeWidth="1.5" rx="3" className="transition-all duration-300" />
+                                        <circle cx="300" cy="80" r="8" className={`transition-all duration-500 ${activePitchZone === "spin" ? "fill-[#C9A84C] stroke-white stroke-2 scale-110" : "fill-[#C9A84C]/30 stroke-[#C9A84C]/60 animate-pulse"}`} />
+                                        <text x="300" y="83" fill="#fff" fontSize="9" fontWeight="900" textAnchor="middle" style={{ fontFamily: "Barlow, sans-serif" }}>S</text>
+                                    </g>
+
+                                    {/* Interactive Hotspot 3: Bounce zone (Right Batter end) */}
+                                    <g onClick={() => setActivePitchZone("bounce")} className="cursor-pointer group">
+                                        <rect x="385" y="48" width="80" height="64" fill={activePitchZone === "bounce" ? "rgba(211,47,47,0.18)" : "transparent"} stroke={activePitchZone === "bounce" ? "#D32F2F" : "rgba(255,255,255,0.06)"} strokeWidth="1.5" rx="3" className="transition-all duration-300" />
+                                        <circle cx="425" cy="80" r="8" className={`transition-all duration-500 ${activePitchZone === "bounce" ? "fill-[#D32F2F] stroke-white stroke-2 scale-110" : "fill-[#D32F2F]/30 stroke-[#D32F2F]/60 animate-pulse"}`} />
+                                        <text x="425" y="83" fill="#fff" fontSize="9" fontWeight="900" textAnchor="middle" style={{ fontFamily: "Barlow, sans-serif" }}>B</text>
+                                    </g>
+                                </svg>
+                                
+                                {/* Label indicators overlay */}
+                                <div className="flex justify-between w-full max-w-[440px] mt-2 text-[9.5px] font-black uppercase text-white/40 tracking-widest px-2" style={{ fontFamily: "Barlow Condensed, sans-serif" }}>
+                                    <span className={`cursor-pointer ${activePitchZone === "swing" ? "text-white" : ""}`} onClick={() => setActivePitchZone("swing")}>SWING CORRIDOR [W]</span>
+                                    <span className={`cursor-pointer ${activePitchZone === "spin" ? "text-[#C9A84C]" : ""}`} onClick={() => setActivePitchZone("spin")}>SPIN POCKET [S]</span>
+                                    <span className={`cursor-pointer ${activePitchZone === "bounce" ? "text-[#D32F2F]" : ""}`} onClick={() => setActivePitchZone("bounce")}>BOUNCE ZONE [B]</span>
+                                </div>
+                            </div>
+
+                            {/* Hotspot details read-out panel */}
+                            <div className="bg-white/[0.01] border border-white/5 p-4 rounded-lg relative transition-all duration-300">
+                                {activePitchZone === "spin" && (
+                                    <div className="space-y-2 animate-[fadeIn_0.3s_ease]">
+                                        <div className="flex justify-between items-center">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase">ZONE SELECT // SPIN CORRIDOR</span>
+                                            <span className="text-[10px] font-mono text-white/30">HOTSPOT S-CENTER</span>
+                                        </div>
+                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[15px] m-0">स्पिन चक्रव्यूह (Center Length)</h5>
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] leading-relaxed m-0">
+                                            क्रिजको ३.५ देखि ४.५ मिटरको लेन्थ क्षेत्र। यहाँ बल परेपछि सन्दीप लामिछानेको गुगली ३.८ डिग्रीसम्म टर्न हुने रणनीतिक रेकर्ड छ। विपक्षी मध्यक्रमलाई दबावमा राख्न यो पकेटमा नियन्त्रित स्पिन बलिङ मुख्य हतियार बन्नेछ।
+                                        </p>
+                                    </div>
+                                )}
+                                {activePitchZone === "swing" && (
+                                    <div className="space-y-2 animate-[fadeIn_0.3s_ease]">
+                                        <div className="flex justify-between items-center">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-[#1E3A8A] font-black uppercase">ZONE SELECT // SWING SECTOR</span>
+                                            <span className="text-[10px] font-mono text-white/30">HOTSPOT W-SWING</span>
+                                        </div>
+                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[15px] m-0">इन-स्विंग र वायु वेग (Full Length Corridor)</h5>
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] leading-relaxed m-0">
+                                            खेल मैदानको पश्चिमेली हावाको वेगले बलरहरूलाई अत्यधिक स्विंग प्राप्त गर्न मद्दत गर्नेछ। विपक्षी स्टार बलर साद बिन जफर र निकोलस नेत्रावलकरको इन-स्विंग बल यहाँ सुरुवाती ओभरमा काल बन्न सक्छ। ब्याट्सम्यानले फ्रन्ट-फुट डिफेन्स र लेट-प्ले रणनीति अपनाउनु आवश्यक छ।
+                                        </p>
+                                    </div>
+                                )}
+                                {activePitchZone === "bounce" && (
+                                    <div className="space-y-2 animate-[fadeIn_0.3s_ease]">
+                                        <div className="flex justify-between items-center">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-[#D32F2F] font-black uppercase">ZONE SELECT // BOUNCE REGION</span>
+                                            <span className="text-[10px] font-mono text-white/30">HOTSPOT B-BOUNCE</span>
+                                        </div>
+                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[15px] m-0">डेथ ओभर बाउन्स पकेट (Short Length Pocket)</h5>
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] leading-relaxed m-0">
+                                            ८.० मिटर भन्दा छोटो बाउन्स पकेट। यहाँ बल परेपछि अचानक आउने अनपेक्षित उछालले ब्याट्सम्यानलाई पुल वा हुक सट खेल्न बाध्य पार्नेछ। सोमपाल कामी र करण केसीको स्लो-बाउन्सर र सर्ट-पिच भेरियसन विपक्षी ब्याटरहरूलाई समात्न बेहद उपयोगी सिद्ध हुनेछ।
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* 2. Interactive Combat Duel Matchup Simulator */}
+                        <div className="bg-[#05070c]/90 border border-white/5 p-6 rounded-sm space-y-6 relative overflow-hidden">
+                            <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-white/20 select-none">// SIM_VER_4.95_PRO</div>
+                            <div className="border-l-2 border-[#D32F2F] pl-4 space-y-0.5">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#D32F2F] font-black uppercase tracking-widest block">
+                                    TACTICAL FIGHT CARD SIMULATOR
+                                </span>
+                                <h4 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0">
+                                    खेलाडी टक्कर सिमुलेटर (Clash Simulator)
+                                </h4>
+                            </div>
+
+                            {/* Matchup Tabs */}
+                            <div className="flex gap-2 border-b border-white/5 pb-3 scrollbar-none overflow-x-auto w-full">
+                                <button 
+                                    onClick={() => setSelectedMatchupId("rohit-saad")}
+                                    className={`px-4 py-2 text-[11.5px] font-black uppercase tracking-wider transition-all duration-300 rounded-sm cursor-pointer ${
+                                        selectedMatchupId === "rohit-saad" 
+                                            ? "bg-[#C9A84C]/10 border border-[#C9A84C]/35 text-[#C9A84C] shadow-[0_0_12px_rgba(201,168,76,0.06)]"
+                                            : "border border-white/5 text-white/40 hover:text-white/70 hover:border-white/10"
+                                    }`}
+                                    style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                >
+                                    पौडेल vs जफर
+                                </button>
+                                <button 
+                                    onClick={() => setSelectedMatchupId("sandeep-aqib")}
+                                    className={`px-4 py-2 text-[11.5px] font-black uppercase tracking-wider transition-all duration-300 rounded-sm cursor-pointer ${
+                                        selectedMatchupId === "sandeep-aqib" 
+                                            ? "bg-[#C9A84C]/10 border border-[#C9A84C]/35 text-[#C9A84C] shadow-[0_0_12px_rgba(201,168,76,0.06)]"
+                                            : "border border-white/5 text-white/40 hover:text-white/70 hover:border-white/10"
+                                    }`}
+                                    style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                >
+                                    लामिलाने vs इलियास
+                                </button>
+                                <button 
+                                    onClick={() => setSelectedMatchupId("dipendra-kirton")}
+                                    className={`px-4 py-2 text-[11.5px] font-black uppercase tracking-wider transition-all duration-300 rounded-sm cursor-pointer ${
+                                        selectedMatchupId === "dipendra-kirton" 
+                                            ? "bg-[#C9A84C]/10 border border-[#C9A84C]/35 text-[#C9A84C] shadow-[0_0_12px_rgba(201,168,76,0.06)]"
+                                            : "border border-white/5 text-white/40 hover:text-white/70 hover:border-white/10"
+                                    }`}
+                                    style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                >
+                                    ऐरी vs किर्टन
+                                </button>
+                            </div>
+
+                            {/* Clash Duel Sheet */}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch pt-2">
+                                {/* Nepal Fighter */}
+                                <div className="bg-[#1E3A8A]/5 border border-[#1E3A8A]/15 rounded-lg p-5 flex flex-col justify-between relative group hover:border-[#1E3A8A]/35 transition-all duration-300">
+                                    <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-[#1E3A8A]/50 select-none">FORCE_A // NEPAL</div>
+                                    <div className="space-y-3">
+                                        <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TACTICAL ASSET</span>
+                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
+                                            {selectedMatchupId === "rohit-saad" && "रोहित पौडेल"}
+                                            {selectedMatchupId === "sandeep-aqib" && "सन्दीप लामिछाने"}
+                                            {selectedMatchupId === "dipendra-kirton" && "दीपेन्द्र सिंह ऐरी"}
+                                        </h5>
+                                        <span className="text-white/45 text-[11.5px] block font-mono">
+                                            {selectedMatchupId === "rohit-saad" && "ROLE: Middle-Order Anchor / Captain"}
+                                            {selectedMatchupId === "sandeep-aqib" && "ROLE: Leg-Spin Mastermind"}
+                                            {selectedMatchupId === "dipendra-kirton" && "ROLE: Explosive Finisher"}
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Stats grid */}
+                                    <div className="space-y-3 mt-6 border-t border-white/5 pt-4">
+                                        <div className="flex justify-between text-[11.5px]">
+                                            <span className="text-white/50">MATCHUP RATING</span>
+                                            <span className="text-white font-mono font-black">
+                                                {selectedMatchupId === "rohit-saad" && "88%"}
+                                                {selectedMatchupId === "sandeep-aqib" && "92%"}
+                                                {selectedMatchupId === "dipendra-kirton" && "90%"}
+                                            </span>
+                                        </div>
+                                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                            <div 
+                                                className="h-full bg-[#1E3A8A] rounded-full" 
+                                                style={{ width: selectedMatchupId === "rohit-saad" ? "88%" : selectedMatchupId === "sandeep-aqib" ? "92%" : "90%" }}
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4 mt-2">
+                                            <div className="bg-black/30 p-2.5 rounded border border-white/5 text-center">
+                                                <span className="text-[8px] text-white/30 block mb-0.5 tracking-wider uppercase">EFFICIENCY INDEX</span>
+                                                <span className="text-white text-[13px] font-mono font-black block">
+                                                    {selectedMatchupId === "rohit-saad" && "124.5"}
+                                                    {selectedMatchupId === "sandeep-aqib" && "94.2"}
+                                                    {selectedMatchupId === "dipendra-kirton" && "185.0"}
+                                                </span>
+                                            </div>
+                                            <div className="bg-black/30 p-2.5 rounded border border-white/5 text-center">
+                                                <span className="text-[8px] text-white/30 block mb-0.5 tracking-wider uppercase">CONTROL RATIO</span>
+                                                <span className="text-[#C9A84C] text-[13px] font-mono font-black block">
+                                                    {selectedMatchupId === "rohit-saad" && "88%"}
+                                                    {selectedMatchupId === "sandeep-aqib" && "90%"}
+                                                    {selectedMatchupId === "dipendra-kirton" && "94%"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Opponent Fighter */}
+                                <div className="bg-[#D32F2F]/5 border border-[#D32F2F]/15 rounded-lg p-5 flex flex-col justify-between relative group hover:border-[#D32F2F]/35 transition-all duration-300">
+                                    <div className="absolute top-0 right-0 p-3 text-[8.5px] font-mono text-[#D32F2F]/50 select-none">FORCE_B // OPPONENT</div>
+                                    <div className="space-y-3">
+                                        <span className="text-[#C9A84C] font-mono text-[9px] uppercase tracking-wider block">// TARGET TARGETED</span>
+                                        <h5 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] m-0">
+                                            {selectedMatchupId === "rohit-saad" && "साद बिन जफर"}
+                                            {selectedMatchupId === "sandeep-aqib" && "आकिब इलियास"}
+                                            {selectedMatchupId === "dipendra-kirton" && "निकोलस किर्टन"}
+                                        </h5>
+                                        <span className="text-white/45 text-[11.5px] block font-mono">
+                                            {selectedMatchupId === "rohit-saad" && "ROLE: Chatur Left-Arm Spinner"}
+                                            {selectedMatchupId === "sandeep-aqib" && "ROLE: Explosive All-Rounder / Captain"}
+                                            {selectedMatchupId === "dipendra-kirton" && "ROLE: Middle-Order Match Winner"}
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Stats grid */}
+                                    <div className="space-y-3 mt-6 border-t border-white/5 pt-4">
+                                        <div className="flex justify-between text-[11.5px]">
+                                            <span className="text-white/50">THREAT POTENTIAL</span>
+                                            <span className="text-[#D32F2F] font-mono font-black">
+                                                {selectedMatchupId === "rohit-saad" && "85%"}
+                                                {selectedMatchupId === "sandeep-aqib" && "95%"}
+                                                {selectedMatchupId === "dipendra-kirton" && "88%"}
+                                            </span>
+                                        </div>
+                                        <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                            <div 
+                                                className="h-full bg-[#D32F2F] rounded-full" 
+                                                style={{ width: selectedMatchupId === "rohit-saad" ? "85%" : selectedMatchupId === "sandeep-aqib" ? "95%" : "88%" }}
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4 mt-2">
+                                            <div className="bg-black/30 p-2.5 rounded border border-white/5 text-center">
+                                                <span className="text-[8px] text-white/30 block mb-0.5 tracking-wider uppercase">DOT PERCENTAGE</span>
+                                                <span className="text-white text-[13px] font-mono font-black block">
+                                                    {selectedMatchupId === "rohit-saad" && "52.0%"}
+                                                    {selectedMatchupId === "sandeep-aqib" && "41.5%"}
+                                                    {selectedMatchupId === "dipendra-kirton" && "48.2%"}
+                                                </span>
+                                            </div>
+                                            <div className="bg-black/30 p-2.5 rounded border border-white/5 text-center">
+                                                <span className="text-[8px] text-white/30 block mb-0.5 tracking-wider uppercase">DANGER LEVEL</span>
+                                                <span className="text-[#D32F2F] text-[13px] font-mono font-black block">
+                                                    {selectedMatchupId === "rohit-saad" && "HIGH"}
+                                                    {selectedMatchupId === "sandeep-aqib" && "CRITICAL"}
+                                                    {selectedMatchupId === "dipendra-kirton" && "MEDIUM"}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Matchup Battle Quote */}
+                            <div className="bg-[#D32F2F]/5 border border-[#D32F2F]/10 px-5 py-3 rounded-lg relative text-center">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.2em" }} className="text-[#D32F2F] font-black block mb-1">
+                                    TACTICAL CORRIDOR COUNTERMEASURE // रणनीतिक विश्लेषण
+                                </span>
+                                <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/80 text-[12.5px] italic m-0">
+                                    {selectedMatchupId === "rohit-saad" && "\"साद बिन जफरको चतुर स्पिन प्याटर्न विरुद्ध रोहितको स्वीप र कभर ड्राइभको सन्तुलन नै विजयको अचूक रणनीति हो।\""}
+                                    {selectedMatchupId === "sandeep-aqib" && "\"आकिब स्पिनर विरुद्ध आक्रामक ब्याटिङ गर्छन्; सन्दीप लामिछानेको नाडीबाट निस्कने रङअन र फ्लाइट नै उनलाई जालमा पार्ने ब्रह्मास्त्र हो।\""}
+                                    {selectedMatchupId === "dipendra-kirton" && "\"किर्टन इनिङ्सलाई रोक्ने मुख्य खम्बा हुन्; दीपेन्द्र सिंह ऐरीको तीव्र गतिको अफ-ब्रेक र कसिलो फिल्डिङले उनको बाउन्ड्री करिडोर बन्द गरिदिनेछ।\""}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column (4 cols): Fan Verdict Poll & Stadium equalizers */}
+                    <div className="lg:col-span-4 space-y-8">
+                        
+                        {/* 3. The Rhinos Verdict Fan Poll */}
+                        <div className="bg-[#05070c]/90 border border-white/5 p-6 rounded-sm space-y-6 relative overflow-hidden select-none">
+                            <div className="border-l-2 border-[#C9A84C] pl-4 space-y-0.5">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block">
+                                    THE RHINOS' VERDICT
+                                </span>
+                                <h4 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] leading-tight m-0">
+                                    नेपाली फ्यान फैसला (Interactive Poll)
+                                </h4>
+                            </div>
+
+                            <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/50 text-[12.5px] leading-relaxed m-0">
+                                आजको महा-भिडन्तमा विजयको सबैभन्दा ठूलो हतियार को बन्नेछ? आफ्नो रणनीतिक भोट हाल्नुहोस्:
+                            </p>
+
+                            {/* Poll Form or Results */}
+                            <div className="space-y-3.5">
+                                {/* Option A */}
+                                <div 
+                                    onClick={() => {
+                                        if (votedOption) return;
+                                        localStorage.setItem(`nepalcric_vote_${activeMatchId}`, "A");
+                                        const newVotes = { ...pollVotes, opA: pollVotes.opA + 1 };
+                                        localStorage.setItem(`nepalcric_votes_data_${activeMatchId}`, JSON.stringify(newVotes));
+                                        setPollVotes(newVotes);
+                                        setVotedOption("A");
+                                    }}
+                                    className={`relative p-4 border rounded-lg transition-all duration-300 ${
+                                        votedOption 
+                                            ? "border-white/5 bg-white/[0.01] cursor-default" 
+                                            : "border-white/10 bg-white/[0.02] hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/5 cursor-pointer"
+                                    }`}
+                                >
+                                    {votedOption && (
+                                        <div 
+                                            className="absolute top-0 bottom-0 left-0 bg-[#C9A84C]/10 rounded-l-lg transition-all duration-500" 
+                                            style={{ width: `${pollVotes.opA}%` }}
+                                        />
+                                    )}
+                                    <div className="relative flex justify-between items-center text-[12.5px] font-bold">
+                                        <span className="flex items-center gap-2">
+                                            {votedOption === "A" && <span className="text-[#C9A84C] font-mono text-[10px] shrink-0">✓</span>}
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className={votedOption === "A" ? "text-[#C9A84C]" : "text-white/80"}>तिव्र गतिको बलिङ र रिभर्स स्विंग</span>
+                                        </span>
+                                        {votedOption && <span className="text-[#C9A84C] font-mono">{pollVotes.opA}%</span>}
+                                    </div>
+                                </div>
+
+                                {/* Option B */}
+                                <div 
+                                    onClick={() => {
+                                        if (votedOption) return;
+                                        localStorage.setItem(`nepalcric_vote_${activeMatchId}`, "B");
+                                        const newVotes = { ...pollVotes, opB: pollVotes.opB + 1 };
+                                        localStorage.setItem(`nepalcric_votes_data_${activeMatchId}`, JSON.stringify(newVotes));
+                                        setPollVotes(newVotes);
+                                        setVotedOption("B");
+                                    }}
+                                    className={`relative p-4 border rounded-lg transition-all duration-300 ${
+                                        votedOption 
+                                            ? "border-white/5 bg-white/[0.01] cursor-default" 
+                                            : "border-white/10 bg-white/[0.02] hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/5 cursor-pointer"
+                                    }`}
+                                >
+                                    {votedOption && (
+                                        <div 
+                                            className="absolute top-0 bottom-0 left-0 bg-[#C9A84C]/10 rounded-l-lg transition-all duration-500" 
+                                            style={{ width: `${pollVotes.opB}%` }}
+                                        />
+                                    )}
+                                    <div className="relative flex justify-between items-center text-[12.5px] font-bold">
+                                        <span className="flex items-center gap-2">
+                                            {votedOption === "B" && <span className="text-[#C9A84C] font-mono text-[10px] shrink-0">✓</span>}
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className={votedOption === "B" ? "text-[#C9A84C]" : "text-white/80"}>मध्यम ओभरको स्पिन चक्रव्यूह</span>
+                                        </span>
+                                        {votedOption && <span className="text-[#C9A84C] font-mono">{pollVotes.opB}%</span>}
+                                    </div>
+                                </div>
+
+                                {/* Option C */}
+                                <div 
+                                    onClick={() => {
+                                        if (votedOption) return;
+                                        localStorage.setItem(`nepalcric_vote_${activeMatchId}`, "C");
+                                        const newVotes = { ...pollVotes, opC: pollVotes.opC + 1 };
+                                        localStorage.setItem(`nepalcric_votes_data_${activeMatchId}`, JSON.stringify(newVotes));
+                                        setPollVotes(newVotes);
+                                        setVotedOption("C");
+                                    }}
+                                    className={`relative p-4 border rounded-lg transition-all duration-300 ${
+                                        votedOption 
+                                            ? "border-white/5 bg-white/[0.01] cursor-default" 
+                                            : "border-white/10 bg-white/[0.02] hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/5 cursor-pointer"
+                                    }`}
+                                >
+                                    {votedOption && (
+                                        <div 
+                                            className="absolute top-0 bottom-0 left-0 bg-[#C9A84C]/10 rounded-l-lg transition-all duration-500" 
+                                            style={{ width: `${pollVotes.opC}%` }}
+                                        />
+                                    )}
+                                    <div className="relative flex justify-between items-center text-[12.5px] font-bold">
+                                        <span className="flex items-center gap-2">
+                                            {votedOption === "C" && <span className="text-[#C9A84C] font-mono text-[10px] shrink-0">✓</span>}
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className={votedOption === "C" ? "text-[#C9A84C]" : "text-white/80"}>डेथ ओभरको विष्फोटक ब्याटिङ</span>
+                                        </span>
+                                        {votedOption && <span className="text-[#C9A84C] font-mono">{pollVotes.opC}%</span>}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {votedOption && (
+                                <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-center text-[10.5px] text-[#C9A84C] uppercase tracking-wider font-extrabold m-0 py-1">
+                                    ✓ फ्यान भोट रेकर्ड गरियो // THANK YOU FOR VOTING
+                                </p>
+                            )}
+                        </div>
+
+                        {/* 4. Stadium ambient chants player / Equalizer */}
+                        <div className="bg-[#05070c]/90 border border-white/5 p-6 rounded-sm space-y-6 relative overflow-hidden select-none">
+                            <div className="border-l-2 border-[#D32F2F] pl-4 space-y-0.5">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#D32F2F] font-black uppercase tracking-widest block">
+                                    STADIUM AUDIO ANTICIPATOR
+                                </span>
+                                <h4 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[18px] leading-tight m-0">
+                                    रंगशालाको हुंकार (Stadium Ambient)
+                                </h4>
+                            </div>
+
+                            <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/50 text-[12.5px] leading-relaxed m-0">
+                                मैदान भित्रको चिसो हावा र समर्थकहरूको वास्तविक गर्जाहट महसुस गर्नुहोस्। तलको च्यानलहरू प्ले गरेर स्टेडियमको वातावरण सिमुलेट गर्नुहोस्:
+                            </p>
+
+                            {/* Sound trigger lists */}
+                            <div className="space-y-3">
+                                {/* Sound 1 */}
+                                <div 
+                                    onClick={() => {
+                                        const nextSound = activeSound === "roar" ? null : "roar";
+                                        setActiveSound(nextSound);
+                                        if (nextSound) playSynthSound("roar");
+                                    }}
+                                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                                        activeSound === "roar"
+                                            ? "border-[#D32F2F]/40 bg-[#D32F2F]/5"
+                                            : "border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02]"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${activeSound === "roar" ? "bg-[#D32F2F] text-white animate-pulse" : "bg-white/5 text-white/50"}`}>
+                                            {activeSound === "roar" ? "■" : "▶"}
+                                        </div>
+                                        <div className="text-left">
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[13px] font-bold block text-white/80">रंगशालाको गर्जाहट (Stadium Roar)</span>
+                                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "8px" }} className="text-white/30 uppercase tracking-wider">CROWD AMBIENT DRONE</span>
+                                        </div>
+                                    </div>
+                                    {activeSound === "roar" && (
+                                        <div className="flex items-end gap-0.5 h-6">
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.6s_ease-in-out_infinite]" style={{ height: "45%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.4s_ease-in-out_infinite]" style={{ height: "90%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.5s_ease-in-out_infinite]" style={{ height: "60%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.3s_ease-in-out_infinite]" style={{ height: "35%" }} />
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Sound 2 */}
+                                <div 
+                                    onClick={() => {
+                                        const nextSound = activeSound === "drums" ? null : "drums";
+                                        setActiveSound(nextSound);
+                                        if (nextSound) playSynthSound("drums");
+                                    }}
+                                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                                        activeSound === "drums"
+                                            ? "border-[#D32F2F]/40 bg-[#D32F2F]/5"
+                                            : "border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02]"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${activeSound === "drums" ? "bg-[#D32F2F] text-white animate-pulse" : "bg-white/5 text-white/50"}`}>
+                                            {activeSound === "drums" ? "■" : "▶"}
+                                        </div>
+                                        <div className="text-left">
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[13px] font-bold block text-white/80">रिनोको युद्ध बाजा (Rhino Drums)</span>
+                                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "8px" }} className="text-white/30 uppercase tracking-wider">TACTICAL WAR DRUMS BEAT</span>
+                                        </div>
+                                    </div>
+                                    {activeSound === "drums" && (
+                                        <div className="flex items-end gap-0.5 h-6">
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.5s_ease-in-out_infinite]" style={{ height: "80%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.3s_ease-in-out_infinite]" style={{ height: "40%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.6s_ease-in-out_infinite]" style={{ height: "95%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.4s_ease-in-out_infinite]" style={{ height: "55%" }} />
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Sound 3 */}
+                                <div 
+                                    onClick={() => {
+                                        const nextSound = activeSound === "shanka" ? null : "shanka";
+                                        setActiveSound(nextSound);
+                                        if (nextSound) playSynthSound("shanka");
+                                    }}
+                                    className={`flex items-center justify-between p-3 border rounded-lg transition-all duration-300 cursor-pointer ${
+                                        activeSound === "shanka"
+                                            ? "border-[#D32F2F]/40 bg-[#D32F2F]/5"
+                                            : "border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02]"
+                                    }`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${activeSound === "shanka" ? "bg-[#D32F2F] text-white animate-pulse" : "bg-white/5 text-white/50"}`}>
+                                            {activeSound === "shanka" ? "■" : "▶"}
+                                        </div>
+                                        <div className="text-left">
+                                            <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[13px] font-bold block text-white/80">गोर्खाली शंखनाद (Gorkha Chants)</span>
+                                            <span style={{ fontFamily: "Barlow, sans-serif", fontSize: "8px" }} className="text-white/30 uppercase tracking-wider">HEROIC CHANTS & DRONE</span>
+                                        </div>
+                                    </div>
+                                    {activeSound === "shanka" && (
+                                        <div className="flex items-end gap-0.5 h-6">
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.3s_ease-in-out_infinite]" style={{ height: "60%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.6s_ease-in-out_infinite]" style={{ height: "90%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.4s_ease-in-out_infinite]" style={{ height: "35%" }} />
+                                            <div className="w-[2px] bg-[#D32F2F] animate-[vsPulse_0.5s_ease-in-out_infinite]" style={{ height: "75%" }} />
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {activeSound && (
+                                <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-center text-[10.5px] text-[#D32F2F] uppercase tracking-wider font-extrabold m-0 py-1 animate-pulse">
+                                    🔊 रंगशालाको आवाज सक्रिय छ... // SYNTHESIZER ONLINE
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </section>
 
