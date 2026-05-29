@@ -22,32 +22,285 @@ export interface MatchDayData {
     fixtures: Fixture[];
 }
 
+interface ChronicleDetail {
+    story: string;
+    championName: string;
+    championDesc: string;
+    dangerName: string;
+    dangerDesc: string;
+    battlefieldQuote: string;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 📖 VISCERAL SPORTS-DOCUMENTARY CHRONICLES (nepalCRIC EXCLUSIVE DOSSIERS)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const CHRONICLES_DICT: { [key: string]: ChronicleDetail } = {
+    "01": {
+        story: "क्यानडाको माटोमा वीर गोर्खाहरू पहिलो पटक ओर्लिँदा हावामा एउटा फरक खालको तनाव हुनेछ। कप्तान रोहित पौडेलको काँधमा सिंगो देशको आशा मात्र होइन, इतिहास रच्ने र विश्वलाई आफ्नो उपस्थितिको आभास गराउने ठूलो दबाब हुनेछ। चिसो हावा र नौलो पीचको चुनौतीलाई सामना गर्दै विजय हासिल गर्नु नै आजको अग्निपरीक्षा हुनेछ।",
+        championName: "रोहित पौडेल",
+        championDesc: "कप्तानी दबाब र मध्यक्रमको बलियो आधार",
+        dangerName: "साद बिन जफर",
+        dangerDesc: "चतुर स्पिनर र कसिलो बलिङका पर्याय",
+        battlefieldQuote: "मैदानमा छिर्दा संशय हटाउनुस्, हामी केवल जित्नका लागि बनेका हौं।"
+    },
+    "02": {
+        story: "ओमानविरुद्धको त्यो आगो ओकल्ने टक्कर। मैदानमा तीब्र बेगका सोमपाल कामी र करण केसीको अटूट लडाईं चल्नेछ। ओमानका आक्रामक कप्तान आकिब इलियासको ब्याटलाई रोक्न र टियू मैदानको क्रिजमा नेपाली स्पिनको आधिपत्य जमाउन सन्दीप लामिछानेको नाडीबाट निस्कने जादुमयी गुगली नै हाम्रो अचूक ब्रह्मास्त्र बन्नेछ।",
+        championName: "सन्दीप लामिछाने",
+        championDesc: "विश्वस्तरीय स्पिन र जादुमयी गुगलीका नायक",
+        dangerName: "आकिब इलियास",
+        dangerDesc: "विस्फोटक अलराउन्डर र म्याच विनर",
+        battlefieldQuote: "जब मेरो नाडी घुम्छ, गुरुत्वाकर्षण आफैं लत्रिनेछ।"
+    },
+    "03": {
+        story: "दोस्रो मुठभेड, जहाँ बदला र प्रतिष्ठाको लडाईं अझ घनीभूत हुनेछ। पहिलो खेलको गल्तीहरू सुधार्दै, दीपेन्द्र सिंह ऐरीको विष्फोटक अलराउन्ड प्रदर्शनले विरोधी स्टार निकोलस किर्टनको गल्ली उडाउनेछ। पीचको २२ गज नै हाम्रो साम्राज्य हुनेछ र हरेक बाउन्ड्री सिंहहरूको गर्जाहट बन्नेछ।",
+        championName: "दीपेन्द्र सिंह ऐरी",
+        championDesc: "विष्फोटक अलराउन्डर र अविश्वसनीय फिल्डर",
+        dangerName: "निकोलस किर्टन",
+        dangerDesc: "क्यानडाका मुख्य म्याच विनर ब्याट्सम्यान",
+        battlefieldQuote: "६ बल। ६ छक्का। मेरो ब्याटले इतिहासको सिमाना कोर्छ।"
+    },
+    "04": {
+        story: "ओमानविरुद्धको दोस्रो भिडन्त। कुशल मल्लको आक्रामक ब्याटिङले विरोधी स्पिनर जिशान मकसूदको कसिलो बलिङलाई ध्वस्त पार्नेछ। यो केवल एउटा क्रिकेट खेल होइन, हाम्रो आत्म-सम्मान र नेपाली क्रिकेट गौरवको अन्तिम रक्षा हो, जहाँ गल्तीको कुनै स्थान हुने छैन, जहाँ हरेक प्रहार निर्णायक बन्नेछ।",
+        championName: "कुशल मल्ल",
+        championDesc: "विष्फोटक बायाँ हाते ब्याट्सम्यान र उपयोगी स्पिनर",
+        dangerName: "जिशान मकसूद",
+        dangerDesc: "ओमानका अनुभवी पूर्व कप्तान र चतुर स्पिनर",
+        battlefieldQuote: "डरलाई ड्रेसिङ रुममै छोडेर आउनुस्, क्रिज हाम्रो हो।"
+    },
+    "05": {
+        story: "डलासको त्यो तातो घाम, जहाँ टी-ट्वेन्टी विश्वकपमा हामीले बेहोरेको हारको बदला लिन सिंहहरू मैदानमा ओर्लिनेछन्। कुशल भुर्तेलको ओपनिङ विष्फोटक प्रहारले अमेरिकाको सौरभ नेत्रावलकरको धारिलो बलिङलाई निस्तेज पार्नेछ। बदलाको यो ऐतिहासिक मौका हुनेछ, जहाँ हामी गुमेको गौरव फर्काउनेछौं।",
+        championName: "कुशल भुर्तेल",
+        championDesc: "आक्रामक ओपनर र असाधारण म्याच विनर",
+        dangerName: "सौरभ नेत्रावलकर",
+        dangerDesc: "सटीक स्विङ र घातक बायाँ हाते तीब्र बलर",
+        battlefieldQuote: "डलासको हारको ऋण चुकाउन, हामी क्रिजमा आगो बाल्नेछौं।"
+    },
+    "06": {
+        story: "स्कटल्यान्डविरुद्धको महायुद्ध। गुलशन झाको तीब्र गति र मध्यक्रमको लचकताले स्कटल्यान्डका कप्तान रिची बेरिंग्टनको घातक प्रहारलाई रोक्नेछ। कीर्तिपुरको माटोको ऋण चुकाउने र विश्वकपको मञ्चमा हिमाल झैं उच्च भएर उभिने यो अन्तिम र स्वर्णिय मौका हुनेछ, जहाँ सिंगो राष्ट्र एकजुट भएर गर्जिनेछ।",
+        championName: "गुलशन झा",
+        championDesc: "युवा सनसनी, प्रभावशाली अलराउन्डर",
+        dangerName: "रिची बेरिंग्टन",
+        dangerDesc: "अनुभवी कप्तान र मध्यक्रमका खम्बा",
+        battlefieldQuote: "जब युवा जोश मैदानमा गर्जिन्छ, हिमाल हल्लिनेछ।"
+    }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🌐 DEVANAGARI LOCALIZATION UTILITIES (अगस्ट STANDARD CALENDAR COMPLIANCE)
+// ─────────────────────────────────────────────────────────────────────────────
+
+export function parseFixtureDate(dateStr: string, timeStr: string): Date | null {
+    try {
+        const months: { [key: string]: number } = {
+            JAN: 0, FEB: 1, MAR: 2, APR: 3, MAY: 4, JUN: 5,
+            JUL: 6, AUG: 7, SEP: 8, OCT: 9, NOV: 10, DEC: 11
+        };
+        const parts = dateStr.trim().split(/\s+/);
+        if (parts.length < 2) return null;
+        
+        const monthAbbr = parts[0].toUpperCase();
+        const dayNum = parseInt(parts[1], 10);
+        
+        const monthIndex = months[monthAbbr];
+        if (monthIndex === undefined || isNaN(dayNum)) return null;
+        
+        const timeParts = timeStr.replace(" NPT", "").split(":");
+        const hours = timeParts[0] ? parseInt(timeParts[0], 10) : 0;
+        const minutes = timeParts[1] ? parseInt(timeParts[1], 10) : 0;
+        
+        const year = 2026;
+        
+        // Force synchronous global countdown exactly in Nepal Standard Time (NPT, UTC+5:45)
+        const utcDate = Date.UTC(year, monthIndex, dayNum, hours, minutes);
+        const nptOffsetMs = 345 * 60 * 1000;
+        return new Date(utcDate - nptOffsetMs);
+    } catch (e) {
+        return null;
+    }
+}
+
+export function formatNepaliDate(dateStr: string): string {
+    const monthsMap: { [key: string]: string } = {
+        JAN: "जनवरी",
+        FEB: "फेब्रुअरी",
+        MAR: "मार्च",
+        APR: "अप्रिल",
+        MAY: "मे",
+        JUN: "जुन",
+        JUL: "जुलाई",
+        AUG: "अगस्ट",
+        SEP: "सेप्टेम्बर",
+        OCT: "अक्टोबर",
+        NOV: "नोभेम्बर",
+        DEC: "डिसेम्बर"
+    };
+    
+    const parts = dateStr.trim().split(/\s+/);
+    if (parts.length < 2) return dateStr;
+    
+    const englishMonth = parts[0].toUpperCase();
+    const nepaliMonth = monthsMap[englishMonth] || englishMonth;
+    
+    const englishDay = parts[1];
+    const nepaliDay = englishDay.replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+    
+    return `${nepaliMonth} ${nepaliDay}`;
+}
+
+export function formatNepaliTime(timeStr: string): string {
+    const nepaliDigits = timeStr.replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+    return nepaliDigits.replace("NPT", "नेपाली समय (NPT)");
+}
+
+export function formatNumberToNepali(num: number | string): string {
+    return num.toString().replace(/[0-9]/g, match => '०१२३४५६७८९'[parseInt(match)]);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🏴 COUNTRY FLAG MAPPING  (flagcdn.com — ISO 3166-1 alpha-2)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Maps each fixture ID → { np: Nepal ISO, opp: Opponent ISO } */
+const FLAG_MAP: Record<string, { np: string; opp: string }> = {
+    "01": { np: "np", opp: "ca" },     // Nepal vs Canada
+    "02": { np: "np", opp: "om" },     // Nepal vs Oman
+    "03": { np: "np", opp: "ca" },     // Nepal vs Canada (return)
+    "04": { np: "np", opp: "om" },     // Nepal vs Oman (return)
+    "05": { np: "np", opp: "us" },     // Nepal vs USA
+    "06": { np: "np", opp: "gb-sct" }, // Nepal vs Scotland
+};
+
+/**
+ * FlagImg — renders a country flag with a gentle breeze-wave animation.
+ * The `side` prop controls the perspective-tilt direction so both flags
+ * lean slightly inward toward the VS centre, creating a face-off feel.
+ */
+function FlagImg({ code, side, size = 44 }: { code: string; side: "left" | "right"; size?: number }) {
+    const tilt = side === "left" ? "rotateY(8deg)" : "rotateY(-8deg)";
+    return (
+        <div
+            style={{
+                width: Math.round(size * 1.5),
+                height: size,
+                borderRadius: 4,
+                overflow: "hidden",
+                flexShrink: 0,
+                boxShadow: "0 6px 24px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.07)",
+                transform: `perspective(280px) ${tilt}`,
+                animation: "flagWave 5s ease-in-out infinite",
+                animationDelay: side === "left" ? "0s" : "0.8s",
+            }}
+        >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+                src={`https://flagcdn.com/w80/${code}.png`}
+                alt={code.toUpperCase()}
+                width={Math.round(size * 1.5)}
+                height={size}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                loading="eager"
+            />
+        </div>
+    );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// THE JUMBOTRON BROADCAST BATTLEFIELD SHOWCASE
+// ─────────────────────────────────────────────────────────────────────────────
+
 export default function MatchDayClient({ data }: { data: MatchDayData }) {
     const [mounted, setMounted] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [copied, setCopied] = useState(false);
+    const [selectedMatchId, setSelectedMatchId] = useState<string>("");
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+    const [selectedTab, setSelectedTab] = useState<"chronicle" | "weapon" | "danger" | "h2h">("chronicle");
+    const [sweepActive, setSweepActive] = useState(false);
+    
+    interface Particle {
+        width: string; height: string; left: string; top: string;
+        animation: string; animationDelay: string;
+    }
+    const [particles, setParticles] = useState<Particle[]>([]);
 
     useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setMounted(true);
         const handleScroll = () => setScrollY(window.scrollY);
         window.addEventListener("scroll", handleScroll, { passive: true });
+        
+        // CSS Dust Particles setup (matches homepage style)
+        setParticles([...Array(30)].map(() => ({
+            width: Math.random() * 3 + 1 + 'px',
+            height: Math.random() * 3 + 1 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+            animation: `floatDust ${Math.random() * 15 + 15}s linear infinite`,
+            animationDelay: `-${Math.random() * 30}s`,
+        })));
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Countdown Timer State
+    // ── TWO-PASS RENDERING PATTERN FOR 100% HYDRATION SAFETY ──
+    const referenceClock = mounted ? new Date() : new Date("2026-05-28T00:00:00+05:45");
+
+    const resolvedFixtures = data.fixtures.map(f => {
+        const fixtureDate = parseFixtureDate(f.date, f.time) || new Date(`${f.date} 2026`);
+        return {
+            ...f,
+            past: fixtureDate < referenceClock,
+            timestamp: fixtureDate.getTime()
+        };
+    }).sort((a, b) => a.timestamp - b.timestamp);
+
+    const upcomingFixtures = resolvedFixtures.filter(f => !f.past);
+
+    // Dynamic Default Match Node Auto-Selection on Mount
+    useEffect(() => {
+        if (mounted && !selectedMatchId && resolvedFixtures.length > 0) {
+            const upcoming = resolvedFixtures.filter(f => !f.past);
+            if (upcoming.length > 0) {
+                setSelectedMatchId(upcoming[0].id);
+            } else {
+                setSelectedMatchId(resolvedFixtures[0].id);
+            }
+        }
+    }, [mounted, resolvedFixtures, selectedMatchId]);
+
+    // Active Selection details
+    const activeMatchId = selectedMatchId || (resolvedFixtures[0]?.id ?? "");
+    const activeMatch = resolvedFixtures.find(f => f.id === activeMatchId) || resolvedFixtures[0];
+
+    const opponentName = activeMatch 
+        ? activeMatch.nepaliName.replace("विरुद्ध", "") 
+        : "प्रतिद्वन्द्वी";
+
+    // Visceral Chronicles resolution
+    const activeChronicle = CHRONICLES_DICT[activeMatch.id] || {
+        story: "नेपाली क्रिकेट टोलीको गौरवशाली यात्राको एउटा महत्वपूर्ण मुठभेड।",
+        championName: activeMatch.weapon,
+        championDesc: "मैदानमा मुख्य भूमिका",
+        dangerName: activeMatch.danger,
+        dangerDesc: "प्रतिद्वन्द्वी शक्ति",
+        battlefieldQuote: "जीतको संकल्प बोकेर सिंहहरू मैदानमा ओर्लिनेछन्।"
+    };
+
+    // Dynamic countdown target clock linked strictly to the active focused match
     const [timeLeft, setTimeLeft] = useState({
-        days: "०",
-        hours: "०",
-        minutes: "०",
-        seconds: "०"
+        days: "००",
+        hours: "००",
+        minutes: "००",
+        seconds: "००"
     });
 
     useEffect(() => {
-        if (!mounted) return;
+        if (!mounted || !activeMatch || activeMatch.past) {
+            setTimeLeft({ days: "००", hours: "००", minutes: "००", seconds: "००" });
+            return;
+        }
 
-        const targetTime = new Date(data.targetDate).getTime();
+        const targetTime = activeMatch.timestamp;
 
         const timer = setInterval(() => {
             const now = new Date().getTime();
@@ -55,6 +308,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
             if (diff < 0) {
                 clearInterval(timer);
+                setTimeLeft({ days: "००", hours: "००", minutes: "००", seconds: "००" });
                 return;
             }
 
@@ -74,360 +328,676 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [mounted, data.targetDate]);
+    }, [mounted, activeMatch]);
 
-    // Determine past status based on real current date
-    const today = new Date();
-
-    // Sort chronologically and determine past status
-    const fixtures = data.fixtures.map(f => {
-        const fixtureDate = new Date(`${f.date} 2026`);
-        return { ...f, past: fixtureDate < today, timestamp: fixtureDate.getTime() };
-    }).sort((a, b) => a.timestamp - b.timestamp);
+    const completedMissions = resolvedFixtures.filter(f => f.past).length;
+    const totalMissions = resolvedFixtures.length;
 
     const handleShare = () => {
-        navigator.clipboard.writeText(window.location.href);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        if (typeof window !== "undefined") {
+            navigator.clipboard.writeText(window.location.href);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
+
+    // Tabs for Jumbotron layer projector switcher
+    const dossierTabs = [
+        { id: "chronicle", label: "०१ // रणभूमि गाथा", sub: "THE CLASH SAGA" },
+        { id: "weapon", label: "०२ // वीरको ब्रह्मास्त्र", sub: "WARRIOR PROFILE" },
+        { id: "danger", label: "०३ // शत्रुको संहारक", sub: "CHALLENGER TELEMETRY" },
+        { id: "h2h", label: "०४ // ऐतिहासिक टक्कर", sub: "TECTONIC DATA" }
+    ] as const;
+
+    // Helper to render the circular NPT Countdown compass
+    const renderCountdownOrb = () => {
+        return (
+            <div className="relative flex flex-col items-center justify-center bg-[#05080f]/95 border border-[#C9A84C]/25 rounded-full w-[210px] h-[210px] shadow-[0_0_50px_rgba(201,168,76,0.15),inset_0_0_20px_rgba(201,168,76,0.06)] select-none p-4 text-center transition-all duration-500 hover:border-[#D32F2F]/40 hover:shadow-[0_0_55px_rgba(211,47,47,0.18)] animate-[vsPulse_3s_ease-in-out_infinite]">
+                
+                {/* Rotating gear radar lines */}
+                <div className="absolute inset-2 border border-dashed border-white/5 rounded-full animate-[sbSpotlightSpin_30s_linear_infinite] pointer-events-none" />
+                <div className="absolute inset-4 border border-white/5 rounded-full pointer-events-none" />
+                
+                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block mb-2.5">
+                    {activeMatch.past ? "समाप्त मिशन" : "LIVE NPT COUNTDOWN"}
+                </span>
+
+                {activeMatch.past ? (
+                    <div className="flex flex-col items-center">
+                        <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-[28px] text-[#C9A84C] tracking-wide leading-none">✓ सम्पन्न</span>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.1em" }} className="text-white/35 uppercase mt-1">HISTORIC CLASH</span>
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-1 justify-center mb-3">
+                        <div className="flex flex-col items-center">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.days}</span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">दिन</span>
+                        </div>
+                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
+                        
+                        <div className="flex flex-col items-center">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.hours}</span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">घण्टा</span>
+                        </div>
+                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
+                        
+                        <div className="flex flex-col items-center">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.minutes}</span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">मिनेट</span>
+                        </div>
+                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/15 text-[14px] font-bold pb-2">:</span>
+                        
+                        <div className="flex flex-col items-center">
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-white text-[20px] font-black leading-none">{timeLeft.seconds}</span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "8px" }} className="text-[#C9A84C] font-extrabold uppercase mt-0.5 tracking-wider">सेकेन्ड</span>
+                        </div>
+                    </div>
+                )}
+
+                {/* VS Emblem / Live marker */}
+                <div className="flex items-center gap-1.5 mt-2">
+                    <span className={`h-1.5 w-1.5 rounded-full ${activeMatch.past ? "bg-[#C9A84C]" : "bg-[#D32F2F] animate-pulse"}`} />
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.15em" }} className="text-white/50 uppercase font-black">
+                        NEPAL VS {opponentName}
+                    </span>
+                </div>
+            </div>
+        );
     };
 
     return (
-        <div className="bg-[#07080F] min-h-screen selection:bg-[#C41E3A] selection:text-white pb-32 relative">
+        <div className="bg-[#07080F] min-h-screen text-white selection:bg-[#D32F2F] selection:text-white pb-32 relative overflow-hidden">
 
-            {/* 4. Global Atmosphere: Dual radial gradient & Ghost Flag */}
-            <div className="fixed inset-0 pointer-events-none z-0">
+            {/* ── AMBIENT FLOODLIGHT FLARES & FLOATING DUST ── */}
+            <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                 <div
                     className="absolute inset-0"
                     style={{
                         background: `
-                             radial-gradient(circle at 15% 90%, rgba(196,30,58,0.08), transparent 55%),
-                             radial-gradient(circle at 85% 10%, rgba(0,56,147,0.08), transparent 50%)
+                             radial-gradient(circle at 50% -15%, rgba(201, 168, 76, 0.15) 0%, rgba(30, 58, 138, 0.08) 50%, transparent 80%),
+                             radial-gradient(circle at 15% 90%, rgba(211,47,47,0.06), transparent 55%),
+                             radial-gradient(circle at 85% 10%, rgba(30,58,138,0.04), transparent 50%)
                          `
                     }}
                 />
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-[120px] opacity-[0.06] select-none">
-                    <svg width="600" height="900" viewBox="0 0 200 250" fill="#C41E3A" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M40 20 L160 110 L80 110 L180 230 L40 230 Z" />
-                    </svg>
-                </div>
+                
+                {/* 30 Floating Dust Particles */}
+                {mounted && particles.map((style, i) => (
+                    <div
+                        key={i}
+                        className="absolute bg-[#C9A84C]/15 rounded-full"
+                        style={style}
+                    />
+                ))}
             </div>
 
-            {/* 2. THE PARALLAX HEADER — "THE STAGE IS SET" */}
-            <section className="relative h-[58vh] w-full overflow-hidden after:absolute after:bottom-0 after:left-0 after:w-full after:h-[80px] after:bg-gradient-to-t after:from-[#07080F] after:to-transparent after:z-10">
-                {/* Layer 1: Dark stadium background */}
+            {/* ── PREMIUM CINEMATIC PARALLAX COVER ── */}
+            <section className="relative h-[42vh] w-full overflow-hidden after:absolute after:bottom-0 after:left-0 after:w-full after:h-[120px] after:bg-gradient-to-t after:from-[#07080F] after:to-transparent after:z-10 flex items-end">
                 <div
-                    className="absolute inset-0 w-full h-full bg-cover md:bg-fixed"
+                    className="absolute inset-0 w-full h-full bg-cover bg-top animate-ken-burns"
                     style={{
                         backgroundImage: `url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
-                        filter: 'grayscale(40%) brightness(0.35)',
-                        transform: `translateY(${scrollY * 0.4}px)`,
+                        filter: 'grayscale(30%) brightness(0.24) saturate(80%)',
+                        transform: `translateY(${scrollY * 0.3}px)`,
                     }}
                 />
 
-                {/* Layer 4: Text Anchored Bottom-Left */}
-                <div className="absolute inset-0 z-20 flex flex-col justify-end px-6 md:px-12 pb-12 w-full max-w-7xl mx-auto">
-                    <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase block mb-4 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_both]">
-                        FIXTURES · 2026
-                    </span>
+                <div className="absolute inset-0 bg-gradient-to-b from-[#07080F]/40 via-transparent to-[#07080F] z-1" />
 
-                    <div className="relative inline-block w-max">
-                        <h1 className="font-display font-black text-white text-[clamp(80px,12vw,160px)] leading-[0.85] tracking-tight animate-[dynamicFadeUp_0.8s_cubic-bezier(0.76,0,0.24,1)_0.2s_both]">
+                <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.3em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block mb-3 animate-[fadeUpIn_0.8s_cubic-bezier(0.16,1,0.3,1)_both]">
+                            CAMPAIGN 2026 // आगामी युद्धहरू
+                        </span>
+                        <h1 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[56px] md:text-[80px] leading-none tracking-tight animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.2s_both]">
                             म्याच डे
                         </h1>
-                        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(196,30,58,0.25)_0%,transparent_60%)] animate-[dynamicFadeUp_0.8s_cubic-bezier(0.76,0,0.24,1)_0.2s_both]" />
+                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="text-white/40 text-[16px] font-medium tracking-wide mt-2 block animate-[fadeUpIn_0.8s_cubic-bezier(0.16,1,0.3,1)_0.4s_both]">
+                            नेपाल क्रिकेट टोलीको खेल तालिका र रणभूमि गाथा
+                        </span>
                     </div>
 
-                    <span className="font-barlow font-medium text-white/45 text-[18px] block mt-2 animate-[fadeUpIn_0.8s_cubic-bezier(0.76,0,0.24,1)_0.5s_both]" style={{ letterSpacing: '0' }}>
-                        नेपालका आगामी युद्धहरू
-                    </span>
-                </div>
-
-                {/* Layer 5: Campaign Progress Bar */}
-                <div className="absolute bottom-0 left-0 w-full z-30 px-6 md:px-12 pb-8 max-w-7xl mx-auto left-1/2 -translate-x-1/2 flex items-center justify-between">
-                    <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: '#C9A84C', letterSpacing: '0.25em', textTransform: 'uppercase' }}>
-                        CAMPAIGN 2026
-                    </span>
-                    <div style={{ display: 'flex', flexDirection: 'row', gap: '6px' }}>
-                        <span onClick={() => document.getElementById('mission-00')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: '#C41E3A', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">●</span>
-                        <span onClick={() => document.getElementById('mission-02')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">○</span>
-                        <span onClick={() => document.getElementById('mission-03')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">○</span>
-                        <span onClick={() => document.getElementById('mission-04')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">○</span>
-                        <span onClick={() => document.getElementById('mission-05')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">○</span>
-                        <span onClick={() => document.getElementById('mission-06')?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px', cursor: 'pointer', transition: 'opacity 0.2s ease' }} className="hover:opacity-100 opacity-80">○</span>
+                    <div className="flex items-center gap-6 border-l border-white/10 pl-6 select-none animate-[fadeUpIn_0.8s_cubic-bezier(0.16,1,0.3,1)_0.6s_both]">
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.4)" }}>
+                            {formatNumberToNepali(completedMissions)}/{formatNumberToNepali(totalMissions)} मिशन पूरा
+                        </span>
                     </div>
-                    <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0' }}>
-                        १/६ मिशन पूरा
-                    </span>
                 </div>
             </section>
 
-            {/* 3. THE 'NEXT BATTLE' FEATURE CARD */}
-            <section className="w-full relative z-10 animate-[dynamicFadeUp_0.8s_cubic-bezier(0.76,0,0.24,1)_0.9s_both] px-6">
-                <div
-                    className="max-w-5xl mx-auto w-full py-8 md:py-[48px] px-8 md:px-[80px] bg-[linear-gradient(135deg,rgba(13,27,42,0.98)_0%,rgba(7,8,15,0.99)_60%,rgba(196,30,58,0.07)_100%)] border border-[rgba(196,30,58,0.25)] backdrop-blur-[16px] transition-shadow duration-500 hover:shadow-[0_0_60px_rgba(196,30,58,0.08)]"
-                    style={{ borderLeft: '3px solid #C41E3A' }}
-                >
-                    {/* Top Strip */}
-                    <div className="flex justify-between items-center mb-10 max-w-7xl mx-auto border-b border-[rgba(255,255,255,0.05)] pb-4">
-                        <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: '#C9A84C', letterSpacing: '0', textTransform: 'uppercase' }}>अर्को मिशन</span>
-                        <div className="flex items-center gap-4">
-                            <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.3em', textTransform: 'uppercase' }}>MISSION #02</span>
-                            <span
-                                onClick={handleShare}
-                                style={{
-                                    fontFamily: 'Barlow Condensed, sans-serif',
-                                    fontSize: '10px',
-                                    letterSpacing: '0.15em',
-                                    color: copied ? '#C9A84C' : 'rgba(255,255,255,0.25)',
-                                    cursor: 'pointer',
-                                    transition: 'color 0.3s ease',
-                                    userSelect: 'none'
-                                }}
-                            >
-                                {copied ? '✓ COPIED' : 'SHARE ↗'}
-                            </span>
-                        </div>
-                    </div>
+            {/* ── 📚 THE STADIUM JUMBOTRON BROADCAST BATTLEFIELD DECK (SPOTLIGHT REDESIGN) ── */}
+            <section className="relative z-10 max-w-6xl mx-auto px-6 mb-16 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_0.8s_both]">
+                
+                {/* Dossier Pinned Header Bar */}
+                <div className="w-full flex items-center justify-between bg-black/60 backdrop-blur-md px-5 py-3 border border-white/5 border-b-0 rounded-t-sm text-[9.5px] font-bold text-white/30 tracking-widest uppercase">
+                    <span className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 bg-[#D32F2F] rounded-full animate-pulse" />
+                        JUMBOTRON TELEMETRY CORE // युद्ध कक्ष प्रोजेक्टर
+                    </span>
+                    <span className="text-[#C9A84C] cursor-pointer hover:text-white transition-colors" onClick={handleShare}>
+                        {copied ? "✓ LINK COPIED" : "SHARE BROADCAST DECK ↗"}
+                    </span>
+                </div>
 
-                    <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 max-w-7xl mx-auto">
+                {/* Curved Jumbotron Case Container */}
+                <div className="w-full bg-[#090c15]/80 backdrop-blur-xl border border-white/5 shadow-[0_30px_100px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.06)] rounded-b-sm overflow-hidden p-6 md:p-10 flex flex-col gap-6 relative">
+                    
+                    {/* Stadium light sweep animation overlay */}
+                    {sweepActive && (
+                        <div className="light-sweep-overlay" />
+                    )}
 
-                        {/* Column 1: NEPAL */}
-                        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-                            <span className="font-barlow font-bold text-[#C9A84C] text-[12px] tracking-[0.3em] uppercase block mb-1">एनपीएल</span>
-                            <h2 className="font-display font-black text-white text-[clamp(40px,5vw,72px)] leading-[0.9] mb-1 relative z-20" style={{ letterSpacing: '0' }}>नेपाल</h2>
-                            <span className="font-barlow font-medium text-[rgba(255,255,255,0.35)] text-[10px] tracking-wider uppercase mb-8">घरेलु टोली</span>
-
-                            {/* Weapon Box */}
-                            <div className="bg-[rgba(196,30,58,0.08)] border border-[rgba(196,30,58,0.2)] px-4 py-3 w-full max-w-[280px]">
-                                <span className="font-barlow font-bold text-[#C41E3A] text-[10px] uppercase block mb-2" style={{ letterSpacing: '0' }}>⚔ हाम्रो हतियार</span>
-                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">रोहित पौडेल</span>
-                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">कप्तान · मध्यक्रम</span>
-                            </div>
+                    {/* ═══════════════════════════════════════════════════════ */}
+                    {/* ★  THE MATCHUP IDENTITY PLATE — THE FIRST THING SEEN  ★ */}
+                    {/* ═══════════════════════════════════════════════════════ */}
+                    <div className="w-full flex flex-col items-center justify-center gap-0 pt-2 pb-4 border-b border-white/5 relative overflow-hidden">
+                        {/* Ghost background country names */}
+                        <div
+                            aria-hidden="true"
+                            className="absolute inset-0 flex items-center justify-between pointer-events-none select-none overflow-hidden px-4"
+                        >
+                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "clamp(80px,14vw,180px)", color: "rgba(30,58,138,0.05)", lineHeight: 1, fontWeight: 900 }}>नेपाल</span>
+                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "clamp(80px,14vw,180px)", color: "rgba(201,168,76,0.04)", lineHeight: 1, fontWeight: 900 }}>{opponentName}</span>
                         </div>
 
-                        {/* Column 2: CENTER (Glassmorphic Anchor) */}
-                        <div className="shrink-0 flex flex-col items-center relative z-20 mt-8 md:mt-0 bg-white/5 backdrop-blur-md rounded-md border border-white/10 p-6 md:p-8">
-                            <span className="font-barlow font-black text-[#C9A84C] text-[clamp(60px,8vw,100px)] leading-none tracking-[-0.02em] block mb-1" style={{ animation: 'vsPulse 3s ease-in-out infinite' }}>VS</span>
-                            <span className="font-barlow font-medium text-white/40 text-[12px] uppercase block mb-6">आईसीसी टी-ट्वेन्टी · २०२६</span>
+                        {/* Format + date pill */}
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.28em" }} className="text-[#C9A84C]/70 font-black uppercase tracking-widest mb-3">
+                            {activeMatch.format} &nbsp;·&nbsp; {formatNepaliDate(activeMatch.date)}, २०२६ &nbsp;·&nbsp; {activeMatch.venue}
+                        </span>
 
-                            {/* Countdown Timer */}
-                            <div className="flex flex-col items-center mb-8">
-                                <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0', marginBottom: '8px' }}>म्याच सुरु हुन</span>
-                                <div className="flex items-center gap-4 text-center">
-                                    {!mounted ? (
-                                        <div style={{ visibility: 'hidden' }} className="font-barlow font-bold text-white text-[32px]">00:00:00:00</div>
-                                    ) : (
-                                        <>
-                                            <div className="flex flex-col">
-                                                <span className="font-barlow font-bold text-white text-[32px] transition-opacity duration-100">{timeLeft.days}</span>
-                                                <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase" style={{ letterSpacing: '0' }}>दिन</span>
-                                            </div>
-                                            <span className="font-barlow font-bold text-[#C9A84C] text-[32px] pb-[18px] opacity-30">:</span>
-                                            <div className="flex flex-col">
-                                                <span className="font-barlow font-bold text-white text-[32px] transition-opacity duration-100">{timeLeft.hours}</span>
-                                                <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase" style={{ letterSpacing: '0' }}>घण्टा</span>
-                                            </div>
-                                            <span className="font-barlow font-bold text-[#C9A84C] text-[32px] pb-[18px] opacity-30">:</span>
-                                            <div className="flex flex-col">
-                                                <span className="font-barlow font-bold text-white text-[32px] transition-opacity duration-100">{timeLeft.minutes}</span>
-                                                <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase" style={{ letterSpacing: '0' }}>मिनेट</span>
-                                            </div>
-                                            <span className="font-barlow font-bold text-[#C9A84C] text-[32px] pb-[18px] opacity-30">:</span>
-                                            <div className="flex flex-col">
-                                                <span className="font-barlow font-bold text-white text-[32px] transition-opacity duration-100">{timeLeft.seconds}</span>
-                                                <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase" style={{ letterSpacing: '0' }}>सेकेन्ड</span>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                                <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0', marginTop: '8px' }}>बाँकी छ</span>
-                            </div>
+                        {/* THE CLASH PLATE */}
+                        <div className="flex items-center justify-center gap-4 md:gap-8 w-full relative z-10">
 
-                            {/* Threat Meter */}
-                            <div className="w-full max-w-[240px] flex flex-col items-center">
-                                <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '6px' }}>
-                                    THREAT LEVEL
-                                </span>
-                                <div className="w-full h-[4px] bg-[rgba(255,255,255,0.1)] rounded-[2px] overflow-hidden mb-2">
-                                    <div
-                                        className="h-full bg-[linear-gradient(90deg,#C9A84C,#C41E3A)] rounded-[2px]"
-                                        style={{ width: mounted ? '80%' : '0%', transition: 'width 1.5s cubic-bezier(0.76,0,0.24,1)' }}
+                            {/* ── NEPAL SIDE ── */}
+                            <div className="flex flex-col items-end gap-2 flex-1 min-w-0">
+                                <div className="flex justify-end">
+                                    <FlagImg
+                                        code={FLAG_MAP[activeMatch.id]?.np ?? "np"}
+                                        side="left"
+                                        size={42}
                                     />
                                 </div>
-                                <span className="font-barlow font-bold text-[#C41E3A] text-[11px] uppercase tracking-wider">HIGH</span>
-                                <div style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '9px', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.15em', textTransform: 'uppercase', marginTop: '4px' }}>
-                                    <span style={{ letterSpacing: '0' }}>सम्पादक मूल्यांकन</span>
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#D32F2F]/70 font-black uppercase tracking-widest">
+                                    हाम्रो टोली
+                                </span>
+                                <h2
+                                    style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900, fontSize: "clamp(32px,6vw,72px)", lineHeight: 1 }}
+                                    className="text-white tracking-tight text-right leading-none m-0"
+                                >
+                                    नेपाल
+                                </h2>
+                            </div>
+
+                            {/* ── VS DIVIDER ── */}
+                            <div className="flex flex-col items-center shrink-0 gap-1">
+                                <div className="h-12 md:h-16 w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent" />
+                                <div className="relative flex items-center justify-center">
+                                    <div className={`absolute w-10 h-10 rounded-full border ${
+                                        activeMatch.past
+                                            ? "border-[#C9A84C]/30"
+                                            : "border-[#D32F2F]/50 animate-[vsPulse_2s_ease-in-out_infinite]"
+                                    }`} />
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontWeight: 900 }} className="text-white/90 text-[18px] md:text-[22px] tracking-tight relative z-10">
+                                        VS
+                                    </span>
+                                </div>
+                                <div className="h-12 md:h-16 w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent" />
+                            </div>
+
+                            {/* ── OPPONENT SIDE ── */}
+                            <div className="flex flex-col items-start gap-2 flex-1 min-w-0">
+                                <div className="flex justify-start">
+                                    <FlagImg
+                                        code={FLAG_MAP[activeMatch.id]?.opp ?? "xx"}
+                                        side="right"
+                                        size={42}
+                                    />
+                                </div>
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C]/70 font-black uppercase tracking-widest">
+                                    विपक्षी टोली
+                                </span>
+                                <h2
+                                    style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900, fontSize: "clamp(32px,6vw,72px)", lineHeight: 1 }}
+                                    className="text-white/80 tracking-tight text-left leading-none m-0 truncate"
+                                >
+                                    {opponentName}
+                                </h2>
+                            </div>
+
+                        </div>
+
+                        {/* Time countdown strip */}
+                        {!activeMatch.past && (
+                            <div className="flex items-center gap-3 mt-5 bg-[#D32F2F]/8 border border-[#D32F2F]/15 px-5 py-2 rounded-sm">
+                                <span className="relative flex h-1.5 w-1.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D32F2F] opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#D32F2F]" />
+                                </span>
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.18em" }} className="text-white/50 font-black uppercase">
+                                    खेल सुरु हुनमा&nbsp;
+                                </span>
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "15px" }} className="text-white font-black">
+                                    {timeLeft.days}<span className="text-white/30 mx-0.5">d</span> {timeLeft.hours}<span className="text-white/30 mx-0.5">h</span> {timeLeft.minutes}<span className="text-white/30 mx-0.5">m</span> {timeLeft.seconds}<span className="text-white/30 mx-0.5">s</span>
+                                </span>
+                            </div>
+                        )}
+                        {activeMatch.past && (
+                            <div className="flex items-center gap-2 mt-5 bg-[#C9A84C]/8 border border-[#C9A84C]/20 px-5 py-2 rounded-sm">
+                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px] uppercase tracking-wider">✓ यो मुकाबला सम्पन्न भयो</span>
+                            </div>
+                        )}
+                    </div>
+                    {/* 2. DYNAMIC TABS SELECTOR */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 relative z-10 max-w-4xl mx-auto mt-12 mb-16 select-none">
+                        {dossierTabs.map((tab) => {
+                            const isTabActive = selectedTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setSelectedTab(tab.id)}
+                                    className={`flex flex-col items-center justify-center py-4 px-3 md:px-4 border text-center transition-all duration-300 relative group cursor-pointer ${
+                                        isTabActive
+                                            ? "bg-[#0b1222] border-[#C9A84C] shadow-[0_0_20px_rgba(201,168,76,0.08)]" 
+                                            : "bg-white/[0.01] border-white/5 hover:border-white/15 hover:bg-white/[0.02]"
+                                    }`}
+                                >
+                                    {/* Filmstrip corner brackets */}
+                                    <div className="absolute top-1.5 left-1.5 w-1 h-1 border-t border-l border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
+                                    <div className="absolute top-1.5 right-1.5 w-1 h-1 border-t border-r border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
+                                    <div className="absolute bottom-1.5 left-1.5 w-1 h-1 border-b border-l border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
+                                    <div className="absolute bottom-1.5 right-1.5 w-1 h-1 border-b border-r border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
+
+                                    <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className={`text-[13.5px] md:text-[14.5px] ${
+                                        isTabActive ? "text-[#C9A84C]" : "text-white/60"
+                                    }`}>
+                                        {tab.label}
+                                    </span>
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.15em" }} className="text-white/20 mt-0.5 tracking-widest block uppercase font-black">
+                                        {tab.sub}
+                                    </span>
+
+                                    {/* Dynamic sweep flare when active */}
+                                    {isTabActive && (
+                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#C9A84C]/5 to-transparent -translate-x-full animate-[sweepEffect_1.8s_infinite]" />
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
+
+                    {/* 3. MULTI-LAYERED PROJECTED VIEWPORTS */}
+                    <div className="min-h-[320px] flex flex-col justify-center relative">
+                        
+                        {selectedTab === "chronicle" && (
+                            <div className="space-y-4 animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase block">
+                                    रणभूमि गाथा // CLASH SAGA
+                                </span>
+                                <div className="border-l-2 border-[#D32F2F] pl-4">
+                                    <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[22px] md:text-[26px] leading-snug m-0">
+                                        {activeChronicle.battlefieldQuote}
+                                    </h3>
+                                </div>
+                                <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[15px] leading-relaxed text-justify m-0">
+                                    {activeChronicle.story}
+                                </p>
+                            </div>
+                        )}
+
+                        {selectedTab === "weapon" && (
+                            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                {/* Nepal Profile card (Left Wing) */}
+                                <div className="lg:col-span-5 bg-gradient-to-br from-[#0b1222]/90 to-[#05070d]/90 border border-white/5 p-6 md:p-8 rounded-sm relative overflow-hidden h-[280px] flex flex-col justify-between">
+                                    <div style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "160px", color: "rgba(30, 58, 138, 0.03)" }} className="absolute -bottom-16 -right-6 font-black select-none pointer-events-none z-0">
+                                        #१७
+                                    </div>
+                                    <div className="relative z-10">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.2em" }} className="text-[#D32F2F] font-black uppercase tracking-widest block mb-2">
+                                            OUR CHAMPION // मुख्य योद्धा
+                                        </span>
+                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-2">
+                                            {activeChronicle.championName}
+                                        </h3>
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#C41E3A] text-[13px] block font-bold">
+                                            {activeChronicle.championDesc}
+                                        </span>
+                                    </div>
+                                    <div className="relative z-10 bg-[rgba(196,30,58,0.03)] border border-[rgba(196,30,58,0.12)] p-4 rounded-sm">
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13px] leading-relaxed m-0 text-justify">
+                                            विपक्षी बलरहरूका लागि यमराज जस्तै विष्फोटक ब्याट्सम्यान र घातक स्पिनर। छ बलमा छक्का प्रहार गर्न सक्ने असाधारण क्षमता र विश्वस्तरीय फिल्डिङले यिनलाई आधुनिक क्रिकेटको सर्वोत्कृष्ट अलराउन्डर सावित गर्छ।
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-2 flex justify-center">
+                                    {renderCountdownOrb()}
                                 </div>
                             </div>
-                        </div>
+                        )}
 
-                        {/* Column 3: OPPONENT */}
-                        <div className="flex-1 flex flex-col items-center md:items-end text-center md:text-right relative z-20 mt-8 md:mt-0">
-                            <span className="font-barlow font-bold text-[rgba(255,255,255,0.35)] text-[12px] tracking-[0.3em] uppercase block mb-1">क्यान</span>
-                            <h2 className="font-display font-black text-[rgba(255,255,255,0.85)] text-[clamp(40px,5vw,72px)] leading-[0.9] mb-1" style={{ letterSpacing: '0' }}>क्यानडा</h2>
-                            <span className="font-barlow font-medium text-[rgba(255,255,255,0.35)] text-[10px] tracking-wider uppercase mb-8">प्रतिद्वन्द्वी</span>
-
-                            {/* Danger Box */}
-                            <div className="bg-[rgba(201,168,76,0.06)] border border-[rgba(201,168,76,0.15)] px-4 py-3 w-full max-w-[280px] text-center md:text-right">
-                                <span className="font-barlow font-bold text-[#C9A84C] text-[10px] uppercase block mb-2" style={{ letterSpacing: '0' }}>⚠ खतरनाक खेलाडी</span>
-                                <span className="font-sans font-semibold text-white text-[16px] block leading-tight">साद बिन जफर</span>
-                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[12px] uppercase block mt-1">कप्तान · स्पिनर</span>
+                        {selectedTab === "danger" && (
+                            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                {/* Opponent profile card (Right Wing) */}
+                                <div className="lg:col-span-5 bg-gradient-to-br from-[#1c1811]/90 to-[#07080f]/90 border border-white/5 p-6 md:p-8 rounded-sm relative overflow-hidden h-[280px] flex flex-col justify-between">
+                                    <div style={{ fontFamily: "Mukta, sans-serif", fontSize: "140px", color: "rgba(201, 168, 76, 0.02)" }} className="absolute -bottom-16 -right-6 font-black select-none pointer-events-none z-0">
+                                        {opponentName}
+                                    </div>
+                                    <div className="relative z-10">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase tracking-widest block mb-2">
+                                            RIVAL THREAT // विपक्षी खतरा चेतावनी
+                                        </span>
+                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-2">
+                                            {activeChronicle.dangerName}
+                                        </h3>
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#D32F2F] text-[13px] block font-bold">
+                                            {activeChronicle.dangerDesc}
+                                        </span>
+                                    </div>
+                                    <div className="relative z-10 bg-[rgba(211,47,47,0.03)] border border-[rgba(211,47,47,0.12)] p-4 rounded-sm">
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13px] leading-relaxed m-0 text-justify">
+                                            विपक्षी टोलीको सबैभन्दा ठूलो म्याच विनर र मुख्य हतियार। कसिलो बलिङ वा विष्फोटक ब्याटिङले यिनले कुनै पनि समय खेलको दिशा बदल्न सक्छन्। यिनलाई सुरुमै घेराबन्दीमा पारेर पन्छाउनु नेपाली टोलीको पहिलो र मुख्य गुरुत्तर दायित्व हुनेछ।
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="lg:col-span-2 flex justify-center">
+                                    {renderCountdownOrb()}
+                                </div>
                             </div>
-                        </div>
+                        )}
 
+                        {selectedTab === "h2h" && (
+                            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                {/* Bento data grid */}
+                                <div className="lg:col-span-5 space-y-4">
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase block">
+                                        रणभूमि इतिहास र रेकर्ड // ARCHIVE METRICS
+                                    </span>
+                                    
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">मुकाबला रेकर्ड // H2H</span>
+                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[18px] block">{activeMatch.h2h}</span>
+                                        </div>
+                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">खेलको ढाँचा // FORMAT</span>
+                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[18px] block">{activeMatch.format}</span>
+                                        </div>
+                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">मैदान मैदान // VENUE</span>
+                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[16px] block truncate">{activeMatch.venue}</span>
+                                        </div>
+                                    </div>
+                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13.5px] leading-relaxed text-justify m-0">
+                                        इतिहास साक्षी छ कि नेपाली क्रिकेटको यो युद्धमा दुवै टोलीले रगत र पसिना बगाएका छन्। यो खेल पुरानो हिसाब चुक्ता गर्ने र हिमालको सिंह झैं गर्जने अर्को अवसर हो।
+                                    </p>
+                                </div>
+                                <div className="lg:col-span-2 flex justify-center">
+                                    {renderCountdownOrb()}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
-                    <div style={{ textAlign: 'center', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '10px', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.12em', padding: '12px 0 0 0' }}>
-                        ⚔ <span style={{ letterSpacing: '0' }}>हाम्रो हतियार</span>
-                        &nbsp;&nbsp;&middot;&nbsp;&nbsp;
-                        ⚠ <span style={{ letterSpacing: '0' }}>खतरनाक खेलाडी</span>
-                    </div>
-
-                    {/* Venue & H2H Strip */}
-                    <div className="mt-12 pt-5 border-t border-[rgba(255,255,255,0.06)] flex flex-col justify-center items-center max-w-7xl mx-auto">
-                        <div className="flex flex-col w-full">
-                            <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
-                                <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[13px] tracking-wider text-center md:text-left">
-                                    TU Cricket Ground, Kathmandu &nbsp;&middot;&nbsp; 15 March 2026 &nbsp;&middot;&nbsp; 10:00 NPT
-                                </span>
-                                <span className="font-barlow font-medium text-[13px] tracking-[0.1em] text-center md:text-right">
-                                    <span className="text-[rgba(255,255,255,0.4)] mr-2">हेड टु हेड:</span>
-                                    <span className="text-[#C9A84C]">नेपाल ३</span>
-                                    <span className="text-[rgba(255,255,255,0.3)] mx-2">-</span>
-                                    <span className="text-[rgba(255,255,255,0.4)]">युएई २</span>
-                                </span>
-                            </div>
-                            <div style={{ fontFamily: 'Mukta, sans-serif', fontStyle: 'italic', fontSize: '13px', color: 'rgba(255,255,255,0.35)', marginTop: '10px', letterSpacing: '0', textAlign: 'center' }}>
-                                &ldquo;इतिहास हाम्रो पक्षमा छ।&rdquo;
-                            </div>
-                        </div>
+                    {/* Telemetry info footer */}
+                    <div className="w-full bg-[#05070c]/90 border-t border-white/5 px-6 py-4 rounded-sm flex flex-col md:flex-row justify-between items-center gap-4 text-[12px] font-medium text-white/50">
+                        <span className="flex items-center gap-2 text-center md:text-left">
+                            🏟️ <strong className="text-white font-bold">{activeMatch.venue}</strong>
+                            &nbsp;&middot;&nbsp; 
+                            📅 {formatNepaliDate(activeMatch.date)}, २०२६
+                            &nbsp;&middot;&nbsp; 
+                            ⏰ {formatNepaliTime(activeMatch.time)}
+                        </span>
+                        <span style={{ fontFamily: "Barlow, sans-serif" }} className="font-bold uppercase tracking-wider text-center md:text-right">
+                            H2H रेकर्ड: <span className="text-[#C9A84C] ml-1.5">{activeMatch.h2h}</span>
+                        </span>
                     </div>
 
                 </div>
             </section>
 
-            {/* 4. THE 'FUTURE CLASHES' ROSTER -> CAMPAIGN MAP */}
-            <section className="max-w-7xl mx-auto px-6 mt-12 relative z-10" style={{ paddingBottom: '60px' }}>
-                <div className="flex items-center mb-8">
-                    <span style={{ fontFamily: 'Barlow Condensed, sans-serif', fontSize: '12px', color: '#C9A84C', letterSpacing: '0.25em', textTransform: 'uppercase', marginRight: '24px' }}>बाँकी मिशनहरू</span>
-                    <div className="flex-grow border-t border-[#C9A84C] opacity-50"></div>
+            {/* ── 🗺️ RESTORED & UPGRADED INTERACTIVE MATCH CARDS GRID (ROSTER) ── */}
+            <section className="max-w-6xl mx-auto px-6 relative z-10 select-none animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_1.0s_both]">
+                
+                <div className="flex items-center gap-4 mb-10">
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", letterSpacing: "0.25em" }} className="text-[#C9A84C] font-black uppercase tracking-wider shrink-0">
+                        युद्ध अभियान श्रृंखला // CAMPAIGN TIMELINE
+                    </span>
+                    <div className="flex-grow border-t border-white/5 opacity-40" />
                 </div>
 
+                {/* Match Day Bento Grid Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {fixtures.map((fix, idx) => {
-                        const isHovered = !fix.past && hoveredCard === fix.id;
+                    {resolvedFixtures.map((fix, idx) => {
+                        const isCompleted = fix.past;
+                        const isActiveSelection = fix.id === activeMatchId;
+                        const isRadarActive = !fix.past && fix.id === (upcomingFixtures[0]?.id ?? "");
+                        const isHovered = hoveredCard === fix.id;
+
+                        // outcome theme border based on victory/threat
+                        const isVictory = fix.h2h.includes("नेपाल") && !fix.past;
+
                         return (
                             <div
                                 key={fix.id}
-                                id={`mission-${fix.id}`}
                                 onMouseEnter={() => setHoveredCard(fix.id)}
                                 onMouseLeave={() => setHoveredCard(null)}
-                                className="flex flex-col relative rounded-[2px] p-[24px_28px] cursor-pointer animate-[dynamicSlideFade_0.6s_cubic-bezier(0.76,0,0.24,1)_both]"
+                                onClick={() => {
+                                    setSelectedMatchId(fix.id);
+                                    setSelectedTab("chronicle");
+                                    if (typeof navigator !== "undefined" && navigator.vibrate) {
+                                        navigator.vibrate([10, 5, 10]); // physical tick
+                                    }
+                                }}
+                                className={`flex flex-col relative rounded-[2px] p-[24px_28px] cursor-pointer transition-all duration-300 overflow-hidden bg-[#090d16]/30 ${
+                                    isActiveSelection 
+                                        ? "border-[#C9A84C] bg-white/[0.04] shadow-[0_8px_30px_rgba(201,168,76,0.06)] scale-[1.01]" 
+                                        : "border-white/5 hover:border-white/15 hover:bg-white/[0.01]"
+                                } ${isCompleted ? "opacity-60 grayscale-[40%]" : ""}`}
                                 style={{
-                                    borderTop: `2px solid ${fix.threatColor}`,
-                                    borderLeft: `1px solid ${isHovered ? 'rgba(196,30,58,0.3)' : 'rgba(255,255,255,0.07)'}`,
-                                    borderRight: `1px solid ${isHovered ? 'rgba(196,30,58,0.3)' : 'rgba(255,255,255,0.07)'}`,
-                                    borderBottom: `1px solid ${isHovered ? 'rgba(196,30,58,0.3)' : 'rgba(255,255,255,0.07)'}`,
-                                    background: isHovered ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.03)',
-                                    transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-                                    transition: 'all 0.3s cubic-bezier(0.76, 0, 0.24, 1)',
-                                    opacity: fix.id === "00" ? 0.28 : 1,
-                                    filter: fix.id === "00" ? 'grayscale(1)' : 'none',
-                                    pointerEvents: fix.id === "00" ? 'none' : 'auto',
-                                    animationDelay: `${idx * 0.1}s`
+                                    borderTopWidth: "3px",
+                                    borderTopColor: isCompleted ? "#C9A84C" : fix.threatColor,
+                                    borderLeftWidth: "1px",
+                                    borderRightWidth: "1px",
+                                    borderBottomWidth: "1px"
                                 }}
                             >
-                                {fix.id === "02" && (
-                                    <div style={{ position: 'absolute', top: '16px', right: '16px', fontFamily: 'Barlow Condensed, sans-serif', fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C9A84C', border: '1px solid rgba(201,168,76,0.4)', padding: '3px 8px', backgroundColor: 'rgba(201,168,76,0.06)' }}>
-                                        ★ <span style={{ letterSpacing: '0' }}>निर्णायक</span>
+                                {/* Background Year Stamp */}
+                                <div style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "70px", color: "rgba(255,255,255,0.01)" }} className="absolute -bottom-6 -right-2 font-black select-none pointer-events-none select-none">
+                                    २०२६
+                                </div>
+
+                                {/* Custom Gold Stamped Watermark for completed matches */}
+                                {isCompleted && (
+                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-[-12deg] border-4 border-double border-[#C9A84C]/25 text-[#C9A84C]/25 font-black uppercase text-[26px] tracking-widest px-4 py-1.5 rounded-sm select-none pointer-events-none select-none z-10">
+                                        ✓ सम्पन्न
                                     </div>
                                 )}
+
                                 {/* Mission Top Row */}
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="font-barlow font-medium text-[rgba(255,255,255,0.3)] text-[11px] uppercase tracking-wider">
-                                        MISSION #{fix.id}
+                                <div className="flex justify-between items-center mb-4 relative z-10">
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className={`font-black uppercase tracking-wider block ${
+                                        isActiveSelection ? "text-[#D32F2F]" : isCompleted ? "text-[#C9A84C]" : "text-white/30"
+                                    }`}>
+                                        MISSION #{fix.id} {isCompleted ? "// HISTORY" : "// FUTURE CLASH"}
                                     </span>
-                                    <span className="font-barlow font-bold text-[#C9A84C] text-[13px] uppercase tracking-wider">
-                                        {fix.date} &middot; {fix.time}
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 font-bold uppercase">
+                                        {formatNepaliDate(fix.date)} &middot; {formatNepaliTime(fix.time)}
                                     </span>
                                 </div>
 
-                                <div className="w-full border-t border-[rgba(255,255,255,0.05)] mb-4" />
+                                <div className="w-full border-t border-white/5 mb-4" />
 
                                 {/* Opponent & Format Row */}
-                                <div className="flex justify-between items-end mb-4">
-                                    <span className="font-sans font-semibold text-white text-[24px] leading-none" style={{ letterSpacing: '0' }}>{fix.nepaliName}</span>
+                                <div className="flex justify-between items-end mb-4 relative z-10">
+                                    <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[24px] leading-none m-0">
+                                        {fix.nepaliName}
+                                    </h3>
                                     <div className="flex items-center gap-3">
-                                        <span className="font-barlow text-[10px] text-[rgba(255,255,255,0.5)] border border-[rgba(255,255,255,0.15)] px-[8px] py-[2px] rounded-sm uppercase tracking-wider">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.1em" }} className="font-bold border border-white/10 px-2 py-0.5 rounded-sm uppercase tracking-wider text-white/40">
                                             {fix.format}
                                         </span>
-                                        {fix.past && (
-                                            <span className="font-sans font-bold text-[10px] text-white bg-[#C41E3A] px-2 py-1 rounded-sm uppercase tracking-wider">
-                                                सकियो
+                                        {isRadarActive && (
+                                            <span className="relative flex h-2 w-2">
+                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D32F2F] opacity-75"></span>
+                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D32F2F]"></span>
                                             </span>
                                         )}
                                     </div>
                                 </div>
 
                                 {/* Mini Threat Meter */}
-                                <div className="flex items-center gap-4 mb-5">
-                                    <span className="font-barlow font-medium text-[rgba(255,255,255,0.4)] text-[11px] uppercase tracking-wider w-[50px] shrink-0">THREAT</span>
-                                    <div className="flex-1 h-[3px] bg-[rgba(255,255,255,0.1)] rounded-full overflow-hidden">
+                                <div className="flex items-center gap-4 mb-4 relative z-10">
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.1em" }} className="text-white/30 font-bold uppercase shrink-0 w-[55px]">THREAT INDEX</span>
+                                    <div className="flex-1 h-[2.5px] bg-white/5 rounded-full overflow-hidden">
                                         <div
                                             className="h-full rounded-full"
-                                            style={{ width: mounted ? `${fix.threat}%` : '0%', background: fix.threatColor, transition: 'width 1.5s cubic-bezier(0.76,0,0.24,1)' }}
+                                            style={{ 
+                                                width: mounted ? `${fix.threat}%` : '0%', 
+                                                background: isCompleted ? "#C9A84C" : fix.threatColor,
+                                                boxShadow: `0 0 6px ${isCompleted ? "#C9A84C" : fix.threatColor}`,
+                                                transition: 'width 1.5s cubic-bezier(0.76,0,0.24,1)' 
+                                            }}
                                         />
                                     </div>
-                                    <span className="font-barlow font-bold text-[11px] uppercase tracking-wider w-[60px] text-right" style={{ color: fix.threatColor }}>{fix.threatLevel}</span>
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10.5px", color: isCompleted ? "#C9A84C" : fix.threatColor }} className="font-black uppercase w-[55px] text-right">
+                                        {formatNumberToNepali(fix.threat)}%
+                                    </span>
                                 </div>
 
                                 {/* Intel Lines */}
-                                <div className="flex flex-col gap-2 mb-6">
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-[12px] opacity-80">⚔</span>
-                                        <span className="font-barlow text-[rgba(255,255,255,0.7)] text-[13px] tracking-wide">{fix.weapon}</span>
+                                <div className="flex flex-col gap-1.5 mb-5 relative z-10">
+                                    {/* Our weapon — crossed-bats SVG */}
+                                    <div className="flex items-center gap-2.5">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="shrink-0" style={{ color: "rgba(201,168,76,0.85)" }}>
+                                            <path d="M4 20L14 10M14 10L18 6L22 2L18 6M14 10L10 14" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <circle cx="5.5" cy="18.5" r="1.8" stroke="currentColor" strokeWidth="1.5"/>
+                                        </svg>
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] tracking-wide">{fix.weapon}</span>
                                     </div>
-                                    <div className="flex items-center gap-3">
-                                        <span className="text-[12px] text-[#C9A84C] opacity-80">⚠</span>
-                                        <span className="font-barlow text-[13px] tracking-wide" style={{ color: isHovered ? 'rgba(255,255,255,1.0)' : 'rgba(201,168,76,0.8)', transition: 'color 0.3s cubic-bezier(0.76, 0, 0.24, 1)' }}>{fix.danger}</span>
+                                    {/* Their danger — warning triangle SVG */}
+                                    <div className="flex items-center gap-2.5">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" className="shrink-0" style={{ color: "rgba(211,47,47,0.85)" }}>
+                                            <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/60 text-[13px] tracking-wide">{fix.danger}</span>
                                     </div>
                                 </div>
 
-                                {/* Bottom Row */}
-                                <div className="flex justify-between items-center mt-auto pt-4 border-t border-[rgba(255,255,255,0.05)]">
-                                    <span className="font-barlow text-[rgba(255,255,255,0.3)] text-[12px] tracking-wide truncate pr-4">{fix.venue}</span>
-                                    {!fix.past && (
-                                        <span className="font-sans font-bold text-[#C41E3A] text-[12px] uppercase whitespace-nowrap" style={{ letterSpacing: '0', opacity: isHovered ? 1 : 0, transition: 'opacity 0.3s cubic-bezier(0.76, 0, 0.24, 1)' }}>विवरण &rarr;</span>
+                                {/* Venue Row */}
+                                <div className="flex justify-between items-center mt-auto pt-3.5 border-t border-white/5 relative z-10 text-[11.5px] font-medium text-white/30">
+                                    <span className="flex items-center gap-1.5 truncate pr-4">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="shrink-0" style={{ color: "rgba(255,255,255,0.25)" }}>
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                        </svg>
+                                        {fix.venue}
+                                    </span>
+                                    {!isCompleted && (
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className={`font-black transition-all duration-300 ${
+                                            isHovered ? "text-[#C9A84C] opacity-100 translate-x-1" : "text-[#C9A84C]/50 opacity-0"
+                                        }`}>
+                                            विवरण &rarr;
+                                        </span>
                                     )}
                                 </div>
 
+                                {/* Unique Decisive tag */}
+                                {fix.id === "02" && (
+                                    <span style={{ fontSize: "7.5px", fontFamily: "Barlow Condensed, sans-serif", letterSpacing: "0.15em" }} className="absolute top-3 right-3 bg-[#C9A84C]/10 border border-[#C9A84C]/30 text-[#C9A84C] font-extrabold px-1.5 py-0.5 rounded-sm uppercase tracking-wider whitespace-nowrap">
+                                        निर्णायक मुकाबला
+                                    </span>
+                                )}
                             </div>
                         );
                     })}
                 </div>
             </section>
 
-            {/* 5. BOTTOM ATMOSPHERE — THE VOID */}
-            <div className="mt-20 pt-20 pb-10 flex justify-center relative z-10">
-                <span style={{ fontFamily: 'Mukta, sans-serif', fontSize: '13px', color: 'rgba(255,255,255,0.28)', letterSpacing: '0', textAlign: 'center', display: 'block' }}>
-                    जब घण्टी बज्छ, मैदान बोल्छ।
+            {/* ── FOOTER SLOGAN ── */}
+            <div className="mt-28 pt-20 pb-6 flex justify-center relative z-10 select-none">
+                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.18)", letterSpacing: "0.05em", textAlign: "center", display: "block" }}>
+                    जब घण्टी बज्छ, मैदान बोल्छ । // WHEN THE BELL RINGS, THE CRUSADE BEGINS.
                 </span>
             </div>
 
+            {/* ── PREMIUM SPORTS-DOCUMENTARY ANIMATION KEYFRAMES ── */}
             <style jsx global>{`
-                @keyframes vsPulse {
-                    0%, 100% { transform: scale(1); opacity: 1; }
-                    50% { transform: scale(1.03); opacity: 0.85; }
+                /* Premium Scrollbars */
+                ::-webkit-scrollbar {
+                    width: 5px;
+                    height: 5px;
                 }
+                ::-webkit-scrollbar-track {
+                    background: #07080F;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: rgba(30, 58, 138, 0.4);
+                    border-radius: 99px;
+                    border: 1px solid rgba(255, 255, 255, 0.02);
+                }
+                ::-webkit-scrollbar-thumb:hover {
+                    background: rgba(211, 47, 47, 0.5);
+                }
+                html, body {
+                    scrollbar-width: thin;
+                    scrollbar-color: rgba(30, 58, 138, 0.4) #07080F;
+                }
+
+                @keyframes floatDust {
+                    0% { transform: translateY(0) translateX(0); opacity: 0; }
+                    10% { opacity: 0.8; }
+                    90% { opacity: 0.8; }
+                    100% { transform: translateY(-80px) translateX(30px); opacity: 0; }
+                }
+
+                @keyframes ken-burns {
+                    0% { transform: scale(1.0); }
+                    100% { transform: scale(1.05); }
+                }
+
+                @keyframes vsPulse {
+                    0%, 100% { 
+                        transform: scale(1); 
+                        box-shadow: 0 0 35px rgba(201, 168, 76, 0.15), inset 0 0 15px rgba(201, 168, 76, 0.05); 
+                        border-color: rgba(201, 168, 76, 0.25);
+                    }
+                    50% { 
+                        transform: scale(1.015); 
+                        box-shadow: 0 0 45px rgba(211, 47, 47, 0.18), inset 0 0 20px rgba(211, 47, 47, 0.08); 
+                        border-color: rgba(211, 47, 47, 0.35);
+                    }
+                }
+
+                @keyframes sweepEffect {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(100%); }
+                }
+
+                @keyframes lightSweep {
+                    0% { transform: translate(-100%, -100%) rotate(-45deg); opacity: 0; }
+                    50% { opacity: 0.6; }
+                    100% { transform: translate(100%, 100%) rotate(-45deg); opacity: 0; }
+                }
+
+                .light-sweep-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to bottom right, transparent, rgba(201, 168, 76, 0.2) 50%, transparent);
+                    z-index: 30;
+                    pointer-events: none;
+                    transform: translate(-100%, -100%) rotate(-45deg);
+                    animation: lightSweep 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                }
+
                 @keyframes dynamicFadeUp {
-                    from { opacity: 0; transform: translateY(30px); }
+                    from { opacity: 0; transform: translateY(16px); }
                     to { opacity: 1; transform: translateY(0); }
                 }
-                @keyframes dynamicSlideFade {
-                    from { opacity: 0; transform: translateX(-20px); }
-                    to { opacity: 1; transform: translateX(0); }
+
+                @keyframes fadeUpIn {
+                    from { opacity: 0; transform: translateY(12px); }
+                    to { opacity: 1; transform: translateY(0); }
                 }
             `}</style>
+
         </div>
     );
 }

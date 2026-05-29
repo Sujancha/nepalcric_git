@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import MatchDayClient from './MatchDayClient';
 
 export const metadata: Metadata = {
-    title: "म्याच डे | NepalCric",
+    title: "म्याच डे | nepalCRIC",
     description: "नेपाल क्रिकेटका आगामी युद्धहरू",
 };
 

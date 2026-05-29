@@ -72,6 +72,14 @@ const STORY_TELEMETRY: Record<string, { db: string; frequency: string; location:
     "story-04": { db: "१३५db", frequency: "१०७.१ MHz", location: "दुबई, युएई" },
     "story-05": { db: "१३१db", frequency: "१०२.८ MHz", location: "भीआरए मैदान, एमस्टेलभिन" },
     "story-06": { db: "१३३db", frequency: "१०५.६ MHz", location: "अर्नोस भेल, सेन्ट भिन्सेन्ट" },
+    "story-07": { db: "१२०db", frequency: "९६.४ MHz", location: "टियू क्रिकेट मैदान, कीर्तिपुर" },
+    "story-08": { db: "१२२db", frequency: "९७.८ MHz", location: "लिंकन, न्यूजील्याण्ड" },
+    "story-09": { db: "१३६db", frequency: "१०८.० MHz", location: "कोलकाता/दिल्ली, भारत" },
+    "story-10": { db: "१३०db", frequency: "१०२.१ MHz", location: "आईसीसी एकेडेमी, दुबई" },
+    "story-11": { db: "११५db", frequency: "९४.२ MHz", location: "हाम्रो सानो कोठा, नेपाल" },
+    "story-12": { db: "१२६db", frequency: "९९.४ MHz", location: "काठमाडौं, नेपाल" },
+    "story-13": { db: "१३४db", frequency: "१०६.३ MHz", location: "टियू क्रिकेट मैदान, कीर्तिपुर" },
+    "story-14": { db: "१३७db", frequency: "१०७.९ MHz", location: "अल अमरात, ओमान" },
 };
 
 export default async function LockerStoryDetail({ params }: { params: Promise<{ id: string }> }) {
