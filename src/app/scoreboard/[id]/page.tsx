@@ -380,7 +380,7 @@ export default async function ScoreboardDetail({ params }: { params: Promise<{ i
                                                     style={{ fontFamily: "Mukta, sans-serif", fontSize: "18px", fontWeight: 800 }}
                                                     className="text-white"
                                                 >
-                                                    नेपाल बनाम {match.opponent}
+                                                    नेपाल विरुद्ध {match.opponent}
                                                 </span>
                                             </div>
                                         </div>

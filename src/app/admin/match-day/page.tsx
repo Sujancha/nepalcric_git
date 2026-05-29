@@ -19,12 +19,48 @@ interface Fixture {
   weapon: string;
   danger: string;
   h2h: string;
+  oppFlag?: string;
 }
 
 interface MatchDayData {
   targetDate: string;
   fixtures: Fixture[];
 }
+
+const FLAG_PRESETS = [
+  { code: 'ca', name: 'Canada (क्यानडा)' },
+  { code: 'om', name: 'Oman (ओमान)' },
+  { code: 'us', name: 'USA (अमेरिका)' },
+  { code: 'gb-sct', name: 'Scotland (स्कटल्याण्ड)' },
+  { code: 'in', name: 'India (भारत)' },
+  { code: 'pk', name: 'Pakistan (पाकिस्तान)' },
+  { code: 'au', name: 'Australia (अस्ट्रेलिया)' },
+  { code: 'za', name: 'South Africa (दक्षिण अफ्रिका)' },
+  { code: 'lk', name: 'Sri Lanka (श्रीलङ्का)' },
+  { code: 'bd', name: 'Bangladesh (बंगलादेश)' },
+  { code: 'ae', name: 'UAE (युएई)' },
+  { code: 'nl', name: 'Netherlands (नेदरल्याण्ड्स)' },
+  { code: 'nz', name: 'New Zealand (न्युजिल्याण्ड)' },
+  { code: 'ie', name: 'Ireland (आयरल्याण्ड)' },
+  { code: 'af', name: 'Afghanistan (अफगानिस्तान)' },
+  { code: 'na', name: 'Namibia (नामिबिया)' },
+  { code: 'zw', name: 'Zimbabwe (जिम्बाब्वे)' },
+  { code: 'hk', name: 'Hong Kong (हङकङ)' },
+];
+
+const WEAPON_PRESETS = [
+  'रोहित पौडेल',
+  'सन्दीप लामिчане',
+  'दीपेन्द्र सिंह ऐरी',
+  'कुशल मल्ल',
+  'कुशल भुर्तेल',
+  'गुलशन झा',
+  'सोमपाल कामी',
+  'करण केसी',
+  'ललित राजवंशी',
+  'आरिफ शेख',
+  'आसिफ शेख'
+];
 
 function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderBottomColor = '#C9A84C';
@@ -121,7 +157,8 @@ export default function MatchDayAdminPage() {
           threatColor: '#C9A84C',
           weapon: '',
           danger: '',
-          h2h: ''
+          h2h: '',
+          oppFlag: 'ca'
         }
       ]
     });
@@ -239,86 +276,168 @@ export default function MatchDayAdminPage() {
             </h3>
 
             {/* Fixtures List */}
-            {data.fixtures.map((fixture, idx) => (
-              <div key={idx} style={{ ...sectionStyle, padding: '1.5rem', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', color: '#6B7280', letterSpacing: '0.2em' }}>MISSION #{fixture.id}</span>
-                  <button onClick={() => removeFixture(idx)} style={{ background: 'transparent', border: 'none', color: '#C41E3A', cursor: 'pointer', fontSize: '12px' }}>हटाउनुस्</button>
-                </div>
-                
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div>
-                    <label style={labelStyle}>विपक्षी (Nepali Name)</label>
-                    <input type="text" value={fixture.nepaliName} onChange={(e) => updateFixture(idx, 'nepaliName', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>मिति (Date)</label>
-                    <input type="text" value={fixture.date} onChange={(e) => updateFixture(idx, 'date', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                  </div>
-                </div>
+            {data.fixtures.map((fixture, idx) => {
+              const currentFlag = fixture.oppFlag || '';
+              const isFlagPreset = FLAG_PRESETS.some(p => p.code === currentFlag);
+              const selectValue = (currentFlag === '' || isFlagPreset) ? currentFlag : '__custom__';
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div>
-                    <label style={labelStyle}>समय (Time)</label>
-                    <input type="text" value={fixture.time} onChange={(e) => updateFixture(idx, 'time', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>स्थान (Venue)</label>
-                    <input type="text" value={fixture.venue} onChange={(e) => updateFixture(idx, 'venue', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>फरम्याट (Format)</label>
-                    <select value={fixture.format} onChange={(e) => updateFixture(idx, 'format', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
-                      <option value="ओडीआई" style={{ background: '#07080F' }}>ओडीआई (ODI)</option>
-                      <option value="टी-ट्वान्टी" style={{ background: '#07080F' }}>टी-ट्वान्टी (T20I)</option>
-                      <option value="टेस्ट" style={{ background: '#07080F' }}>टेस्ट (Test)</option>
-                      <option value="अभ्यास खेल" style={{ background: '#07080F' }}>अभ्यास खेल (Warm-up)</option>
-                    </select>
-                  </div>
-                </div>
+              const currentWeapon = fixture.weapon || '';
+              const isWeaponPreset = WEAPON_PRESETS.includes(currentWeapon);
+              const weaponSelectValue = (currentWeapon === '' || isWeaponPreset) ? currentWeapon : '__custom__';
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div>
-                    <label style={labelStyle}>खतरा मिटर (Threat %)</label>
-                    <input type="number" value={fixture.threat} onChange={(e) => updateFixture(idx, 'threat', parseInt(e.target.value))} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+              return (
+                <div key={idx} style={{ ...sectionStyle, padding: '1.5rem', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                    <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', color: '#6B7280', letterSpacing: '0.2em' }}>MISSION #{fixture.id}</span>
+                    <button onClick={() => removeFixture(idx)} style={{ background: 'transparent', border: 'none', color: '#C41E3A', cursor: 'pointer', fontSize: '12px' }}>हटाउनुस्</button>
                   </div>
-                  <div>
-                    <label style={labelStyle}>खतरा स्तर (Level)</label>
-                    <select value={fixture.threatLevel} onChange={(e) => updateFixture(idx, 'threatLevel', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
-                      <option value="LOW" style={{ background: '#07080F' }}>LOW (न्यून)</option>
-                      <option value="MEDIUM" style={{ background: '#07080F' }}>MEDIUM (मध्यम)</option>
-                      <option value="HIGH" style={{ background: '#07080F' }}>HIGH (उच्च)</option>
-                      <option value="EXTREME" style={{ background: '#07080F' }}>EXTREME (अत्यधिक)</option>
-                    </select>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.2fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div>
+                      <label style={labelStyle}>विपक्षी (Nepali Name)</label>
+                      <input type="text" value={fixture.nepaliName} onChange={(e) => updateFixture(idx, 'nepaliName', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>मिति (Date)</label>
+                      <input type="text" value={fixture.date} onChange={(e) => updateFixture(idx, 'date', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>विपक्षी झण्डा (Opponent Flag)</label>
+                      <select
+                        value={selectValue}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (val === '__custom__') {
+                            updateFixture(idx, 'oppFlag', '');
+                          } else {
+                            updateFixture(idx, 'oppFlag', val);
+                          }
+                        }}
+                        style={{ ...inputStyle, cursor: 'pointer' }}
+                        onFocus={focusGold}
+                        onBlur={blurDim}
+                      >
+                        <option value="" style={{ background: '#07080F' }}>चयन गर्नुस् (Select Flag)</option>
+                        {FLAG_PRESETS.map(p => (
+                          <option key={p.code} value={p.code} style={{ background: '#07080F' }}>
+                            {p.name}
+                          </option>
+                        ))}
+                        <option value="__custom__" style={{ background: '#07080F' }}>Other (Manual / अन्य)</option>
+                      </select>
+                      {selectValue === '__custom__' && (
+                        <div style={{ marginTop: '0.5rem' }}>
+                          <input
+                            type="text"
+                            value={currentFlag}
+                            onChange={(e) => updateFixture(idx, 'oppFlag', e.target.value)}
+                            placeholder="Flag code e.g. ca"
+                            style={inputStyle}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <label style={labelStyle}>खतरा रङ (Color)</label>
-                    <select value={fixture.threatColor} onChange={(e) => updateFixture(idx, 'threatColor', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
-                      <option value="#10B981" style={{ background: '#07080F' }}>Green (Low)</option>
-                      <option value="#F59E0B" style={{ background: '#07080F' }}>Amber (Medium)</option>
-                      <option value="#C9A84C" style={{ background: '#07080F' }}>Gold (High)</option>
-                      <option value="#C41E3A" style={{ background: '#07080F' }}>Red (Extreme)</option>
-                    </select>
-                  </div>
-                </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
-                  <div>
-                    <label style={labelStyle}>हाम्रो हतियार (Our Weapon)</label>
-                    <input type="text" value={fixture.weapon} onChange={(e) => updateFixture(idx, 'weapon', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div>
+                      <label style={labelStyle}>समय (Time)</label>
+                      <input type="text" value={fixture.time} onChange={(e) => updateFixture(idx, 'time', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>स्थान (Venue)</label>
+                      <input type="text" value={fixture.venue} onChange={(e) => updateFixture(idx, 'venue', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>फरम्याट (Format)</label>
+                      <select value={fixture.format} onChange={(e) => updateFixture(idx, 'format', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                        <option value="ओडीआई" style={{ background: '#07080F' }}>ओडीआई (ODI)</option>
+                        <option value="टी-ट्वान्टी" style={{ background: '#07080F' }}>टी-ट्वान्टी (T20I)</option>
+                        <option value="टेस्ट" style={{ background: '#07080F' }}>टेस्ट (Test)</option>
+                        <option value="अभ्यास खेल" style={{ background: '#07080F' }}>अभ्यास खेल (Warm-up)</option>
+                      </select>
+                    </div>
                   </div>
-                  <div>
-                    <label style={labelStyle}>खतरनाक खेलाडी (Danger)</label>
-                    <input type="text" value={fixture.danger} onChange={(e) => updateFixture(idx, 'danger', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
-                  </div>
-                </div>
 
-                <div>
-                  <label style={labelStyle}>हेड-टु-हेड (Head to Head)</label>
-                  <input type="text" value={fixture.h2h} onChange={(e) => updateFixture(idx, 'h2h', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div>
+                      <label style={labelStyle}>खतरा मिटर (Threat %)</label>
+                      <input type="number" value={fixture.threat} onChange={(e) => updateFixture(idx, 'threat', parseInt(e.target.value))} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                    <div>
+                      <label style={labelStyle}>खतरा स्तर (Level)</label>
+                      <select value={fixture.threatLevel} onChange={(e) => updateFixture(idx, 'threatLevel', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                        <option value="LOW" style={{ background: '#07080F' }}>LOW (न्यून)</option>
+                        <option value="MEDIUM" style={{ background: '#07080F' }}>MEDIUM (मध्यम)</option>
+                        <option value="HIGH" style={{ background: '#07080F' }}>HIGH (उच्च)</option>
+                        <option value="EXTREME" style={{ background: '#07080F' }}>EXTREME (अत्यधिक)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label style={labelStyle}>खतरा रङ (Color)</label>
+                      <select value={fixture.threatColor} onChange={(e) => updateFixture(idx, 'threatColor', e.target.value)} style={{ ...inputStyle, cursor: 'pointer' }} onFocus={focusGold} onBlur={blurDim}>
+                        <option value="#10B981" style={{ background: '#07080F' }}>Green (Low)</option>
+                        <option value="#F59E0B" style={{ background: '#07080F' }}>Amber (Medium)</option>
+                        <option value="#C9A84C" style={{ background: '#07080F' }}>Gold (High)</option>
+                        <option value="#C41E3A" style={{ background: '#07080F' }}>Red (Extreme)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div>
+                      <label style={labelStyle}>हाम्रो हतियार (Our Weapon)</label>
+                      <select
+                        value={weaponSelectValue}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (val === '__custom__') {
+                            updateFixture(idx, 'weapon', '');
+                          } else {
+                            updateFixture(idx, 'weapon', val);
+                          }
+                        }}
+                        style={{ ...inputStyle, cursor: 'pointer' }}
+                        onFocus={focusGold}
+                        onBlur={blurDim}
+                      >
+                        <option value="" style={{ background: '#07080F' }}>खेलाडी चयन गर्नुस् (Select Player)</option>
+                        {WEAPON_PRESETS.map(name => (
+                          <option key={name} value={name} style={{ background: '#07080F' }}>
+                            {name}
+                          </option>
+                        ))}
+                        <option value="__custom__" style={{ background: '#07080F' }}>Other (Manual / अन्य)</option>
+                      </select>
+                      {weaponSelectValue === '__custom__' && (
+                        <div style={{ marginTop: '0.5rem' }}>
+                          <input
+                            type="text"
+                            value={currentWeapon}
+                            onChange={(e) => updateFixture(idx, 'weapon', e.target.value)}
+                            placeholder="खेलाडीको नाम (Player's Name)"
+                            style={inputStyle}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <label style={labelStyle}>खतरनाक खेलाडी (Danger)</label>
+                      <input type="text" value={fixture.danger} onChange={(e) => updateFixture(idx, 'danger', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>हेड-टु-हेड (Head to Head)</label>
+                    <input type="text" value={fixture.h2h} onChange={(e) => updateFixture(idx, 'h2h', e.target.value)} style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
 
             <button
               onClick={addFixture}

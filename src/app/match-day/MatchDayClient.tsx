@@ -15,6 +15,7 @@ export interface Fixture {
     weapon: string;
     danger: string;
     h2h: string;
+    oppFlag?: string;
 }
 
 export interface MatchDayData {
@@ -384,10 +385,10 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
 
     // Tabs for Jumbotron layer projector switcher
     const dossierTabs = [
-        { id: "chronicle", label: "०१ // रणभूमि गाथा", sub: "THE CLASH SAGA" },
-        { id: "weapon", label: "०२ // वीरको ब्रह्मास्त्र", sub: "WARRIOR PROFILE" },
-        { id: "danger", label: "०३ // शत्रुको संहारक", sub: "CHALLENGER TELEMETRY" },
-        { id: "h2h", label: "०४ // ऐतिहासिक टक्कर", sub: "TECTONIC DATA" }
+        { id: "chronicle", num: "०१", label: "महा-भिडन्त", sub: "THE BATTLEFRONT" },
+        { id: "weapon", num: "०२", label: "हाम्रा योद्धाहरू", sub: "WARRIOR DOSSIER" },
+        { id: "danger", num: "०३", label: "विपक्षी खतरा", sub: "THREAT DETECTED" },
+        { id: "h2h", num: "०४", label: "भिडन्त इतिहास", sub: "HEAD-TO-HEAD" }
     ] as const;
 
     // Helper to render the circular NPT Countdown compass
@@ -553,7 +554,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                             <div className="flex flex-col items-end gap-2 flex-1 min-w-0">
                                 <div className="flex justify-end">
                                     <FlagImg
-                                        code={FLAG_MAP[activeMatch.id]?.np ?? "np"}
+                                        code="np"
                                         side="left"
                                         size={42}
                                     />
@@ -589,7 +590,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                             <div className="flex flex-col items-start gap-2 flex-1 min-w-0">
                                 <div className="flex justify-start">
                                     <FlagImg
-                                        code={FLAG_MAP[activeMatch.id]?.opp ?? "xx"}
+                                        code={activeMatch.oppFlag || FLAG_MAP[activeMatch.id]?.opp || "xx"}
                                         side="right"
                                         size={42}
                                     />
@@ -648,12 +649,21 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                     <div className="absolute bottom-1.5 left-1.5 w-1 h-1 border-b border-l border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
                                     <div className="absolute bottom-1.5 right-1.5 w-1 h-1 border-b border-r border-white/10 group-hover:border-[#C9A84C]/50 transition-colors" />
 
-                                    <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className={`text-[13.5px] md:text-[14.5px] ${
-                                        isTabActive ? "text-[#C9A84C]" : "text-white/60"
+                                    {/* Mini stacked index tag at the top */}
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.1em" }} className={`mb-1.5 px-2 py-0.5 border rounded-sm font-black transition-colors ${
+                                        isTabActive 
+                                            ? "text-[#C9A84C] border-[#C9A84C]/30 bg-[#C9A84C]/5" 
+                                            : "text-white/30 border-white/5 bg-white/[0.01] group-hover:border-white/10"
+                                    }`}>
+                                        {tab.num}
+                                    </span>
+
+                                    <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className={`text-[14.5px] md:text-[15.5px] transition-colors ${
+                                        isTabActive ? "text-[#C9A84C]" : "text-white/70 group-hover:text-white"
                                     }`}>
                                         {tab.label}
                                     </span>
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.15em" }} className="text-white/20 mt-0.5 tracking-widest block uppercase font-black">
+                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.15em" }} className="text-white/20 mt-1 tracking-widest block uppercase font-black">
                                         {tab.sub}
                                     </span>
 
@@ -672,7 +682,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         {selectedTab === "chronicle" && (
                             <div className="space-y-4 animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
                                 <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase block">
-                                    रणभूमि गाथा // CLASH SAGA
+                                    महा-भिडन्त विवरण // THE BATTLEFRONT
                                 </span>
                                 <div className="border-l-2 border-[#D32F2F] pl-4">
                                     <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[22px] md:text-[26px] leading-snug m-0">
@@ -692,20 +702,20 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 <div className="lg:col-span-3 flex justify-center">
                                     <div className="relative w-[240px] h-[310px] bg-[#05070d] border border-white/10 rounded-sm overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.8)] group select-none">
                                         
-                                        {/* Corner cut overlays (Tactical Border) */}
+                                        {/* Corner cut overlays (Tactical Gold Border) */}
                                         <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-[#C9A84C] z-20" />
-                                        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-white/20 z-20" />
-                                        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-white/20 z-20" />
-                                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C41E3A] z-20" />
+                                        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-[#C9A84C] z-20" />
+                                        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-[#C9A84C] z-20" />
+                                        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-[#C9A84C] z-20" />
                                         
-                                        {/* Heartbeat sweep line */}
-                                        <div className="absolute inset-x-0 h-[1.5px] bg-[#C41E3A]/40 top-0 shadow-[0_0_8px_#C41E3A] z-20 animate-[sweepEffect_2.2s_infinite]" />
+                                        {/* Golden tactical sweep line */}
+                                        <div className="absolute inset-x-0 h-[1.5px] bg-[#C9A84C]/45 top-0 shadow-[0_0_8px_#C9A84C] z-20 animate-[sweepEffect_2.2s_infinite]" />
 
                                         {CHAMPION_IMAGES[activeMatch.weapon] ? (
                                             <>
-                                                {/* Gritty duotone sports image overlay */}
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent z-10" />
-                                                <div className="absolute inset-0 bg-gradient-to-tr from-[#1E3A8A]/35 via-transparent to-[#C41E3A]/20 mix-blend-color-dodge z-10 pointer-events-none" />
+                                                {/* Sleek tactical dark vignette and multiply overlay */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent z-10" />
+                                                <div className="absolute inset-0 bg-[#1E3A8A]/10 mix-blend-multiply z-10 pointer-events-none" />
                                                 {/* eslint-disable-next-line @next/next/no-img-element */}
                                                 <img 
                                                     src={CHAMPION_IMAGES[activeMatch.weapon]} 
@@ -717,16 +727,16 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                             /* Holographic Classified Tactical Wireframe Avatar */
                                             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-[#0b1222] to-[#04060b] select-none">
                                                 {/* Rotating radar graphic */}
-                                                <div className="relative w-36 h-36 border border-dashed border-[#C41E3A]/20 rounded-full flex items-center justify-center animate-[sbSpotlightSpin_20s_linear_infinite]">
+                                                <div className="relative w-36 h-36 border border-dashed border-[#1E3A8A]/30 rounded-full flex items-center justify-center animate-[sbSpotlightSpin_20s_linear_infinite]">
                                                     <div className="w-28 h-28 border border-white/5 rounded-full flex items-center justify-center" />
-                                                    <div className="absolute top-0 w-2.5 h-2.5 bg-[#C41E3A] rounded-full animate-ping" />
+                                                    <div className="absolute top-0 w-2.5 h-2.5 bg-[#1E3A8A] rounded-full animate-ping" />
                                                     <div className="absolute bottom-0 w-1.5 h-1.5 bg-[#C9A84C] rounded-full" />
                                                 </div>
                                                 
                                                 {/* Holographic fingerprints/scanlines */}
                                                 <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.015)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
                                                 
-                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.2em" }} className="text-[#C41E3A] font-black uppercase mt-6 tracking-widest text-center animate-pulse">
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase mt-6 tracking-widest text-center animate-pulse">
                                                     CLASSIFIED SIGNAL IDENT
                                                 </span>
                                                 <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.12em" }} className="text-white/20 uppercase mt-1 tracking-wider text-center">
@@ -751,7 +761,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 <div className="lg:col-span-4 space-y-5">
                                     <div className="border-l-2 border-[#C9A84C] pl-4 space-y-1">
                                         <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase block tracking-widest">
-                                            OUR MATCH WINNER // हाम्रो मुख्य योद्धा
+                                            OUR MATCH WINNER // हाम्रा योद्धाहरू
                                         </span>
                                         <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-1">
                                             {activeChronicle.championName}
@@ -945,12 +955,12 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                     </p>
 
                                     {/* 📊 Threat Attributes Matrix Dashboard */}
-                                    <div className="bg-[#0c0505]/95 border border-[#C41E3A]/20 p-5 rounded-sm space-y-4 relative overflow-hidden select-none">
+                                    <div className="bg-[#0c0505]/95 border border-[#D32F2F]/20 p-5 rounded-sm space-y-4 relative overflow-hidden select-none">
                                         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.008)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
                                         
                                         <div className="flex items-center justify-between border-b border-white/5 pb-2">
-                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#C41E3A] font-black uppercase">THREAT ASSESSMENT // शत्रुको शक्ति स्तर</span>
-                                            <span className="text-[#C41E3A] text-[10px] font-black uppercase animate-pulse">WAR TARGET</span>
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-[#D32F2F] font-black uppercase">THREAT ASSESSMENT // विपक्षी खतरा स्तर</span>
+                                            <span className="text-[#D32F2F] text-[10px] font-black uppercase animate-pulse">WAR TARGET</span>
                                         </div>
 
                                         {/* Threat Attribute 1 */}
@@ -959,7 +969,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 <span className="text-white/60 tracking-wider">
                                                     THREAT INDEX // समग्र खतरा गुणांक
                                                 </span>
-                                                <span className="text-[#C41E3A]">
+                                                <span className="text-[#D32F2F]">
                                                     {activeMatch.id === "01" && "९२%"}
                                                     {activeMatch.id === "02" && "९६%"}
                                                     {activeMatch.id === "03" && "९०%"}
@@ -970,7 +980,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                             </div>
                                             <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
                                                 <div 
-                                                    className="h-full bg-[#C41E3A] rounded-full" 
+                                                    className="h-full bg-[#D32F2F] rounded-full" 
                                                     style={{ width: activeMatch.id === "01" ? "92%" : activeMatch.id === "02" ? "96%" : activeMatch.id === "03" ? "90%" : activeMatch.id === "04" ? "92%" : activeMatch.id === "05" ? "97%" : "94%" }} 
                                                 />
                                             </div>
@@ -987,7 +997,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                     {activeMatch.id === "05" && "SWING SPEED PRECISION // इन-स्विंग सटीक स्तर"}
                                                     {activeMatch.id === "06" && "MIDDLE ORDER INTEGRITY // मध्यक्रम ब्याटिङ बल"}
                                                 </span>
-                                                <span className="text-white/80">
+                                                <span className="text-[#D32F2F]">
                                                     {activeMatch.id === "01" && "९०%"}
                                                     {activeMatch.id === "02" && "९५%"}
                                                     {activeMatch.id === "03" && "८८%"}
@@ -998,7 +1008,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                             </div>
                                             <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
                                                 <div 
-                                                    className="h-full bg-white/20 rounded-full" 
+                                                    className="h-full bg-[#D32F2F] rounded-full" 
                                                     style={{ width: activeMatch.id === "01" ? "90%" : activeMatch.id === "02" ? "95%" : activeMatch.id === "03" ? "88%" : activeMatch.id === "04" ? "91%" : activeMatch.id === "05" ? "96%" : "92%" }} 
                                                 />
                                             </div>
@@ -1007,10 +1017,10 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                         {/* Threat Attribute 3 */}
                                         <div className="space-y-1.5">
                                             <div className="flex justify-between text-[11px] font-bold">
-                                                <span className="text-[#C9A84C] tracking-wider">
+                                                <span className="text-[#D32F2F] tracking-wider">
                                                     INTEL COUNTERMEASURE // रणनीतिक प्रत्याक्रमण रणनीति
                                                 </span>
-                                                <span className="text-[#C9A84C]">
+                                                <span className="text-[#D32F2F]">
                                                     {activeMatch.id === "01" && "८५% -- TACTICAL SIEGE"}
                                                     {activeMatch.id === "02" && "९२% -- SPIN CORRIDOR"}
                                                     {activeMatch.id === "03" && "८५% -- PRESSURE COVER"}
@@ -1021,7 +1031,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                             </div>
                                             <div className="w-full h-[3px] bg-white/5 rounded-full overflow-hidden">
                                                 <div 
-                                                    className="h-full bg-[#C9A84C] rounded-full" 
+                                                    className="h-full bg-[#D32F2F] rounded-full" 
                                                     style={{ width: activeMatch.id === "01" ? "85%" : activeMatch.id === "02" ? "92%" : activeMatch.id === "03" ? "85%" : activeMatch.id === "04" ? "95%" : activeMatch.id === "05" ? "94%" : "95%" }} 
                                                 />
                                             </div>
@@ -1032,32 +1042,76 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                         )}
 
                         {selectedTab === "h2h" && (
-                            <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
-                                {/* Bento data grid */}
-                                <div className="lg:col-span-5 space-y-4">
-                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.2em" }} className="text-[#C9A84C] font-black uppercase block">
-                                        रणभूमि इतिहास र रेकर्ड // ARCHIVE METRICS
-                                    </span>
-                                    
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
-                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">मुकाबला रेकर्ड // H2H</span>
-                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[18px] block">{activeMatch.h2h}</span>
-                                        </div>
-                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
-                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">खेलको ढाँचा // FORMAT</span>
-                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[18px] block">{activeMatch.format}</span>
-                                        </div>
-                                        <div className="bg-white/[0.01] border border-white/5 p-4 rounded-sm">
-                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">मैदान मैदान // VENUE</span>
-                                            <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[16px] block truncate">{activeMatch.venue}</span>
-                                        </div>
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-[dynamicFadeUp_0.4s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                
+                                {/* Tactical Compare Dossier Column (8 cols) */}
+                                <div className="lg:col-span-8 space-y-5">
+                                    <div className="border-l-2 border-[#C9A84C] pl-4 space-y-1">
+                                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.22em" }} className="text-[#C9A84C] font-black uppercase block tracking-widest">
+                                            COMBAT FIELD ANALYSIS // भिडन्त इतिहास र रेकर्ड
+                                        </span>
+                                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[28px] leading-none mb-1">
+                                            द्वन्द्व इतिहास
+                                        </h3>
+                                        <span style={{ fontFamily: "Mukta, sans-serif" }} className="text-white/40 text-[13px] block font-bold">
+                                            नेपाल र {opponentName} बिचको ऐतिहासिक तुलनात्मक स्थिति
+                                        </span>
                                     </div>
-                                    <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13.5px] leading-relaxed text-justify m-0">
-                                        इतिहास साक्षी छ कि नेपाली क्रिकेटको यो युद्धमा दुवै टोलीले रगत र पसिना बगाएका छन्। यो खेल पुरानो हिसाब चुक्ता गर्ने र हिमालको सिंह झैं गर्जने अर्को अवसर हो।
-                                    </p>
+
+                                    {/* High-Fidelity Tactical Compare Matrix */}
+                                    <div className="bg-[#05070c]/90 border border-white/5 p-6 rounded-sm space-y-5 relative overflow-hidden select-none">
+                                        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.008)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+
+                                        {/* H2H Duel Header */}
+                                        <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9.5px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase">TACTICAL COMPARISON GRID</span>
+                                            <span className="text-[#D32F2F] text-[10px] font-black uppercase tracking-wider animate-pulse">RECORD IDENT: {activeMatch.h2h}</span>
+                                        </div>
+
+                                        {/* Compare Metric 1: H2H Split Meter */}
+                                        <div className="space-y-2">
+                                            <div className="flex justify-between text-[11px] font-bold text-white/70">
+                                                <span className="tracking-wide">NEPAL FORCE STRENGTH</span>
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="text-[#C9A84C]">H2H RECORD</span>
+                                                <span className="tracking-wide">{opponentName.toUpperCase()} FORCE STRENGTH</span>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                {/* Left side: Nepal strength */}
+                                                <div className="flex-1 h-[6px] bg-[#1E3A8A] rounded-l-full relative overflow-hidden">
+                                                    <div className="absolute right-0 top-0 bottom-0 bg-white/20 w-[10%]" />
+                                                </div>
+                                                {/* Center metric pill */}
+                                                <div style={{ fontFamily: "Mukta, sans-serif", fontSize: "11px", fontWeight: 800 }} className="px-3 py-0.5 border border-white/10 rounded-full text-white bg-black/60 shrink-0">
+                                                    {activeMatch.h2h}
+                                                </div>
+                                                {/* Right side: Opponent strength */}
+                                                <div className="flex-1 h-[6px] bg-[#D32F2F] rounded-r-full relative overflow-hidden">
+                                                    <div className="absolute left-0 top-0 bottom-0 bg-white/20 w-[15%]" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Compare Metric 2: Format & Venue Integrity */}
+                                        <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-4">
+                                            <div className="bg-white/[0.01] border border-white/5 px-4 py-3 rounded-sm">
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">खेल ढाँचा // MATCH FORMAT</span>
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[15px] block">{activeMatch.format}</span>
+                                            </div>
+                                            <div className="bg-white/[0.01] border border-white/5 px-4 py-3 rounded-sm">
+                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8px", letterSpacing: "0.1em" }} className="text-white/30 uppercase block mb-1">भिडन्त मैदान // COMBAT GROUND</span>
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[14px] block truncate">{getLocalizedVenue(activeMatch.venue)}</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Compare Metric 3: Narrative summary paragraph */}
+                                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13.5px] leading-relaxed text-justify mt-2 m-0">
+                                            इतिहास साक्षी छ कि नेपाली क्रिकेटको यो युद्धमा दुवै टोलीले रगत र पसिना बगाएका छन्। यो खेल पुरानो हिसाब चुक्ता गर्ने, हिमालको सिंह झैं गर्जने र २२ गजको पीचमा आफ्नो साम्राज्य खडा गर्ने ऐतिहासिक मौका हो।
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="lg:col-span-2 flex justify-center">
+
+                                {/* Radial Countdown Orb Column (4 cols) */}
+                                <div className="lg:col-span-4 flex justify-center">
                                     {renderCountdownOrb()}
                                 </div>
                             </div>
@@ -1094,10 +1148,15 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                 {/* Tactical Vertical Timeline Track Container */}
                 <div className="relative max-w-4xl mx-auto pl-12 md:pl-16">
                     
-                    {/* The physical glowing, dashed timeline cable line */}
-                    <div className="absolute left-[20px] md:left-[26px] top-6 bottom-6 w-[1.5px] border-l border-dashed border-white/10 z-0 pointer-events-none" />
+                    {/* Glowing active visual campaign progress cable line */}
+                    <div className="absolute left-[20px] md:left-[26px] top-6 bottom-6 w-[2px] bg-white/5 z-0 pointer-events-none">
+                        <div 
+                            className="bg-gradient-to-b from-[#C9A84C] via-[#1E3A8A] to-[#D32F2F] w-full rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(201,168,76,0.35)]"
+                            style={{ height: `${(completedMissions / totalMissions) * 100}%` }}
+                        />
+                    </div>
 
-                    <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-8 w-full">
                         {resolvedFixtures.map((fix) => {
                             const isCompleted = fix.past;
                             const isActiveSelection = fix.id === activeMatchId;
@@ -1108,135 +1167,188 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                             // Format time nicely in Devanagari 12-hour format
                             const localizedTime = formatNepaliTime(fix.time);
 
-                            return (
-                                <div
-                                    key={fix.id}
-                                    onClick={() => {
-                                        setSelectedMatchId(fix.id);
-                                        setSelectedTab("chronicle");
-                                        if (typeof navigator !== "undefined" && navigator.vibrate) {
-                                            navigator.vibrate([10, 5, 10]);
-                                        }
-                                    }}
-                                    className="relative flex items-center w-full"
-                                >
-                                    
-                                    {/* 🔘 The Tectonic circular node on the timeline path */}
-                                    <div className="absolute left-[-40px] md:left-[-49px] z-10 flex items-center justify-center w-10 h-10 select-none pointer-events-none">
-                                        {isActiveSelection ? (
-                                            <div className="relative flex items-center justify-center">
-                                                {/* Double pulsing rings for selected/active */}
-                                                <span className="absolute w-7 h-7 bg-[#C41E3A]/20 border border-[#C41E3A]/40 rounded-full animate-ping" />
-                                                <span className="absolute w-5 h-5 bg-[#C9A84C]/35 rounded-full" />
-                                                <span className="relative w-2.5 h-2.5 bg-[#C41E3A] rounded-full border border-white/30" />
-                                            </div>
-                                        ) : isCompleted ? (
-                                            <div className="relative flex items-center justify-center">
-                                                {/* Golden solid completed node */}
-                                                <span className="w-5 h-5 bg-[#07080F] border-2 border-[#C9A84C]/60 rounded-full flex items-center justify-center">
-                                                    <span className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" />
-                                                </span>
-                                            </div>
-                                        ) : (
-                                            <div className="relative flex items-center justify-center">
-                                                {/* Muted future node */}
-                                                <span className="w-4 h-4 bg-[#07080F] border border-white/10 rounded-full flex items-center justify-center">
-                                                    <span className="w-1 h-1 bg-white/10 rounded-full" />
-                                                </span>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* 📦 The Tactical Campaign Card */}
-                                    <div
-                                        className={`flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 w-full cursor-pointer transition-all duration-300 rounded-sm relative overflow-hidden bg-gradient-to-br from-[#090d16]/30 to-[#04060b]/40 border ${
-                                            isActiveSelection 
-                                                ? "border-[#C9A84C] bg-white/[0.03] shadow-[0_15px_40px_rgba(201,168,76,0.06)] scale-[1.01]" 
-                                                : "border-white/5 hover:border-white/10 hover:bg-white/[0.01]"
-                                        }`}
-                                    >
-                                        
-                                        {/* Background radar grid pattern for selected match */}
-                                        {isActiveSelection && (
-                                            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(201,168,76,0.01)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
-                                        )}
-
-                                        {/* 1. OVERLAPPING TILTED FLAG FACEOFF DUEL (THE FLAG INTEGRATION) */}
-                                        <div className="flex items-center gap-4 shrink-0">
-                                            
-                                            {/* Flag Faceoff Container */}
-                                            <div className="relative flex items-center w-[95px] h-[48px] select-none pointer-events-none shrink-0">
-                                                {/* Nepal Flag (Left - Inward Tilt) */}
-                                                <div className="absolute left-0 z-10">
-                                                    <FlagImg
-                                                        code={FLAG_MAP[fix.id]?.np ?? "np"}
-                                                        side="left"
-                                                        size={26}
-                                                    />
-                                                </div>
-                                                
-                                                {/* Tactical VS Overlay divider ring */}
-                                                <div style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="absolute left-[36px] z-20 flex items-center justify-center w-5 h-5 bg-[#05070c] border border-white/10 text-white text-[9.5px] font-black rounded-full shadow-[0_0_10px_black]">
-                                                    VS
-                                                </div>
-
-                                                {/* Opponent Flag (Right - Inward Tilt) */}
-                                                <div className="absolute right-0 z-10">
-                                                    <FlagImg
-                                                        code={FLAG_MAP[fix.id]?.opp ?? "xx"}
-                                                        side="right"
-                                                        size={26}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            {/* Mission Index & Format details */}
-                                            <div className="flex flex-col">
-                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10.5px", letterSpacing: "0.15em" }} className={`font-black uppercase tracking-wider block ${
-                                                    isActiveSelection ? "text-[#C41E3A]" : isCompleted ? "text-[#C9A84C]" : "text-white/30"
-                                                }`}>
-                                                    MISSION #{fix.id} {isCompleted ? "// HISTORY" : "// FUTURE"}
-                                                </span>
-                                                <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.05em" }} className="text-white/30 uppercase mt-0.5 tracking-wider font-black">
-                                                    {fix.format} CHAMPIONSHIP
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        {/* 2. MATCHUP TITLE AND LOCALIZED VENUE */}
-                                        <div className="flex-1 min-w-0 md:px-6">
-                                            <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[17px] md:text-[19px] leading-snug m-0">
-                                                नेपाल <span className="text-[#C41E3A] mx-1">बनाम</span> {fix.nepaliName.replace("विरुद्ध", "")}
-                                            </h3>
-                                            
-                                            {/* Localized Devanagari Venue */}
-                                            <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "12px" }} className="text-white/35 block mt-0.5 font-bold">
-                                                {localizedVenue}
+                            // Determine if we should inject a stage header before this item
+                            let phaseHeader = null;
+                            if (fix.id === "01") {
+                                phaseHeader = (
+                                    <div className="relative -left-6 md:-left-8 flex items-center gap-4 mb-4 select-none animate-[fadeUpIn_0.6s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                        <div className="shrink-0 px-3 py-1 border border-[#C9A84C]/30 bg-[#C9A84C]/5 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-[#C9A84C] font-black uppercase">
+                                                PHASE ०१ // एसिया-क्यानडा त्रिकोणात्मक श्रृंखला
                                             </span>
                                         </div>
+                                        <div className="flex-grow h-[1px] bg-gradient-to-r from-white/10 to-transparent" />
+                                    </div>
+                                );
+                            } else if (fix.id === "05") {
+                                phaseHeader = (
+                                    <div className="relative -left-6 md:-left-8 flex items-center gap-4 mb-4 mt-6 select-none animate-[fadeUpIn_0.6s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                        <div className="shrink-0 px-3 py-1 border border-[#D32F2F]/30 bg-[#D32F2F]/5 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-[#D32F2F] font-black uppercase">
+                                                PHASE ०२ // विश्वकप बदला भिडन्त
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow h-[1px] bg-gradient-to-r from-white/10 to-transparent" />
+                                    </div>
+                                );
+                            } else if (fix.id === "06") {
+                                phaseHeader = (
+                                    <div className="relative -left-6 md:-left-8 flex items-center gap-4 mb-4 mt-6 select-none animate-[fadeUpIn_0.6s_cubic-bezier(0.16,1,0.3,1)_both]">
+                                        <div className="shrink-0 px-3 py-1 border border-[#1E3A8A]/30 bg-[#1E3A8A]/10 rounded-sm">
+                                            <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10px", letterSpacing: "0.15em" }} className="text-white/80 font-black uppercase">
+                                                PHASE ०३ // लिग-२ च्याम्पियनशिप महा-संग्राम
+                                            </span>
+                                        </div>
+                                        <div className="flex-grow h-[1px] bg-gradient-to-r from-white/10 to-transparent" />
+                                    </div>
+                                );
+                            }
 
-                                        {/* 3. LOCALIZED DATE-TIME & STATUS BADGES */}
-                                        <div className="flex flex-col md:items-end justify-center gap-2.5 shrink-0">
-                                            {/* Fully Localized Date & Time (All Devanagari, no English mixed!) */}
-                                            <div className="flex flex-col md:items-end leading-tight">
-                                                <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px]">
-                                                    {formatNepaliDate(fix.date)}
-                                                </span>
-                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "10.5px" }} className="text-white/30 mt-0.5">
-                                                    {localizedTime}
+                            return (
+                                <div key={fix.id} className="w-full flex flex-col">
+                                    {phaseHeader}
+                                    <div
+                                        onClick={() => {
+                                            setSelectedMatchId(fix.id);
+                                            setSelectedTab("chronicle");
+                                            if (typeof navigator !== "undefined" && navigator.vibrate) {
+                                                navigator.vibrate([10, 5, 10]);
+                                            }
+                                        }}
+                                        className="relative flex items-center w-full group/item"
+                                    >
+                                        
+                                        {/* 🔘 The Tectonic circular node on the timeline path */}
+                                        <div className="absolute left-[-40px] md:left-[-49px] z-10 flex items-center justify-center w-10 h-10 select-none pointer-events-none">
+                                            {isActiveSelection ? (
+                                                <div className="relative flex items-center justify-center">
+                                                    {/* Double pulsing rings for selected/active */}
+                                                    <span className="absolute w-7 h-7 bg-[#C41E3A]/20 border border-[#C41E3A]/40 rounded-full animate-ping" />
+                                                    <span className="absolute w-5 h-5 bg-[#C9A84C]/35 rounded-full" />
+                                                    <span className="relative w-2.5 h-2.5 bg-[#C41E3A] rounded-full border border-white/30" />
+                                                </div>
+                                            ) : isCompleted ? (
+                                                <div className="relative flex items-center justify-center">
+                                                    {/* Golden solid completed node */}
+                                                    <span className="w-5 h-5 bg-[#07080F] border-2 border-[#C9A84C]/60 rounded-full flex items-center justify-center">
+                                                        <span className="w-1.5 h-1.5 bg-[#C9A84C] rounded-full" />
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <div className="relative flex items-center justify-center">
+                                                    {/* Muted future node */}
+                                                    <span className="w-4 h-4 bg-[#07080F] border border-white/10 rounded-full flex items-center justify-center">
+                                                        <span className="w-1 h-1 bg-white/10 rounded-full" />
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* 📦 The Tactical Campaign Card */}
+                                        <div
+                                            className={`flex flex-col md:flex-row md:items-center justify-between gap-6 p-6 w-full cursor-pointer transition-all duration-300 rounded-sm relative overflow-hidden bg-gradient-to-br from-[#090d16]/30 to-[#04060b]/40 border ${
+                                                isActiveSelection 
+                                                    ? "border-[#C9A84C] bg-white/[0.03] shadow-[0_15px_40px_rgba(201,168,76,0.06)] scale-[1.01]" 
+                                                    : "border-white/5 hover:border-white/10 hover:bg-white/[0.01]"
+                                            }`}
+                                        >
+                                            
+                                            {/* Tactical Corner Brackets */}
+                                            <div className={`absolute top-0 left-0 w-2.5 h-2.5 border-t border-l transition-colors duration-300 ${
+                                                isActiveSelection ? "border-[#C9A84C]" : "border-white/10 group-hover/item:border-white/20"
+                                            }`} />
+                                            <div className={`absolute top-0 right-0 w-2.5 h-2.5 border-t border-r transition-colors duration-300 ${
+                                                isActiveSelection ? "border-[#C9A84C]" : "border-white/10 group-hover/item:border-white/20"
+                                            }`} />
+                                            <div className={`absolute bottom-0 left-0 w-2.5 h-2.5 border-b border-l transition-colors duration-300 ${
+                                                isActiveSelection ? "border-[#C9A84C]" : "border-white/10 group-hover/item:border-white/20"
+                                            }`} />
+                                            <div className={`absolute bottom-0 right-0 w-2.5 h-2.5 border-b border-r transition-colors duration-300 ${
+                                                isActiveSelection ? "border-[#C9A84C]" : "border-white/10 group-hover/item:border-white/20"
+                                            }`} />
+
+                                            {/* Background radar grid pattern for selected match */}
+                                            {isActiveSelection && (
+                                                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(201,168,76,0.01)_50%,transparent_50%)] bg-[size:100%_4px] pointer-events-none" />
+                                            )}
+
+                                            {/* 1. OVERLAPPING TILTED FLAG FACEOFF DUEL (THE FLAG INTEGRATION) */}
+                                            <div className="flex items-center gap-4 shrink-0">
+                                                
+                                                {/* Flag Faceoff Container */}
+                                                <div className="relative flex items-center w-[95px] h-[48px] select-none pointer-events-none shrink-0">
+                                                    {/* Nepal Flag (Left - Inward Tilt) */}
+                                                    <div className="absolute left-0 z-10">
+                                                        <FlagImg
+                                                            code="np"
+                                                            side="left"
+                                                            size={26}
+                                                        />
+                                                    </div>
+                                                    
+                                                    {/* Tactical VS Overlay divider ring */}
+                                                    <div style={{ fontFamily: "Barlow Condensed, sans-serif" }} className="absolute left-[36px] z-20 flex items-center justify-center w-5 h-5 bg-[#05070c] border border-white/10 text-white text-[9.5px] font-black rounded-full shadow-[0_0_10px_black]">
+                                                        VS
+                                                    </div>
+
+                                                    {/* Opponent Flag (Right - Inward Tilt) */}
+                                                    <div className="absolute right-0 z-10">
+                                                        <FlagImg
+                                                            code={fix.oppFlag || FLAG_MAP[fix.id]?.opp || "xx"}
+                                                            side="right"
+                                                            size={26}
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                {/* Mission Index & Format details */}
+                                                <div className="flex flex-col">
+                                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "10.5px", letterSpacing: "0.15em" }} className={`font-black uppercase tracking-wider block ${
+                                                        isActiveSelection ? "text-[#C41E3A]" : isCompleted ? "text-[#C9A84C]" : "text-white/30"
+                                                    }`}>
+                                                        MISSION #{fix.id} {isCompleted ? "// HISTORY" : "// FUTURE"}
+                                                    </span>
+                                                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "8.5px", letterSpacing: "0.05em" }} className="text-white/30 uppercase mt-0.5 tracking-wider font-black">
+                                                        {fix.format} CHAMPIONSHIP
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {/* 2. MATCHUP TITLE AND LOCALIZED VENUE */}
+                                            <div className="flex-1 min-w-0 md:px-6">
+                                                <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-white text-[17px] md:text-[19px] leading-snug m-0">
+                                                    नेपाल <span className="text-white/40 mx-1.5 font-normal">विरुद्ध</span> {fix.nepaliName.replace("विरुद्ध", "")}
+                                                </h3>
+                                                
+                                                {/* Localized Devanagari Venue */}
+                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "12px" }} className="text-white/35 block mt-0.5 font-bold">
+                                                    {localizedVenue}
                                                 </span>
                                             </div>
 
-                                            {/* Status Badge */}
-                                            {isCompleted ? (
-                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#C9A84C] font-black uppercase border border-[#C9A84C]/25 bg-[#C9A84C]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
-                                                    सम्पन्न
-                                                </span>
-                                            ) : (
-                                                <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#D32F2F] font-black uppercase border border-[#D32F2F]/25 bg-[#D32F2F]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
-                                                    आगामी
-                                                </span>
-                                            )}
+                                            {/* 3. LOCALIZED DATE-TIME & STATUS BADGES */}
+                                            <div className="flex flex-col md:items-end justify-center gap-2.5 shrink-0">
+                                                {/* Fully Localized Date & Time (All Devanagari, no English mixed!) */}
+                                                <div className="flex flex-col md:items-end leading-tight">
+                                                    <span style={{ fontFamily: "Mukta, sans-serif", fontWeight: 800 }} className="text-[#C9A84C] text-[13px]">
+                                                        {formatNepaliDate(fix.date)}
+                                                    </span>
+                                                    <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "10.5px" }} className="text-white/30 mt-0.5">
+                                                        {localizedTime}
+                                                    </span>
+                                                </div>
+
+                                                {/* Status Badge */}
+                                                {isCompleted ? (
+                                                    <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#C9A84C] font-black uppercase border border-[#C9A84C]/25 bg-[#C9A84C]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
+                                                        सम्पन्न
+                                                    </span>
+                                                ) : (
+                                                    <span style={{ fontFamily: "Mukta, sans-serif", fontSize: "9.5px", letterSpacing: "0.08em" }} className="text-[#D32F2F] font-black uppercase border border-[#D32F2F]/25 bg-[#D32F2F]/5 px-3 py-0.5 rounded-sm tracking-wider w-max select-none pointer-events-none">
+                                                        आगामी
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
