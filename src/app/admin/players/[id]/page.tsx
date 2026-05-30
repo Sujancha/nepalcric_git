@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { inputStyle, labelStyle, sectionStyle, saveBtnStyle, cancelBtnStyle } from '../../adminStyles';
 import AdminEditor from '@/components/admin/AdminEditor';
+import InlineImageUploader from '@/components/admin/InlineImageUploader';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
@@ -264,33 +265,42 @@ export default function PlayerEditorPage() {
             <div style={sectionStyle}>
               <label style={labelStyle}>तस्बिरहरू</label>
               {images.map((img, idx) => (
-                <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                  <input
-                    type="text"
-                    value={img}
-                    onChange={(e) => updateImage(idx, e.target.value)}
-                    placeholder="/images/players/rohit-paudel/1.webp"
-                    style={{ ...inputStyle, flex: 1 }}
-                    onFocus={focusGold}
-                    onBlur={blurDim}
+                <div key={idx} style={{ marginBottom: '1.25rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                    <span style={{ fontFamily: 'var(--font-barlow), sans-serif', fontSize: '0.7rem', color: '#6B7280' }}>#{idx + 1}</span>
+                    <input
+                      type="text"
+                      value={img}
+                      onChange={(e) => updateImage(idx, e.target.value)}
+                      placeholder="/images/players/rohit-paudel/1.webp"
+                      style={{ ...inputStyle, flex: 1 }}
+                      onFocus={focusGold}
+                      onBlur={blurDim}
+                    />
+                    <button
+                      onClick={() => removeImage(idx)}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: '#6B7280',
+                        cursor: 'pointer',
+                        fontFamily: 'var(--font-barlow), sans-serif',
+                        fontSize: '0.9rem',
+                        padding: '0 0.25rem',
+                        lineHeight: 1,
+                        flexShrink: 0,
+                      }}
+                      title="हटाउनुस्"
+                    >
+                      ×
+                    </button>
+                  </div>
+                  <InlineImageUploader
+                    playerId={id}
+                    label={`तस्बिर #${idx + 1} अपलोड`}
+                    currentValue={img}
+                    onUploadSuccess={(url) => updateImage(idx, url)}
                   />
-                  <button
-                    onClick={() => removeImage(idx)}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#6B7280',
-                      cursor: 'pointer',
-                      fontFamily: 'var(--font-barlow), sans-serif',
-                      fontSize: '0.9rem',
-                      padding: '0 0.25rem',
-                      lineHeight: 1,
-                      flexShrink: 0,
-                    }}
-                    title="हटाउनुस्"
-                  >
-                    ×
-                  </button>
                 </div>
               ))}
               {images.length < 5 && (

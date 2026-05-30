@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { inputStyle, labelStyle, sectionStyle, saveBtnStyle, cancelBtnStyle } from '../adminStyles';
+import InlineImageUploader from '@/components/admin/InlineImageUploader';
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 type ActiveTab = 'archive' | 'featured';
@@ -146,6 +147,14 @@ export default function AdminLockerRoomPage() {
                     <label style={labelStyle}>{lbl}</label>
                     <input type="text" value={story[field] as string} onChange={e => setArchiveStories(archiveStories.map(s => s.id === story.id ? { ...s, [field]: e.target.value } : s))}
                       style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                    {field === 'thumb' && (
+                      <InlineImageUploader
+                        playerId="locker-room"
+                        label="थम्बनेल अपलोड गर्नुस्"
+                        currentValue={story.thumb}
+                        onUploadSuccess={(url) => setArchiveStories(archiveStories.map(s => s.id === story.id ? { ...s, thumb: url } : s))}
+                      />
+                    )}
                   </div>
                 ))}
                 <div style={sectionStyle}>
@@ -222,6 +231,12 @@ export default function AdminLockerRoomPage() {
                   <label style={labelStyle}>Image URL</label>
                   <input type="text" value={story.image} onChange={e => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, image: e.target.value } : s))}
                     style={inputStyle} onFocus={focusGold} onBlur={blurDim} />
+                  <InlineImageUploader
+                    playerId="locker-room"
+                    label="तस्बिर अपलोड गर्नुस्"
+                    currentValue={story.image}
+                    onUploadSuccess={(url) => setFeaturedStories(featuredStories.map((s, i) => i === idx ? { ...s, image: url } : s))}
+                  />
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
                   <div style={sectionStyle}>

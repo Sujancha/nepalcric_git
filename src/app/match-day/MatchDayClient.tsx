@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export interface Fixture {
     id: string;
@@ -252,6 +253,43 @@ function FlagImg({ code, side, size = 44 }: { code: string; side: "left" | "righ
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function MatchDayClient({ data }: { data: MatchDayData }) {
+    // Dynamic mapping helpers for robust sports-documentary navigation routing
+    const getLockerRoomSlug = (matchId: string) => {
+        switch (matchId) {
+            case "01": return "story-01"; // first WC
+            case "02": return "story-02"; // Basanta
+            case "03": return "story-03"; // Shakti
+            case "04": return "story-04"; // Paras
+            case "05": return "story-05"; // 3 Aug 2018
+            case "06": return "story-06"; // Saint Vincent T20 WC
+            default: return "";
+        }
+    };
+
+    const getPlayerSlug = (name: string) => {
+        if (!name) return "";
+        if (name.includes("रोहित")) return "rohit-paudel";
+        if (name.includes("सन्दीप")) return "sandeep-lamichhane";
+        if (name.includes("दीपेन्द्र")) return "dipendra-singh-airee";
+        if (name.includes("मल्ल")) return "kushal-malla";
+        if (name.includes("भुर्तेल")) return "kushal-bhurtel";
+        if (name.includes("झा")) return "gulshan-jha";
+        if (name.includes("कामी")) return "sompal-kami";
+        if (name.includes("केसी")) return "karan-kc";
+        if (name.includes("राजवंशी")) return "lalit-rajbanshi";
+        if (name.includes("आरिफ")) return "aarif-sheikh";
+        if (name.includes("आसिफ")) return "aasif-sheikh";
+        return "";
+    };
+
+    const getScoreboardSlug = (matchId: string) => {
+        if (matchId === "01" || matchId === "03") return "acc-premier-2023";
+        if (matchId === "02" || matchId === "04") return "cwc-qualifier-2023";
+        if (matchId === "05") return "t20wc-2024";
+        if (matchId === "06") return "t20wc-2026";
+        return "";
+    };
+
     const [mounted, setMounted] = useState(false);
     const [scrollY, setScrollY] = useState(0);
     const [copied, setCopied] = useState(false);
@@ -812,6 +850,15 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                 <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[15px] leading-relaxed text-justify m-0">
                                     {activeChronicle.story}
                                 </p>
+                                <div className="pt-4 flex justify-start">
+                                    <Link 
+                                        href={`/locker-room/${getLockerRoomSlug(activeMatch.id)}`}
+                                        className="px-6 py-2.5 border border-[#C9A84C]/40 bg-[#C9A84C]/5 text-[#C9A84C] text-[11px] font-black uppercase tracking-widest hover:bg-[#C9A84C]/10 hover:border-[#C9A84C]/60 hover:text-white transition-all duration-300 rounded-sm"
+                                        style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                    >
+                                        [ ACCESS LOCKER-ROOM STORY // स्टोरी लकर प्रवेश ]
+                                    </Link>
+                                </div>
                             </div>
                         )}
 
@@ -992,6 +1039,17 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 />
                                             </div>
                                         </div>
+
+                                        {/* Premium Warrior Profile Portal */}
+                                        <div className="pt-4 flex justify-start w-full">
+                                            <Link 
+                                                href={`/squad/${getPlayerSlug(activeMatch.weapon)}`}
+                                                className="w-full text-center py-2.5 border border-[#1E3A8A]/40 bg-[#1E3A8A]/10 text-white text-[11px] font-black uppercase tracking-widest hover:bg-[#1E3A8A]/25 hover:border-[#1E3A8A]/60 hover:shadow-[0_0_15px_rgba(30,58,138,0.15)] transition-all duration-300 rounded-sm"
+                                                style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                            >
+                                                [ VIEW FULL WARRIOR PROFILE // योद्धा प्रोफाइल ]
+                                            </Link>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1071,7 +1129,7 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                         {activeMatch.id === "03" && "क्यानडाका प्रमुख ब्याट्सम्यान र म्याच विनर। निकोलस किर्टन मध्यक्रममा लगातार बलियो साझेदारी बनाउने र पावरप्लेपछि तीव्र गतिमा रन बटुल्न असाधारण क्षमता राख्छन्। यिनको विकेट समयमै नझारे नेपाली बलिङमा ठूलो दबाव सिर्जना हुन सक्छ।"}
                                         {activeMatch.id === "04" && "ओमानका अनुभवी र चतुर स्पिन अलराउन्डर। जिशान मकसूद दबाबको अवस्थामा विकेट रोक्न र आफ्नो अनुभवी बलिङ र ब्याटिङले नेपाललाई अप्ठ्यारोमा पार्न सक्ने म्याच विनर हुन्। यिनको सटिक स्पिन रणनीतिलाई सुरुमै असफल पार्नुपर्छ।"}
                                         {activeMatch.id === "05" && "संयुक्त राज्य अमेरिकाका मुख्य तीब्र गतिका बलर। सौरभ नेत्रावलकर सटीक इन-स्विंग र मृत्यु ओभर (Death Overs) मा अचूक योर्कर प्रहार करना सिपालु छन्। विश्वकपमा नेपाललाई अप्ठ्यारोमा पारेका यिनको बलिङलाई निस्तेज पार्न नेपाली ओपनरहरू सतर्क हुनुपर्नेछ।"}
-                                        {activeMatch.id === "06" && "स्कटल्यान्डका अनुभवी कप्तान र मध्यक्रमका खम्बा। रिची बेरिंग्टन दबाब झेल्दै कठिन इनिङ्स खेल्न र कप्तानी सुझबुझका साथ खेल नियन्त्रणमा लिन खप्पिस छन्। यिनलाई सस्तोमै आउट गर्नु हाम्रो जीतका लागि अनिवार्य सर्त हो।"}
+                                            {activeMatch.id === "06" && "स्कटल्यान्डका अनुभवी कप्तान र मध्यक्रमका खम्बा। रिची बेरिंग्टन दबाब झेल्दै कठिन इनिङ्स खेल्न र कप्तानी सुझबुझका साथ खेल नियन्त्रणमा लिन खप्पिस छन्। यिनलाई सस्तोमै आउट गर्नु हाम्रो जीतका लागि अनिवार्य सर्त हो।"}
                                     </p>
 
                                     {/* 📊 Threat Attributes Matrix Dashboard */}
@@ -1227,6 +1285,15 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                         <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[13.5px] leading-relaxed text-justify mt-2 m-0">
                                             इतिहास साक्षी छ कि नेपाली क्रिकेटको यो युद्धमा दुवै टोलीले रगत र पसिना बगाएका छन्। यो खेल पुरानो हिसाब चुक्ता गर्ने, हिमालको सिंह झैं गर्जने र २२ गजको पीचमा आफ्नो साम्राज्य खडा गर्ने ऐतिहासिक मौका हो।
                                          </p>
+                                         <div className="pt-4 flex justify-start">
+                                             <Link 
+                                                 href={`/scoreboard/${getScoreboardSlug(activeMatch.id)}`}
+                                                 className="px-6 py-2.5 border border-[#D32F2F]/40 bg-[#D32F2F]/5 text-[#D32F2F] text-[11px] font-black uppercase tracking-widest hover:bg-[#D32F2F]/10 hover:border-[#D32F2F]/60 hover:text-white transition-all duration-300 rounded-sm"
+                                                 style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                             >
+                                                 [ OPEN SCOREBOARD ARCHIVE // खेल इतिहास अभिलेख ]
+                                             </Link>
+                                         </div>
                                     </div>
                                 </div>
                             </div>
@@ -1448,6 +1515,13 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 {selectedMatchupId === "sandeep-aqib" && "ROLE: Leg-Spin Mastermind"}
                                                 {selectedMatchupId === "dipendra-kirton" && "ROLE: Explosive Finisher"}
                                             </span>
+                                             <Link 
+                                                 href={`/squad/${selectedMatchupId === "rohit-saad" ? "rohit-paudel" : selectedMatchupId === "sandeep-aqib" ? "sandeep-lamichhane" : "dipendra-singh-airee"}`}
+                                                 className="inline-block mt-2 text-[10.5px] text-[#C9A84C]/80 hover:text-[#C9A84C] font-black uppercase tracking-wider hover:underline"
+                                                 style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                             >
+                                                 [ SECURE DOSSIER // योद्धा प्रोफाइल ] ↗
+                                             </Link>
                                         </div>
 
                                         {/* Player photo frame */}
@@ -1525,6 +1599,13 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                                                 {selectedMatchupId === "sandeep-aqib" && "ROLE: Explosive All-Rounder / Captain"}
                                                 {selectedMatchupId === "dipendra-kirton" && "ROLE: Middle-Order Match Winner"}
                                             </span>
+                                             <Link 
+                                                 href={`/locker-room/${getLockerRoomSlug(activeMatch.id)}`}
+                                                 className="inline-block mt-2 text-[10.5px] text-[#D32F2F]/80 hover:text-[#D32F2F] font-black uppercase tracking-wider hover:underline"
+                                                 style={{ fontFamily: "Barlow Condensed, sans-serif" }}
+                                             >
+                                                 [ TARGET INTEL // रणनीतिक विवरण ] ↗
+                                             </Link>
                                         </div>
 
                                         {/* Opponent Radar Flag Frame */}
@@ -2073,6 +2154,114 @@ export default function MatchDayClient({ data }: { data: MatchDayData }) {
                             );
                         })}
                     </div>
+                </div>
+            </section>
+
+            {/* ── 🗺️ STRATEGIC MISSIONS EXPLORER: THE ULTIMATE NAVIGATION WEB ── */}
+            <section className="max-w-6xl mx-auto px-6 relative z-10 select-none mb-12 animate-[dynamicFadeUp_0.8s_cubic-bezier(0.16,1,0.3,1)_1.1s_both]">
+                <div className="flex items-center gap-4 mb-10">
+                    <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "12px", letterSpacing: "0.25em" }} className="text-[#C9A84C] font-black uppercase tracking-wider shrink-0">
+                        रणनीतिक मिशन अन्वेषक // STRATEGIC MISSIONS EXPLORER
+                    </span>
+                    <div className="flex-grow border-t border-white/5 opacity-40" />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {/* Card 1: The Roster */}
+                    <Link href="/squad" className="group relative block bg-[#090d16]/40 backdrop-blur-md border border-white/5 p-6 rounded-lg overflow-hidden transition-all duration-500 hover:border-[#1E3A8A]/40 hover:shadow-[0_15px_45px_rgba(30,58,138,0.18)] hover:-translate-y-1">
+                        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#1E3A8A]/50 transition-all duration-300 group-hover:border-[#1E3A8A] rounded-tl-sm" />
+                        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#1E3A8A]/10 transition-all duration-300 group-hover:border-[#1E3A8A]/45 rounded-tr-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#1E3A8A]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/30 uppercase font-black block mb-2 tracking-widest group-hover:text-[#C9A84C] transition-colors">
+                            MISSION ZONE #01 // दल
+                        </span>
+                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0 tracking-wide">
+                            योद्धा दल
+                        </h3>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 block mt-1 uppercase font-black">
+                            THE GLORIOUS SQUAD
+                        </span>
+                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[12.5px] leading-relaxed mt-4 mb-0">
+                            संसार जित्ने नेपालका वीर योद्धाहरूको विस्तृत प्रोफाइल, रेकर्ड, र व्यक्तिगत रणकौशल गाथाहरू अध्ययन गर्नुस्।
+                        </p>
+                        <div className="mt-5 flex items-center justify-between text-[11px] font-black uppercase text-[#1E3A8A] group-hover:text-white transition-colors tracking-widest" style={{ fontFamily: "Barlow Condensed, sans-serif" }}>
+                            <span>[ ENTER ROSTER // प्रवेश ]</span>
+                            <span className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                    </Link>
+
+                    {/* Card 2: The Scoreboard */}
+                    <Link href="/scoreboard" className="group relative block bg-[#090d16]/40 backdrop-blur-md border border-white/5 p-6 rounded-lg overflow-hidden transition-all duration-500 hover:border-[#D32F2F]/40 hover:shadow-[0_15px_45px_rgba(211,47,47,0.12)] hover:-translate-y-1">
+                        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#D32F2F]/50 transition-all duration-300 group-hover:border-[#D32F2F] rounded-tl-sm" />
+                        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#D32F2F]/10 transition-all duration-300 group-hover:border-[#D32F2F]/45 rounded-tr-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#D32F2F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/30 uppercase font-black block mb-2 tracking-widest group-hover:text-[#C9A84C] transition-colors">
+                            MISSION ZONE #02 // इतिहास
+                        </span>
+                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0 tracking-wide">
+                            खेल इतिहास
+                        </h3>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 block mt-1 uppercase font-black">
+                            SCOREBOARD CENTRE
+                        </span>
+                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[12.5px] leading-relaxed mt-4 mb-0">
+                            एसिया कपदेखि ऐतिहासिक विश्वकपसम्म, विगतका सबै ऐतिहासिक द्वन्द्वहरूको विस्तृत म्याच रेकर्ड र नतिजाहरू।
+                        </p>
+                        <div className="mt-5 flex items-center justify-between text-[11px] font-black uppercase text-[#D32F2F] group-hover:text-white transition-colors tracking-widest" style={{ fontFamily: "Barlow Condensed, sans-serif" }}>
+                            <span>[ ACCESS ARCHIVES // रेकर्ड ]</span>
+                            <span className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                    </Link>
+
+                    {/* Card 3: The Locker Room */}
+                    <Link href="/locker-room" className="group relative block bg-[#090d16]/40 backdrop-blur-md border border-white/5 p-6 rounded-lg overflow-hidden transition-all duration-500 hover:border-[#C9A84C]/40 hover:shadow-[0_15px_45px_rgba(201,168,76,0.12)] hover:-translate-y-1">
+                        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#C9A84C]/50 transition-all duration-300 group-hover:border-[#C9A84C] rounded-tl-sm" />
+                        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#C9A84C]/10 transition-all duration-300 group-hover:border-[#C9A84C]/45 rounded-tr-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#C9A84C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/30 uppercase font-black block mb-2 tracking-widest group-hover:text-[#C9A84C] transition-colors">
+                            MISSION ZONE #03 // लकर
+                        </span>
+                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0 tracking-wide">
+                            स्टोरी लकर
+                        </h3>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 block mt-1 uppercase font-black">
+                            THE LOCKER ROOM
+                        </span>
+                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[12.5px] leading-relaxed mt-4 mb-0">
+                            स्कोरबोर्ड भन्दा बाहिर, ड्रेसिङ रुमका ती अमूल्य र भावुक क्षणहरू जसले नेपाली क्रिकेटको भाग्य कोरे।
+                        </p>
+                        <div className="mt-5 flex items-center justify-between text-[11px] font-black uppercase text-[#C9A84C] group-hover:text-white transition-colors tracking-widest" style={{ fontFamily: "Barlow Condensed, sans-serif" }}>
+                            <span>[ ENTER LOCKER // लकर रुम ]</span>
+                            <span className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                    </Link>
+
+                    {/* Card 4: The Fan Zone */}
+                    <Link href="/fanzone" className="group relative block bg-[#090d16]/40 backdrop-blur-md border border-white/5 p-6 rounded-lg overflow-hidden transition-all duration-500 hover:border-emerald-500/40 hover:shadow-[0_15px_45px_rgba(16,185,129,0.12)] hover:-translate-y-1">
+                        <div className="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-emerald-500/50 transition-all duration-300 group-hover:border-emerald-500 rounded-tl-sm" />
+                        <div className="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-emerald-500/10 transition-all duration-300 group-hover:border-emerald-500/45 rounded-tr-sm" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "9px", letterSpacing: "0.15em" }} className="text-white/30 uppercase font-black block mb-2 tracking-widest group-hover:text-emerald-400 transition-colors">
+                            MISSION ZONE #04 // फ्यान
+                        </span>
+                        <h3 style={{ fontFamily: "Mukta, sans-serif", fontWeight: 900 }} className="text-white text-[20px] leading-tight m-0 tracking-wide">
+                            फ्यान जोन हब
+                        </h3>
+                        <span style={{ fontFamily: "Barlow Condensed, sans-serif", fontSize: "11px", letterSpacing: "0.05em" }} className="text-white/40 block mt-1 uppercase font-black">
+                            THE FAN ZONE HUB
+                        </span>
+                        <p style={{ fontFamily: "Mukta, sans-serif" }} className="text-[#B0B8C8] text-[12.5px] leading-relaxed mt-4 mb-0">
+                            फ्यान सर्वेक्षणहरूमा भाग लिनुस्, भविष्यवाणी गर्नुस्, र समुदायको गर्विलो ग्यालेरी र क्रियाकलापहरूमा रमाउनुस्।
+                        </p>
+                        <div className="mt-5 flex items-center justify-between text-[11px] font-black uppercase text-emerald-500 group-hover:text-white transition-colors tracking-widest" style={{ fontFamily: "Barlow Condensed, sans-serif" }}>
+                            <span>[ CLAIM MISSION // फ्यान जोन ]</span>
+                            <span className="transform transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                    </Link>
                 </div>
             </section>
             {/* ── FOOTER SLOGAN ── */}
