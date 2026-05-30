@@ -80,7 +80,7 @@ export default function HeroSection({ scoreboardData }: { scoreboardData?: any }
       image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       date: "वान्खेडे, २०२६",
       stat: "१२ वर्षपछिको स्वर्णिम जित",
-      slug: "story-05"
+      slug: "story-15"
     }
   ];
 
@@ -120,7 +120,7 @@ export default function HeroSection({ scoreboardData }: { scoreboardData?: any }
           </span>
         </div>
         <h2 className="font-display uppercase text-4xl md:text-5xl lg:text-6xl text-stadium-white leading-none">
-          रंगशालाको सपनादेखि <span className="text-[#C41E3A] drop-shadow-[0_0_15px_rgba(196,30,58,0.4)]">वान्खेडेको इतिहाससम्म:</span> चार स्वर्णिम मोड
+          हिमालयको गर्जनदेखि <span className="text-[#C41E3A] drop-shadow-[0_0_15px_rgba(196,30,58,0.4)]">वान्खेडेको फ्लडलाइटसम्म:</span> चार स्वर्णिम अध्याय
         </h2>
         <p className="font-sans text-[#B0B8C8] text-sm md:text-base mt-4 max-w-3xl leading-relaxed">
           बालेन्द्र शाहको रंगशालाको गुप्त कूटनीतिपछि नेपाली क्रिकेटको वास्तविक महासंग्राम सुरु हुन्छ। ती चार ऐतिहासिक लडाइँ र स्वर्णिम मोडहरू — जसले हामीलाई अभावको हिलोबाट वान्खेडेको फ्लडलाइटसम्म पुर्‍यायो।
@@ -132,16 +132,17 @@ export default function HeroSection({ scoreboardData }: { scoreboardData?: any }
         {chapters.map((ch, idx) => {
           const isActive = activeChapter === idx;
           return (
-            <div
+            <Link
               key={idx}
+              href={`/locker-room/${ch.slug}`}
               onMouseEnter={() => setActiveChapter(idx)}
               onMouseLeave={() => setActiveChapter(null)}
-              className={`group relative rounded-sm border overflow-hidden cursor-pointer bg-black/40 flex flex-col justify-between p-6 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] ${
+              className={`group relative rounded-sm border overflow-hidden cursor-pointer bg-black/40 flex flex-col justify-between p-6 transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-decoration-none ${
                 isActive
                   ? "border-[#C9A84C] flex-[1.4] translate-y-[-8px] shadow-[0_0_30px_rgba(201,168,76,0.15)]"
                   : "border-white/5 hover:border-white/20"
               }`}
-              style={{ flex: isActive ? "1.4" : "1" }}
+              style={{ flex: isActive ? "1.4" : "1", textDecoration: "none" }}
             >
               {/* Background desaturated-to-color Image */}
               <div className="absolute inset-0 z-0">
@@ -187,18 +188,17 @@ export default function HeroSection({ scoreboardData }: { scoreboardData?: any }
                     <span className="font-sans font-bold text-[#C9A84C]">{ch.stat}</span>
                   </div>
 
-                  <Link
-                    href={`/locker-room/${ch.slug}`}
+                  <div
                     className="w-full block text-center py-2.5 bg-[#C9A84C] text-[#07080F] font-stats font-bold uppercase tracking-widest text-[9px] rounded-sm hover:bg-white hover:text-black transition-colors duration-300 shadow-[0_0_15px_rgba(201,168,76,0.3)]"
                   >
                     [ ACCESS CHAPTER TAPE ] ↗
-                  </Link>
+                  </div>
                 </div>
               </div>
 
               {/* Glowing visual indicators at card bottom */}
               <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-transparent via-[#C9A84C]/35 to-transparent transform scale-x-0 group-hover:scale-x-100 origin-center transition-transform duration-500" />
-            </div>
+            </Link>
           );
         })}
       </div>
