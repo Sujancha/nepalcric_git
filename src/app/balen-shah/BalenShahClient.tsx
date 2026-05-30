@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Sliders } from 'lucide-react';
 
 /* ── Full-bleed image break (parallax desktop / fade mobile) ── */
 function ImageBreak({ src, caption }: { src: string; caption: string }) {
@@ -373,6 +374,121 @@ function P({ children, muted = false }: { children: React.ReactNode; muted?: boo
     return <p className={`mb-[1.8em] ${muted ? 'italic text-white/60' : ''}`}>{children}</p>;
 }
 
+/* ── Mayor-Engine Rap & Engineering Synthesizer Dashboard ── */
+function MayorEngineDashboard() {
+    const [rapMetaphor, setRapMetaphor] = useState(80);
+    const [structuralPrec, setStructuralPrec] = useState(85);
+    const [adminAction, setAdminAction] = useState(90);
+
+    const mcSuccess = Math.min(100, Math.round((rapMetaphor * 0.3) + (structuralPrec * 0.35) + (adminAction * 0.35)));
+
+    let achievementText = "सिस्टम सुस्त: पुरानो दलगत अवरोध र फोहोर राजनीतिक दबाब कायमै।";
+    if (mcSuccess >= 60 && mcSuccess < 85) {
+        achievementText = "सन्तुलित प्रगति: डिजिटल नक्सांकन, सार्वजनिक विद्यालय सुधार, र २०८ रोपनी ऐतिहासिक जग्गा फिर्ता।";
+    } else if (mcSuccess >= 85) {
+        achievementText = "चरम सफलता: सिंहदरबारको फोहोर बन्द कूटनीति, ग्रेटर नेपाल कूटनीतिक अडान र ४० औं प्रधानमन्त्रीको ऐतिहासिक शपथ!";
+    }
+
+    return (
+        <div className="my-12 p-6 md:p-8 bg-black/60 border border-[#C9A84C]/35 rounded-sm relative overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-left">
+            <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#C9A84C]/5 rounded-full filter blur-xl pointer-events-none" />
+            
+            <div className="flex justify-between items-center border-b border-white/5 pb-4 mb-6">
+                <span className="font-stats font-bold text-[10px] text-[#C9A84C] uppercase tracking-widest flex items-center gap-1.5">
+                    <Sliders className="w-3.5 h-3.5 text-[#C9A84C] animate-pulse" />
+                    मेयर-इन्जिनियरिङ कमान्ड सिन्थेसाइजर // MAYOR-ENGINE DASHBOARD
+                </span>
+                <span className="font-mono text-[7px] text-[#10B981] font-bold animate-pulse">● METRIC ENGINE ACTIVE</span>
+            </div>
+
+            <p className="font-sans text-[12px] text-[#B0B8C8]/80 leading-relaxed mb-6 text-justify">
+                संरचनागत ईन्जिनियरिङ परिशुद्धता, भूमिगत नेपहपको सडक विम्ब, र प्रशासनिक तागतको मिश्रण नै बालेन्द्र शाहको कूटनीतिको मूल आधार हो। यिनीहरूलाई तलको कन्सोलबाट समायोजन गरी महानगर र संघीय कामहरूको प्रतिफल हेर्नुहोस्।
+            </p>
+
+            <div className="space-y-4 mb-6">
+                {/* Slider 1 */}
+                <div className="space-y-1">
+                    <div className="flex justify-between text-[11px] font-mono">
+                        <span className="text-[#6B7280]">नेप-हप सडक विम्ब (RAP RHYTHM & METAPHOR)</span>
+                        <span className="text-[#C9A84C] font-bold">{rapMetaphor}%</span>
+                    </div>
+                    <input 
+                        type="range" min="30" max="100" value={rapMetaphor}
+                        onChange={(e) => setRapMetaphor(Number(e.target.value))}
+                        className="w-full accent-[#C9A84C] h-1 bg-white/5 rounded-full outline-none cursor-pointer"
+                    />
+                </div>
+
+                {/* Slider 2 */}
+                <div className="space-y-1">
+                    <div className="flex justify-between text-[11px] font-mono">
+                        <span className="text-[#6B7280]">ईन्जिनियरिङ परिशुद्धता (STRUCTURAL PRECISION)</span>
+                        <span className="text-[#3B82F6] font-bold">{structuralPrec}%</span>
+                    </div>
+                    <input 
+                        type="range" min="30" max="100" value={structuralPrec}
+                        onChange={(e) => setStructuralPrec(Number(e.target.value))}
+                        className="w-full accent-[#3B82F6] h-1 bg-white/5 rounded-full outline-none cursor-pointer"
+                    />
+                </div>
+
+                {/* Slider 3 */}
+                <div className="space-y-1">
+                    <div className="flex justify-between text-[11px] font-mono">
+                        <span className="text-[#6B7280]">बुलडोजर प्रशासनिक तागत (ADMINISTRATIVE FORCE)</span>
+                        <span className="text-[#C41E3A] font-bold">{adminAction}%</span>
+                    </div>
+                    <input 
+                        type="range" min="30" max="100" value={adminAction}
+                        onChange={(e) => setAdminAction(Number(e.target.value))}
+                        className="w-full accent-[#C41E3A] h-1 bg-white/5 rounded-full outline-none cursor-pointer"
+                    />
+                </div>
+            </div>
+
+            {/* Gauge Result Card */}
+            <div className="bg-[#07080F]/90 border border-white/5 p-4 rounded-sm space-y-4">
+                <div className="flex justify-between items-center text-[10px] font-mono">
+                    <span className="text-[#6B7280]">OPERATIONAL INTERACTION SUCCESS:</span>
+                    <span className="text-[#10B981] font-black">{mcSuccess}%</span>
+                </div>
+
+                <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                    <div 
+                        className="h-full bg-gradient-to-r from-[#C41E3A] via-[#C9A84C] to-[#10B981] rounded-full transition-all duration-300"
+                        style={{ width: `${mcSuccess}%` }}
+                    />
+                </div>
+
+                {/* Audio Equalizer visual simulation */}
+                <div className="flex items-end justify-center gap-0.5 h-6 opacity-30 select-none">
+                    {[...Array(24)].map((_, idx) => (
+                        <div 
+                            key={idx}
+                            className="w-1 bg-[#C9A84C] rounded-sm transition-all duration-300 flex-grow"
+                            style={{
+                                height: `${15 + Math.sin(idx * 0.6) * 40 + Math.random() * 45}%`,
+                                animation: "pulseEqualizer 1s ease-in-out infinite alternate",
+                                animationDelay: `-${idx * 0.08}s`
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <div className="space-y-1">
+                    <span className="font-mono text-[8px] text-[#6B7280] uppercase tracking-widest block">// SYNTHESIZED SYSTEM FEEDBACK</span>
+                    <h5 className="font-sans font-black text-stadium-white text-[13px] leading-snug m-0 uppercase">
+                        {mcSuccess < 60 ? "सङ्घर्ष र दबाब // RESISTANCE ACTIVATED" : mcSuccess < 85 ? "सकारात्मक नतिजा // STABILITY INITIATED" : "पूर्ण रूपान्तरण // TOTAL SYSTEM SWEEP"}
+                    </h5>
+                    <p className="font-sans text-[11px] text-[#B0B8C8] leading-relaxed m-0 text-justify">
+                        {achievementText}
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function BalenShahClient() {
     const [navVisible, setNavVisible] = useState(false);
     const [copyDone, setCopyDone] = useState(false);
@@ -475,6 +591,7 @@ export default function BalenShahClient() {
                     &ldquo;काठमाडौंको एउटा छुट्टै सुगन्ध छ। मन्दिरहरूमा आरतीको धुप, घण्टीको आवाज, चाडपर्वको रंग — यहाँ सधैं संगीत गुञ्जिरहेको जस्तो लाग्छ। आजका केटाकेटीलाई म आफूले देखेको काठमाडौं देखाउन चाहन्छु। काठमाडौंको असली सुगन्धसँग दुनियाँलाई परिचित गराउन चाहन्छु।&rdquo;
                 </PullQuote>
                 <P>त्यो सुगन्ध उनले कहिल्यै बिर्सेनन्। न त्यो सडकका बालबालिका। न त्यो प्रतीक्षालयको कठोर कुर्सी। ती सबै स्मृतिहरू — वर्षौं पछि — बुलडोजर र मतपत्रमा रूपान्तरित भए।</P>
+                <MayorEngineDashboard />
             </Section>
 
             {/* ══ SECTION 3 — संघर्षका चरणहरू ══ */}

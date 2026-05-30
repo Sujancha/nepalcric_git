@@ -14,7 +14,7 @@ export function getAllStories(): StoryFrontmatter[] {
 
   const filenames = fs.readdirSync(directory);
   const stories = filenames
-    .filter(file => file.endsWith('.md'))
+    .filter(file => file.endsWith('.md') && file.toLowerCase() !== 'readme.md')
     .map(filename => {
       const slug = filename.replace(/\.md$/, '');
       const filePath = path.join(directory, filename);

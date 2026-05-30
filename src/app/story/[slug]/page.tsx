@@ -44,10 +44,23 @@ export default async function StoryArticlePage({ params }: Props) {
 
     // Compute recommendation on the server so the Client Component never imports `fs`
     const allStories = getAllStories();
-    const currentIndex = allStories.findIndex(s => s.slug === slug);
-    const recoStory = allStories.length > 1
-        ? allStories[(currentIndex + 1) % allStories.length]
-        : null;
+    
+    // Load content for all stories on the server to pass down to Client component
+    const storiesContent: Record<string, string> = {};
+    for (const s of allStories) {
+        const fullStory = getStoryBySlug(s.slug);
+        if (fullStory) {
+            storiesContent[s.slug] = fullStory.content;
+        }
+    }
 
-    return <StoryArticleClient story={storyData.data} htmlContent={storyData.content} recoStory={recoStory} />;
+    return (
+        <StoryArticleClient 
+            story={storyData.data} 
+            htmlContent={storyData.content} 
+            allStories={allStories} 
+            currentSlug={slug} 
+            storiesContent={storiesContent}
+        />
+    );
 }
