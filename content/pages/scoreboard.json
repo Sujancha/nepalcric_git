@@ -2,5 +2,15 @@
   "isLive": false,
   "matchTitle": "नेपाल VS UAE",
   "matchStatus": "MATCH IN PROGRESS",
-  "pulseText": "नेपालले बलिङमा सानदार सुरुवात गर्दै युएईका टप अर्डरलाई ध्वस्त बनाएको छ। दीपेन्द्र सिंह ऐरीको स्पीन ट्रयापले ब्याट्सम्यानलाई खुल्न दिएको छैन, रन रेट निरन्तर दबाबमा छ।"
+  "pulseText": "नेपालले बलिङमा सानदार सुरुवात गर्दै युएईका टप अर्डरलाई ध्वस्त बनाएको छ। दीपेन्द्र सिंह ऐरीको स्पीन ट्रयापले ब्याट्सम्यानलाई खुल्न दिएको छैन, रन रेट निरन्तर दबाबमा छ।",
+  "standings": [
+    { "rank": 1, "name": "अमेरिका", "nameEn": "USA", "flag": "🇺🇸", "played": 28, "won": 19, "lost": 9, "nr": 0, "pts": 38, "nrr": 0.762 },
+    { "rank": 2, "name": "स्कटल्याण्ड", "nameEn": "Scotland", "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "played": 32, "won": 16, "lost": 10, "nr": 6, "pts": 38, "nrr": 0.631 },
+    { "rank": 3, "name": "ओमान", "nameEn": "Oman", "flag": "🇴🇲", "played": 28, "won": 14, "lost": 11, "nr": 3, "pts": 31, "nrr": 0.018 },
+    { "rank": 4, "name": "नेदरल्याण्ड्स", "nameEn": "Netherlands", "flag": "🇳🇱", "played": 24, "won": 13, "lost": 9, "nr": 2, "pts": 28, "nrr": 0.165 },
+    { "rank": 5, "name": "नेपाल", "nameEn": "Nepal", "flag": "🇳🇵", "played": 28, "won": 11, "lost": 15, "nr": 2, "pts": 24, "nrr": 0.023, "isNepal": true },
+    { "rank": 6, "name": "नामिबिया", "nameEn": "Namibia", "flag": "🇳🇦", "played": 28, "won": 10, "lost": 16, "nr": 2, "pts": 22, "nrr": -0.491 },
+    { "rank": 7, "name": "क्यानडा", "nameEn": "Canada", "flag": "🇨🇦", "played": 24, "won": 9, "lost": 12, "nr": 3, "pts": 21, "nrr": -0.209 },
+    { "rank": 8, "name": "युएई", "nameEn": "UAE", "flag": "🇦🇪", "played": 24, "won": 7, "lost": 17, "nr": 0, "pts": 14, "nrr": -1.016 }
+  ]
 }

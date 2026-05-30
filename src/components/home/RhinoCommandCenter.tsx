@@ -190,6 +190,77 @@ export default function RhinoCommandCenter() {
                   <span className={`h-2 w-2 rounded-full ${selectedPlayer === idx ? "bg-[#C9A84C] animate-pulse" : "bg-white/20"}`} />
                 </div>
               ))}
+
+              {/* Telemetry Biographical Metadata Panel to perfectly balance the layout */}
+              <div className="mt-2 p-5 rounded-sm border border-white/10 bg-black/40 backdrop-blur-md flex flex-col justify-between h-auto gap-4 relative overflow-hidden group">
+                {/* Tactical grid light */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:100%_4px] pointer-events-none" />
+                
+                <div>
+                  <div className="flex justify-between items-center border-b border-white/5 pb-2 mb-3">
+                    <span className="font-stats font-bold text-[9px] text-[#C9A84C] uppercase tracking-widest">
+                      योद्धा बायो-डेटा // WARRIOR BIOMETRICS
+                    </span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#C41E3A] animate-ping" />
+                  </div>
+
+                  <div className="flex flex-col gap-2.5 font-mono text-[11px] text-[#B0B8C8]">
+                    <div className="flex justify-between">
+                      <span className="text-[#6B7280]">जर्सी नम्बर // JERSEY:</span>
+                      <span className="text-stadium-white font-bold font-sans">
+                        {selectedPlayer === 0 ? "१७" : selectedPlayer === 1 ? "२५" : "१४"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#6B7280]">ब्याटिङ // BATTING:</span>
+                      <span className="text-stadium-white font-bold font-sans">
+                        दायाँ हाते (Right Hand)
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#6B7280]">बलिङ // BOWLING:</span>
+                      <span className="text-stadium-white font-bold font-sans">
+                        {selectedPlayer === 0 ? "अफ-ब्रेक" : selectedPlayer === 1 ? "लेग-ब्रेक" : "लेग-ब्रेक"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-[#6B7280]">डेब्यू // DEBUT:</span>
+                      <span className="text-stadium-white font-bold font-sans">
+                        {selectedPlayer === 0 ? "२०१८" : selectedPlayer === 1 ? "२०१८" : "२०२१"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Animated Oscilloscope / Radar Scan Grid */}
+                <div className="h-14 bg-black/60 rounded-sm border border-white/5 p-2 flex items-center justify-between relative overflow-hidden">
+                  <div className="flex items-end gap-0.5 h-full w-[65%]">
+                    {Array.from({ length: 15 }).map((_, i) => {
+                      const heights = [30, 75, 45, 90, 20, 60, 40, 85, 30, 70, 50, 95, 25, 65, 40];
+                      const height = heights[i % heights.length];
+                      return (
+                        <div
+                          key={i}
+                          className="flex-grow bg-[#C9A84C]/65 rounded-sm animate-[pulse_1.2s_ease-in-out_infinite]"
+                          style={{
+                            height: `${height}%`,
+                            animationDelay: `${i * 0.08}s`
+                          }}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="text-right flex flex-col justify-center">
+                    <span className="font-stats font-bold text-[8px] text-[#C41E3A] uppercase tracking-widest block mb-0.5 animate-pulse">
+                      SECURE LINK
+                    </span>
+                    <span className="font-mono text-[7px] text-[#6B7280] block">
+                      SIG: 99.8% // ENCR
+                    </span>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             {/* Right Column: Detailed Player Classification */}

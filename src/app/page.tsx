@@ -82,7 +82,7 @@ export default function Home() {
 
       {/* 6. Voices (Spotlight Tactical Attributes Terminal) */}
       <ScrollReveal direction="left" delay={0}>
-        <Voices />
+        <Voices standings={scoreboardData.standings || []} />
       </ScrollReveal>
 
       {/* Docu-Bridge 6: Voices -> StorytellingHub (Locker Room Film Archives) */}

@@ -6,11 +6,26 @@ import { inputStyle, labelStyle, sectionStyle, saveBtnStyle, cancelBtnStyle } fr
 
 type SaveStatus = 'idle' | 'saving' | 'saved' | 'error';
 
+interface TeamRow {
+  rank: number;
+  name: string;
+  nameEn: string;
+  flag: string;
+  played: number;
+  won: number;
+  lost: number;
+  nr: number;
+  pts: number;
+  nrr: number;
+  isNepal?: boolean;
+}
+
 interface ScoreboardData {
   isLive: boolean;
   matchTitle: string;
   matchStatus: string;
   pulseText: string;
+  standings?: TeamRow[];
 }
 
 function focusGold(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -52,15 +67,28 @@ export default function ScoreboardAdminPage() {
     fetchData();
   }, [fetchData]);
 
+  const sortAndGetStandings = (teams: TeamRow[]) => {
+    const sorted = [...teams].sort((a, b) => {
+      if (b.pts !== a.pts) return b.pts - a.pts;
+      return b.nrr - a.nrr;
+    });
+    return sorted.map((t, idx) => ({ ...t, rank: idx + 1 }));
+  };
+
   async function handleSave() {
     if (!sha || !data) return;
     setSaveStatus('saving');
     setSaveError('');
     try {
+      const finalData = { ...data };
+      if (finalData.standings && finalData.standings.length > 0) {
+        finalData.standings = sortAndGetStandings(finalData.standings);
+      }
+      
       const res = await fetch('/api/admin/parse-scoreboard', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data, sha }),
+        body: JSON.stringify({ data: finalData, sha }),
       });
       const resData = await res.json();
       if (res.ok && resData.success) {
@@ -80,6 +108,15 @@ export default function ScoreboardAdminPage() {
   const updateField = (field: keyof ScoreboardData, val: string | boolean) => {
     if (!data) return;
     setData({ ...data, [field]: val });
+  };
+
+  const updateStandingField = (idx: number, field: keyof TeamRow, val: any) => {
+    if (!data) return;
+    const standings = data.standings ? [...data.standings] : [];
+    if (standings[idx]) {
+      standings[idx] = { ...standings[idx], [field]: val };
+      setData({ ...data, standings });
+    }
   };
 
   const canSave = !loading && !!sha && saveStatus !== 'saving' && data !== null;
@@ -223,6 +260,103 @@ export default function ScoreboardAdminPage() {
                 onFocus={focusGold}
                 onBlur={blurDim}
               />
+            </div>
+
+            {/* LEAGUE-2 STANDINGS TABLE EDITOR */}
+            <div style={{ ...sectionStyle, marginTop: '3rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '2rem' }}>
+              <label style={{ ...labelStyle, fontSize: '0.8rem', color: '#C9A84C' }}>
+                लिग-२ अङ्क तालिका सम्पादन (Edit League-2 Standings)
+              </label>
+              <p style={{ fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.8rem', color: 'rgba(255,255,255,0.45)', marginBottom: '1.5rem', marginTop: 0 }}>
+                विश्वकप लिग-२ को वास्तविक अङ्कहरू यहाँ सम्पादन गर्नुस्। सेभ गर्दा तालिका अङ्क र NRR का आधारमा स्वतः क्रमबद्ध (Rank/Sort) हुनेछ।
+              </p>
+
+              <div style={{ overflowX: 'auto', background: 'rgba(255,255,255,0.01)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '4px', padding: '1rem' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mukta), sans-serif', fontSize: '0.85rem' }}>
+                  <thead>
+                    <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', color: '#6B7280', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '40px' }}>Rank</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'left' }}>Team</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '70px' }}>Played</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '70px' }}>Won</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '70px' }}>Lost</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '80px', color: '#C9A84C' }}>Points</th>
+                      <th style={{ padding: '0.5rem', textAlign: 'center', width: '90px' }}>NRR</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(data.standings || []).map((team, idx) => (
+                      <tr key={team.nameEn} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', background: team.isNepal ? 'rgba(196,30,58,0.03)' : 'transparent' }}>
+                        {/* Rank */}
+                        <td style={{ padding: '0.5rem', fontFamily: 'var(--font-jetbrains-mono), monospace', color: team.isNepal ? '#C9A84C' : '#6B7280', fontWeight: 'bold', textAlign: 'center' }}>
+                          {team.rank}
+                        </td>
+                        {/* Team Name */}
+                        <td style={{ padding: '0.5rem', color: '#E8E8E8', fontWeight: 'bold' }}>
+                          <span style={{ marginRight: '0.5rem' }}>{team.flag}</span>
+                          <span>{team.name}</span>
+                          <span style={{ fontSize: '0.65rem', color: '#6B7280', textTransform: 'uppercase', marginLeft: '0.4rem', fontFamily: 'var(--font-jetbrains-mono), monospace' }}>{team.nameEn}</span>
+                        </td>
+                        {/* Played */}
+                        <td style={{ padding: '0.3rem' }}>
+                          <input
+                            type="number"
+                            value={team.played}
+                            onChange={(e) => updateStandingField(idx, 'played', parseInt(e.target.value) || 0)}
+                            style={{ ...inputStyle, padding: '0.25rem', textAlign: 'center', fontSize: '0.85rem' }}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </td>
+                        {/* Won */}
+                        <td style={{ padding: '0.3rem' }}>
+                          <input
+                            type="number"
+                            value={team.won}
+                            onChange={(e) => updateStandingField(idx, 'won', parseInt(e.target.value) || 0)}
+                            style={{ ...inputStyle, padding: '0.25rem', textAlign: 'center', color: '#10B981', fontSize: '0.85rem' }}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </td>
+                        {/* Lost */}
+                        <td style={{ padding: '0.3rem' }}>
+                          <input
+                            type="number"
+                            value={team.lost}
+                            onChange={(e) => updateStandingField(idx, 'lost', parseInt(e.target.value) || 0)}
+                            style={{ ...inputStyle, padding: '0.25rem', textAlign: 'center', color: '#C41E3A', fontSize: '0.85rem' }}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </td>
+                        {/* Points */}
+                        <td style={{ padding: '0.3rem' }}>
+                          <input
+                            type="number"
+                            value={team.pts}
+                            onChange={(e) => updateStandingField(idx, 'pts', parseInt(e.target.value) || 0)}
+                            style={{ ...inputStyle, padding: '0.25rem', textAlign: 'center', color: '#C9A84C', fontWeight: 'bold', fontSize: '0.85rem' }}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </td>
+                        {/* NRR */}
+                        <td style={{ padding: '0.3rem' }}>
+                          <input
+                            type="text"
+                            value={team.nrr}
+                            onChange={(e) => updateStandingField(idx, 'nrr', parseFloat(e.target.value) || 0)}
+                            style={{ ...inputStyle, padding: '0.25rem', textAlign: 'center', fontSize: '0.85rem' }}
+                            onFocus={focusGold}
+                            onBlur={blurDim}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* ACTION BUTTONS */}
