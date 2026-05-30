@@ -945,17 +945,25 @@ export default function StoryArticleClient({
                 }
                 
                 .story-content h3 {
-                    font-family: var(--font-display), sans-serif;
+                    font-family: var(--font-sans), sans-serif;
                     font-weight: 800;
-                    font-size: 1.6rem;
+                    font-size: 1.45rem;
                     color: #C41E3A;
-                    margin: 2.2rem 0 1rem 0;
-                    text-transform: uppercase;
-                    letter-spacing: -0.01em;
-                    border: none;
-                    padding: 0;
-                    background: none;
-                    text-align: left;
+                    margin: 2.6rem 0 1.2rem 0;
+                    position: relative;
+                    padding-left: 1rem;
+                    line-height: 1.3;
+                    letter-spacing: normal;
+                }
+                .story-content h3::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 12%;
+                    bottom: 12%;
+                    width: 3.5px;
+                    background-color: #C9A84C;
+                    border-radius: 2px;
                 }
                 
                 .story-content img {
